@@ -1,7 +1,7 @@
 # TeLoQuito
 
-## 👥 Miembros del Equipo
-| Nombre y Apellidos | Correo URJC | Usuario GitHub |
+## 👥 Group members
+| Name and surname | URJC Email | GitHub User |
 |:--- |:--- |:--- |
 | Lucas Moreno Prieto | l.morenop.2023@alumnos.urjc.es | lucasmp31 |
 | Diego Rodríguez Torrecilla | d.rodriguezto.2023@alumnos.urjc.es | DiegoRodriguezT |
@@ -9,49 +9,49 @@
 
 ---
 
-## 🎭 **Preparación: Definición del Proyecto**
+## 🎭 **Preparation: Project Definition**
 
-### **Descripción del Tema**
+### ** Topic Description **
 A web application intended for buying/selling second hand products, similar to Wallapop, that allows users to search products or offer them for sale, as well as letting them buy and give reviews to their sellers. If an user is interested in buying a product, the app lets them communicate with the vendor through a chat. This application gives the user the capability of getting money easily selling objects they don't use anymore and buying other ones at a cheap price. 
 
 ### **Entities**
-1. **Usuario**:
-2. **Producto**:
-3. **Pedido**: 
-4. **Categoría**: 
-5. **Mensaje**:
-6. **Reseña**:
+1. **User**:
+2. **Product**:
+3. **Order**: 
+4. **Category**: 
+5. **Message**:
+6. **Review**:
 
 **Connections between entities:**
 - User - Order: a user can make serveral orders (1:N)
-- Product - Category: a product belong in one category, but one category can contain multiple products (N:1)
+- Product - Category: a product belongs to one category, but one category can contain multiple products (N:1)
 - User - Message: a user can message multiple users and send multiple messages. Each message has one transmitter and one receptor. (1:N)
 - User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
 - Order - Product: each order has exactly one product, because they can buy from different users (1:1) 
 
-### **Permisos de los Usuarios**
+### **Users Permissions**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
-* **Usuario Anónimo**: 
+* **Anonymous User**: 
   - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
   - No es dueño de ninguna entidad
 
-* **Usuario Registrado**: 
+* **Registered User**: 
   - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
   - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
 
-* **Administrador**: 
+* **Administrator**: 
   - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
   - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
 
-### **Imágenes**
+### **Images**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
 - **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
 - **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
 - **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
 
-### **Gráficos**
+### **Graphics**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
 - **Gráfico 1**: [Ej: Ventas mensuales - Gráfico de barras]
@@ -59,18 +59,18 @@ Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 - **Gráfico 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
 - **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
 
-### **Tecnología Complementaria**
+### **Complementary Technology**
 Indicar qué tecnología complementaria se empleará:
 
 - [Ej: Envío de correos electrónicos automáticos mediante JavaMailSender]
 - [Ej: Generación de PDFs de facturas usando iText o similar]
 
-### **Algoritmo o Consulta Avanzada**
+### **Algorithm or Advanced query**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
-- **Algoritmo/Consulta**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
-- **Descripción**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
-- **Alternativa**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
+- **Algorithm/Query**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
+- **Description**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
+- **Alternative**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
 
 ---
 
