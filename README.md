@@ -12,15 +12,17 @@
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-Una aplicación de compraventa de artículos de segunda mano similar a Wallapop, que permite a los usuarios buscar productos o añadir productos a la venta, además de dar reseñas y poder comprar.
+Una aplicación de compraventa de artículos de segunda mano similar a Wallapop, que permite a los usuarios buscar productos o añadir productos a la venta, además de poder comprar y dar reseñas a los vendedores. Si un usuario está interesado en comprar un producto, puede comunicarse con el vendedor mediante un chat. Esta aplicación aporta al usuario la capacidad de poder ganar dinero de forma sencilla por objetos que ya no utiliza y poder comprar otros a un precio asequible. 
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **Usuario**:
+2. **Producto**:
+3. **Pedido**: 
+4. **Categoría**: 
+5. **Mensaje**:
+6. **Reseña**:
 
 **Relaciones entre entidades:**
 - [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
