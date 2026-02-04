@@ -17,13 +17,13 @@ A web application intended for buying/selling second hand products, similar to W
 ### **Entities**
 1. **User**: represents buyers and sellers (same role). It stores name, email address, phone number, avatar and delivery address.  
 2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description and images. 
-3. **Order**: a purchase of a single product by a user. 
+3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date and estimated time of arrival. 
 4. **Category**: used to classify products. A product could belong, for example, to clothes or electronic categories. 
-5. **Message**: represents messages in a chat between two users, at a specific time. Stores the message text. 
-6. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5. 
+5. **Message**: represents a message in a chat between two users, at a specific time. Stores the message text, sender, receptor and timestamp. 
+6. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users. 
 
 **Connections between entities:**
-- User - Order: a user can make serveral orders (1:N)
+- User - Order: a user can make several orders (1:N)
 - Product - Category: a product belongs to one category, but one category can contain multiple products (N:1)
 - User - Message: a user can message multiple users and send multiple messages. Each message has one transmitter and one receptor. (1:N)
 - User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
@@ -46,15 +46,15 @@ A web application intended for buying/selling second hand products, similar to W
 ### **Images**
 
 - **User**: each user has one image as their avatar.
-- **Product**: each product has different images of the product made by the vendor.
+- **Product**: each product has different images of the product taken by the vendor.
 - **Review**: a review may have images showing the product as it arrived to the customer.
 
 ### **Charts**
 
-- **Charts 1**: Bar chart showing the reviews given to a user
-- **Charts 2**: Pie chart showing categories where users buy the most
-- **Charts 3**: Line chart of registered users by month.
-- **Charts 4**: Bar chart showing purchases made by day.
+- **Reviews**: Bar chart showing the reviews given to a user
+- **Top Categories**: Pie chart showing categories where users buy the most
+- **Registered Users**: Line chart of registered users by month.
+- **Daily Purchases**: Bar chart showing purchases made by day.
 
 ### **Complementary Technology**
 
@@ -62,10 +62,9 @@ A web application intended for buying/selling second hand products, similar to W
 - Automatic emails: users will receive automatic emails notifying them of new messages or if someone buys one of their products.
 
 ### **Algorithm or Advanced query**
-Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
 - **Algorithm/Query**: Search algorithm showing products in order of the vendor's reviews and also taking into account the distance.
-- **Description**: It searches the database of products and shows the ones with matches in name to the search ordered by ratings (from higher to lower) and distance (from lower to higher).
+- **Description**: It searches the database of products and shows the ones with matches in name to the search, ordered by ratings (from higher to lower) and distance (from lower to higher).
 - **Alternative**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
 
 ---
