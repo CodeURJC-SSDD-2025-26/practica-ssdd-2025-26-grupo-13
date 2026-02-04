@@ -1,4 +1,4 @@
-# TeLoQuito
+# MeLoQuitanDeLasManos (MQM)
 
 ## 👥 Group members
 | Name and surname | URJC Email | GitHub User |
