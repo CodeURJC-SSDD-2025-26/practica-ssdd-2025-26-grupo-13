@@ -50,13 +50,13 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 - **Product**: each product has different images of the product made by the vendor.
 - **Review**: a review may have images showing the product as it arrived to the customer.
 
-### **Graphics**
+### **Charts**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
-- **Gráfico 1**: [Ej: Ventas mensuales - Gráfico de barras]
-- **Gráfico 2**: [Ej: Productos más vendidos - Gráfico de tarta/circular]
-- **Gráfico 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
-- **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
+- **Charts 1**: Bar chart showing the reviews given to a user[Ej: Ventas mensuales - Gráfico de barras]
+- **Charts 2**: Pie chart showing categories where users buy the most[Ej: Productos más vendidos - Gráfico de tarta/circular]
+- **Charts 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
+- **Charts 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
 
 ### **Complementary Technology**
 
