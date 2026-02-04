@@ -20,7 +20,7 @@ A web application intended for buying/selling second hand products, similar to W
 3. **Order**: a purchase of a single product by a user. 
 4. **Category**: used to classify products. A product could belong, for example, to clothes or electronic categories. 
 5. **Message**: represents messages in a chat between two users, at a specific time. Stores the message text. 
-6. **Review**: user feedback after a purchase. 
+6. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5. 
 
 **Connections between entities:**
 - User - Order: a user can make serveral orders (1:N)
