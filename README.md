@@ -29,20 +29,19 @@ A web application intended for buying/selling second hand products, similar to W
 - User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
 - Order - Product: each order has exactly one product, because they can buy from different users (1:1) 
 
-### **Users Permissions**
-Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
+### **User Permissions**
 
 * **Anonymous User**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
-  - No es dueño de ninguna entidad
+  - Permissions: viewing products available in the website, searching and signing up to access the rest of features. 
+  - Not owner of any entity. 
 
 * **Registered User**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permissions: putting up products for sale, buying products, message other users, reviewing vendors.
+  - Owner of: their products, their messages to other users, and the reviews they make, as well as personal information.
 
 * **Administrator**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permissions: modify or delete products, users or reviews not following the Terms and Conditions, looking at internal statistics.
+  - Able to manage everything in the website, including users, products, orders, categories and reviews. 
 
 ### **Images**
 
@@ -51,12 +50,11 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 - **Review**: a review may have images showing the product as it arrived to the customer.
 
 ### **Charts**
-Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
-- **Charts 1**: Bar chart showing the reviews given to a user[Ej: Ventas mensuales - Gráfico de barras]
-- **Charts 2**: Pie chart showing categories where users buy the most[Ej: Productos más vendidos - Gráfico de tarta/circular]
-- **Charts 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
-- **Charts 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
+- **Charts 1**: Bar chart showing the reviews given to a user
+- **Charts 2**: Pie chart showing categories where users buy the most
+- **Charts 3**: Line chart of registered users by month.
+- **Charts 4**: Bar chart showing purchases made by day.
 
 ### **Complementary Technology**
 
