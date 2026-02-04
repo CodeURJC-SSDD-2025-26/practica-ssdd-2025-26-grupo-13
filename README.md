@@ -3,9 +3,9 @@
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| Lucas | l.morenop.2023@alumnos.urjc.es | lucasmp31 |
-| Diego | d.rodriguezto.2023@alumnos.urjc.es | DiegoRodriguezT |
-| Lucia | l.lopezgar.2023@alumnos.urjc.es | lucialopezgp |
+| Lucas Moreno Prieto | l.morenop.2023@alumnos.urjc.es | lucasmp31 |
+| Diego Rodríguez Torrecilla | d.rodriguezto.2023@alumnos.urjc.es | DiegoRodriguezT |
+| Lucia López García del Pino| l.lopezgar.2023@alumnos.urjc.es | lucialopezgp |
 
 ---
 
@@ -22,11 +22,12 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 3. **[Entidad 3]**: [Ej: Pedido]
 4. **[Entidad 4]**: [Ej: Categoría]
 
-**Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+**Connections between entities:**
+- User - Order: a user can make serveral orders (1:N)
+- Product - Category: a product belong in one category, but one category can contain multiple products (N:1)
+- User - Message: a user can message multiple users and send multiple messages. Each message has one transmitter and one receptor. (1:N)
+- User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
+- Order - Product: each order has exactly one product, because they can buy from different users (1:1) 
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
