@@ -45,11 +45,10 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
   - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
 
 ### **Images**
-Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- **User**: each user has one foto as their avatar.
+- **Product**: each products has different images of the product made by the vendor.
+- **Review**: a review may have images showing the product as it arrived to the customer.
 
 ### **Graphics**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
@@ -60,10 +59,9 @@ Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 - **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
 
 ### **Complementary Technology**
-Indicar qué tecnología complementaria se empleará:
 
-- [Ej: Envío de correos electrónicos automáticos mediante JavaMailSender]
-- [Ej: Generación de PDFs de facturas usando iText o similar]
+- Search algorithm: when a user searches for a product, the results will be ordered by the vendor's reviews from best to worst.
+- Automatic emails: users will receive automatic emails notifying them of new messages or if someone buys one of their products.
 
 ### **Algorithm or Advanced query**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
