@@ -46,8 +46,8 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 
 ### **Images**
 
-- **User**: each user has one foto as their avatar.
-- **Product**: each products has different images of the product made by the vendor.
+- **User**: each user has one image as their avatar.
+- **Product**: each product has different images of the product made by the vendor.
 - **Review**: a review may have images showing the product as it arrived to the customer.
 
 ### **Graphics**
