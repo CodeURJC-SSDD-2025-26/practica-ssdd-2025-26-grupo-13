@@ -1,4 +1,4 @@
-# [Nombre de la Aplicación]
+# TeLoQuito
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
@@ -12,7 +12,7 @@
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+Una aplicación de compraventa de artículos de segunda mano similar a Wallapop, que permite a los usuarios buscar productos o añadir productos a la venta, además de dar reseñas y poder comprar.
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
