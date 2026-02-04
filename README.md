@@ -64,8 +64,8 @@ A web application intended for buying/selling second hand products, similar to W
 ### **Algorithm or Advanced query**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
-- **Algorithm/Query**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
-- **Description**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
+- **Algorithm/Query**: Search algorithm showing products in order of the vendor's reviews and also taking into account the distance.
+- **Description**: It searches the database of products and shows the ones with matches in name to the search ordered by ratings (from higher to lower) and distance (from lower to higher).
 - **Alternative**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
 
 ---
