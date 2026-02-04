@@ -15,12 +15,12 @@
 A web application intended for buying/selling second hand products, similar to Wallapop, that allows users to search products or offer them for sale, as well as letting them buy and give reviews to their sellers. If an user is interested in buying a product, the app lets them communicate with the vendor through a chat. This application gives the user the capability of getting money easily selling objects they don't use anymore and buying other ones at a cheap price. 
 
 ### **Entities**
-1. **User**:
-2. **Product**:
-3. **Order**: 
-4. **Category**: 
-5. **Message**:
-6. **Review**:
+1. **User**: represents buyers and sellers (same role). It stores name, email address, phone number, avatar and delivery address.  
+2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description and images. 
+3. **Order**: a purchase of a single product by a user. 
+4. **Category**: used to classify products. A product could belong, for example, to clothes or electronic categories. 
+5. **Message**: represents messages in a chat between two users, at a specific time. Stores the message text. 
+6. **Review**: user feedback after a purchase. 
 
 **Connections between entities:**
 - User - Order: a user can make serveral orders (1:N)
