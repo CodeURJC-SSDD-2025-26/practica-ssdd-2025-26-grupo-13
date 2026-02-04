@@ -11,7 +11,7 @@
 
 ## 🎭 **Preparation: Project Definition**
 
-### ** Topic Description **
+### **Topic Description**
 A web application intended for buying/selling second hand products, similar to Wallapop, that allows users to search products or offer them for sale, as well as letting them buy and give reviews to their sellers. If an user is interested in buying a product, the app lets them communicate with the vendor through a chat. This application gives the user the capability of getting money easily selling objects they don't use anymore and buying other ones at a cheap price. 
 
 ### **Entities**
