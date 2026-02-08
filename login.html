@@ -11,7 +11,7 @@
         <link type="text/css" rel="stylesheet" href="login.css"/>
     </head>
     <body> 
-        <main class="container border rounded px-5 py-4"> 
+        <main class="border"> 
             <h1 id="title">
                     Únete a Me lo Quitan de las Manos
             </h1>
@@ -33,12 +33,14 @@
                         <label for ="inputPassword">Contraseña</label>
                         <input type="password" id="inputPassword" placeholder="Contraseña" class="form-control"><br>
                     </div>
-                    <label>
-                        <input type="checkbox" checked>
-                        He leido y acepto los Términos y Condiciones
-                    </label><br>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <div id="register">
+                        <label>
+                            <input type="checkbox" checked>
+                            He leido y acepto los Términos y Condiciones
+                        </label>
+                    
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </div>
                 </form>
             </div>
         </main>
