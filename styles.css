@@ -14,6 +14,11 @@ header {
     border-radius: 26px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+h4 {
+    font-size: 1.5em !important;
+    font-weight: bold !important;
+    margin: 0px 0px 0px 0px !important;
+}
 
 nav {
     padding-bottom: 0px;
