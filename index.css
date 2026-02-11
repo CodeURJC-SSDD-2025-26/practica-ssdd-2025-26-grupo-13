@@ -2,16 +2,6 @@ body {
     background-color: rgb(0, 0, 140);
 }
 
-section {
-    width: 80%;
-    margin-top: 20px !important;
-    border: 1px solid rgb(200, 200, 200);
-    margin: auto;
-    border-radius: 25px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-}
-
 #carousel {
     border-radius: 20px;
     overflow: hidden;
@@ -89,27 +79,4 @@ h4 {
     margin-top: 10px;
 }
 
-footer {
-    width: 80%;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.copyright {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 30%;
-    color: rgb(78, 78, 78);
-    font-size: smaller;
-}
-hr {
-    width: 80%;
-    margin: auto !important;
-}
-
-.estrella {
-    color: #ffc107;
-}
 
