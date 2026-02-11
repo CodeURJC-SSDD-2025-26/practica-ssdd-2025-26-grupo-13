@@ -2,45 +2,6 @@ body {
     background-color: rgb(0, 0, 140);
 }
 
-header {
-    display: flex;
-    position: sticky;
-    top: 10px;
-    z-index: 20;
-    background-color:white;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 25px 20px 25px;
-    width: 85%;
-    margin: auto;
-    margin-top: 20px;
-    border: 1px solid rgb(205, 205, 205);
-    border-radius: 26px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-nav {
-    padding-bottom: 0px;
-}
-
-nav a {
-    color: rgb(62, 62, 62);
-    text-decoration: none;
-}
-
-main {
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-
-.botonsesion {
-    background-color: darkcyan;
-    color: white;
-    padding: 10px 12px 10px 12px;
-    border-radius: 15px;
-    font-size: medium;
-}
-
 section {
     width: 80%;
     margin-top: 20px !important;
