@@ -5,11 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MQM</title>
     <link type="text/css" rel="stylesheet" href="producto.css"/>
+    <link type="text/css" rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head> 
 <body>
-    <h1>MQM</h1>
-    <img src="images/barbacoa.jpg"> 
-    <p><strong>Producto:</strong> <a>barbacoa</a></p>
-    <p><strong>Precio:</strong>70</p>
+    <header>
+        <img src="images/MQM.png" width="80px"/>
+        <nav>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              </form>
+            <a href="login.html" class="botonsesion">Iniciar sesión</a> 
+        </nav>
+    </header>
+    <main>
+    <div class="grid">
+        <div class="imagen"><img class="product" src="images/barbacoa.jpg"></div>
+        <div class="content"> <p id="title"><strong>Barbacoa con parrillas</strong></p>
+            <p>Buen estado · Negro y Marrón · Metal y Madera</p>
+            <p id="price"><strong>70€</strong></p>
+            <button class="buybutton btn btn-primary me-3">
+                Comprar
+            </button>
+            <button class="buybutton btn btn-primary">
+                Hacer oferta
+            </button>
+        </div>
+        <div class="user">
+
+        </div>
+        <div class="categories"> 
+            <div class="container">
+                <div class="item">Jardín  y exteriores</div>
+                <div class="item">Cocina</div>
+            </div>
+        </div>
+    </div>
+    </main>
+    <footer>
+        <div class="copyright">
+            <img src="images/MQM.png" width="100"/>
+            <p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
+        </div>
+    </footer>
 </body>
 </html>
