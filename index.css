@@ -8,21 +8,13 @@ body {
 
 }
 
-.products {
-    width: 80%;
-    margin-top: 20px !important;
-    border: 1px solid rgb(200, 200, 200);
-    margin: auto;
-    border-radius: 25px;
-    padding: 1.2em 1.4em 1.2em 1.4em;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+
+
+section:first-child {
+    padding: 0;
 }
 
-h4 {
-    font-size: 1.5em !important;
-    font-weight: bold !important;
-    margin: 0px 0px 0px 0px !important;
-}
 
 .subtitle {
     font-size: 1em;
@@ -36,10 +28,11 @@ h4 {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     /* This adds space between items */
     gap: 20px;
-    margin: 25px auto 0 auto;
+    margin: 25px auto 10px auto;
     width: 100%;
     justify-items: center;
 }
+
 
 .smallproductcard {
     display: flex;
@@ -48,6 +41,31 @@ h4 {
     font-size: 1em;
     text-overflow: ellipsis;
     width: 150px;
+}
+
+.categoriesgrid {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 25px auto 0 auto;
+    width: 100%;
+    justify-items: center;
+}
+
+.categorycard {
+    height: 300px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 300;
+}
+.categoryimg {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .smallproductcard p {
@@ -78,5 +96,4 @@ h4 {
     margin-bottom: 0px;
     margin-top: 10px;
 }
-
 

@@ -4,7 +4,7 @@ header {
     top: 10px;
     z-index: 20;
     background-color:white;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 20px 25px 20px 25px;
     width: 85%;
@@ -12,6 +12,7 @@ header {
     margin-top: 20px;
     border: 1px solid rgb(205, 205, 205);
     border-radius: 26px;
+    gap: 2em;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 h4 {
@@ -23,7 +24,9 @@ h4 {
 nav {
     padding-bottom: 0px;
     display: flex;
-    gap: 4px;
+    gap: 20px;
+    flex: 1;  
+
 }
 
 nav a {
@@ -47,16 +50,16 @@ main {
 .form-inline {
     display: flex;
     gap: 4px;
+    flex: 1;            
 }
 
 section {
-    width: 80%;
     margin-top: 20px !important;
     border: 1px solid rgb(200, 200, 200);
     margin: auto;
     border-radius: 25px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
+    padding: 1.2em 1.4em 1.2em 1.4em;
 }
 
 footer {
@@ -81,4 +84,20 @@ hr {
 
 .estrella {
     color: #ffc107;
+}
+
+.searchbar {
+    border-radius: 15px !important;
+}
+
+h4 {
+    font-size: 1.5em !important;
+    font-weight: bold !important;
+    margin: 0px 0px 0px 0px !important;
+}
+main {
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 20px;
 }
