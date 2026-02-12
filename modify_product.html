@@ -28,13 +28,13 @@
         </header>
 
         <div class ="title">
-            <h2>Sube tu anuncio</h2>
+            <h2>Modifica tu anuncio</h2>
         </div>
         <div class="category">
             <h4>Selecciona una categoría</h4>
             <div class="categoriesgrid">
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main active">
                         <img width="135px" src="images/ropa.png" />
                         <p class="fw-medium">Ropa</p>
                     </button>
@@ -72,15 +72,15 @@
                 <form>
                     <div class="mb-3">
                         <label for="productName" class="form-label">Nombre del producto</label> 
-                        <input type="text" class="form-control" id="productName" placeholder="Introduce el nombre del producto"> 
+                        <input type="text" class="form-control" id="productName" placeholder="Introduce el nombre del producto" value="Camiseta"> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productDescription" class="form-label">Descripción</label> 
-                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe tu producto"></textarea> 
+                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe tu producto">Camiseta de manga corta azul</textarea> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productPrice" class="form-label">Precio (€)</label> 
-                        <input type="number" class="form-control" id="productPrice" placeholder="Introduce el precio"> 
+                        <input type="number" class="form-control" id="productPrice" placeholder="Introduce el precio" value="15"> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productImage" class="form-label">Imagen del producto</label> 
@@ -105,6 +105,11 @@
         <script>
             // Para interactividad de botones
             const buttons = document.querySelectorAll('.button-main');
+            
+            // Asegurar que el primer botón empiece con active si no hay ninguno
+            if (!document.querySelector('.button-main.active')) {
+                buttons[0].classList.add('active');
+            }
             
             buttons.forEach(button => {
                 button.addEventListener('click', function() {
