@@ -62,6 +62,7 @@ main {
   color: white;
   padding: 10px 12px 10px 12px;
   border-radius: 15px;
+  text-decoration: none;
   font-size: medium;
 }
 
