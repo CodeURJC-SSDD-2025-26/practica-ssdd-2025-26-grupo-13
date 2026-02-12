@@ -1,54 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MQM</title>
-    <link type="text/css" rel="stylesheet" href="producto.css"/>
-    <link type="text/css" rel="stylesheet" href="styles.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="producto.css" />
+    <link type="text/css" rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head> 
-<body>
+  </head>
+  <body>
     <header>
-        <img src="images/MQM.png" width="80px"/>
-        <nav>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              </form>
-            <a href="login.html" class="botonsesion">Iniciar sesión</a> 
-        </nav>
+      <img src="images/MQM.png" width="80px" />
+      <nav>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+        <a href="login.html" class="botonsesion">Iniciar sesión</a>
+      </nav>
     </header>
     <main>
-    <div class="grid">
-        <div class="imagen"><img class="product" src="images/barbacoa.jpg"></div>
-        <div class="content"> <p id="title"><strong>Barbacoa con parrillas</strong></p>
-            <p>Buen estado · Negro y Marrón · Metal y Madera</p>
-            <p id="price"><strong>70€</strong></p>
-            <button class="buybutton btn btn-primary me-3">
-                Comprar
-            </button>
-            <button class="buybutton btn btn-primary">
-                Hacer oferta
-            </button>
-        </div>
-        <div class="user">
-
-        </div>
-        <div class="categories"> 
-            <div class="container">
-                <div class="item">Jardín  y exteriores</div>
-                <div class="item">Cocina</div>
+      <div class="container w-75 gap-3">
+        <div class="row">
+          <div class="col-md-7">
+            <div class="imagen h-100">
+              <img class="product" src="images/barbacoa.jpg" />
             </div>
+          </div>
+          <div class="col-md-5">
+            <div class="content">
+              <p id="title"><strong>Barbacoa con parrillas</strong></p>
+              <p>Buen estado · Negro y Marrón · Metal y Madera</p>
+              <p id="price"><strong>70€</strong></p>
+              <button class="buybutton btn btn-primary me-3">Comprar</button>
+              <button class="buybutton btn btn-primary">Hacer oferta</button>
+            </div>
+            <div class="user">
+              <div class="profile">
+                <div class="a">
+                  <img
+                    class="rounded-circle"
+                    src="images/usuario anonimo.jpg"
+                    width="50px"
+                  />
+                </div>
+                <div class="b">
+                  <p id="user"><strong>Usuario 1</strong></p>
+                </div>
+                <div class="c">
+                  <div>
+                    <i class="bi bi-star-fill estrella"></i>
+                    <i class="bi bi-star-fill estrella"></i>
+                    <i class="bi bi-star-fill estrella"></i>
+                    <i class="bi bi-star-fill estrella"></i>
+                    <i class="bi bi-star estrella"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+        <div class="row">
+          <div class="col">
+            <div class="categories">
+              <div class="item">Electrodomésticos</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="description">
+              <h1>Detalles del producto:</h1>
+              <p>
+                Barbacoa con varias alturas para la parrilla, ideal para
+                controlar la cocción de los alimentos.
+              </p>
+              <p>
+                Incluye una bandeja para recoger las cenizas, lo que facilita la
+                limpieza después de su uso. Diseño robusto y duradero, perfecto
+                para disfrutar de deliciosas comidas al aire libre con amigos y
+                familiares.
+              </p>
+              <ul>
+                <li>Material: Metal y Madera</li>
+                <li>Color: Negro y Marrón</li>
+              </ul>
+              <p><strong>Medidas:</strong></p>
+              <table id="measures">
+                <tr>
+                  <td>Anchura:</td>
+                  <td>42 cm</td>
+                </tr>
+                <tr>
+                  <td>Altura:</td>
+                  <td>90 cm</td>
+                </tr>
+                <tr>
+                  <td>Profundidad:</td>
+                  <td>130 cm</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="ubication">Humanes, Madrid</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="reviews">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <h3>
+                      <i class="bi bi-star-fill estrella"></i>
+                      <strong>4.5 Juan M. valoraciones</strong>
+                    </h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h4>Reseñas</h4>
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="grid2">
+                      <div class="A">
+                        <img
+                          class="rounded-circle"
+                          src="images/usuario anonimo.jpg"
+                          width="60px"
+                        />
+                      </div>
+                      <div class="B">
+                        <p>Usuario Anonimo 1</p>
+                      </div>
+                      <div class="C">
+                        <p>Hace 1 mes</p>
+                      </div>
+                      <div class="D">
+                        <div>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star estrella"></i>
+                        </div>
+                      </div>
+                      <div class="E">
+                        <p>
+                          Una persona fantastica, el producto como nuevo, la
+                          recomiemdo.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="grid2">
+                      <div class="A">
+                        <img
+                          class="rounded-circle"
+                          src="images/usuario anonimo.jpg"
+                          width="60px"
+                        />
+                      </div>
+                      <div class="B">
+                        <p>Usuario Anonimo 2</p>
+                      </div>
+                      <div class="C">
+                        <p>Hace 6 meses</p>
+                      </div>
+                      <div class="D">
+                        <div>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star estrella"></i>
+                        </div>
+                      </div>
+                      <div class="E">
+                        <p>
+                          Muy agradable y todo perfecto.El producto es tal cual
+                          se describe, y el trato ha sido excelente.
+                          Recomendable 100%
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="grid2">
+                      <div class="A">
+                        <img
+                          class="rounded-circle"
+                          src="images/usuario anonimo.jpg"
+                          width="60px"
+                        />
+                      </div>
+                      <div class="B">
+                        <p>Usuario Anonimo 3</p>
+                      </div>
+                      <div class="C">
+                        <p>Hace 2 años</p>
+                      </div>
+                      <div class="D">
+                        <div>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star-fill estrella"></i>
+                          <i class="bi bi-star estrella"></i>
+                          <i class="bi bi-star estrella"></i>
+                        </div>
+                      </div>
+                      <div class="E">
+                        <p>
+                          Vendedora muy amable y el producto en muy buenas
+                          condiciones tal cual decia el anuncio.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="buybutton btn btn-primary me-3">Ver todas las valoraciones</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
-        <div class="copyright">
-            <img src="images/MQM.png" width="100"/>
-            <p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
-        </div>
+      <div class="copyright">
+        <img src="images/MQM.png" width="100" />
+        <p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
