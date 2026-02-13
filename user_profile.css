@@ -98,7 +98,7 @@
     margin-top: 10px;
 }
 
-.container{
+.reviews{
     display:flex;
     flex-wrap:nowrap;
     flex-flow: column;

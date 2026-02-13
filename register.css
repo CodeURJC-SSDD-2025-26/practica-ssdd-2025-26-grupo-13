@@ -5,7 +5,7 @@ main{
     margin-top: 2em;
     margin-bottom: 2em;
     border: 0.4em;
-    padding: 1em 1em 1em 1em;
+    padding: 2em 0.5em 2em 0.5em;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 1.5em;
 }
@@ -28,10 +28,11 @@ h1{
     font-size: 26pt;
 }
 body{
-    background-color: #70A89E;
+    background-color: #e3f1ef;
 }
 #mainlink{
     color: white;
+    text-decoration: none;
 }
 #regist{
     display: flex;
