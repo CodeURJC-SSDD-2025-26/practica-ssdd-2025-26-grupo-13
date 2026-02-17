@@ -15,7 +15,7 @@ body {
 header {
   display: flex;
   position: sticky;
-  top: 10px;
+  top: 20px;
   z-index: 20;
   background-color: white;
   justify-content: flex-start;
@@ -45,6 +45,7 @@ nav {
   display: flex;
   gap: 20px;
   flex: 1;
+  align-items: center;
 }
 
 nav a {
@@ -57,13 +58,18 @@ main {
   margin-bottom: 40px;
 }
 
-.botonsesion {
+.button {
   background-color: darkcyan;
   color: white;
   padding: 10px 12px 10px 12px;
   border-radius: 15px;
   text-decoration: none;
   font-size: medium;
+  white-space: nowrap;
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-inline {
@@ -130,7 +136,12 @@ main {
 
 .form-control {
   border-radius: 15px !important;
-  padding: 0.375rem 1rem;
+  padding: 0.7rem 1rem;
+}
+
+.form-select {
+  border-radius: 15px !important;
+  padding: 0.7rem 1rem;
 }
 
 .productslist {
@@ -148,6 +159,27 @@ main {
   display: flex;
   justify-content: space-between;
   margin-right: 1px;
-  color:rgb(83, 83, 83);
+  color: rgb(83, 83, 83);
   flex-wrap: wrap;
+}
+
+.menubutton {
+  font-size: 1.5rem;
+}
+
+.secondarybutton {
+  background-color: white;
+  color: rgb(63, 63, 63);
+  border: 1px solid rgb(200, 200, 200);
+}
+
+a[aria-expanded="true"] .bi-chevron-right {
+  display: none;
+}
+a[aria-expanded="false"] .bi-chevron-down {
+  display: none;
+}
+
+.collapsebutton {
+  cursor: pointer;
 }
