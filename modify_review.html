@@ -20,31 +20,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script>
-      const stars = document.querySelectorAll("#star-rating .star");
-      const ratingValue = document.getElementById("rating-value");
-      let currentRating = 0;
-
-      stars.forEach((star, idx) => {
-        star.addEventListener("mouseover", () => {
-          highlightStars(idx + 1);
-        });
-        star.addEventListener("mouseout", () => {
-          highlightStars(currentRating);
-        });
-        star.addEventListener("click", () => {
-          currentRating = idx + 1;
-          ratingValue.value = currentRating;
-          highlightStars(currentRating);
-        });
-      });
-
-      function highlightStars(rating) {
-        stars.forEach((star, idx) => {
-          star.innerHTML = idx < rating ? "&#9733;" : "&#9734;";
-        });
-      }
-    </script>
   </head>
   <body>
     <header>
@@ -58,7 +33,7 @@
             aria-label="Buscar"
           />
         </form>
-        <a href="login.html" class="botonsesion">Iniciar sesión</a>
+        <a href="login.html" class="button">Iniciar sesión</a>
       </nav>
     </header>
     <div class="category">
@@ -102,8 +77,10 @@
           <input type="hidden" name="rating" id="rating-value" value="0" />
         </div>
         <br />
-        <a href="product.html" class="botonsesion me-2">Publicar</a>
-        <a href="product.html" class="botonsesion">Eliminar reseña</a>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="product.html" class="button me-2">Publicar</a>
+          <a href="product.html" class="button">Eliminar reseña</a>
+        </div>
       </form>
     </div>
 
@@ -115,5 +92,30 @@
         <p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
       </div>
     </footer>
+    <script>
+      const stars = document.querySelectorAll("#star-rating .star");
+      const ratingValue = document.getElementById("rating-value");
+      let currentRating = 0;
+
+      stars.forEach((star, idx) => {
+        star.addEventListener("mouseover", () => {
+          highlightStars(idx + 1);
+        });
+        star.addEventListener("mouseout", () => {
+          highlightStars(currentRating);
+        });
+        star.addEventListener("click", () => {
+          currentRating = idx + 1;
+          ratingValue.value = currentRating;
+          highlightStars(currentRating);
+        });
+      });
+
+      function highlightStars(rating) {
+        stars.forEach((star, idx) => {
+          star.innerHTML = idx < rating ? "&#9733;" : "&#9734;";
+        });
+      }
+    </script>
   </body>
 </html>
