@@ -33,7 +33,7 @@
                         <input type="password" id="inputPassword" placeholder="Contraseña" class="form-control" required><br>
                     </div>
                     <div id="regist">
-                        <button type="submit" class="btn btn-primary"><a href="index.html" id="mainlink">Iniciar Sesión</a></button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display:none"><a href="index.html" id="mainlink">Iniciar Sesión</a></button>
                         <p id="registro">
                             ¿Aún no tienes cuenta?
                             <a href="register.html">Regístrate</a>
@@ -49,5 +49,21 @@
                 <p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
             </div>
         </footer>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const email = document.getElementById('inputEmail');
+                const pass = document.getElementById('inputPassword');
+                const submitBtn = document.getElementById('submitBtn');
+
+                function updateButtonVisibility() {
+                    const show = email.value.trim() !== '' && pass.value.trim() !== '';
+                    submitBtn.style.display = show ? '' : 'none';
+                }
+
+                email.addEventListener('input', updateButtonVisibility);
+                pass.addEventListener('input', updateButtonVisibility);
+                updateButtonVisibility();
+            });
+        </script>
     </body>
 </html>
