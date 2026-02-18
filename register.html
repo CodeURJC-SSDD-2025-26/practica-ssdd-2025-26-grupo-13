@@ -23,7 +23,7 @@
                     Únete a Me lo Quitan de las Manos
             </h1>
             <div id="register">
-                <form role ="form">
+                <form role ="form" action="index.html" method="get">
                     <div class="form-group">
                         <label for ="inputName">Nombre</label>
                         <input type="name" id="inputName" placeholder="Nombre" class="form-control" required><br>
@@ -46,7 +46,7 @@
                             He leido y acepto los Términos y Condiciones
                         </label>
                     
-                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display:none"><a href="index.html" id="mainlink">Registrarse</a></button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Registrarse</button>
                     </div>
                 </form>
             </div>
@@ -59,29 +59,5 @@
                 <p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
             </div>
         </footer>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const email = document.getElementById('inputEmail');
-                const pass = document.getElementById('inputPassword');
-                const submitBtn = document.getElementById('submitBtn');
-                const name = document.getElementById('inputName');
-                const surnames = document.getElementById('inputSurnames');
-                const checkbox = document.querySelector('input[type="checkbox"]');
-
-
-                function updateButtonVisibility() {
-                    const show = email.value.trim() !== '' && pass.value.trim() !== '' && name.value.trim() !== '' && surnames.value.trim() !== '' && checkbox.checked!==false;
-                    submitBtn.style.display = show ? '' : 'none';
-                }
-
-                email.addEventListener('input', updateButtonVisibility);
-                pass.addEventListener('input', updateButtonVisibility);
-                name.addEventListener('input', updateButtonVisibility);
-                surnames.addEventListener('input', updateButtonVisibility);
-                checkbox.addEventListener('change', updateButtonVisibility);
-                updateButtonVisibility();
-            });
-        </script>
     </body>
 </html>

@@ -1,0 +1,10 @@
+.button-main {
+  background-color: transparent !important;
+  border: none !important;
+  transition: background-color 0.3s ease;
+}
+
+.button-main.active {
+  background-color: darkcyan !important;
+  color: white !important;
+}
