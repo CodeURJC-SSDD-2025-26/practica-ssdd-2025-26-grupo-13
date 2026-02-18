@@ -43,3 +43,7 @@
   background-color: darkcyan !important;
   color: white !important;
 }
+a{
+  text-decoration: none;
+  color: white;
+}

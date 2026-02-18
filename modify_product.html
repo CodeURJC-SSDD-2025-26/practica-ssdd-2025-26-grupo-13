@@ -69,25 +69,25 @@
             
         <div class="category">
                 <h4>Información del producto</h4>
-                <form>
+                <form action="product.html" method="get">
                     <div class="mb-3">
                         <label for="productName" class="form-label">Nombre del producto</label> 
-                        <input type="text" class="form-control" id="productName" placeholder="Introduce el nombre del producto" value="Camiseta"> 
+                        <input type="text" class="form-control" id="productName" placeholder="Introduce el nombre del producto" value="Camiseta" required> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productDescription" class="form-label">Descripción</label> 
-                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe tu producto">Camiseta de manga corta azul</textarea> 
+                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe tu producto" required>Camiseta de manga corta azul</textarea> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productPrice" class="form-label">Precio (€)</label> 
-                        <input type="number" class="form-control" id="productPrice" placeholder="Introduce el precio" value="15"> 
+                        <input type="number" class="form-control" id="productPrice" placeholder="Introduce el precio" value="15" required> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productImage" class="form-label">Imagen del producto</label> 
-                        <input class="form-control" type="file" id="productImage"> 
+                        <input class="form-control" type="file" id="productImage" required> 
                     </div> 
                     <br>
-                    <a href="product.html" class="boton">Publicar</a>
+                    <button class="button" type="submit">Publicar</button>
                 </form>
         </div>
     
