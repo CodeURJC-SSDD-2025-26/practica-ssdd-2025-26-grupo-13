@@ -38,15 +38,14 @@
     </header>
     <div class="category">
       <h4>Modificar reseña</h4>
-      <form>
-        <div class="my-3">
-          <label for="name" class="form-label">Usuario</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            placeholder="Juan_prz66"
-          />
+      <form action="user_profile.html" method="GET">
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <p class="fw-semibold">Usuario: </p>
+          <p>Lucas Martínez</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <p class="fw-semibold">Producto: </p>
+          <p>iPhone 15 Pro Max</p>
         </div>
         <div class="mb-3">
           <label for="reviewDescription" class="form-label"
@@ -57,6 +56,7 @@
             id="reviewDescription"
             rows="3"
             placeholder="El producto no estaba en buen estado como se habia acordado. Tuve que devolverlo."
+            required
           ></textarea>
         </div>
         <div class="mb-3">
@@ -78,8 +78,8 @@
         </div>
         <br />
         <div class="d-flex flex-wrap gap-2">
-          <a href="product.html" class="button me-2">Publicar</a>
-          <a href="product.html" class="button">Eliminar reseña</a>
+          <button type="submit" class="button me-2">Publicar</button>
+          <a href="user_profile.html" class="button">Eliminar reseña</a>
         </div>
       </form>
     </div>
