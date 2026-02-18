@@ -19,10 +19,57 @@
         <header>
             <a href="index.html"><img src="images/MQM.png" width="80px" /></a>
             <nav>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                <a class="d-sm-none d-flex ms-auto" data-bs-toggle="offcanvas" href="#offcanvasNavbar" role="button" aria-controls="offcanvasNavbar">
+                    <i class="bi bi-list menubutton"></i>
+                </a>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header mt-4">
+                <a href="index.html" class="ms-2"><img src="images/MQM.png" width="90px" /></a>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                
+                <ul class="navbar-nav justify-content-end flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link ms-2" href="index.html">Página principal</a>
+                </li>
+                <li class="nav-item mt-4">
+                    <form
+                    class="form-inline"
+                    action="search.html"
+                    method="get">
+                    <input
+                        class="form-control mr-sm-2 py-2 searchbar"
+                        type="search"
+                        placeholder="Buscar"
+                        aria-label="Buscar" />
+                    </form>
+                </li>
+                <li class="nav-item mt-4">
+                    <a class="nav-link button w-100" href="login.html">Iniciar sesión</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link button w-100 secondarybutton" href="sell_product.html">Vender</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+                <form
+                class="form-inline d-none d-sm-flex"
+                action="search.html"
+                method="get">
+                <input
+                    class="form-control mr-sm-2 py-2 searchbar"
+                    type="search"
+                    name="search"
+                    placeholder="Buscar"
+                    aria-label="Buscar" />
                 </form>
-                <a href="login.html" class="button">Iniciar sesión</a> 
+                <div class="d-flex gap-1">
+                <a href="sell_product.html" class="button secondarybutton mr-0 d-none d-sm-flex">Vender</a>
+                <a href="login.html" class="button d-none d-sm-flex">Iniciar sesión</a>
+                </div>
+                
             </nav>
         </header>
     
