@@ -183,3 +183,7 @@ a[aria-expanded="false"] .bi-chevron-down {
 .collapsebutton {
   cursor: pointer;
 }
+
+button {
+  border: none;
+}
