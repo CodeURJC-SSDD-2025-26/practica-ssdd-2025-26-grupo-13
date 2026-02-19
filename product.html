@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MQM</title>
+    <title>MQM - Me Lo Quitan De Las Manos</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
@@ -24,17 +24,87 @@
   </head>
   <body>
     <header>
-      <img src="images/MQM.png" width="80px" />
+      <a href="index.html"><img src="images/MQM.png" width="80px" /></a>
       <nav>
-        <form class="form-inline my-2 my-lg-0">
+        <a
+          class="d-sm-none d-flex ms-auto"
+          data-bs-toggle="offcanvas"
+          href="#offcanvasNavbar"
+          role="button"
+          aria-controls="offcanvasNavbar"
+        >
+          <i class="bi bi-list menubutton"></i>
+        </a>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header mt-4">
+            <a href="index.html" class="ms-2"
+              ><img src="images/MQM.png" width="90px"
+            /></a>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1">
+              <li class="nav-item">
+                <a class="nav-link ms-2" href="index.html">Página principal</a>
+              </li>
+              <li class="nav-item mt-4">
+                <form class="form-inline" action="search.html" method="get">
+                  <input
+                    class="form-control mr-sm-2 py-2 searchbar"
+                    type="search"
+                    placeholder="Buscar"
+                    aria-label="Buscar"
+                  />
+                </form>
+              </li>
+              <li class="nav-item mt-4">
+                <a class="nav-link button w-100" href="login.html"
+                  >Iniciar sesión</a
+                >
+              </li>
+              <li class="nav-item mt-2">
+                <a
+                  class="nav-link button w-100 secondarybutton"
+                  href="sell_product.html"
+                  >Vender</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <form
+          class="form-inline d-none d-sm-flex"
+          action="search.html"
+          method="get"
+        >
           <input
-            class="form-control mr-sm-2"
+            class="form-control mr-sm-2 py-2 searchbar"
             type="search"
-            placeholder="Search"
-            aria-label="Search"
+            name="search"
+            placeholder="Buscar"
+            aria-label="Buscar"
           />
         </form>
-        <a href="login.html" class="button">Iniciar sesión</a>
+        <div class="d-flex gap-1">
+          <a
+            href="sell_product.html"
+            class="button secondarybutton mr-0 d-none d-sm-flex"
+            >Vender</a
+          >
+          <a href="login.html" class="button d-none d-sm-flex"
+            >Iniciar sesión</a
+          >
+        </div>
       </nav>
     </header>
     <main>
@@ -58,10 +128,12 @@
             <div class="user">
               <div class="profile">
                 <div class="a">
-                  <a href="user_profile.html"><img 
-                    class="rounded-circle"
-                    src="images/usuario anonimo.jpg"
-                    width="50px"> 
+                  <a href="user_profile.html"
+                    ><img
+                      class="rounded-circle"
+                      src="images/usuario anonimo.jpg"
+                      width="50px"
+                    />
                   </a>
                 </div>
                 <div class="b">
@@ -151,24 +223,36 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="container py-2">
-                      <div class="d-flex flex-column flex-md-row align-items-start gap-3">
+                      <div
+                        class="d-flex flex-column flex-md-row align-items-start gap-3"
+                      >
                         <a href="user_profile.html">
-                          <img class="rounded-circle" src="images/usuario anonimo.jpg" width="60px" alt="Usuario">
+                          <img
+                            class="rounded-circle"
+                            src="images/usuario anonimo.jpg"
+                            width="60px"
+                            alt="Usuario"
+                          />
                         </a>
                         <div class="flex-grow-1">
-                          <div class="d-flex flex-column flex-md-row align-items-md-center gap-2">
+                          <div
+                            class="d-flex flex-column flex-md-row align-items-md-center gap-2"
+                          >
                             <span class="fw-semibold">Usuario 2</span>
                             <span>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star star"></i>
                             </span>
-                            <span class="text-muted small ms-md-3">Hace 1 año</span>
+                            <span class="text-muted small ms-md-3"
+                              >Hace 1 año</span
+                            >
                           </div>
                           <p class="mb-0 mt-2">
-                            El producto es tal cual se describe, y el trato ha sido excelente. Recomendable 100%.
+                            El producto es tal cual se describe, y el trato ha
+                            sido excelente. Recomendable 100%.
                           </p>
                         </div>
                       </div>
@@ -178,22 +262,35 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="container py-2">
-                      <div class="d-flex flex-column flex-md-row align-items-start gap-3">
+                      <div
+                        class="d-flex flex-column flex-md-row align-items-start gap-3"
+                      >
                         <a href="user_profile.html">
-                          <img class="rounded-circle" src="images/usuario anonimo.jpg" width="60px" alt="Usuario">
+                          <img
+                            class="rounded-circle"
+                            src="images/usuario anonimo.jpg"
+                            width="60px"
+                            alt="Usuario"
+                          />
                         </a>
                         <div class="flex-grow-1">
-                          <div class="d-flex flex-column flex-md-row align-items-md-center gap-2">
+                          <div
+                            class="d-flex flex-column flex-md-row align-items-md-center gap-2"
+                          >
                             <span class="fw-semibold">Usuario 3</span>
                             <span>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star star"></i>
                             </span>
-                            <span class="text-muted small ms-md-3">Hace 1 año</span>
-                            <a href="modify_review.html" class="button ms-4">Modificar reseña</a> 
+                            <span class="text-muted small ms-md-3"
+                              >Hace 1 año</span
+                            >
+                            <a href="modify_review.html" class="button ms-4"
+                              >Modificar reseña</a
+                            >
                           </div>
                           <p class="mb-0 mt-2">
                             Todo perfecto y como fue acordado.
@@ -206,24 +303,36 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="container py-2">
-                      <div class="d-flex flex-column flex-md-row align-items-start gap-3">
+                      <div
+                        class="d-flex flex-column flex-md-row align-items-start gap-3"
+                      >
                         <a href="user_profile.html">
-                          <img class="rounded-circle" src="images/usuario anonimo.jpg" width="60px" alt="Usuario">
+                          <img
+                            class="rounded-circle"
+                            src="images/usuario anonimo.jpg"
+                            width="60px"
+                            alt="Usuario"
+                          />
                         </a>
                         <div class="flex-grow-1">
-                          <div class="d-flex flex-column flex-md-row align-items-md-center gap-2">
+                          <div
+                            class="d-flex flex-column flex-md-row align-items-md-center gap-2"
+                          >
                             <span class="fw-semibold">Usuario 4</span>
                             <span>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star-fill star"></i>
-                            <i class="bi bi-star star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star-fill star"></i>
+                              <i class="bi bi-star star"></i>
                             </span>
-                            <span class="text-muted small ms-md-3">Hace 1 año</span>
+                            <span class="text-muted small ms-md-3"
+                              >Hace 1 año</span
+                            >
                           </div>
                           <p class="mb-0 mt-2">
-                            Producto en perfecto estado y ningun problema a la hora de tratar con él. 
+                            Producto en perfecto estado y ningun problema a la
+                            hora de tratar con él.
                           </p>
                         </div>
                       </div>
