@@ -79,11 +79,28 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 ### **Capturas de Pantalla y Descripción de Páginas**
 
 #### **1. Página Principal / Home**
-![Página Principal](images/home-page.png)
+![Página Principal](images/index_image)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
+> ![Página de login de administrador](images/login_admin_image)
+> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+
+![Página de login](images/login_image)
+> [Página de inicio de sesión. Consiste en un formulario que pide el correo y la contraseña y un botón de inicio de sesión. Además, tiene enlaces a las páginas de registro y de login de administrador.]
+![Página de registro](images/register_image)
+> [Página de registro. Consiste en un formulario que pide el correo, el nombre, apellidos y una contraseña, además de un botón de registro.]
+![Página de registro](images/user_profile_image)
+> [Página del perfil del usuario. Muestra la información básica del usuario (foto, user, valoraciones,...), además de la lista de productos comprados, productos en venta y las reseñas que le han hecho.]
+![Página de login de administrador](images/sell_product_image)
+> [Página de venta de producto: permite añadir un anuncio de un producto. Consiste en un formulario que pide los datos necesarios, como categoría, descripción, precio y una imagen para describirlo, además del botón de publicar]
+> ![Página de login de administrador](images/modify_product_image)
+> [Página de modificación de producto: permite modificar un anuncio de un producto. Consiste en un formulario que permite modificar los datos aportados, como categoría, descripción, precio y una imagen para describirlo, además del botón de publicar]
+> ![Página de login de administrador](images/admin_dashboard_image)
+> [Vista de administrador. Permite ver algunas estadísticas y gráficas sobre los usuarios, reseñas y productos de la web, además de la lista de todos los usuarios, reseñas y productos, pudiendo modificar o eliminarlos.]
+
+
 
 ### **Members Participation in Assignment 1**
 
