@@ -18,14 +18,8 @@
     
     </head>
     <body>
-        <header>
+        <header class="alternativeheader">
             <a href="index.html"><img src="images/MQM.png" width="80px" /></a>
-            <nav>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                </form>
-                <a href="login.html" class="button">Iniciar sesión</a> 
-            </nav>
         </header>
 
         <div class="icons gap-5">
@@ -300,7 +294,7 @@
             const ventasChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Ropa', 'Informática', 'Electrodomésticos', 'Libros', 'Deportes'],
+                    labels: ['Ropa', 'Informática', 'Electrodomésticos', 'Libros', 'Automóviles'],
                     datasets: [{
                         label: 'Productos vendidos',
                         data: [150, 220, 85, 110, 95],
