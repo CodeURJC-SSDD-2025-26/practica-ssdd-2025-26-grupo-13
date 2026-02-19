@@ -84,21 +84,29 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
-> ![Página de login de administrador](images/login_admin_image)
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
+
+#### **2. Página Inicio de Sesión / Login**
 ![Página de login](images/login_image.png)
 > [Página de inicio de sesión. Consiste en un formulario que pide el correo y la contraseña y un botón de inicio de sesión. Además, tiene enlaces a las páginas de registro y de login de administrador.]
+#### **3. Página de Registro / Register**
 ![Página de registro](images/register_image.png)
 > [Página de registro. Consiste en un formulario que pide el correo, el nombre, apellidos y una contraseña, además de un botón de registro.]
+#### **4. Página del Perfil de Usuario / User Profile**
 ![Página de registro](images/user_profile_image.png)
 > [Página del perfil del usuario. Muestra la información básica del usuario (foto, user, valoraciones,...), además de la lista de productos comprados, productos en venta y las reseñas que le han hecho.]
+#### **5. Página Venta Producto / Sell Product**
 ![Página de login de administrador](images/sell_product_image.png)
 > [Página de venta de producto: permite añadir un anuncio de un producto. Consiste en un formulario que pide los datos necesarios, como categoría, descripción, precio y una imagen para describirlo, además del botón de publicar]
+#### **6. Página Modificar Producto / Modify Image**
 > ![Página de login de administrador](images/modify_product_image.png)
 > [Página de modificación de producto: permite modificar un anuncio de un producto. Consiste en un formulario que permite modificar los datos aportados, como categoría, descripción, precio y una imagen para describirlo, además del botón de publicar]
+#### **7. Página Vista Administrador / Administrator Dashboard**
 > ![Página de login de administrador](images/admin_dashboard_image.png)
 > [Vista de administrador. Permite ver algunas estadísticas y gráficas sobre los usuarios, reseñas y productos de la web, además de la lista de todos los usuarios, reseñas y productos, pudiendo modificar o eliminarlos.]
+
+> ![Página de login de administrador](images/login_admin_image)
+> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 
 
