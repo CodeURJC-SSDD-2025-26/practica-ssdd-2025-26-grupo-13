@@ -136,17 +136,17 @@ Making the login and register pages, ensuring that all fields must be completed 
 
 ---
 
-#### **Student 3 - [Nombre Completo]**
+#### **Student 3 - Lucas Moreno Prieto**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Designed and implemented the product.html page, which displays detailed information about individual products. Developed the complete review functionality for the platform, including: the create_review page which features a form allowing users to submit reviews and ratings for products they have purchased, the modify_review page and the integration of review displays within the product detail pages. Implemented a dynamic star rating system that allows users to rate products from 1 to 5 stars. Created the administrator_login.html page, establishing a secure entry point for administrators to access administrative functions and manage platform content. Developed the modify_user.html page, enabling users to update their personal information and profile pictures.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Update product and user profile pages with improved navigation and layout; add modify user page](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/75f78dc) | [modify_user.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/modify_product.html)   |
+|2| [Changed review in product.html and added create_review.html and modify_review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/023f706)  | [product.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/product.html), [create_review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/create_review.html), [modify_review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/modify_review.html)   |
+|3| [Create administrator_login.html and minor changes in create_review.html and modify_review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/d4c6f40)  | [administrator_login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/administrator_login.html)   |
+|4| [Changed product.html and product.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/4837c51)  | [product.html]([URL_archivo_5](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/product.html)), [product.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/producto.css)  |
+|5| [Remove optional image upload from review forms and added link to administrator_login.html - Review form refinement + admin integration]([URL_commit_4](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/3558a1d))  | [administrator_login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/administrator_login.html)   |
 
 ---
 
