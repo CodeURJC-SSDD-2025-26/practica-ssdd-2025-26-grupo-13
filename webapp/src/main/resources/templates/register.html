@@ -1,0 +1,36 @@
+{{> head}}
+<body>
+    <main class="border"> 
+            <h1 id="title">
+                    Únete a Me lo Quitan de las Manos
+            </h1>
+            <div id="register">
+                <form role ="form" action="index.html" method="get">
+                    <div class="form-group">
+                        <label for ="inputName">Nombre</label>
+                        <input type="name" id="inputName" placeholder="Nombre" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSurnames">Apellidos</label>
+                        <input type="surnames" id="inputSurnames" placeholder="Apellidos" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for ="inputEmail">Email</label>
+                        <input type="email" id="inputEmail" placeholder="Email" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label for ="inputPassword">Contraseña</label>
+                        <input type="password" id="inputPassword" placeholder="Contraseña" class="form-control" required><br>
+                    </div>
+                    <div id="regist">
+                        <label>
+                            <input type="checkbox" required>
+                            He leido y acepto los Términos y Condiciones
+                        </label>
+                    
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+    </main>
+{{> footer}}

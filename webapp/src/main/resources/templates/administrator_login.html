@@ -1,0 +1,35 @@
+{{>head}}
+<body>
+    <main class="border">
+      <h1 id="title">Inicia sesión como administrador</h1>
+      <div id="login">
+        <form role="form" action="administrator_dashboard.html" method="get">
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input
+              type="email"
+              id="inputEmail"
+              placeholder="Email"
+              class="form-control"
+              required
+            /><br />
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Contraseña</label>
+            <input
+              type="password"
+              id="inputPassword"
+              placeholder="Contraseña"
+              class="form-control"
+              required
+            /><br />
+          </div>
+          <div id="regist">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              Iniciar Sesión
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+{{>footer}}
