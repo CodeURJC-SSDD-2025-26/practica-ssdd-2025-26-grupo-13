@@ -78,9 +78,9 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 
-#### **1. Página Principal / Home**
-![Página Principal](images/index_image)
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+#### **1. Home Page**
+![Home Page](images/index_image.png)
+> Home page of the web app, showing a search bar, carousel and sections listing recommended products and categories. 
 
 #### **2. Login Page**
 ![Login Page](images/login_image.png)
