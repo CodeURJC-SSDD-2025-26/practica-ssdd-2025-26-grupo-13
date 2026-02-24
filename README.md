@@ -17,7 +17,7 @@ A web application intended for buying/selling second hand products, similar to W
 ### **Entities**
 1. **User**: represents buyers and sellers (same role). It stores name, email address, phone number, avatar and delivery address.  
 2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description, images and list of categories. 
-3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date and estimated time of arrival. 
+3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date, estimated time of arrival and destination address. 
 4. **Message** (optional): represents a message in a chat between two users, at a specific time. Stores the message text, sender, receptor and timestamp.
 5. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users. 
 
@@ -67,16 +67,16 @@ A web application intended for buying/selling second hand products, similar to W
 
 ---
 
-## 🛠 **Práctica 1: Maquetación de páginas web con HTML y CSS**
+## 🛠 **Assignment 1: Webpage layout with HTML and CSS**
 
-### **Diagrama de Navegación**
+### **Navigation Diagram**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
 ![Diagrama de Navegación](images/navigation-diagram.png)
 
 > [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
 
-### **Capturas de Pantalla y Descripción de Páginas**
+### **Screenshots and Descriptions of Pages**
 
 #### **1. Home Page**
 ![Home Page](images/index_image.png)
@@ -97,7 +97,16 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 #### **6. Modify Product Page**
 > ![Modify Product Page](images/modify_product_image.png)
 > [Modify Product Page: it makes possible modifying your product's advertisement. It consists of the same form as the Sell Product Page with the initial data, where you can change any of the information. There is also an upload button.]
-#### **7. Administrator Dashboard Page**
+
+#### **7. Search Page**
+> ![Search Page](images/search_image.png)
+> The user is taken here when searching something through the search bar, located in the header of (almost) all webpages. A list of product results matching the input of the user is shown, with options to filter by category, location, publication date and minimum & maximum price. 
+
+#### **8. Buy Page**
+> ![Buy Page](images/buy_image.png)
+> This website requests the user's shipping and payment details necessary to purchase the product. The required shipping information includes the name, street address, city, postal code, etc. For payment, the user must provide credit card details such as the card number and CVV. On the right, a summary of the product and its price is shown, letting users apply a discount code if available. 
+
+#### **9. Administrator Dashboard Page**
 > ![Administrator Dashboard Page](images/admin_dashboard_image.png)
 > [Administrator Dashboard Page. It enables the administrator to see certain stadistics and charts about the users, reviews and products that conform the web, in addition to the complete lists of users, reviews and products, being able to change or delete them.]
 
@@ -110,15 +119,16 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **Student 1 - Diego Rodríguez Torrecilla**
 
-Design and development of some of the main pages of the application. Created the landing page (index.html) with search bar, carousel, recommended products and categories. Built the search results page (search.html) with product listings and filtering options. Developed the purchase page (buy.html) including order summary, delivery address, and payment forms. Implemented header and footer shared by all the pages of the application, as well as some common styling in styles.css. Implemented responsive navigation with Bootstrap offcanvas & collapse menus.
+Design and development of some of the main pages of the application. Created the landing page (index.html) with search bar, carousel, recommended products and categories. Built the search results page (search.html) with product listings and filtering by category, location, date and price. Developed the purchase page (buy.html) including order summary, delivery address, and payment forms. Implemented header and footer shared by all the pages of the application, as well as some common styling in styles.css. Implemented responsive navigation with Bootstrap offcanvas & collapse menus. Ensured uniform class naming and styling consistency across all developed pages. Created the product card component reused across multiple pages (index, search, user profile) for consistency.
+
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Create buy.html page with order summary and delivery and payment forms. Add responsive navigation with offcanvas bootstrap menu. Update button styles.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/3261f19efe4fe63d7acaecf56ffc4660f8c6309a)  | [Archivo1](URL_archivo_1)   |
-|2| [Implement search.html with list of products and filter options. Change styles to improve responsiveness and consistency. Add links to product.html in each product card.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/a9fac4ec4971ce9a3ca505fd11887b9742a2ba0a)  | [Archivo2](URL_archivo_2)   |
-|3| [Add index.html, including search bar, carousel, recommended products and base CSS.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/3ddd48dd81aa02f5286d6ed3193a9129df6ba0ff#diff-0eb547304658805aad788d320f10bf1f292797b5e6d745a3bf617584da017051)  | [Archivo3](URL_archivo_3)   |
-|4| [Add categories section to index.html, update CSS for improved layout, and create new search.html and search.css files for search results functionality.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/18ea3ab9cb95f721d20be5b24ef9e7f3bc310b7e#diff-8802dce05666bd3b9a6e2d0859f727e2a85d317bd900e3f71fb359bc219caf2a)  | [Archivo4](URL_archivo_4)   |
-|5| [Moved common styles to styles.css — established shared styling architecture used across all pages.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/880803ee7fb11143eb11812d512f57efa92c14cd)  | [Archivo5](URL_archivo_5)   |
+|1| [Create buy.html page with order summary and delivery and payment forms. Add responsive navigation with offcanvas bootstrap menu. Update button styles.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/3261f19efe4fe63d7acaecf56ffc4660f8c6309a)  | Mostly [buy.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/buy.html), [buy.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/buy.css), [styles.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/styles.css)   |
+|2| [Implement search.html with list of products and filter options. Change styles to improve responsiveness and consistency. Add links to product.html in each product card.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/a9fac4ec4971ce9a3ca505fd11887b9742a2ba0a)  | Mostly [search.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/search.html), [search.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/search.css), [index.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/index.html), [styles.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/styles.css)   |
+|3| [Add index.html, including search bar, carousel, recommended products and base CSS.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/3ddd48dd81aa02f5286d6ed3193a9129df6ba0ff#diff-0eb547304658805aad788d320f10bf1f292797b5e6d745a3bf617584da017051)  | [index.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/index.html), [index.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/index.css)   |
+|4| [Add categories section to index.html, update CSS for improved layout, and create new search.html and search.css files for search results functionality.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/18ea3ab9cb95f721d20be5b24ef9e7f3bc310b7e#diff-8802dce05666bd3b9a6e2d0859f727e2a85d317bd900e3f71fb359bc219caf2a)  | [search.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/search.html), [search.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/search.css), [index.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/index.html), [index.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/index.css)   |
+|5| [Moved common styles to styles.css - established shared styling used in all pages.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/880803ee7fb11143eb11812d512f57efa92c14cd)  | [styles.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/styles.css)   |
 
 ---
 
@@ -147,20 +157,6 @@ Designed and implemented the product.html page, which displays detailed informat
 |3| [Create administrator_login.html and minor changes in create_review.html and modify_review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/d4c6f40)  | [administrator_login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/administrator_login.html)   |
 |4| [Changed product.html and product.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/4837c51)  | [product.html]([URL_archivo_5](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/product.html)), [product.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/producto.css)  |
 |5| [Remove optional image upload from review forms and added link to administrator_login.html - Review form refinement + admin integration]([URL_commit_4](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/3558a1d))  | [administrator_login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/administrator_login.html)   |
-
----
-
-#### **Alumno 4 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 
 ---
 
