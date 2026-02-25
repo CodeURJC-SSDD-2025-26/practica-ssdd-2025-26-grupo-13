@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
     @GetMapping("/login")
     public String showLoginForm(Model model) {
-        model.addAttribute("cssfile", "login");
+        model.addAttribute("cssfile", "register");
         return "login";
     }
 }

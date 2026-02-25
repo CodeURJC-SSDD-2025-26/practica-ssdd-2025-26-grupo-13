@@ -1,0 +1,49 @@
+.category{
+    
+    width: 80%;
+    margin-top: 20px !important;
+    border: 1px solid rgb(200, 200, 200);
+    margin: auto;
+    border-radius: 25px;
+    padding: 1.2em 1.4em 1.2em 1.4em;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.title{
+    width: 80%;
+    margin-top: 20px !important;
+    margin-bottom: 0px !important;
+    margin: auto;
+}
+.categoriesgrid {
+  margin: 25px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+}
+.element{
+  height: 8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: black;
+  text-decoration: none;
+  transition: 0.5s;
+}
+/*para interactividad de los botones*/
+.button-main {
+  background-color: transparent !important;
+  border: none !important;
+  transition: background-color 0.3s ease;
+}
+
+.button-main.active {
+  background-color: darkcyan !important;
+  color: white !important;
+}
+a{
+  text-decoration: none;
+  color: white;
+}

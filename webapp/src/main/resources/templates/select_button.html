@@ -1,0 +1,19 @@
+<script>
+            // Para interactividad de botones
+            const buttons = document.querySelectorAll('.button-main');
+            
+            // Asegurar que el primer botón empiece con active si no hay ninguno
+            if (!document.querySelector('.button-main.active')) {
+                buttons[0].classList.add('active');
+            }
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover clase 'active' de todos los botones
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Añadir clase 'active' solo al botón clickado
+                    this.classList.add('active');
+                });
+            });
+</script>
