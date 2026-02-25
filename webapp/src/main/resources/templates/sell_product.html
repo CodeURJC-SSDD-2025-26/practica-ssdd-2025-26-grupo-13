@@ -1,0 +1,68 @@
+{{>header}}
+        <div class ="title">
+            <h2>Sube tu anuncio</h2>
+        </div>
+        <div class="category">
+            <h4>Selecciona una categoría</h4>
+            <div class="categoriesgrid">
+                <div class="element">
+                    <button class="btn button-main">
+                        <img width="135px" src="images/ropa.png" />
+                        <p class="fw-medium">Ropa</p>
+                    </button>
+                </div>
+                <div class="element">
+                    <button class="btn button-main">
+                        <img width="173px" src="images/car.png" />
+                        <p class="fw-medium">Automóviles</p>
+                    </button>
+                </div>
+                <div class="element">
+                    <button class="btn button-main">
+                        <img width="100px" src="images/computers.png" />
+                        <p class="fw-medium">Informática</p>
+                    </button>
+                </div>
+                <div class="element">
+                    <button class="btn button-main">
+                        <img width="100px" src="images/books.png" />
+                        <p class="fw-medium">Libros</p>
+                    </button>
+                </div>
+                <div class="element">
+                    <button class="btn button-main">
+                        <img width="100px" src="images/electrodomesticos.png" />
+                        <p class="fw-medium">Electrodomésticos</p>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+            
+        <div class="category">
+                <h4>Información del producto</h4>
+                <form action="product.html" method="get">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Nombre del producto</label> 
+                        <input type="text" class="form-control" id="productName" placeholder="Introduce el nombre del producto" required> 
+                    </div> 
+                    <div class="mb-3"> 
+                        <label for="productDescription" class="form-label">Descripción</label> 
+                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe tu producto" required></textarea> 
+                    </div> 
+                    <div class="mb-3"> 
+                        <label for="productPrice" class="form-label">Precio (€)</label> 
+                        <input type="number" class="form-control" id="productPrice" placeholder="Introduce el precio" required> 
+                    </div> 
+                    <div class="mb-3"> 
+                        <label for="productImage" class="form-label">Imagen del producto</label> 
+                        <input class="form-control" type="file" id="productImage" required> 
+                    </div> 
+                    <br>
+                    <button class="button" type="submit">Publicar</button>
+                </form>
+        </div>
+    
+
+        {{>select_button}}
+{{>footer}}

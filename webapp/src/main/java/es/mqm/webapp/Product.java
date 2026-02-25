@@ -1,5 +1,7 @@
 package es.mqm.webapp;
 
+import java.util.ArrayList;
+
 public class Product {
     private String name;
     private String description;
