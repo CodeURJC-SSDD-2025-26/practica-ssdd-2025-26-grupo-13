@@ -109,10 +109,25 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 #### **9. Administrator Dashboard Page**
 > ![Administrator Dashboard Page](images/admin_dashboard_image.png)
 > [Administrator Dashboard Page. It enables the administrator to see certain stadistics and charts about the users, reviews and products that conform the web, in addition to the complete lists of users, reviews and products, being able to change or delete them.]
+#### **10. Administrator Login Page**
+> ![Administrator Login Page](images/login_admin_image.png)
+> Administrator Login Page. It consists of a form that asks for the email and password of an administrator so that the administrator can access their unique functions.
 
-> ![Página de login de administrador](images/login_admin_image)
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+#### **11. Create Review Page**
+> ![Create Review Page](images/create_review_image.png)
+> Create Review Page. It displays a form for entering the information needed to write a review. There is also a star rating system.
 
+#### **12. Modify Review Page**
+> ![Modify Review Page](images/modify_review_image.png)
+> Modify Review Page. It shows the user and the product that has been reviewed and allows you to modify the description and the star rating.
+
+#### **13. Modify User Page**
+> ![Modify User Page](images/modify_user_image.png)
+> Modify User Page. It allows you to view your current user data and change it. You can also change your profile picture.
+
+#### **14. Product Page**
+> ![Priduct Page](images/product_image.png)
+> Product Page. It consists of a page for each product listed for sale. It displays the product's main features, price, and the seller. It also provides information about the seller, such as their star rating, name, location, and some of the most important reviews left by other users.
 
 
 ### **Members Participation in Assignment 1**
