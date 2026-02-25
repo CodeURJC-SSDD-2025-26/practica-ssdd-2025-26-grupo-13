@@ -11,7 +11,7 @@
                 <a href="user_profile">
                   <img
                     class="rounded-circle"
-                    src="images/usuario anonimo.jpg"
+                    src="/images/{{imageUrl}}"
                     width="60px"
                     alt="Usuario"
                   />
@@ -21,13 +21,13 @@
                     class="d-flex flex-column flex-md-row align-items-md-center gap-2"
                   >
                     <span class="me-5">
-                      <p id="user"><strong>Usuario 1</strong></p>
+                      <p id="user"><strong>{{name}}</strong></p>
                     </span>
                     <span class="me-2">
-                      <p><strong>4</strong> Ventas</p>
+                      <p><strong>{{sold}}</strong> Ventas</p>
                     </span>
                     <span>
-                      <p><strong>1</strong> Compra</p>
+                      <p><strong>{{bought}}</strong> Compras</p>
                     </span>
                   </div>
                   <div class="flex-grow-1 gap-2 d-flex flex-wrap">
@@ -42,7 +42,7 @@
                       <span>
                         <i class="bi bi-geo-alt"></i>
                       </span>
-                      <span> 30201, Cartagena </span>
+                      <span> {{location}} </span>
                     </div>
                   </div>
                 </div>
@@ -58,13 +58,14 @@
         <h4>Productos en venta</h4>
       </div>
       <div class="productsgrid">
+        {{#products}}
         <div class="smallproductcard">
           <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">50€</p>
+            <img width="150px" src="/images/{{imageUrl}}" />
+            <p class="pricetag">{{price}}€</p>
           </a>
           <div class="product-footer">
-            <p>Producto 1</p>
+            <p>{{name}}</p>
             <a
               class="create-review-right"
               href="modify_product"
@@ -73,66 +74,23 @@
             ></a>
           </div>
         </div>
-        <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">30€</p>
-          </a>
-          <div class="product-footer">
-            <p>Producto 2</p>
-            <a
-              class="create-review-right"
-              href="modify_product"
-              aria-label="Crear reseña"
-              ><i class="bi bi-pencil-square"></i
-            ></a>
-          </div>
-        </div>
-        <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">100€</p>
-          </a>
-          <div class="product-footer">
-            <p>Producto 3</p>
-            <a
-              class="create-review-right"
-              href="modify_product"
-              aria-label="Crear reseña"
-              ><i class="bi bi-pencil-square"></i
-            ></a>
-          </div>
-        </div>
-        <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">20€</p>
-          </a>
-          <div class="product-footer">
-            <p>Producto 4</p>
-            <a
-              class="create-review-right"
-              href="modify_product"
-              aria-label="Crear reseña"
-              ><i class="bi bi-pencil-square"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-    </section>
+        {{/products}}
+       </div>
+      </section>
 
     <section class="products">
       <div>
         <h4>Productos Comprados</h4>
       </div>
       <div class="productsgrid">
+        {{#products}}
         <div class="smallproductcard">
           <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">50€</p>
+            <img width="150px" src="/images/{{imageUrl}}" />
+            <p class="pricetag">{{price}}€</p>
           </a>
           <div class="product-footer">
-            <p>Producto 1</p>
+            <p>{{name}}</p>
             <a
               class="create-review-right"
               href="create_review"
@@ -141,51 +99,7 @@
             ></a>
           </div>
         </div>
-        <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">30€</p>
-          </a>
-          <div class="product-footer">
-            <p>Producto 2</p>
-            <a
-              class="create-review-right"
-              href="create_review"
-              aria-label="Crear reseña"
-              ><i class="bi bi-star"></i
-            ></a>
-          </div>
-        </div>
-        <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">100€</p>
-          </a>
-          <div class="product-footer">
-            <p>Producto 3</p>
-            <a
-              class="create-review-right"
-              href="create_review"
-              aria-label="Crear reseña"
-              ><i class="bi bi-star"></i
-            ></a>
-          </div>
-        </div>
-        <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="images/placeholder100x100.png" />
-            <p class="pricetag">20€</p>
-          </a>
-          <div class="product-footer">
-            <p>Producto 4</p>
-            <a
-              class="create-review-right"
-              href="create_review"
-              aria-label="Crear reseña"
-              ><i class="bi bi-star"></i
-            ></a>
-          </div>
-        </div>
+        {{/products}}
       </div>
     </section>
 
@@ -205,6 +119,7 @@
             <br />
           </div>
         </div>
+        {{#reviews}}
         <div class="row">
           <div class="col-12">
             <div class="container py-2">
@@ -214,7 +129,7 @@
                 <a href="user_profile">
                   <img
                     class="rounded-circle"
-                    src="images/usuario anonimo.jpg"
+                    src="/images/usuario anonimo.jpg"
                     width="60px"
                     alt="Usuario"
                   />
@@ -223,7 +138,7 @@
                   <div
                     class="d-flex flex-column flex-md-row align-items-md-center gap-2"
                   >
-                    <span class="fw-semibold">Usuario Anónimo 1</span>
+                    <span class="fw-semibold">{{user}}</span>
                     <span>
                       <i class="bi bi-star-fill star"></i>
                       <i class="bi bi-star-fill star"></i>
@@ -231,53 +146,16 @@
                       <i class="bi bi-star-fill star"></i>
                       <i class="bi bi-star star"></i>
                     </span>
-                    <span class="text-muted small ms-md-3">Hace 1 mes</span>
-                  </div>
-                  <p class="mb-2 mt-2">Genial la calidad y envío rápido.</p>
-                  <div class="item F">
-                    <p>Compró: Silla Azul</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="container py-2">
-              <div
-                class="d-flex flex-column flex-md-row align-items-start gap-3"
-              >
-                <a href="user_profile">
-                  <img
-                    class="rounded-circle"
-                    src="images/usuario anonimo.jpg"
-                    width="60px"
-                    alt="Usuario"
-                  />
-                </a>
-                <div class="flex-grow-1">
-                  <div
-                    class="d-flex flex-column flex-md-row align-items-md-center gap-2"
-                  >
-                    <span class="fw-semibold">Usuario Anónimo 2</span>
-                    <span>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star star"></i>
-                    </span>
-                    <span class="text-muted small ms-md-3">Hace 6 meses</span>
+                    <span class="text-muted small ms-md-3">{{date}}</span>
                     <a href="modify_review" class="button ms-4"
                       >Modificar reseña</a
                     >
                   </div>
                   <p class="mb-2 mt-2">
-                    Gran servicio al cliente y buena relación calidad-precio
+                    {{description}}
                   </p>
                   <div class="item F">
-                    <p>Compró: iPhone XR</p>
+                    <p>Compró: {{product}}</p>
                   </div>
                 </div>
               </div>
@@ -285,45 +163,7 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12">
-            <div class="container py-2">
-              <div
-                class="d-flex flex-column flex-md-row align-items-start gap-3"
-              >
-                <a href="user_profile">
-                  <img
-                    class="rounded-circle"
-                    src="images/usuario anonimo.jpg"
-                    width="60px"
-                    alt="Usuario"
-                  />
-                </a>
-                <div class="flex-grow-1">
-                  <div
-                    class="d-flex flex-column flex-md-row align-items-md-center gap-2"
-                  >
-                    <span class="fw-semibold">Usuario Anónimo 3</span>
-                    <span>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star-fill star"></i>
-                      <i class="bi bi-star star"></i>
-                      <i class="bi bi-star star"></i>
-                    </span>
-                    <span class="text-muted small ms-md-3">Hace 2 años</span>
-                  </div>
-                  <p class="mb-2 mt-2">
-                    Envío rápido y gran trato, pero un poco caro para lo que es
-                  </p>
-                  <div class="item F">
-                    <p>Compró: Impresora 3D</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          {{/reviews}}
       </div>
     </div>
 

@@ -16,7 +16,7 @@ public class IndexController {
         List<Product> products = new ArrayList<Product>();
         ArrayList<String> categories = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            products.add(new Product("Producto " + (i + 1), "", 50, "placeholder100x100.png", categories));
+            products.add(new Product(i+1, "Producto " + (i + 1),"Descripcion", 50, "Vendedor" + (i+1), "placeholder100x100.png", categories));
         }
 
         model.addAttribute("cssfile", "index");
