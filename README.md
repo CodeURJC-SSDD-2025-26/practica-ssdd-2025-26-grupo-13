@@ -115,19 +115,19 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **11. Create Review Page**
 > ![Create Review Page](images/create_review_image.png)
-> Create Review Page. It displays a form for entering the information needed to write a review. There is also a star rating system.
+> It displays a form for entering the information needed to write a review. There is also a star rating system.
 
 #### **12. Modify Review Page**
 > ![Modify Review Page](images/modify_review_image.png)
-> Modify Review Page. It shows the user and the product that has been reviewed and allows you to modify the description and the star rating.
+> It shows the user and the product that has been reviewed and allows you to modify the description and the star rating.
 
 #### **13. Modify User Page**
 > ![Modify User Page](images/modify_user_image.png)
-> Modify User Page. It allows you to view your current user data and change it. You can also change your profile picture.
+> It allows you to view your current user data and change it. You can also change your profile picture.
 
 #### **14. Product Page**
 > ![Priduct Page](images/product_image.png)
-> Product Page. It consists of a page for each product listed for sale. It displays the product's main features, price, and the seller. It also provides information about the seller, such as their star rating, name, location, and some of the most important reviews left by other users.
+> It consists of a page for each product listed for sale. It displays the product's main features, price, and the seller. It also provides information about the seller, such as their star rating, name, location, and some of the most important reviews left by other users.
 
 
 ### **Members Participation in Assignment 1**
