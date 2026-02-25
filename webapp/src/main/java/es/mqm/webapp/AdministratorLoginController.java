@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdministratorLoginController {
     @GetMapping("/administrator_login")
     public String showLoginForm(Model model) {
-        model.addAttribute("cssfile", "register");
-        return "administrator_login";
+        model.addAttribute("cssfile", "register"); 
+        return "administrator_login"; 
     }
 }

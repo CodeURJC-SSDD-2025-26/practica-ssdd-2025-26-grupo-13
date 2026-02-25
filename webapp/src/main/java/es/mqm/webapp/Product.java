@@ -40,6 +40,4 @@ public class Product {
     public ArrayList<String> getCategories() {
         return categories;
     }
-
-
 }

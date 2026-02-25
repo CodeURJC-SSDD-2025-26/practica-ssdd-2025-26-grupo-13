@@ -1,0 +1,69 @@
+{{>header}}
+<main>
+  <h4>Crear reseña</h4>
+  <form action="user_profile" method="GET">
+    <div class="my-3">
+      <label for="name" class="form-label">Usuario</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Introduce el nombre del usuario"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="reviewDescription" class="form-label"
+        >Información de la reseña</label
+      >
+      <textarea
+        class="form-control"
+        id="reviewDescription"
+        rows="3"
+        placeholder="Describe tu reseña"
+        required
+      ></textarea>
+    </div>
+    <!-- Sistema de valoración por estrellas -->
+    <p class="form-label mb-0">Valoración por estrellas</p>
+    <div
+      id="star-rating"
+      style="font-size: 2rem; color: #ffc107; cursor: pointer"
+    >
+      <span class="star" data-value="1">&#9734;</span>
+      <span class="star" data-value="2">&#9734;</span>
+      <span class="star" data-value="3">&#9734;</span>
+      <span class="star" data-value="4">&#9734;</span>
+      <span class="star" data-value="5">&#9734;</span>
+      <input type="hidden" name="rating" id="rating-value" value="0" />
+    </div>
+    <br />
+    <button type="submit" class="button">Publicar</button>
+  </form>
+</main>
+<script>
+  const stars = document.querySelectorAll("#star-rating .star");
+  const ratingValue = document.getElementById("rating-value");
+  let currentRating = 0;
+
+  stars.forEach((star, idx) => {
+    star.addEventListener("mouseover", () => {
+      highlightStars(idx + 1);
+    });
+    star.addEventListener("mouseout", () => {
+      highlightStars(currentRating);
+    });
+    star.addEventListener("click", () => {
+      currentRating = idx + 1;
+      ratingValue.value = currentRating;
+      highlightStars(currentRating);
+    });
+  });
+
+  function highlightStars(rating) {
+    stars.forEach((star, idx) => {
+      star.innerHTML = idx < rating ? "&#9733;" : "&#9734;";
+    });
+  }
+</script>
+{{>footer}}
