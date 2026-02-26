@@ -1,0 +1,150 @@
+{{>header}}
+<main>
+  <aside class="d-none d-md-block">
+    <form action="search" method="get">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="fs-3">Filtros</h4>
+        <div>
+          <button type="submit" class="button">Aplicar</button>
+        </div>
+      </div>
+      <hr class="separator" />
+      <div class="ms-2">
+        <input type="hidden" name="search" value="{{search}}" />
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="todas" name="category" id="checkTodas"
+            {{#isTodas}}checked{{/isTodas}} />
+          <label class="form-check-label" for="checkTodas">
+            Todas las categorías
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="ropa" name="category" id="checkRopa"
+            {{#isRopa}}checked{{/isRopa}} />
+          <label class="form-check-label" for="checkRopa"> Ropa </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="informatica" name="category" id="checkInformatica"
+            {{#isInformatica}}checked{{/isInformatica}} />
+          <label class="form-check-label" for="checkInformatica">
+            Informática
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="category" value="automoviles" id="checkAuto"
+            {{#isAutomoviles}}checked{{/isAutomoviles}} />
+          <label class="form-check-label" for="checkAuto">
+            Automóviles
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="electrodomesticos" name="category" id="checkElectro"
+            {{#isElectrodomesticos}}checked{{/isElectrodomesticos}} />
+          <label class="form-check-label" for="checkElectro">
+            Electrodomésticos
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="libros" name="category" id="checkLibros"
+            {{#isLibros}}checked{{/isLibros}} />
+          <label class="form-check-label" for="checkLibros"> Libros </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="otros" name="category" id="checkOtros"
+            {{#isOtros}}checked{{/isOtros}} />
+          <label class="form-check-label" for="checkOtros"> Otros </label>
+        </div>
+      </div>
+      <hr class="separator mb-3" />
+      <a class="collapsebutton d-flex justify-content-between text-black text-decoration-none "
+        data-bs-toggle="collapse" data-bs-target="#locationDropdown" aria-expanded="false"
+        aria-controls="locationDropdown">
+        <p class="fw-medium fs-6 mb-0">Ubicación</p>
+        <div class="">
+          <i class="bi bi-chevron-right"></i>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </a>
+      <div class="collapse show" id="locationDropdown">
+        <input type="text" name="location" class="form-control mt-3" placeholder="Ubicación" aria-label="Ubicación"
+          value="{{location}}" />
+      </div>
+      <hr class="separator mb-3" />
+      <p class="fw-medium fs-6 mb-3">Fecha de publicación</p>
+      <div class="ms-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="date" value="" id="checkHoy"
+            {{#isDateAny}}checked{{/isDateAny}} />
+          <label class="form-check-label" for="checkHoy"> Cualquiera </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="date" value="hoy" id="checkHoy"
+            {{#isDateHoy}}checked{{/isDateHoy}} />
+          <label class="form-check-label" for="checkHoy"> Hoy </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="date" value="7" id="check7"
+            {{#isDate7}}checked{{/isDate7}} />
+          <label class="form-check-label" for="check7">
+            Últimos 7 días
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="date" value="30" id="check30"
+            {{#isDate30}}checked{{/isDate30}} />
+          <label class="form-check-label" for="check30">
+            Últimos 30 días
+          </label>
+        </div>
+      </div>
+      <hr class="separator mb-3" />
+      <a class="collapsebutton d-flex pe-auto justify-content-between text-black fw-medium text-decoration-none mb-3"
+        data-bs-toggle="collapse" data-bs-target="#priceDropdown" aria-expanded="false" aria-controls="priceDropdown">
+        <p class="fw-medium fs-6 mb-0">Precio</p>
+        <div class="">
+          <i class="bi bi-chevron-right"></i>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </a>
+      <div class="collapse show mx-2" id="priceDropdown">
+        <div class="d-flex gap-2">
+          <input type="text" name="minPrice" class="form-control" placeholder="Min" aria-label="Min"
+            value="{{minPrice}}" />
+          <input type="text" name="maxPrice" class="form-control" placeholder="Max" aria-label="Max"
+            value="{{maxPrice}}" />
+        </div>
+      </div>
+    </form>
+
+  </aside>
+  <div>
+    <!-- Aquí se mostrarán los resultados de la búsqueda -->
+    <div class="resultados">
+      <h2>Resultados de "{{search}}"</h2>
+      <p class="subtitle">
+        A continuación se muestran los resultados de tu búsqueda con los
+        filtros aplicados.
+      </p>
+      <div class="productslist">
+        {{#products}}
+        <a class="bigproductcard" href="product.html">
+          <img src="/images/{{imageUrl}}" />
+          <p class="pricetag">{{price}}€</p>
+          <p>{{name}}</p>
+          <div class="vendor">
+            <span>{{seller}}</span>
+            <div>
+              <i class="bi bi-star-fill star"></i>
+              <i class="bi bi-star-fill star"></i>
+              <i class="bi bi-star-fill star"></i>
+              <i class="bi bi-star-fill star"></i>
+              <i class="bi bi-star star"></i>
+            </div>
+          </div>
+        </a>
+        {{/products}}
+      </div>
+    </div>
+  </div>
+</main>
+{{>footer}}

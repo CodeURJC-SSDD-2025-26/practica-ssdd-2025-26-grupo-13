@@ -1,0 +1,96 @@
+aside {
+  width: min(30%, 400px);
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+  display: block;
+}
+
+.separator {
+  width: 100%;
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+  color: rgb(165, 165, 165);
+}
+
+ul {
+  list-style-type: none;
+}
+
+main {
+  display: flex;
+  gap: 50px;
+}
+
+
+.smallproductcard p {
+  margin-bottom: 0px;
+}
+
+.smallproductcard a {
+  font-weight: 600;
+  color: rgb(62, 62, 62);
+  text-decoration: none;
+}
+.smallproductcard a:hover {
+  font-weight: 600;
+  color: rgb(23, 23, 23);
+  text-decoration: none;
+}
+
+
+/* @media screen and (max-width: 805px) {
+  .vendor {
+    flex-direction: column;
+  }
+} */
+
+.pricetag {
+  font-size: 1em;
+  font-weight: 600;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.bigproductcard {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 1em;
+  gap: 2px;
+  width: 200px;
+  color: black;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 805px) {
+  .bigproductcard {
+    width: 100px;
+  }
+}
+
+.bigproductcard p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bigproductcard p {
+  margin-bottom: 0px;
+}
+
+.bigproductcard a {
+  font-weight: 600;
+  color: rgb(62, 62, 62);
+  text-decoration: none;
+}
+.bigproductcard a:hover {
+  font-weight: 600;
+  color: rgb(23, 23, 23);
+  text-decoration: none;
+}
+
+.bigproductcard .pricetag {
+  font-size: 1.1em;
+}
+
