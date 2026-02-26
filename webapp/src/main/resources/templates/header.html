@@ -21,7 +21,7 @@
   </head>
   <body>
     <header>
-      <a href="index"><img src="/images/MQM.png" width="80px" /></a>
+      <a href="/index"><img src="/images/MQM.png" width="80px" /></a>
       <nav>
         <a class="d-sm-none d-flex ms-auto" data-bs-toggle="offcanvas" href="#offcanvasNavbar" role="button" aria-controls="offcanvasNavbar">
             <i class="bi bi-list menubutton"></i>
@@ -40,7 +40,7 @@
           <li class="nav-item mt-4">
              <form
               class="form-inline"
-              action="search.html"
+              action="/search"
               method="get">
               <input
                 class="form-control mr-sm-2 py-2 searchbar"
@@ -50,17 +50,17 @@
             </form>
           </li>
           <li class="nav-item mt-4">
-            <a class="nav-link button w-100" href="login">Iniciar sesión</a>
+            <a class="nav-link button w-100" href="/login">Iniciar sesión</a>
           </li>
           <li class="nav-item mt-2">
-            <a class="nav-link button w-100 secondarybutton" href="sell_product">Vender</a>
+            <a class="nav-link button w-100 secondarybutton" href="/sell_product">Vender</a>
           </li>
         </ul>
       </div>
     </div>
         <form
           class="form-inline d-none d-sm-flex"
-          action="search"
+          action="/search"
           method="get">
           <input
             class="form-control mr-sm-2 py-2 searchbar"
@@ -70,9 +70,9 @@
             aria-label="Buscar" />
         </form>
         <div class="d-flex gap-1">
-          <a href="sell_product.html" class="button secondarybutton mr-0 d-none d-sm-flex">Vender</a>
+          <a href="/sell_product" class="button secondarybutton mr-0 d-none d-sm-flex">Vender</a>
         {{^loggedin}}
-        <a href="login" class="button d-none d-sm-flex">Iniciar sesión</a>
+        <a href="/login" class="button d-none d-sm-flex">Iniciar sesión</a>
         {{/loggedin}}
         </div>
         
