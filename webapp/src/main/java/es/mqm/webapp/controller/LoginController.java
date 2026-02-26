@@ -1,12 +1,13 @@
-package es.mqm.webapp;
+package es.mqm.webapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 @Controller
-public class AdministratorLoginController {
-    @GetMapping("/administrator_login")
+public class LoginController {
+    @GetMapping("/login")
     public String showLoginForm(Model model) {
-        model.addAttribute("cssfile", "register"); 
-        return "administrator_login"; 
+        model.addAttribute("cssfile", "register");
+        return "login";
     }
 }
