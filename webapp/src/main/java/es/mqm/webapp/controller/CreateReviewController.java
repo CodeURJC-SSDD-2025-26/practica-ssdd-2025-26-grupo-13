@@ -1,4 +1,4 @@
-package es.mqm.webapp;
+package es.mqm.webapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

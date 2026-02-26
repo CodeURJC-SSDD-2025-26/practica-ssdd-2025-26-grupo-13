@@ -64,7 +64,7 @@
         </div>
         <div class="productslist">
           {{#products}}
-          <a class="smallproductcard" href="product.html">
+          <a class="smallproductcard" href="product">
             <img src="/images/placeholder100x100.png" />
             <p class="pricetag">{{price}}€</p>
             <p>{{name}}</p>
@@ -91,7 +91,7 @@
         </div>
         <div class="categoriesgrid">
           {{#categories}}
-            <a class="categorycard" href="search.html?category={{slug}}">
+            <a class="categorycard" href="search?search=&category={{slug}}">
               <div class="categoryimg">
                 <img width="{{imgWidth}}px" src="{{imageUrl}}" />
               </div>
