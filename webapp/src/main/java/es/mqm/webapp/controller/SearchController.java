@@ -33,12 +33,13 @@ public class SearchController {
         model.addAttribute("loggedin", true);
         model.addAttribute("products", products);
         model.addAttribute("categories", CategoryData.CATEGORIES);
-        model.addAttribute("search", searchParam);
-        model.addAttribute("category", category);
-        model.addAttribute("date", date);
-        model.addAttribute("minPrice", minPrice);
-        model.addAttribute("maxPrice", maxPrice);
-        model.addAttribute("location", location);
+
+        model.addAttribute("search", searchParam != null ? searchParam : "");
+        model.addAttribute("category", category != null ? category : "");
+        model.addAttribute("date", date != null ? date : "");
+        model.addAttribute("minPrice", minPrice != null ? minPrice : "");
+        model.addAttribute("maxPrice", maxPrice != null ? maxPrice : "");
+        model.addAttribute("location", location != null ? location : "");
 
         model.addAttribute("isTodas", category == null || category.equals("todas") || category.isEmpty());
         model.addAttribute("isRopa", "ropa".equals(category));
