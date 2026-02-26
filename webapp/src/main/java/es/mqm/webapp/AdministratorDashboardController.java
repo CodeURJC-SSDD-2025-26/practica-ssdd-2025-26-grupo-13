@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.mqm.webapp.model.Product;
+import es.mqm.webapp.model.Review;
+import es.mqm.webapp.model.User;
+
 @Controller
 public class AdministratorDashboardController {
     private List<User> users= new ArrayList<User>();

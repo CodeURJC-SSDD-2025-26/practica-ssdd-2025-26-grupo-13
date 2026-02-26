@@ -1,4 +1,4 @@
-package es.mqm.webapp;
+package es.mqm.webapp.model;
 
 public class Review {
     private int id;

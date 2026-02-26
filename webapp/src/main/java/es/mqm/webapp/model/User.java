@@ -1,4 +1,4 @@
-package es.mqm.webapp;
+package es.mqm.webapp.model;
 
 import java.util.ArrayList;
 import java.util.List;

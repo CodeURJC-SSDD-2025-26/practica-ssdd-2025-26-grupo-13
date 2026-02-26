@@ -1,5 +1,5 @@
 // es/mqm/webapp/CategoryData.java
-package es.mqm.webapp;
+package es.mqm.webapp.model;
 
 import java.util.List;
 

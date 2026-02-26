@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.mqm.webapp.model.CategoryData;
+import es.mqm.webapp.model.Product;
+
 @Controller
 public class IndexController {
     @GetMapping("/index")
