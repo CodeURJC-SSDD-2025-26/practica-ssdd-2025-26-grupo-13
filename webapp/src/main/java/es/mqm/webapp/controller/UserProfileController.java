@@ -15,9 +15,10 @@ public class UserProfileController {
     
     
     
-    @GetMapping("/user_profile/{user_id}")
-     public String showUserProfile(Model model, @PathVariable String user_id) {
-        User user = new User(1, "Usuario " + user_id, "Apellido", "usuario" + user_id + "@example.com", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4);
+    @GetMapping("/user_profile/{id}")
+     public String showUserProfile(Model model, @PathVariable String id) {
+        int user_id = Integer.parseInt(id);
+        User user = new User(user_id, "Usuario " + user_id, "Apellido", "usuario" + user_id + "@example.com", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4);
         model.addAttribute("name", user.getName());
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());

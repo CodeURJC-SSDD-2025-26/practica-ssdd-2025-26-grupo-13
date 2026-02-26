@@ -31,7 +31,7 @@ public class User {
             products.add(new Product(i+1, "Producto " + (i + 1), "", 50, "Vendedor" + (i+1), "placeholder100x100.png", categories));
         }
         for(int i=0;i<3;i++){
-            reviews.add(new Review(i+1,"iPhone XR", "Usuario 3", "Usuario 1","Muy buen producto, gran calidad precio","Hace 6 meses", (float) 4.0));
+            reviews.add(new Review(i+1,"iPhone XR", ""+(id + i+1), "1","Muy buen producto, gran calidad precio","Hace 6 meses", (float) 4.0));
         }
     }
     public int getId() {

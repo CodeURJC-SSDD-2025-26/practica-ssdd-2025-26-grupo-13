@@ -3,16 +3,16 @@ package es.mqm.webapp.model;
 public class Review {
     private int id;
     private String product;
-    private String user;
-    private String userDest;
+    private String userId;
+    private String userDestId;
     private String description;
     private String date;
     private float rating;
-    public Review(int id,String product, String user, String userDest, String description, String date, Float rating) {
+    public Review(int id,String product, String userId, String userDestId, String description, String date, Float rating) {
         this.id = id;
         this.product = product;
-        this.user = user;
-        this.userDest = userDest;
+        this.userId = userId;
+        this.userDestId = userDestId;
         this.description = description;
         this.date = date;
         this.rating = rating;
@@ -23,11 +23,11 @@ public class Review {
     public String getProduct() {
         return product;
     }
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
-    public String getUserDest() {
-        return userDest;
+    public String getUserDestId() {
+        return userDestId;
     }
     public String getDescription() {
         return description;
