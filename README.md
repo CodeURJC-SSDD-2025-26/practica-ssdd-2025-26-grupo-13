@@ -70,11 +70,14 @@ A web application intended for buying/selling second hand products, similar to W
 ## 🛠 **Assignment 1: Webpage layout with HTML and CSS**
 
 ### **Navigation Diagram**
-Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
+Diagram that shows how to navigate between the different pages of the application:
 
-![Diagrama de Navegación](images/navigation-diagram.png)
+![Navigation Diagram](images/navigation-diagram.png)
 
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
+> The blue arrows represent actions that all users can make, the yellow arrows are only for registered users and the green arrows are for administrators.
+In the modify_user, modify_review and create_review pages the search bar and sell button are shown, but in reality they would be hidden, that is why there aren't any arrows to the sell and search pages.
+Also, in all the pages only accesible to registered users the log in button still apears, but it would be hidden with code.
+ 
 
 ### **Screenshots and Descriptions of Pages**
 
