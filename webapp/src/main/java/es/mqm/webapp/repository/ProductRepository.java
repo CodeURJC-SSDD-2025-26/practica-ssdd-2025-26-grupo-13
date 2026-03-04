@@ -9,9 +9,13 @@ import es.mqm.webapp.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByName(String name);
+
     List<Product> findByCategory(String category);
+
     List<Product> findByUser(User user);
+
     List<Product> findAll();
+
     Optional<Product> findById(Integer id);
 
 }
