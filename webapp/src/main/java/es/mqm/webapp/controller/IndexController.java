@@ -13,7 +13,7 @@ import es.mqm.webapp.model.Product;
 
 @Controller
 public class IndexController {
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
 
         List<Product> products = new ArrayList<Product>();
