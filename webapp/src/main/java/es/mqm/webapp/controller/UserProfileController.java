@@ -3,6 +3,7 @@ package es.mqm.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.repository.UserRepository;
 
 @Controller
 public class UserProfileController {
-    
+    @Autowired 
+    private UserRepository userRepository;
     
     
     @GetMapping("/user_profile/{id}")
@@ -40,12 +43,17 @@ public class UserProfileController {
     }
     @GetMapping("/modify_user/{id}")
     public String showModifyUser(Model model,@PathVariable String id) {
-        //aqui cogeriamos el usuario de la base de datos y lo pasariamos al modelo. Po ahora lo hacemos con un usuario de prueba
         int user_id = Integer.parseInt(id);
-        User user = new User(user_id, "Usuario " + user_id, "Apellido", "usuario" + user_id + "@example.com", "1234", "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4);
+        User user = userRepository.findById(user_id).orElse(null);
+        model.addAttribute("name", user.getName());
+        model.addAttribute("surnames", user.getSurnames());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("password",user.getPassword());
         model.addAttribute("cssfile", "sell_product");    
         return "modify_user";
     }
+
+    
 
     @RequestMapping("/newuser")
     public String createNewUser(Model model, @RequestParam String email, 
