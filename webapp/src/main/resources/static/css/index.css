@@ -27,6 +27,7 @@ section:first-child {
 }
 
 .categorycard {
+  width: 200px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -47,7 +48,7 @@ section:first-child {
     margin: 25px 0px;
     gap: 1.5rem;
     font-size: 0.8em;
-  }   
+  }
 }
 
 .categorycard:hover {
@@ -64,6 +65,8 @@ section:first-child {
 
 .categoryimg img {
   max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
 }
 

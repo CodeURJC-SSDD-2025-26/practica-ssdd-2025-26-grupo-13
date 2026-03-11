@@ -1,7 +1,6 @@
 package es.mqm.webapp.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ public class SearchController {
         List<Product> products = new ArrayList<>();
         ArrayList<String> categories = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            products.add(new Product(i + 1, searchParam, "Descripcion", 50, "Vendedor" + (i + 1),
+            products.add(new Product(searchParam, "Descripcion", 50, "Vendedor" + (i + 1),
                     "product-400x600.png", categories));
         }
 

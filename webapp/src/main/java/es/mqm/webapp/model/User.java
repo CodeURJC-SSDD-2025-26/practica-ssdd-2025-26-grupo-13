@@ -26,6 +26,7 @@ public class User {
     private String surnames;
     private String email;
     private String imageUrl;
+    private String password;
     private float rating;
     private String location;
     private int bought;
@@ -43,9 +44,8 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String surnames, String email, String imageUrl, float rating, String location,
+    public User(String name, String surnames, String email, String password, String imageUrl, float rating, String location,
             int bought, int sold) {
-        this.id = id;
         this.name = name;
         this.surnames = surnames;
         this.email = email;
@@ -87,6 +87,12 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getImageUrl() {

@@ -14,15 +14,16 @@ import es.mqm.webapp.model.User;
 
 @Controller
 public class AdministratorDashboardController {
-    private List<User> users= new ArrayList<User>();
+    private List<User> users = new ArrayList<User>();
     private List<Product> products = new ArrayList<Product>();
-    private List<Review> reviews = new ArrayList<Review>(); 
+    private List<Review> reviews = new ArrayList<Review>();
     private int userCounter = 33550;
     private int productCounter = 120730;
     private int productSoldCounter = 570980;
     private List<Integer> categoriesSold = new ArrayList<Integer>();
     private List<Integer> reviewsRating = new ArrayList<Integer>();
     private List<Integer> newUsersPerMonth = new ArrayList<Integer>();
+
     @GetMapping("/administrator_dashboard")
     public String showAdministratorDashboardPage(Model model) {
         users.clear();
@@ -33,10 +34,11 @@ public class AdministratorDashboardController {
         newUsersPerMonth.clear();
 
         for(int i=0;i<3;i++){
-            users.add(new User(i+1, "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", "1234", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
+            users.add(new User( "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", "1234", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
         }
-        for(int i=0;i<3;i++){
-            products.add(new Product(i+1, "Producto " + (i + 1), "Categoria", 50, "" + (i+1), "placeholder100x100.png", new ArrayList<String>()));
+        for (int i = 0; i < 3; i++) {
+            products.add(new Product("Producto " + (i + 1), "Categoria", 50, "" + (i + 1), "placeholder100x100.png",
+                    new ArrayList<String>()));
         }
         for(int i=0;i<3;i++){
             reviews.add(new Review(i+1,"iPhone XR", "" + (i+1), "1","Muy buen producto, gran calidad precio","Hace 6 meses", (float) 4.0));
