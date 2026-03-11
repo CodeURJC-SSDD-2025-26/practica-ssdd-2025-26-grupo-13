@@ -18,12 +18,10 @@ A web application intended for buying/selling second hand products, similar to W
 1. **User**: represents buyers and sellers (same role). It stores name, email address, phone number, avatar and delivery address.  
 2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description, images and list of categories. 
 3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date, estimated time of arrival and destination address. 
-4. **Message** (optional): represents a message in a chat between two users, at a specific time. Stores the message text, sender, receptor and timestamp.
-5. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users. 
+4. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users. 
 
 **Connections between entities:**
 - User - Order: a user can make several orders (1:N)
-- User - Message: a user can message multiple users and send multiple messages. Each message has one transmitter and one receptor. (1:N)
 - User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
 - Order - Product: each order has exactly one product, because they can buy from different users (1:1) 
 
