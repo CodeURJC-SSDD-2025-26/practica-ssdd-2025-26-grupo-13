@@ -21,26 +21,26 @@
   </head>
   <body>
     <header>
-      <a href="index"><img src="/images/MQM.png" width="80px" /></a>
+      <a href="/"><img src="/images/MQM.png" width="80px" /></a>
       <nav>
         <a class="d-sm-none d-flex ms-auto" data-bs-toggle="offcanvas" href="#offcanvasNavbar" role="button" aria-controls="offcanvasNavbar">
             <i class="bi bi-list menubutton"></i>
         </a>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header mt-4">
-        <a href="index" class="ms-2"><img src="/images/MQM.png" width="90px" /></a>
+        <a href="/" class="ms-2"><img src="/images/MQM.png" width="90px" /></a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         
         <ul class="navbar-nav justify-content-end flex-grow-1">
           <li class="nav-item">
-            <a class="nav-link ms-2" href="index">Página principal</a>
+            <a class="nav-link ms-2" href="/">Página principal</a>
           </li>
           <li class="nav-item mt-4">
              <form
               class="form-inline"
-              action="search.html"
+              action="/search"
               method="get">
               <input
                 class="form-control mr-sm-2 py-2 searchbar"
@@ -50,17 +50,17 @@
             </form>
           </li>
           <li class="nav-item mt-4">
-            <a class="nav-link button w-100" href="login">Iniciar sesión</a>
+            <a class="nav-link button w-100" href="/login">Iniciar sesión</a>
           </li>
           <li class="nav-item mt-2">
-            <a class="nav-link button w-100 secondarybutton" href="sell_product">Vender</a>
+            <a class="nav-link button w-100 secondarybutton" href="/sell_product">Vender</a>
           </li>
         </ul>
       </div>
     </div>
         <form
           class="form-inline d-none d-sm-flex"
-          action="search"
+          action="/search"
           method="get">
           <input
             class="form-control mr-sm-2 py-2 searchbar"
@@ -70,9 +70,9 @@
             aria-label="Buscar" />
         </form>
         <div class="d-flex gap-1">
-          <a href="sell_product.html" class="button secondarybutton mr-0 d-none d-sm-flex">Vender</a>
+          <a href="/sell_product" class="button secondarybutton mr-0 d-none d-sm-flex">Vender</a>
         {{^loggedin}}
-        <a href="login" class="button d-none d-sm-flex">Iniciar sesión</a>
+        <a href="/login" class="button d-none d-sm-flex">Iniciar sesión</a>
         {{/loggedin}}
         </div>
         

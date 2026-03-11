@@ -18,12 +18,10 @@ A web application intended for buying/selling second hand products, similar to W
 1. **User**: represents buyers and sellers (same role). It stores name, email address, phone number, avatar and delivery address.  
 2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description, images and list of categories. 
 3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date, estimated time of arrival and destination address. 
-4. **Message** (optional): represents a message in a chat between two users, at a specific time. Stores the message text, sender, receptor and timestamp.
-5. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users. 
+4. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users. 
 
 **Connections between entities:**
 - User - Order: a user can make several orders (1:N)
-- User - Message: a user can message multiple users and send multiple messages. Each message has one transmitter and one receptor. (1:N)
 - User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
 - Order - Product: each order has exactly one product, because they can buy from different users (1:1) 
 
@@ -70,11 +68,14 @@ A web application intended for buying/selling second hand products, similar to W
 ## 🛠 **Assignment 1: Webpage layout with HTML and CSS**
 
 ### **Navigation Diagram**
-Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
+Diagram that shows how to navigate between the different pages of the application:
 
-![Diagrama de Navegación](images/navigation-diagram.png)
+![Navigation Diagram](images/navigation-diagram.png)
 
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
+> The blue arrows represent actions that all users can make, the yellow arrows are only for registered users and the green arrows are for administrators.
+In the modify_user, modify_review and create_review pages the search bar and sell button are shown, but in reality they would be hidden, that is why there aren't any arrows to the sell and search pages.
+Also, in all the pages only accesible to registered users the log in button still apears, but it would be hidden with code.
+ 
 
 ### **Screenshots and Descriptions of Pages**
 

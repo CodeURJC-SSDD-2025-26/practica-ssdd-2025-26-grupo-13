@@ -4,21 +4,21 @@
                 <i class="bi bi-people fs-3 me-2"></i>
                 <div>
                     <p class="mb-0"><strong>Usuarios registrados</strong></p>
-                    <p class="mb-0 fs-3 fw-semibold">33,550</p>
+                    <p class="mb-0 fs-3 fw-semibold">{{userCounter}}</p>
                 </div>
             </div>
             <div class="item gap-2">
                 <i class="bi bi-box-seam fs-3 me-2"></i>
                 <div>
                     <p class="mb-0"><strong>Productos en venta</strong></p>
-                    <p class="mb-0 fs-3 fw-semibold">120,730</p>
+                    <p class="mb-0 fs-3 fw-semibold">{{productCounter}}</p>
                 </div>
             </div>
             <div class="item gap-2">
                 <i class="bi bi-cash-coin fs-3 me-2"></i>
                 <div>
                     <p class="mb-0"><strong>Productos vendidos</strong></p>
-                    <p class="mb-0 fs-3 fw-semibold">570,980</p>
+                    <p class="mb-0 fs-3 fw-semibold">{{productSoldCounter}}</p>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                     {{#users}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile">Usuario{{id}}</a></td>
+                    <td><a href="user_profile/{{id}}">Usuario{{id}}</a></td>
                     <td>{{name}}</td>
                     <td>{{surnames}}</td>
                     <td>{{email}}</td>
@@ -88,7 +88,7 @@
                     <tr>
                     {{#products}}
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile">Usuario{{seller}}</a></td>
+                    <td><a href="user_profile/{{seller}}">Usuario {{seller}}</a></td>
                     <td>{{categories}}</td>
                     <td>{{name}}</td>
                     <td>{{price}}€</td>
@@ -136,8 +136,8 @@
                     {{#reviews}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile">{{user}}</a></td>
-                    <td><a href="user_profile">{{userDest}}</a></td>
+                    <td><a href="user_profile/{{userId}}">Usuario {{userId}}</a></td>
+                    <td><a href="user_profile/{{userDestId}}">Usuario {{userDestId}}</a></td>
                     <td>"{{description}}"</td>
                     <td>
                         <i class="bi bi-star-fill star"></i>
@@ -196,6 +196,9 @@
         
 
         <script>
+            const categoriesSoldData = JSON.parse('[{{{categoriesSoldJson}}}]');
+            const newUsersPerMonthData = JSON.parse('[{{{newUsersPerMonthJson}}}]');
+
             // Gráfica de ventas por categoría (Pie chart)
             const ctx = document.getElementById('ventasChart').getContext('2d');
             const ventasChart = new Chart(ctx, {
@@ -204,7 +207,7 @@
                     labels: ['Ropa', 'Informática', 'Electrodomésticos', 'Libros', 'Automóviles'],
                     datasets: [{
                         label: 'Productos vendidos',
-                        data: [150, 220, 85, 110, 95],
+                        data: categoriesSoldData,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.6)',
                             'rgba(54, 162, 235, 0.6)',
@@ -244,7 +247,7 @@
                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                     datasets: [{
                         label: 'Nuevos usuarios',
-                        data: [320, 380, 290, 410, 520, 380, 450, 390, 510, 620, 540, 680],
+                        data: newUsersPerMonthData,
                         backgroundColor: 'rgba(75, 192, 192, 0.6)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
@@ -275,13 +278,14 @@
 
                 // Gráfica de reseñas recibidas por calificación (1-5 estrellas)
                 const ctxReviews = document.getElementById('reviewsChart').getContext('2d');
+                const reviewsRatingData = JSON.parse('[{{{reviewsRatingJson}}}]');
                 const reviewsChart = new Chart(ctxReviews, {
                     type: 'bar',
                     data: {
                         labels: ['1 estrella', '2 estrellas', '3 estrellas', '4 estrellas', '5 estrellas'],
                         datasets: [{
                             label: 'Número de reseñas',
-                            data: [20, 12, 50, 100, 200],
+                            data: reviewsRatingData,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.6)',
                                 'rgba(255, 159, 64, 0.6)',
@@ -318,3 +322,4 @@
                 });
         </script>
 {{>footer}}
+

@@ -8,7 +8,7 @@
               <div
                 class="d-flex flex-column flex-md-row align-items-start gap-3"
               >
-                <a href="user_profile">
+                <a href="/user_profile/{{id}}">
                   <img
                     class="rounded-circle"
                     src="/images/{{imageUrl}}"
@@ -68,7 +68,7 @@
             <p>{{name}}</p>
             <a
               class="create-review-right"
-              href="modify_product"
+              href="/modify_product"
               aria-label="Crear reseña"
               ><i class="bi bi-pencil-square"></i
             ></a>
@@ -93,7 +93,7 @@
             <p>{{name}}</p>
             <a
               class="create-review-right"
-              href="create_review"
+              href="/create_review"
               aria-label="Crear reseña"
               ><i class="bi bi-star"></i
             ></a>
@@ -126,7 +126,7 @@
               <div
                 class="d-flex flex-column flex-md-row align-items-start gap-3"
               >
-                <a href="user_profile">
+                <a href="/user_profile/{{userId}}">
                   <img
                     class="rounded-circle"
                     src="/images/usuario anonimo.jpg"
@@ -138,7 +138,7 @@
                   <div
                     class="d-flex flex-column flex-md-row align-items-md-center gap-2"
                   >
-                    <span class="fw-semibold">{{user}}</span>
+                    <span class="fw-semibold">Usuario {{userId}}</span>
                     <span>
                       <i class="bi bi-star-fill star"></i>
                       <i class="bi bi-star-fill star"></i>
@@ -147,7 +147,7 @@
                       <i class="bi bi-star star"></i>
                     </span>
                     <span class="text-muted small ms-md-3">{{date}}</span>
-                    <a href="modify_review" class="button ms-4"
+                    <a href="/modify_review" class="button ms-4"
                       >Modificar reseña</a
                     >
                   </div>

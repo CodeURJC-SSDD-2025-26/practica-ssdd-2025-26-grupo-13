@@ -1,4 +1,4 @@
-package es.mqm.webapp;
+package es.mqm.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import es.mqm.webapp.model.Product;
 
 @Controller
 public class IndexController {
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
 
         List<Product> products = new ArrayList<Product>();
