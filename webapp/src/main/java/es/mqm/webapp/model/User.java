@@ -26,11 +26,13 @@ public class User {
     private List<Product> products = new ArrayList<Product>();
     private ArrayList<String> categories;
     private List<Review> reviews = new ArrayList<Review>();
-    public User(int id, String name, String surnames, String email, String imageUrl, float rating, String location, int bought, int sold) {
+    private String password;
+    public User(int id, String name, String surnames, String email, String password, String imageUrl, float rating, String location, int bought, int sold) {
         this.id = id;
         this.name = name;
         this.surnames = surnames;
         this.email = email;
+        this.password = password;
         this.imageUrl = imageUrl;
         this.rating = rating;
         this.location = location;
@@ -56,6 +58,9 @@ public class User {
     public String getEmail() {
         return email;
     }
+    public String getPassword() {
+        return password;
+    }   
     public String getImageUrl() {
         return imageUrl;
     }
