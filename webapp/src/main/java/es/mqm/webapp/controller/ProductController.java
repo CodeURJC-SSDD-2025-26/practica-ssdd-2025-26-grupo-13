@@ -16,16 +16,17 @@ public class ProductController {
         return "product";
     }
     @GetMapping("/sell_product")
-     public String showSellProductPage(Model model) {
+    public String showSellProductPage(Model model) {
         model.addAttribute("cssfile", "sell_product");
         return "sell_product";
     }
+
     @GetMapping("/modify_product")
-     public String showModifyProductPage(Model model) {
+    public String showModifyProductPage(Model model) {
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Categoria 1");
-        Product product = new Product(1,"Producto","Descripcion", 50.0, "Vendedor","product-400x600.png", categories);
-        model.addAttribute("cssfile", "sell_product"); 
+        Product product = new Product("Producto", "Descripcion", 50.0, "Vendedor", "product-400x600.png", categories);
+        model.addAttribute("cssfile", "sell_product");
         model.addAttribute("product", product);
         model.addAttribute("categories", categories);
         return "modify_product";
