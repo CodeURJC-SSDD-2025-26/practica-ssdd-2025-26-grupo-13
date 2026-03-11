@@ -34,6 +34,10 @@ public class UserProfileController {
         model.addAttribute("reviews", user.getReviews());
         return "user_profile";
     }
-
+    @GetMapping("/modify_user")
+    public String showModifyUser(Model model) {
+        model.addAttribute("cssfile", "sell_product");    
+        return "modify_user";
+    }
     
 }
