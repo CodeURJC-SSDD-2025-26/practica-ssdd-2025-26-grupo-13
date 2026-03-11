@@ -33,7 +33,7 @@ public class AdministratorDashboardController {
         newUsersPerMonth.clear();
 
         for(int i=0;i<3;i++){
-            users.add(new User(i+1, "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", "1234", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
+            users.add(new User( "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", "1234", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
         }
         for(int i=0;i<3;i++){
             products.add(new Product(i+1, "Producto " + (i + 1), "Categoria", 50, "" + (i+1), "placeholder100x100.png", new ArrayList<String>()));
