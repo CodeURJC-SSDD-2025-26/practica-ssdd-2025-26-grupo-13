@@ -27,7 +27,7 @@ public class User {
     private String email;
     private String imageUrl;
     private String password;
-    private float rating;
+    private double rating;
     private String location;
     private int bought;
     private int sold;
@@ -44,7 +44,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surnames, String email, String password, String imageUrl, float rating, String location,
+    public User(String name, String surnames, String email, String password, String imageUrl, double rating, String location,
             int bought, int sold) {
         this.name = name;
         this.surnames = surnames;
@@ -103,11 +103,11 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
