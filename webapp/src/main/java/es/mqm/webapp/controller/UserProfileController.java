@@ -38,8 +38,11 @@ public class UserProfileController {
         model.addAttribute("reviews", user.getReviews());
         return "user_profile";
     }
-    @GetMapping("/modify_user")
-    public String showModifyUser(Model model) {
+    @GetMapping("/modify_user/{id}")
+    public String showModifyUser(Model model,@PathVariable String id) {
+        //aqui cogeriamos el usuario de la base de datos y lo pasariamos al modelo. Po ahora lo hacemos con un usuario de prueba
+        int user_id = Integer.parseInt(id);
+        User user = new User(user_id, "Usuario " + user_id, "Apellido", "usuario" + user_id + "@example.com", "1234", "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4);
         model.addAttribute("cssfile", "sell_product");    
         return "modify_user";
     }
