@@ -1,0 +1,82 @@
+{{>header}}
+<main>
+  <div class="title">
+    <h2>Modifica tus datos</h2>
+  </div>
+  <div class="category">
+    <form action="product.html" method="get">
+      <div class="d-flex gap-5 flex-wrap justify-content-between ms-sm-2">
+        <div class="m-auto position-relative">
+          <img
+            class="rounded-circle"
+            src="images/usuario anonimo.jpg"
+            width="150px"
+            alt="Usuario"
+          />
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary text position-absolute bottom-0 end-0 rounded-circle p-2"
+            style="width: 40px; height: 40px"
+            onclick="document.getElementById('userImage').click()"
+          >
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+          <input
+            type="file"
+            class="form-control mt-2"
+            id="userImage"
+            style="display: none"
+          />
+        </div>
+        <div class="flex-grow-1">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Introduce tu nombre"
+              value="Juan"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="form-label">Apellidos</label>
+            <input
+              type="text"
+              class="form-control"
+              id="surname"
+              placeholder="Introduce los apellidos del usuario"
+              value="García López"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Introduce el email del usuario"
+          value="juan.garcia@example.com"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Introduce la contraseña del usuario"
+          value="contraseña123"
+          required
+        />
+      </div>
+      <button class="button" type="submit">Modificar</button>
+    </form>
+  </div>
+</main>
+{{>footer}}
