@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.repository.UserRepository;
 
 @Controller
 public class UserProfileController {
@@ -44,11 +45,19 @@ public class UserProfileController {
         model.addAttribute("reviews", user.getReviews());
         return "user_profile";
     }
-    @GetMapping("/modify_user")
-    public String showModifyUser(Model model){
+    @GetMapping("/modify_user/{id}")
+    public String showModifyUser(Model model,@PathVariable String id) {
+        int user_id = Integer.parseInt(id);
+        User user = userRepository.findById(user_id).orElse(null);
+        model.addAttribute("name", user.getName());
+        model.addAttribute("surnames", user.getSurnames());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("password",user.getPassword());
         model.addAttribute("cssfile", "sell_product");    
         return "modify_user";
     }
+
+    
 
     @PostMapping("/newuser")
     public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword ){

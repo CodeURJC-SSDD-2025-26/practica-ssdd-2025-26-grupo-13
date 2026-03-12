@@ -16,7 +16,7 @@ public class ReviewController {
     public String showModifyReviewForm(@PathVariable("id") int id,Model model) {
         Review review = new Review(1, "barbacoa", "Lucas Martinez", "Usuario Destino", "No me ha gustado el treto que he recibido", "2024-06-01", 4.0f);  
         model.addAttribute("cssfile", "sell_product");
-        model.addAttribute("name", review.getUser());  
+        model.addAttribute("name", review.getUserId());  
         model.addAttribute("product_name", review.getProduct());
         model.addAttribute("description", review.getDescription());
         return "modify_review"; 

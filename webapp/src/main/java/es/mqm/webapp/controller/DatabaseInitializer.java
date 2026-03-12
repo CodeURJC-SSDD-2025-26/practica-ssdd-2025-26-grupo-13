@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 import es.mqm.webapp.model.Product;
+import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ProductRepository;
 import es.mqm.webapp.repository.UserRepository;
 
@@ -25,6 +26,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             productRepository.save(new Product("Producto " + (i + 1), "Descripcion", 50, "Vendedor" + (i + 1),
                     "placeholder100x100.png", categories));
         }
+        userRepository.save(new User("Usuario 1", "Apellido", "usuario1@example.com", "1234", "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));  
     }
 
 }
