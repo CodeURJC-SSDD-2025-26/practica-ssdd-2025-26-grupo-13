@@ -144,6 +144,25 @@
         </a>
         {{/products}}
       </div>
+      {{#showPagination}}
+      <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+        <ul class="pagination mt-4">
+          <li class="page-item {{^hasPrev}}disabled{{/hasPrev}}">
+            <a class="page-link" href="/search?{{baseQuery}}&page={{prevPage}}" aria-label="Anterior">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <span class="page-link">{{currentPage}} / {{totalPages}}</span>
+          </li>
+          <li class="page-item {{^hasNext}}disabled{{/hasNext}}">
+            <a class="page-link" href="/search?{{baseQuery}}&page={{nextPage}}" aria-label="Siguiente">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      {{/showPagination}}
     </div>
   </div>
 </main>

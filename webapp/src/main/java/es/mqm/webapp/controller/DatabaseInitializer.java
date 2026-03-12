@@ -26,7 +26,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<String> categories = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 40; i++) {
             productRepository.save(new Product("Producto " + (i + 1), "Descripcion", 50, "Vendedor" + (i + 1),
                     "placeholder100x100.png", categories));
         }
