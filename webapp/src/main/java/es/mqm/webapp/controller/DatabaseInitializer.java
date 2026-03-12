@@ -10,33 +10,34 @@ import org.springframework.stereotype.Controller;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
-import es.mqm.webapp.repository.ProductRepository;
-import es.mqm.webapp.repository.ReviewRepository;
-import es.mqm.webapp.repository.UserRepository;
+import es.mqm.webapp.service.ProductService;
+import es.mqm.webapp.service.ReviewService;
+import es.mqm.webapp.service.UserService;
 
 @Controller
 public class DatabaseInitializer implements CommandLineRunner {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
     @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewService reviewService;
 
     @Override
     public void run(String... args) throws Exception {
         List<String> categories = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
-            productRepository.save(new Product("Producto " + (i + 1), "Descripcion", 50, "Vendedor" + (i + 1),
+            User user= userService.findById(1).orElse(null);
+            productService.save(new Product("Producto " + (i + 1), "Descripcion", 50, user,
                     "placeholder100x100.png", categories));
         }
         for (int i = 0; i < 5; i++) {
-            userRepository.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", "1234", "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
+            userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", "1234", "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
         }
         for(int i=0; i<3; i++){
-            Product product = productRepository.findById(i + 1).orElse(null);
-            User user = userRepository.findById(1).orElse(null);
-            reviewRepository.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 4.0f));
+            Product product = productService.findById(i + 1).orElse(null);
+            User user = userService.findById(1).orElse(null);
+            reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 4.0f));
         }  
     }
 

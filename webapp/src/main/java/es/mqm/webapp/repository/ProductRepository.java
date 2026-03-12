@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import es.mqm.webapp.model.Product;
+import es.mqm.webapp.model.User;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByName(String name);
@@ -15,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByCategoriesContaining(String category);
 
-    List<Product> findBySeller(String seller);
+    List<Product> findByUser(User user);
 
     List<Product> findAll();
 

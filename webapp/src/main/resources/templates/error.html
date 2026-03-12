@@ -1,6 +1,7 @@
-{{>headAdmin}}
+{{>header}}
 <div class="container">
-    <h2>Error 404</h2>
-    <p>El recurso que estás buscando no existe.</p>
+    <i class="bi bi-emoji-frown-fill display-1 mb-1"></i>
+    <h1 class="fs-1 fw-bold">Error {{status}}</h1>
+    <p>{{message}}</p>
 </div>
 {{>footer}}

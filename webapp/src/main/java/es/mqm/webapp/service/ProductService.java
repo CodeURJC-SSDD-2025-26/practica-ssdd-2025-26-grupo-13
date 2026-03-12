@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.mqm.webapp.model.Product;
+import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ProductRepository;
 
 @Service
@@ -34,8 +35,8 @@ public class ProductService {
         return repository.findByCategoriesContaining(category);
     }
 
-    public List<Product> findBySeller(String seller) {
-        return repository.findBySeller(seller);
+    public List<Product> findByUser(User user) {
+        return repository.findByUser(user);
     }
 
     public Page<Product> getProducts(int pageNo, int pageSize) {
