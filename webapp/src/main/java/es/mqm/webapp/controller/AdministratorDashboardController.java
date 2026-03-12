@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.service.ProductService;
+import es.mqm.webapp.service.UserService;
 
 @Controller
 public class AdministratorDashboardController {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ProductService productService;
+
     private List<User> users = new ArrayList<User>();
     private List<Product> products = new ArrayList<Product>();
     private List<Review> reviews = new ArrayList<Review>();
@@ -41,7 +49,9 @@ public class AdministratorDashboardController {
                     new ArrayList<String>()));
         }
         for(int i=0;i<3;i++){
-            reviews.add(new Review("iPhone XR", "" + (i+1), "1","Muy buen producto, gran calidad precio","Hace 6 meses", (float) 4.0));
+            Product product=productService.findById(i + 1).orElse(null);
+            User user=userService.findById(1).orElse(null);
+            reviews.add(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 4.0f));
         }
         for(int i=0;i<5;i++){
             categoriesSold.add((int) Math.floor(Math.random() * (250 - 50 + 1)) + 50);

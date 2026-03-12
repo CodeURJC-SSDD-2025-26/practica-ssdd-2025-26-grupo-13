@@ -8,11 +8,10 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @OneToOne
-    private String product;
+    private Product product;
     @ManyToOne
-    private String userId;
+    private User user;
     @ManyToOne
-    private String userDestId;
     private String description;
     private String date;
     private float rating;
@@ -20,11 +19,9 @@ public class Review {
     public Review() {
     }
 
-    public Review(int productId, int userId, int userDestId, String description, String date,
-            Float rating) {
+    public Review(Product product, User user, String description, String date, Float rating) {
         this.product = product;
-        this.userId = userId;
-        this.userDestId = userDestId;
+        this.user = user;
         this.description = description;
         this.date = date;
         this.rating = rating;
@@ -38,28 +35,20 @@ public class Review {
         this.id = id;
     }
 
-    public String getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserDestId() {
-        return userDestId;
-    }
-
-    public void setUserDestId(String userDestId) {
-        this.userDestId = userDestId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {
