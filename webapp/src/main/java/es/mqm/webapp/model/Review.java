@@ -1,17 +1,17 @@
 package es.mqm.webapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @OneToOne
     private String product;
+    @ManyToOne
     private String userId;
+    @ManyToOne
     private String userDestId;
     private String description;
     private String date;
@@ -20,9 +20,8 @@ public class Review {
     public Review() {
     }
 
-    public Review(int id, String product, String userId, String userDestId, String description, String date,
+    public Review(String product, String userId, String userDestId, String description, String date,
             Float rating) {
-        this.id = id;
         this.product = product;
         this.userId = userId;
         this.userDestId = userDestId;

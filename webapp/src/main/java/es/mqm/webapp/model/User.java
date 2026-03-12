@@ -32,14 +32,6 @@ public class User {
     private int bought;
     private int sold;
 
-    @OneToMany
-    private List<Product> products = new ArrayList<>();
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> categories = new ArrayList<>();
-
-    @OneToMany
-    private List<Review> reviews = new ArrayList<>();
 
     public User() {
     }
@@ -135,27 +127,5 @@ public class User {
         this.sold = sold;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }
