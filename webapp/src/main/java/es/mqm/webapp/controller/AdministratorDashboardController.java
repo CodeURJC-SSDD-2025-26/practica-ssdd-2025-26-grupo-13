@@ -70,6 +70,8 @@ public class AdministratorDashboardController {
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         model.addAttribute("newUsersPerMonthJson", newUsersPerMonthJson);
+
+        model.addAttribute("cssfile", "administrator_dashboard"); 
         return "administrator_dashboard";
     }
 }

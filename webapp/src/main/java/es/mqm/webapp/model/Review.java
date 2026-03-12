@@ -1,17 +1,17 @@
 package es.mqm.webapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @OneToOne
     private String product;
+    @ManyToOne
     private String userId;
+    @ManyToOne
     private String userDestId;
     private String description;
     private String date;

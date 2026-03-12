@@ -27,24 +27,16 @@ public class User {
     private String email;
     private String imageUrl;
     private String password;
-    private float rating;
+    private double rating;
     private String location;
     private int bought;
     private int sold;
 
-    @OneToMany
-    private List<Product> products = new ArrayList<>();
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> categories = new ArrayList<>();
-
-    @OneToMany
-    private List<Review> reviews = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String name, String surnames, String email, String password, String imageUrl, float rating, String location,
+    public User(String name, String surnames, String email, String password, String imageUrl, double rating, String location,
             int bought, int sold) {
         this.name = name;
         this.surnames = surnames;
@@ -103,11 +95,11 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -135,27 +127,5 @@ public class User {
         this.sold = sold;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }

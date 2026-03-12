@@ -3,12 +3,13 @@
     <main class="border">
       <h1 id="title">Inicia sesión como administrador</h1>
       <div id="login">
-        <form role="form" action="administrator_dashboard" method="get">
+        <form role="form" action="/login_admin" method="post">
           <div class="form-group">
             <label for="inputEmail">Email</label>
             <input
               type="email"
               id="inputEmail"
+              name="inputEmail"
               placeholder="Email"
               class="form-control"
               required
@@ -19,6 +20,7 @@
             <input
               type="password"
               id="inputPassword"
+              name="inputPassword"
               placeholder="Contraseña"
               class="form-control"
               required
