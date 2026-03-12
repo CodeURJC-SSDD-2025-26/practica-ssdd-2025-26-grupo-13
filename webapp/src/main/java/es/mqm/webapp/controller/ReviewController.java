@@ -31,7 +31,7 @@ public class ReviewController {
 
     @RequestMapping("/newReview/{product_id}")
     public String newReview(@PathVariable("product_id") int productId, @RequestParam String name, @RequestParam String reviewDescription) { 
-        Review review = new Review("product_id", name, "name", reviewDescription, "2024-06-01", 4.0f);
+        Review review = new Review("product_id", , "name", reviewDescription, "2024-06-01", 4.0f);
         return "user_profile/"+name; 
     }
     

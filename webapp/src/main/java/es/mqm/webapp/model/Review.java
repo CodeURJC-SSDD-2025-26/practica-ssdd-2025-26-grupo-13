@@ -20,7 +20,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(String product, String userId, String userDestId, String description, String date,
+    public Review(int productId, int userId, int userDestId, String description, String date,
             Float rating) {
         this.product = product;
         this.userId = userId;
