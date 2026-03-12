@@ -14,7 +14,7 @@ public class ReviewController {
 
     @GetMapping("/modify_review/{id}")
     public String showModifyReviewForm(@PathVariable("id") int id,Model model) {
-        Review review = new Review(1, "barbacoa", "Lucas Martinez", "Usuario Destino", "No me ha gustado el treto que he recibido", "2024-06-01", 4.0f);  
+        Review review = new Review("barbacoa", "Lucas Martinez", "Usuario Destino", "No me ha gustado el treto que he recibido", "2024-06-01", 4.0f);  
         model.addAttribute("cssfile", "sell_product");
         model.addAttribute("name", review.getUserId());  
         model.addAttribute("product_name", review.getProduct());
@@ -31,8 +31,8 @@ public class ReviewController {
 
     @RequestMapping("/newReview/{product_id}")
     public String newReview(@PathVariable("product_id") int productId, @RequestParam String name, @RequestParam String reviewDescription) { 
-        Review review = new Review(1, "product_id", name, "name", reviewDescription, "2024-06-01", 4.0f);
-        return "user_profile/"; 
+        Review review = new Review("product_id", name, "name", reviewDescription, "2024-06-01", 4.0f);
+        return "user_profile/"+name; 
     }
     
 }

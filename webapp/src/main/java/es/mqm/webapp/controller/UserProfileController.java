@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.UserRepository;
+import es.mqm.webapp.service.UserService;
 
 @Controller
 public class UserProfileController {
     @Autowired 
-    private UserRepository userRepository;
+    private UserService userService;
     
     
     @GetMapping("/user_profile/{id}")
@@ -44,7 +45,7 @@ public class UserProfileController {
     @GetMapping("/modify_user/{id}")
     public String showModifyUser(Model model,@PathVariable String id) {
         int user_id = Integer.parseInt(id);
-        User user = userRepository.findById(user_id).orElse(null);
+        User user = userService.findById(user_id).orElse(null);
         model.addAttribute("name", user.getName());
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());
@@ -53,7 +54,17 @@ public class UserProfileController {
         return "modify_user";
     }
 
-    
+    @RequestMapping("/modify_info/{id}")
+    public String modifyUser(Model model, @PathVariable String id, @RequestParam String name, @RequestParam String surn,ames, @RequestParam String email, @RequestParam String password){
+        int user_id = Integer.parseInt(id);
+        User user = userRepository.findById(user_id).orElse(null);
+        user.setName(name);
+        user.setSurnames(surnames);
+        user.setEmail(email);
+        user.setPassword(password);
+        userRepository.save(user);
+        return "user_profile/{id}";
+    }
 
     @RequestMapping("/newuser")
     public String createNewUser(Model model, @RequestParam String email, 
@@ -61,7 +72,7 @@ public class UserProfileController {
             @RequestParam String location, @RequestParam int bought, 
             @RequestParam int sold*/){
                 User user = new User( "Nuevo Usuario", "Apellido", email, password, "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4);
-            /*model.addAttribute("name", name);
+            /*model.addAttribute("name", name);*/
             model.addAttribute("surnames", surnames);
             model.addAttribute("email", email);
             model.addAttribute("password", password);*/

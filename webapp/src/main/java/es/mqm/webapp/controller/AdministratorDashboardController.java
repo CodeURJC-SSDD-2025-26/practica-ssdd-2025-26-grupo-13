@@ -41,7 +41,7 @@ public class AdministratorDashboardController {
                     new ArrayList<String>()));
         }
         for(int i=0;i<3;i++){
-            reviews.add(new Review(i+1,"iPhone XR", "" + (i+1), "1","Muy buen producto, gran calidad precio","Hace 6 meses", (float) 4.0));
+            reviews.add(new Review("iPhone XR", "" + (i+1), "1","Muy buen producto, gran calidad precio","Hace 6 meses", (float) 4.0));
         }
         for(int i=0;i<5;i++){
             categoriesSold.add((int) Math.floor(Math.random() * (250 - 50 + 1)) + 50);
