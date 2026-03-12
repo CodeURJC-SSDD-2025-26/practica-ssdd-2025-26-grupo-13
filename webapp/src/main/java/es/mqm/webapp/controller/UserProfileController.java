@@ -20,15 +20,12 @@ import es.mqm.webapp.service.UserService;
 @Controller
 public class UserProfileController {
     @Autowired
-    private UserRepository userRepository;
-    public UserProfileController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserService userService;
     
     @GetMapping("/user_profile/{id}")
      public String showUserProfile(Model model, @PathVariable String id) {
         int user_id = Integer.parseInt(id);
-        User user = userRepository.findById(user_id).orElse(null);
+        User user = userService.findById(user_id).orElse(null);
         model.addAttribute("name", user.getName());
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());
@@ -42,8 +39,6 @@ public class UserProfileController {
 
         
         model.addAttribute("cssfile", "user_profile");
-        model.addAttribute("products", user.getProducts());
-        model.addAttribute("reviews", user.getReviews());
         return "user_profile";
     }
     @GetMapping("/modify_user/{id}")
@@ -59,41 +54,22 @@ public class UserProfileController {
     }
 
     @RequestMapping("/modify_info/{id}")
-    public String modifyUser(Model model, @PathVariable String id, @RequestParam String name, @RequestParam String surn,ames, @RequestParam String email, @RequestParam String password){
+    public String modifyUser(Model model, @PathVariable String id, @RequestParam String name, @RequestParam String surnames, @RequestParam String email, @RequestParam String password){
         int user_id = Integer.parseInt(id);
-        User user = userRepository.findById(user_id).orElse(null);
+        User user = userService.findById(user_id).orElse(null);
         user.setName(name);
         user.setSurnames(surnames);
         user.setEmail(email);
         user.setPassword(password);
-        userRepository.save(user);
+        userService.save(user);
         return "user_profile/{id}";
     }
 
-    @RequestMapping("/newuser")
-    public String createNewUser(Model model, @RequestParam String email, 
-            @RequestParam String password /*@RequestParam String imageUrl, @RequestParam float rating, 
-            @RequestParam String location, @RequestParam int bought, 
-            @RequestParam int sold*/){
-                User user = new User( "Nuevo Usuario", "Apellido", email, password, "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4);
-            /*model.addAttribute("name", name);*/
-            model.addAttribute("surnames", surnames);
-            model.addAttribute("email", email);
-            model.addAttribute("password", password);*/
-            /*model.addAttribute("imageUrl", imageUrl);
-            model.addAttribute("rating", rating);
-            model.addAttribute("location", location);
-            model.addAttribute("bought", bought);
-            model.addAttribute("sold", sold);*/
-
-            return "index";
-
-    
 
     @PostMapping("/newuser")
     public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword ){
         User user = new User( inputName, inputSurnames, inputEmail, inputPassword, "usuario_anonimo.jpg", 5.0, "28012, Madrid", 0, 0);
-        userRepository.save(user);
+        userService.save(user);
         return "redirect:/";
     }
     @PostMapping("/validlogin")
@@ -104,9 +80,5 @@ public class UserProfileController {
     public String loginAdmin(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
         return "redirect:/administrator_dashboard";
     }
-    
-
-    
-
     
 }

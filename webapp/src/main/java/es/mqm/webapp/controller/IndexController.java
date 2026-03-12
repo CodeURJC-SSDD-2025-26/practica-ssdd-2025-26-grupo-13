@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import es.mqm.webapp.model.CategoryData;
 import es.mqm.webapp.model.Product;
-import es.mqm.webapp.repository.ProductRepository;
+import es.mqm.webapp.service.ProductService;
 
 @Controller
 public class IndexController {
 
-    @Autowired 
-    private ProductRepository repository;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/")
     public String index(Model model) {
 
-        List<Product> products = repository.findAll();
+        // Show only the first 12 products on the homepage
+        java.util.List<Product> products = productService.getProducts(0, 12).getContent();
 
         model.addAttribute("cssfile", "index");
         model.addAttribute("loggedin", true);
         model.addAttribute("products", products);
         model.addAttribute("categories", CategoryData.CATEGORIES);
+
         return "index";
     }
 }
