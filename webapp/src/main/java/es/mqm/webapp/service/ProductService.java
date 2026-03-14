@@ -1,5 +1,8 @@
 package es.mqm.webapp.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +15,10 @@ import org.springframework.stereotype.Service;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ProductRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 @Service
 public class ProductService {
@@ -32,7 +39,7 @@ public class ProductService {
     }
 
     public List<Product> findByCategory(String category) {
-        return repository.findByCategoriesContaining(category);
+        return repository.findByCategory(category);
     }
 
     public List<Product> findByUser(User user) {
@@ -46,12 +53,12 @@ public class ProductService {
 
     public Page<Product> findByName(String name, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return repository.findByNameIgnoreCase(name, pageable);
+        return repository.findByNameIgnoreCaseContaining(name, pageable);
     }
 
     public Page<Product> findByCategory(String category, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return repository.findByCategoriesContaining(category, pageable);
+        return repository.findByCategory(category, pageable);
     }
 
     public Product save(Product product) {
@@ -62,4 +69,48 @@ public class ProductService {
         repository.delete(product);
     }
 
+    public Page<Product> searchProducts(String name, String category, String location, String date, String minPrice, String maxPrice, int pageNo, int pageSize) {
+        System.out.println("category: " + category);
+        return repository.findAll((root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (name != null) {
+                predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (category != null && !category.equals("todas")) {
+                predicates.add(cb.equal(root.get("category"), category));
+            }
+            if (location != null && !location.isEmpty()) {
+                predicates.add(cb.equal(root.get("location"), location));
+            }
+            if (date != null && !date.isEmpty()) {
+                LocalDateTime minDate = null;
+                LocalDateTime now = LocalDateTime.now();
+
+                switch (date) {
+                    case "hoy":
+                        minDate = LocalDate.now().atStartOfDay();
+                        break;
+                    case "7":
+                        minDate = now.minusDays(7);
+                        break;
+                    case "30":
+                        minDate = now.minusDays(30);
+                        break;
+                }
+
+                if (minDate != null) {
+                    predicates.add(cb.greaterThanOrEqualTo(root.get("createdAt"), minDate));
+                }
+            }
+            if (minPrice != null && !minPrice.isEmpty()) {
+                predicates.add(cb.greaterThanOrEqualTo(root.get("price"), Integer.parseInt(minPrice)));
+            }
+            if (maxPrice != null && !maxPrice.isEmpty()) {
+                predicates.add(cb.lessThanOrEqualTo(root.get("price"), Integer.parseInt(maxPrice)));
+            }
+
+            return cb.and(predicates.toArray(new Predicate[0]));
+        }, PageRequest.of(pageNo, pageSize));
+    }
 }

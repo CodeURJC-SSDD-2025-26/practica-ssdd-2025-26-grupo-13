@@ -17,7 +17,7 @@ public class ProductController {
     @GetMapping("/product")
     public String showProductDetails(Model model) {
         User user = userService.findById(1).orElse(null);
-        Product product = new Product("Producto de ejemplo", "Descripción del producto", 19.99f, user, "producto.jpg", new java.util.ArrayList<>());
+        Product product = new Product("Producto de ejemplo", "Descripción del producto", 19.99f, user, "producto.jpg", "informatica", "Madrid");
         model.addAttribute("cssfile", "product");
         return "product";
     }
@@ -29,13 +29,12 @@ public class ProductController {
 
     @GetMapping("/modify_product")
     public String showModifyProductPage(Model model) {
-        ArrayList<String> categories = new ArrayList<>();
-        categories.add("Categoria 1");
+
         User user = userService.findById(1).orElse(null);
-        Product product = new Product("Producto", "Descripcion", 50.0, user, "product-400x600.png", categories);
+        Product product = new Product("Producto", "Descripcion", 50.0, user, "product-400x600.png", "informatica", "Madrid");
         model.addAttribute("cssfile", "sell_product");
         model.addAttribute("product", product);
-        model.addAttribute("categories", categories);
+        model.addAttribute("category", "informatica");
         return "modify_product";
     }
 }

@@ -25,14 +25,13 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<String> categories = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
-            User user= userService.findById(1).orElse(null);
-            productService.save(new Product("Producto " + (i + 1), "Descripcion", 50, user,
-                    "placeholder100x100.png", categories));
-        }
         for (int i = 0; i < 5; i++) {
             userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", "1234", "usuario_anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
+        }
+        for (int i = 0; i < 40; i++) {
+            User user= userService.findById(1).orElse(null);
+            productService.save(new Product("Producto " + (i + 1), "Descripcion", 50 + i, user,
+                    "placeholder100x100.png", "informatica", "Madrid"));
         }
         for(int i=0; i<3; i++){
             Product product = productService.findById(i + 1).orElse(null);
