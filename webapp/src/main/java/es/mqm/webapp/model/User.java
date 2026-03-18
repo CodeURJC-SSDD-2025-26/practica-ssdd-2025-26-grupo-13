@@ -3,19 +3,18 @@ package es.mqm.webapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
+import jakarta.persistence.*;
+
 
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mqm_user")
+@Component
+@SessionScope
 public class User {
 
     @Id

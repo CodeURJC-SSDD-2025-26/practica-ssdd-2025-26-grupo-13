@@ -36,20 +36,11 @@ public class SearchController {
         boolean hasSearch = searchParam != null && !searchParam.isEmpty();
         boolean hasCategory = category != null && !category.isEmpty() && !category.equals("todas");
 
-        if (hasSearch) {
-            productPage = productService.findByName(searchParam, page, PAGE_SIZE);
-        } else {
-            productPage = productService.getProducts(page, PAGE_SIZE);
-        }
+        productPage = productService.searchProducts(searchParam, category, location, date, minPrice, maxPrice, page, PAGE_SIZE);
 
-        // Clamp to last valid page if out of bounds
         if (page >= productPage.getTotalPages() && productPage.getTotalPages() > 0) {
             page = productPage.getTotalPages() - 1;
-            if (hasSearch) {
-                productPage = productService.findByName(searchParam, page, PAGE_SIZE);
-            } else {
-                productPage = productService.getProducts(page, PAGE_SIZE);
-            }
+            productPage = productService.searchProducts(searchParam, category, location, date, minPrice, maxPrice, page, PAGE_SIZE);
         }
 
         model.addAttribute("cssfile", "search");
@@ -86,7 +77,6 @@ public class SearchController {
         model.addAttribute("nextPage", page + 1);
         model.addAttribute("showPagination", totalPages > 1);
 
-        // Base query string for pagination links (preserves all active filters)
         model.addAttribute("baseQuery", buildBaseQuery(searchParam, category, date, minPrice, maxPrice, location));
 
         return "search";

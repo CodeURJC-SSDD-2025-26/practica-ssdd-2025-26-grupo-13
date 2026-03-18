@@ -43,7 +43,7 @@
                     {{#users}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{id}}">Usuario{{id}}</a></td>
+                    <td><a href="user_profile/{{id}}">Usuario {{id}}</a></td>
                     <td>{{name}}</td>
                     <td>{{surnames}}</td>
                     <td>{{email}}</td>
@@ -85,11 +85,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
                     {{#products}}
+                    <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{seller}}">Usuario {{seller}}</a></td>
-                    <td>{{categories}}</td>
+                    <td><a href="user_profile/{{user.id}}">Usuario {{user.name}}</a></td>
+                    <td>{{category}}</td>
                     <td>{{name}}</td>
                     <td>{{price}}€</td>
                     <td>No</td>
@@ -98,7 +98,6 @@
                         <a href="modify_product" class="btn btn-warning">Modificar</a>
                     </td>
                     </tr>
-                    <tr>
                     {{/products}}
                 </tbody>
             </table>
@@ -136,8 +135,8 @@
                     {{#reviews}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{userId}}">Usuario {{userId}}</a></td>
-                    <td><a href="user_profile/{{userDestId}}">Usuario {{userDestId}}</a></td>
+                    <td><a href="user_profile/{{user.id}}">Usuario {{user.name}}</a></td>
+                    <td><a href="user_profile/{{product.user.id}}">Usuario {{product.user.name}}</a></td>
                     <td>"{{description}}"</td>
                     <td>
                         <i class="bi bi-star-fill star"></i>
@@ -322,4 +321,5 @@
                 });
         </script>
 {{>footer}}
+
 

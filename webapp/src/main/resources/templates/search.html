@@ -108,9 +108,9 @@
       </a>
       <div class="collapse show mx-2" id="priceDropdown">
         <div class="d-flex gap-2">
-          <input type="text" name="minPrice" class="form-control" placeholder="Min" aria-label="Min"
+          <input type="number" name="minPrice" class="form-control" placeholder="Min" aria-label="Min"
             value="{{minPrice}}" />
-          <input type="text" name="maxPrice" class="form-control" placeholder="Max" aria-label="Max"
+          <input type="number" name="maxPrice" class="form-control" placeholder="Max" aria-label="Max"
             value="{{maxPrice}}" />
         </div>
       </div>
@@ -132,7 +132,7 @@
           <p class="pricetag">{{price}}€</p>
           <p>{{name}}</p>
           <div class="vendor">
-            <span>{{seller}}</span>
+            <span>{{#user}}{{name}}{{/user}}</span>
             <div>
               <i class="bi bi-star-fill star"></i>
               <i class="bi bi-star-fill star"></i>

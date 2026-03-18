@@ -45,8 +45,8 @@ public class AdministratorDashboardController {
             users.add(new User( "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", "1234", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
         }
         for (int i = 0; i < 3; i++) {
-            products.add(new Product("Producto " + (i + 1), "Categoria", 50, "" + (i + 1), "placeholder100x100.png",
-                    new ArrayList<String>()));
+            User user = userService.findById(1).orElse(null);
+            products.add(new Product("Producto " + (i + 1), "Categoria", 50, user, "placeholder100x100.png", "informatica", "Madrid"));
         }
         for(int i=0;i<3;i++){
             Product product=productService.findById(i + 1).orElse(null);

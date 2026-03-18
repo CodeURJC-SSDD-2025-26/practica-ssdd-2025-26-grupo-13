@@ -41,44 +41,4 @@ public class UserProfileController {
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
     }
-    @GetMapping("/modify_user/{id}")
-    public String showModifyUser(Model model,@PathVariable String id) {
-        int user_id = Integer.parseInt(id);
-        User user = userService.findById(user_id).orElse(null);
-        model.addAttribute("name", user.getName());
-        model.addAttribute("surnames", user.getSurnames());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("password",user.getPassword());
-        model.addAttribute("cssfile", "sell_product");    
-        return "modify_user";
-    }
-
-    @RequestMapping("/modify_info/{id}")
-    public String modifyUser(Model model, @PathVariable String id, @RequestParam String name, @RequestParam String surnames, @RequestParam String email, @RequestParam String password){
-        int user_id = Integer.parseInt(id);
-        User user = userService.findById(user_id).orElse(null);
-        user.setName(name);
-        user.setSurnames(surnames);
-        user.setEmail(email);
-        user.setPassword(password);
-        userService.save(user);
-        return "user_profile/{id}";
-    }
-
-
-    @PostMapping("/newuser")
-    public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword ){
-        User user = new User( inputName, inputSurnames, inputEmail, inputPassword, "usuario_anonimo.jpg", 5.0, "28012, Madrid", 0, 0);
-        userService.save(user);
-        return "redirect:/";
-    }
-    @PostMapping("/validlogin")
-    public String login(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
-        return "redirect:/";
-    }
-    @PostMapping("/login_admin")
-    public String loginAdmin(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
-        return "redirect:/administrator_dashboard";
-    }
-    
-}
+}   

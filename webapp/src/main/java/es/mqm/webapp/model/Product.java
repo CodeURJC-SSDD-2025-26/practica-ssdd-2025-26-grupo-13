@@ -2,40 +2,54 @@ package es.mqm.webapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String description;
+    private String location;
     private double price;
-    private String seller;
+    @ManyToOne
+    private User user;
     private String imageUrl;
+    private Boolean isSold = false;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> categories = new ArrayList<>();
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    private LocalDate createdAt;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDate updatedAt;
+
+    private String category;
 
     public Product() {
     }
 
-    public Product(String name, String description, double price, String seller, String imageUrl,
-            List<String> categories) {
+    public Product(String name, String description, double price, User user, String imageUrl,
+            String category, String location) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.seller = seller;
+        this.user = user;
         this.imageUrl = imageUrl;
-        this.categories = categories;
+        this.category = category;
+        this.location = location;
     }
+
+
 
     public int getId() {
         return id;
@@ -69,12 +83,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getSeller() {
-        return seller;
+    public User getUser() {
+        return user;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getImageUrl() {
@@ -85,11 +99,29 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public List<String> getCategories() {
-        return categories;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getIsSold() {
+        return isSold;
+    }
+
+    public void setIsSold(Boolean isSold) {
+        this.isSold = isSold;
+    }
+    
+    
 }
