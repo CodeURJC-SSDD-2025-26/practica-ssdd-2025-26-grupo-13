@@ -1,4 +1,6 @@
 package es.mqm.webapp.controller;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.service.ProductService;
@@ -29,14 +28,15 @@ public class ReviewController {
     @GetMapping("/modify_review/{id}")
     public String showModifyReviewForm(@PathVariable("id") int id,Model model) {
         model.addAttribute("cssfile", "sell_product");
-        Review review = reviewService.findById(id).orElse(null);  
-        model.addAttribute("name", (review.getUser()).getName());  
-        model.addAttribute("product_name", (review.getProduct()).getName());
-        model.addAttribute("description", review.getDescription());
+        Review review = reviewService.findById(id).orElse(null);
+        if(review==null){
+            return "redirect:/error";
+        }  
+        model.addAttribute("review", review);  
         return "modify_review"; 
     }
 
-    @RequestMapping("/modifyReview")
+    @PostMapping("/change_review")
     public String modifyReview(@RequestParam int id, @RequestParam String description, @RequestParam float rating) {
         Review review = reviewService.findById(id).orElse(null);
         if (review != null) {
@@ -47,6 +47,17 @@ public class ReviewController {
         return "redirect:/user_profile/" + review.getUser().getId();
     }
 
+    @GetMapping("/delete_review/{id}")
+    public String deleteReview(@PathVariable("id") int id) {
+        Review review = reviewService.findById(id).orElse(null);
+        if (review != null) {
+            int userId = review.getUser().getId();
+            reviewService.deleteById(id);
+            return "redirect:/user_profile/" + userId;
+        }
+        return "redirect:/error";
+    }
+    
     @GetMapping("/create_review/{product_id}")
     public String showCreateReviewForm(@PathVariable("product_id") int productId, Model model) {
         Product product = productService.findById(productId).orElse(null);
@@ -55,10 +66,23 @@ public class ReviewController {
         return  "create_review";
     }
 
-    @PostMapping("/newReview")
-    public String newReview(Review review) { 
+    @PostMapping("/new_review")
+    public String newReview(@RequestParam int product, @RequestParam int user, @RequestParam String description, @RequestParam float rating) {
+        Product reviewProduct = productService.findById(product).orElse(null);
+        User reviewUser = userService.findById(user).orElse(null);
+
+        if (reviewProduct == null || reviewUser == null) {
+            return "redirect:/error";
+        }
+
+        Review review = new Review();
+        review.setProduct(reviewProduct);
+        review.setUser(reviewUser);
+        review.setDescription(description);
+        review.setDate(LocalDate.now().toString());
+        review.setRating(rating);
         reviewService.save(review);
-        return "redirect:/user_profile/1"; 
+        return "redirect:/user_profile/" + review.getUser().getId(); 
     }
     
 }

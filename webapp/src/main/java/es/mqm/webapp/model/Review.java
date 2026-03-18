@@ -7,7 +7,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToOne
+    @ManyToOne
     private Product product;
     @ManyToOne
     private User user;
