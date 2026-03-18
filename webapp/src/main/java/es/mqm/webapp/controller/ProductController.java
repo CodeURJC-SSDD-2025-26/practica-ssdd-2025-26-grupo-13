@@ -21,6 +21,7 @@ public class ProductController {
         model.addAttribute("cssfile", "product");
         return "product";
     }
+
     @GetMapping("/sell_product")
     public String showSellProductPage(Model model) {
         model.addAttribute("cssfile", "sell_product");
