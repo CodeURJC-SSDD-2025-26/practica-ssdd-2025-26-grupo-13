@@ -1,15 +1,27 @@
 package es.mqm.webapp.model;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.MediaTypeFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.multipart.MultipartFile;
 
+import es.mqm.webapp.model.User;
+import es.mqm.webapp.service.UserService;
 import jakarta.persistence.*;
-
-
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mqm_user")
@@ -24,7 +36,8 @@ public class User {
     private String name;
     private String surnames;
     private String email;
-    private String imageUrl;
+    @OneToOne(cascade = CascadeType.ALL) //to eliminate the image when the user is deleted
+    private Image image;
     private String password;
     private double rating;
     private String location;
@@ -32,16 +45,17 @@ public class User {
     private int sold;
 
 
+
     public User() {
     }
 
-    public User(String name, String surnames, String email, String password, String imageUrl, double rating, String location,
+    public User(String name, String surnames, String email, Image image,String password, double rating, String location,
             int bought, int sold) {
         this.name = name;
         this.surnames = surnames;
         this.email = email;
+        this.image = image;
         this.password = password;
-        this.imageUrl = imageUrl;
         this.rating = rating;
         this.location = location;
         this.bought = bought;
@@ -50,10 +64,6 @@ public class User {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -85,13 +95,11 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getImageUrl() {
-        return imageUrl;
+    public void setImage(Image image) {
+        this.image = image;
     }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public Image getImage() {
+        return image;
     }
 
     public double getRating() {
