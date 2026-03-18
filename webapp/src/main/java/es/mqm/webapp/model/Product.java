@@ -22,7 +22,8 @@ public class Product {
     private double price;
     @ManyToOne
     private User user;
-    private String imageUrl;
+    @OneToOne(cascade = CascadeType.ALL) //to eliminate the image when the user is deleted
+    private Image image;
     private Boolean isSold = false;
 
     @CreatedDate
@@ -44,7 +45,7 @@ public class Product {
         this.description = description;
         this.price = price;
         this.user = user;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.category = category;
         this.location = location;
     }
@@ -91,12 +92,12 @@ public class Product {
         this.user = user;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public String getCategory() {

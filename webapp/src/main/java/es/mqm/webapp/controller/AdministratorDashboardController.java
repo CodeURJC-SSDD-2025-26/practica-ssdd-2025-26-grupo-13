@@ -1,14 +1,19 @@
 package es.mqm.webapp.controller;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
@@ -42,7 +47,13 @@ public class AdministratorDashboardController {
         newUsersPerMonth.clear();
 
         for(int i=0;i<3;i++){
-            users.add(new User( "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", "1234", "usuario anonimo.jpg", (float) 4.5, "28012, Madrid", 1, 4));
+            Image image = new Image();
+            try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
+                image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load default user image", e);
+            }
+            users.add(new User( "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", image, "1234", (float) 4.5, "28012, Madrid", 1, 4));
         }
         for (int i = 0; i < 3; i++) {
             User user = userService.findById(1).orElse(null);

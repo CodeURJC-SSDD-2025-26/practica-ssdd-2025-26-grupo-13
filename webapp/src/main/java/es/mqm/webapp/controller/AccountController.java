@@ -1,5 +1,10 @@
 package es.mqm.webapp.controller;
+import java.io.InputStream;
+
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.UserService;
 
@@ -59,7 +65,13 @@ public class AccountController {
 
         @PostMapping("/newuser")
         public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword ){
-            User user = new User( inputName, inputSurnames, inputEmail, inputPassword, "usuario_anonimo.jpg", 5.0, "28012, Madrid", 0, 0);
+            Image image = new Image();
+            try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
+                image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load default user image", e);
+            }
+            User user = new User(inputName, inputSurnames, inputEmail, image, inputPassword, 5.0, "28012, Madrid", 0, 0);
             userService.save(user);
             return "redirect:/";
         }

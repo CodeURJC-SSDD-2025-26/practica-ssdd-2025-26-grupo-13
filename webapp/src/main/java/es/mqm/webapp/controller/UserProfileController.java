@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.UserRepository;
 import es.mqm.webapp.service.UserService;
@@ -30,7 +31,12 @@ public class UserProfileController {
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("password",user.getPassword());
-        model.addAttribute("imageUrl", user.getImageUrl());
+        Image image = user.getImage();
+        if (image != null) {
+            model.addAttribute("imageUrl", image.getId());
+        } else {
+            model.addAttribute("imageUrl", "usuario anonimo.jpg");
+        }
         model.addAttribute("rating", user.getRating());
         model.addAttribute("location", user.getLocation());
         model.addAttribute("bought", user.getBought());
