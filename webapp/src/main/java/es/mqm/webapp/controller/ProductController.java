@@ -11,10 +11,10 @@ public class ProductController {
 
     @GetMapping("/product")
     public String showProductDetails(Model model) {
-        Product product = new Product("Producto de ejemplo", "Descripción del producto", 19.99f, "vendedor", "producto.jpg", new java.util.ArrayList<>());
         model.addAttribute("cssfile", "product");
         return "product";
     }
+
     @GetMapping("/sell_product")
     public String showSellProductPage(Model model) {
         model.addAttribute("cssfile", "sell_product");

@@ -11,7 +11,6 @@ public class Review {
     private Product product;
     @ManyToOne
     private User user;
-    @ManyToOne
     private String description;
     private String date;
     private float rating;

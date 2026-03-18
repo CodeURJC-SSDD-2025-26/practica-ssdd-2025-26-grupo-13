@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
@@ -27,27 +28,37 @@ public class ReviewController {
 
     @GetMapping("/modify_review/{id}")
     public String showModifyReviewForm(@PathVariable("id") int id,Model model) {
+        model.addAttribute("cssfile", "sell_product");
         Review review = reviewService.findById(id).orElse(null);  
-        model.addAttribute("name", review.getUser().getName());  
-        model.addAttribute("product_name", review.getProduct().getName());
+        model.addAttribute("name", (review.getUser()).getName());  
+        model.addAttribute("product_name", (review.getProduct()).getName());
         model.addAttribute("description", review.getDescription());
         return "modify_review"; 
     }
 
-    @GetMapping("/create_review/{product_id}")
-    public String showCreateReviewForm(@PathVariable("product_id") int productId, Model model) {
-        model.addAttribute("product_id", productId);
-        model.addAttribute("cssfile", "styles");
-        return  "redirect:/create_review";
+    @RequestMapping("/modifyReview")
+    public String modifyReview(@RequestParam int id, @RequestParam String description, @RequestParam float rating) {
+        Review review = reviewService.findById(id).orElse(null);
+        if (review != null) {
+            review.setDescription(description);
+            review.setRating(rating);
+            reviewService.save(review);
+        }
+        return "redirect:/user_profile/" + review.getUser().getId();
     }
 
-    @RequestMapping("/newReview/{product_id}")
-    public String newReview(@PathVariable("product_id") int productId, @RequestParam String name, @RequestParam String reviewDescription) { 
+    @GetMapping("/create_review/{product_id}")
+    public String showCreateReviewForm(@PathVariable("product_id") int productId, Model model) {
         Product product = productService.findById(productId).orElse(null);
-        User user = userService.findById(1).orElse(null);
-        Review review = new Review(product, user, "No me ha gustado el treto que he recibido", "2024-06-01", 4.0f);
+        model.addAttribute("product", product);
+        model.addAttribute("cssfile", "styles");
+        return  "create_review";
+    }
+
+    @PostMapping("/newReview")
+    public String newReview(Review review) { 
         reviewService.save(review);
-        return "user_profile/"; 
+        return "redirect:/user_profile/1"; 
     }
     
 }

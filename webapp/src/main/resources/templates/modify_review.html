@@ -2,7 +2,7 @@
 <main>
   <div class="category">
     <h4>Modificar reseña</h4>
-    <form action="user_profile" method="Post">
+    <form action="/modifyReview" method="Post">
       <div class="d-flex flex-wrap gap-2 mt-3">
         <p class="fw-semibold">Usuario:</p>
         <p>{{name}}</p>
@@ -30,8 +30,8 @@
       </div>
       <br />
       <div class="d-flex flex-wrap gap-2">
-        <button type="submit" class="button me-2" type="submit">Publicar</button>
-        <a href="user_profile.html" class="button">Eliminar reseña</a>
+        <button class="button me-2" type="submit">Publicar</button>
+        <a href="user_profile" class="button">Eliminar reseña</a>
       </div>
     </form>
   </div>
