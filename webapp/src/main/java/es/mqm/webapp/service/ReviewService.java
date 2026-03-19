@@ -31,4 +31,7 @@ public class ReviewService {
         repository.deleteById(id);
     }
 
+    public List<Review> findByProductId(Integer productId) {
+        return repository.findByProductId(productId);
+    }
 }

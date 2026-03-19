@@ -57,7 +57,7 @@ public class AdministratorDashboardController {
         }
         for (int i = 0; i < 3; i++) {
             User user = userService.findById(1).orElse(null);
-            products.add(new Product("Producto " + (i + 1), "Categoria", 50, user, "placeholder100x100.png", "informatica", "Madrid"));
+            products.add(new Product("Producto " + (i + 1), "buen estado", "Descripcion", 50, user, "placeholder100x100.png", "informatica"));
         }
         for(int i=0;i<3;i++){
             Product product=productService.findById(i + 1).orElse(null);

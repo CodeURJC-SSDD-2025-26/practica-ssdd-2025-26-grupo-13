@@ -41,9 +41,10 @@ public class DatabaseInitializer implements CommandLineRunner {
         }
         for (int i = 0; i < 40; i++) {
             User user= userService.findById(1).orElse(null);
-            productService.save(new Product("Producto " + (i + 1), "Descripcion", 50 + i, user,
-                    "placeholder100x100.png", "informatica", "Madrid"));
+            productService.save(new Product("Producto " + (i + 1), "buen estado", "Descripcion", 50 + i, user,
+                    "placeholder100x100.png", "informatica"));
         }
+        
         for(int i=0; i<3; i++){
             Product product = productService.findById(i + 1).orElse(null);
             User user = userService.findById(1).orElse(null);

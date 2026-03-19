@@ -17,8 +17,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
+    private String state;
     private String description;
-    private String location;
     private double price;
     @ManyToOne
     private User user;
@@ -39,15 +39,15 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, double price, User user, String imageUrl,
-            String category, String location) {
+    public Product(String name, String state, String description, double price, User user, String imageUrl,
+            String category) {
         this.name = name;
+        this.state = state;
         this.description = description;
         this.price = price;
         this.user = user;
         this.image = image;
         this.category = category;
-        this.location = location;
     }
 
 
@@ -66,6 +66,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getDescription() {
@@ -106,14 +114,6 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Boolean getIsSold() {
