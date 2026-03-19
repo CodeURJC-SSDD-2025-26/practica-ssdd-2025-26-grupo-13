@@ -22,6 +22,14 @@
                         <label for ="inputPassword">Contraseña</label>
                         <input type="password" id="inputPassword" name="inputPassword" placeholder="Contraseña" class="form-control" required><br>
                     </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Dirección</label>
+                        <div id="autocomplete-container"></div>
+                        <input type="hidden" id="latitude" name="latitude" />
+                        <input type="hidden" id="longitude" name="longitude" />
+                        <input type="hidden" id="formatted-address" name="city" />
+                        <br/>
+                    </div>
                     <div id="regist">
                         <label>
                             <input type="checkbox" name="terms" required>
@@ -33,4 +41,34 @@
                 </form>
             </div>
     </main>
+    <script>
+        async function initAutocomplete() {
+            const { PlaceAutocompleteElement } = await google.maps.importLibrary("places");
+
+            const autocompleteElement = new PlaceAutocompleteElement({
+                includedRegionCodes: ["es"],
+                includedPrimaryTypes: ["locality"]
+            });
+            autocompleteElement.style.colorScheme = "light";
+            autocompleteElement.style.borderRadius = "15px";
+            autocompleteElement.style.border = "1px solid #dee2e6";
+
+            document.getElementById("autocomplete-container").appendChild(autocompleteElement);
+
+            autocompleteElement.addEventListener("gmp-select", async (event) => {
+                const place = event.placePrediction.toPlace();
+
+                await place.fetchFields({
+                    fields: ["formattedAddress", "location"]
+                });
+
+                document.getElementById("latitude").value = place.location.lat();
+                document.getElementById("longitude").value = place.location.lng();
+                document.getElementById("formatted-address").value = place.formattedAddress;
+            });
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{mapsApiKey}}&libraries=places&v=weekly&callback=initAutocomplete"></script>
+
 {{> footer}}
