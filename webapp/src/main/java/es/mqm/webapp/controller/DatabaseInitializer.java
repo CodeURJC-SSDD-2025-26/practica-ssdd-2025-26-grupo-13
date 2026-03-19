@@ -12,9 +12,11 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 
 import es.mqm.webapp.model.Image;
+import es.mqm.webapp.model.Location;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.service.LocationService;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.UserService;
@@ -27,9 +29,13 @@ public class DatabaseInitializer implements CommandLineRunner {
     private ProductService productService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private LocationService locationService;
 
     @Override
     public void run(String... args) throws Exception {
+        Location loc = new Location("Madrid", 40.4168, -3.7038);
+        locationService.save(loc);
         for (int i = 0; i < 5; i++) {
             Image image = new Image();
             try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
@@ -37,11 +43,11 @@ public class DatabaseInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load default user image", e);
             }
-            userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, "1234",  (float) 4.5, "28012, Madrid", 1, 4));
+            userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, "1234",  (float) 4.5, loc, 1, 4));
         }
         for (int i = 0; i < 40; i++) {
             User user= userService.findById(1).orElse(null);
-            productService.save(new Product("Producto " + (i + 1), "buen estado", "Descripcion", 50 + i, user,
+            productService.save(new Product("Producto " + (i + 1), "Buen estado", "Descripcion", 50 + i, user,
                     "placeholder100x100.png", "informatica"));
         }
         
@@ -49,7 +55,6 @@ public class DatabaseInitializer implements CommandLineRunner {
             Product product = productService.findById(i + 1).orElse(null);
             User user = userService.findById(1).orElse(null);
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 4.0f));
-        }  
+        }
     }
-
 }
