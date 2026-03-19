@@ -1,11 +1,16 @@
 {{>header}}
 <main>
   <h4>Crear reseña</h4>
-  <form role=form action="/newReview" method="POST">
-    <input type="hidden" name="product_id" value="{{id}}" />
+  <form role=form action="/new_review" method="POST">
+    <input type="hidden" name="product" value="{{product.id}}" />
     <div class="d-flex flex-wrap gap-2 mt-3">
         <p class="fw-semibold">Usuario:</p>
-        <p>{{user.name}}</p>
+        <p>{{product.user.name}}</p>
+    </div>
+    <input type="hidden" name="user" value="{{product.user.id}}" />
+    <div class="d-flex flex-wrap gap-2 mb-3">
+        <p class="fw-semibold">Producto:</p>
+        <p>{{product.name}}</p>
     </div>
     <div class="mb-3">
       <label for="description" class="form-label"

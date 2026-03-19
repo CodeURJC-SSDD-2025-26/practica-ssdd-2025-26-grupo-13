@@ -38,7 +38,7 @@ public class UserProfileController {
             model.addAttribute("imageUrl", "usuario anonimo.jpg");
         }
         model.addAttribute("rating", user.getRating());
-        model.addAttribute("location", user.getLocation());
+        model.addAttribute("location", user.getLocation().getName());
         model.addAttribute("bought", user.getBought());
         model.addAttribute("sold", user.getSold());
 

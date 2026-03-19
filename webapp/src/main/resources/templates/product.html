@@ -4,31 +4,31 @@
     <div class="row">
       <div class="col-md-7">
         <div class="imagen h-100">
-          <img class="product" src="images/barbacoa.jpg" />
+          <img class="product" src="/images/{{imageUrl}}" />
         </div>
       </div>
       <div class="col-md-5">
         <div class="content">
-          <h3 class="mb-0 fs-4 fw-semibold">Barbacoa con parrillas</h3>
-          <p class="text-muted">Buen estado</p>
-          <p id="price"><strong>70€</strong></p>
+          <h3 class="mb-0 fs-4 fw-semibold">{{product.name}}</h3>
+          <p class="text-muted">{{product.state}}</p>
+          <p id="price"><strong>{{product.price}}€</strong></p>
           <div class="d-flex flex-wrap gap-2">
-            <a href="buy" class="button">Comprar</a>
+            <a href="/buy/{{product.id}}" class="button">Comprar</a>
           </div>
         </div>
         <div class="user">
           <div class="profile">
             <div class="a">
-              <a href="user_profile"
+              <a href="/user_profile/{{product.user.id}}"
                 ><img
                   class="rounded-circle"
-                  src="images/usuario anonimo.jpg"
+                  src="/images/{{product.user.image.id}}" 
                   width="50px"
                 />
               </a>
             </div>
             <div class="b">
-              <p id="user"><strong>Usuario 1</strong></p>
+              <p id="user"><strong>{{product.user.name}}</strong></p>
             </div>
             <div class="c">
               <div>
@@ -46,7 +46,7 @@
     <div class="row">
       <div class="col">
         <div class="categories">
-          <div class="item">Electrodomésticos</div>
+          <div class="item">{{product.category}}</div>
         </div>
       </div>
     </div>
@@ -55,41 +55,15 @@
         <div class="description">
           <h1>Detalles del producto:</h1>
           <p>
-            Barbacoa con varias alturas para la parrilla, ideal para controlar
-            la cocción de los alimentos.
+            {{product.description}}
           </p>
-          <p>
-            Incluye una bandeja para recoger las cenizas, lo que facilita la
-            limpieza después de su uso. Diseño robusto y duradero, perfecto para
-            disfrutar de deliciosas comidas al aire libre con amigos y
-            familiares.
-          </p>
-          <ul>
-            <li>Material: Metal y Madera</li>
-            <li>Color: Negro y Marrón</li>
-          </ul>
-          <p><strong>Medidas:</strong></p>
-          <table id="measures">
-            <tr>
-              <td>Anchura:</td>
-              <td>42 cm</td>
-            </tr>
-            <tr>
-              <td>Altura:</td>
-              <td>90 cm</td>
-            </tr>
-            <tr>
-              <td>Profundidad:</td>
-              <td>130 cm</td>
-            </tr>
-          </table>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <div class="ubication fw-medium">
-          <i class="bi bi-geo-alt me-2"></i> <span>Humanes, Madrid</span>
+          <i class="bi bi-geo-alt me-2"></i> <span>{{product.user.location}}</span>
         </div>
       </div>
     </div>
@@ -101,7 +75,7 @@
               <div class="col-12">
                 <h3>
                   <i class="bi bi-star-fill star"></i>
-                  <strong>4.5 Juan M. valoraciones</strong>
+                  <strong>{{product.user.rating}} {{product.user.name}} valoraciones</strong>
                 </h3>
               </div>
             </div>
@@ -111,16 +85,17 @@
                 <br />
               </div>
             </div>
+            {{#reviews}}
             <div class="row">
               <div class="col-12">
                 <div class="container py-2">
                   <div
                     class="d-flex flex-column flex-md-row align-items-start gap-3"
                   >
-                    <a href="user_profile">
+                    <a href="/user_profile/{{user.id}}">
                       <img
                         class="rounded-circle"
-                        src="images/usuario anonimo.jpg"
+                        src="/images/{{user.image.id}}"
                         width="60px"
                         alt="Usuario"
                       />
@@ -129,7 +104,7 @@
                       <div
                         class="d-flex flex-column flex-md-row align-items-md-center gap-2"
                       >
-                        <span class="fw-semibold">Usuario 2</span>
+                        <span class="fw-semibold">{{user.name}}</span>
                         <span>
                           <i class="bi bi-star-fill star"></i>
                           <i class="bi bi-star-fill star"></i>
@@ -137,100 +112,17 @@
                           <i class="bi bi-star-fill star"></i>
                           <i class="bi bi-star star"></i>
                         </span>
-                        <span class="text-muted small ms-md-3">Hace 1 año</span>
+                        <span class="text-muted small ms-md-3">{{date}}</span>
                       </div>
                       <p class="mb-0 mt-2">
-                        El producto es tal cual se describe, y el trato ha sido
-                        excelente. Recomendable 100%.
+                        {{description}}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="container py-2">
-                  <div
-                    class="d-flex flex-column flex-md-row align-items-start gap-3"
-                  >
-                    <a href="user_profile">
-                      <img
-                        class="rounded-circle"
-                        src="images/usuario anonimo.jpg"
-                        width="60px"
-                        alt="Usuario"
-                      />
-                    </a>
-                    <div class="flex-grow-1">
-                      <div
-                        class="d-flex flex-column flex-md-row align-items-md-center gap-2"
-                      >
-                        <span class="fw-semibold">Usuario 3</span>
-                        <span>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star star"></i>
-                        </span>
-                        <span class="text-muted small ms-md-3">Hace 1 año</span>
-                        <a href="modify_review" class="button ms-4"
-                          >Modificar reseña</a
-                        >
-                      </div>
-                      <p class="mb-0 mt-2">
-                        Todo perfecto y como fue acordado.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="container py-2">
-                  <div
-                    class="d-flex flex-column flex-md-row align-items-start gap-3"
-                  >
-                    <a href="user_profile">
-                      <img
-                        class="rounded-circle"
-                        src="images/usuario anonimo.jpg"
-                        width="60px"
-                        alt="Usuario"
-                      />
-                    </a>
-                    <div class="flex-grow-1">
-                      <div
-                        class="d-flex flex-column flex-md-row align-items-md-center gap-2"
-                      >
-                        <span class="fw-semibold">Usuario 4</span>
-                        <span>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star star"></i>
-                        </span>
-                        <span class="text-muted small ms-md-3">Hace 1 año</span>
-                      </div>
-                      <p class="mb-0 mt-2">
-                        Producto en perfecto estado y ningun problema a la hora
-                        de tratar con él.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <a href="user_profile" class="button mt-3">
-                  Ver todas las valoraciones
-                </a>
-              </div>
-            </div>
+            {{/reviews}}
           </div>
         </div>
       </div>

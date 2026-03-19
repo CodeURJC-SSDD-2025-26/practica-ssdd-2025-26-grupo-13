@@ -32,8 +32,11 @@ public class ReviewService {
         return repository.save(review);
     }
 
-    public void delete(Review review) {
-        repository.delete(review);
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 
+    public List<Review> findByProductId(Integer productId) {
+        return repository.findByProductId(productId);
+    }
 }
