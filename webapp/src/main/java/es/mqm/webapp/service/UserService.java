@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,10 @@ public class UserService {
         return repository.findAll();
     }
 
+    public Page<User> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
     public Optional<User> findById(int id) {
         return repository.findById(id);
     }
@@ -33,6 +38,9 @@ public class UserService {
 
     public void delete(User user) {
         repository.delete(user);
+    }
+    public long count() {
+        return repository.count();
     }
 
 }

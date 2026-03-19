@@ -30,7 +30,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Image image = new Image();
             try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
                 image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
@@ -44,7 +44,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             productService.save(new Product("Producto " + (i + 1), "Descripcion", 50 + i, user,
                     "placeholder100x100.png", "informatica", "Madrid"));
         }
-        for(int i=0; i<3; i++){
+        for(int i=0; i<10; i++){
             Product product = productService.findById(i + 1).orElse(null);
             User user = userService.findById(1).orElse(null);
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 4.0f));
