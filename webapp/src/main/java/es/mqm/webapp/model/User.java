@@ -42,16 +42,17 @@ public class User {
     private double rating;
     @ManyToOne
     private Location location;
-    private int bought;
-    private int sold;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
 
 
 
     public User() {
     }
 
-    public User(String name, String surnames, String email, Image image,String password, double rating, Location location,
-            int bought, int sold) {
+    public User(String name, String surnames, String email, Image image, String password, double rating, Location location,
+            String... roles) {
         this.name = name;
         this.surnames = surnames;
         this.email = email;
@@ -59,8 +60,7 @@ public class User {
         this.password = password;
         this.rating = rating;
         this.location = location;
-        this.bought = bought;
-        this.sold = sold;
+          this.roles = List.of(roles);
     }
 
     public int getId() {
@@ -121,20 +121,12 @@ public class User {
         this.location = location;
     }
 
-    public int getBought() {
-        return bought;
+    public List<String> getRoles() {
+        return roles;
     }
 
-    public void setBought(int bought) {
-        this.bought = bought;
-    }
-
-    public int getSold() {
-        return sold;
-    }
-
-    public void setSold(int sold) {
-        this.sold = sold;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
 }

@@ -40,8 +40,11 @@ public class AccountController {
         return "register";
     }
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
+    public String showLoginForm(Model model, @RequestParam(required = false, value = "error") String error) {
         model.addAttribute("cssfile", "register");
+        if (error != null) {
+            model.addAttribute("error", true);
+        }
         return "login";
     }
     @GetMapping("/administrator_login")
@@ -75,25 +78,25 @@ public class AccountController {
     }
 
 
-        @PostMapping("/newuser")
+    @PostMapping("/newuser")
         public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword,
             @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude
          ){
-            Image image = new Image();
-            try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
-                image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to load default user image", e);
-            }
-            Location loc = locationService.findByCity(city).orElse(null);
-            if (loc == null) {
-                loc = new Location(city, Double.parseDouble(latitude), Double.parseDouble(longitude));
-                locationService.save(loc);
-            }
-            User user = new User(inputName, inputSurnames, inputEmail, image, inputPassword, 5.0, loc, 0, 0);
-            userService.save(user);
-            return "redirect:/";
+        Image image = new Image();
+        try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
+            image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load default user image", e);
         }
+        Location loc = locationService.findByCity(city).orElse(null);
+        if (loc == null) {
+            loc = new Location(city, Double.parseDouble(latitude), Double.parseDouble(longitude));
+            locationService.save(loc);
+        }
+        User user = new User(inputName, inputSurnames, inputEmail, image, inputPassword, 5.0, loc, "USER");
+        userService.save(user);
+        return "redirect:/";
+    }
     @PostMapping("/validatelogin")
         public String login(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
         return "redirect:/";

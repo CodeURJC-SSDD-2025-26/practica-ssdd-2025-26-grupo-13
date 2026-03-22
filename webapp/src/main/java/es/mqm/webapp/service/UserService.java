@@ -43,4 +43,8 @@ public class UserService {
         return repository.count();
     }
 
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
 }

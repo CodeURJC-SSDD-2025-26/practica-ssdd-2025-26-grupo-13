@@ -9,6 +9,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import es.mqm.webapp.model.Image;
@@ -32,6 +33,9 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired
     private LocationService locationService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
         Location loc = new Location("Madrid", 40.4168, -3.7038);
@@ -43,8 +47,9 @@ public class DatabaseInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load default user image", e);
             }
-            userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, "1234",  (float) 4.5, loc, 1, 4));
+            userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER"));
         }
+        userService.save(new User("Admin", "Admin", "admin@admin.com", null, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN"));
         for (int i = 0; i < 40; i++) {
             User user= userService.findById(1).orElse(null);
             productService.save(new Product("Producto " + (i + 1), "Buen estado", "Descripcion", 50 + i, user,

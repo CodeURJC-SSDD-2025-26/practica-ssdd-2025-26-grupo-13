@@ -19,7 +19,7 @@ import es.mqm.webapp.repository.UserRepository;
 import es.mqm.webapp.service.UserService;
 
 @Controller
-public class UserProfileController {
+public class UserProfileController extends BaseController {
     @Autowired
     private UserService userService;
     
@@ -39,8 +39,8 @@ public class UserProfileController {
         }
         model.addAttribute("rating", user.getRating());
         model.addAttribute("location", user.getLocation().getName());
-        model.addAttribute("bought", user.getBought());
-        model.addAttribute("sold", user.getSold());
+        model.addAttribute("bought", 4); // placeholder
+        model.addAttribute("sold", 4);
 
 
         
