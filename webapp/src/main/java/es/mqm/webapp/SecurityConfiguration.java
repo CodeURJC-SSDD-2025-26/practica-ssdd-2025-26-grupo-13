@@ -40,7 +40,8 @@ public class SecurityConfiguration {
 		http
 				.authorizeHttpRequests(authorize -> authorize
 						// PUBLIC PAGES
-						.requestMatchers("/", "/css/**", "/images/**", "/search", "/product/**", "/user_profile/**")
+						.requestMatchers("/", "/css/**", "/images/**", "/search", "/product/**", "/user_profile/**",
+								"/error")
 						.permitAll()
 						.requestMatchers("/administrator_dashboard").hasRole("ADMIN")
 						// PRIVATE PAGES

@@ -19,12 +19,12 @@ import es.mqm.webapp.repository.UserRepository;
 import es.mqm.webapp.service.UserService;
 
 @Controller
-public class UserProfileController extends BaseController {
+public class UserProfileController {
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/user_profile/{id}")
-     public String showUserProfile(Model model, @PathVariable String id) {
+    public String showUserProfile(Model model, @PathVariable String id) {
         int user_id = Integer.parseInt(id);
         User user = userService.findById(user_id).orElse(null);
         model.addAttribute("name", user.getName());
@@ -47,4 +47,4 @@ public class UserProfileController extends BaseController {
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
     }
-}   
+}

@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import es.mqm.webapp.model.CategoryData;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class IndexController extends BaseController {
+public class IndexController {
 
     @Autowired
     private ProductService productService;

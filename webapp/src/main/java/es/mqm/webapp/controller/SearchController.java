@@ -12,7 +12,7 @@ import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
 
 @Controller
-public class SearchController extends BaseController{
+public class SearchController {
 
     private static final int PAGE_SIZE = 20;
 
