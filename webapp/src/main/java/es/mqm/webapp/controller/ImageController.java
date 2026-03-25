@@ -17,6 +17,7 @@ import es.mqm.webapp.service.ImageService;
 public class ImageController {
     @Autowired
     private ImageService imageService;
+    
     @GetMapping("/images/{id:\\d+}") //so that it doesn't conflict with the static images
     public ResponseEntity<Object> getImageFile(@PathVariable int id) throws SQLException {
         Resource imageFile = imageService.getImageFile(id);

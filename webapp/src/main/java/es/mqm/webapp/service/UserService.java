@@ -11,6 +11,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.UserRepository;
 
@@ -34,6 +35,12 @@ public class UserService {
 
     public User save(User user) {
         return repository.save(user);
+    }
+    public User addImageToPost(int id, Image image) {
+        User user = repository.findById(id).orElseThrow();
+        user.setImage(image);
+        repository.save(user);
+        return user;
     }
 
     public void delete(User user) {
