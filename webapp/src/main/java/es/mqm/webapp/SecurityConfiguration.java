@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 						.requestMatchers("/", "/css/**", "/images/**", "/search", "/product/**", "/user_profile/**",
 								"/error")
 						.permitAll()
+						.requestMatchers("/h2-console/**").permitAll()
 						.requestMatchers("/administrator_dashboard").hasRole("ADMIN")
 						// PRIVATE PAGES
 						.anyRequest().authenticated())
@@ -60,6 +61,9 @@ public class SecurityConfiguration {
 
 		// Disable CSRF at the moment
 		http.csrf(csrf -> csrf.disable());
+
+		// Allow H2 console iframe to load (SAMEORIGIN)
+		http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
 		return http.build();
 	}
