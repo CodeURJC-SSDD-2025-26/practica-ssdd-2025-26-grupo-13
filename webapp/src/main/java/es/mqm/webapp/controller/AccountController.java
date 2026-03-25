@@ -67,8 +67,8 @@ public class AccountController {
         return "modify_user";
     }
     
-    @PostMapping("/modify_info/{id}")
-    public String modifyUserInfo(@PathVariable int id, @RequestParam String name, @RequestParam String surnames, @RequestParam String email, @RequestParam String password) {
+    @PostMapping("/modify_info")
+    public String modifyUserInfo(@RequestParam int id, @RequestParam String name, @RequestParam String surnames, @RequestParam String email, @RequestParam String password) {
         User user = userService.findById(id).orElse(null);
         if (user != null) {
             user.setName(name);
@@ -84,7 +84,7 @@ public class AccountController {
     @PostMapping("/newuser")
         public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword,
             @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude
-         ){
+         ){ 
         Image image = new Image();
         try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
             image.setImageFile(new SerialBlob(inputStream.readAllBytes()));

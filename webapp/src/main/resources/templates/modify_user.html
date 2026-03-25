@@ -4,7 +4,7 @@
     <h2>Modifica tus datos</h2>
   </div>
   <div class="category">
-    <form role="form" action="/modify_info/{{id}}" method="post">
+    <form role="form" action="/modify_info" method="post">
       <div class="d-flex gap-5 flex-wrap justify-content-between ms-sm-2">
         <div class="m-auto position-relative">
           <img
@@ -24,18 +24,18 @@
           <input
             type="file"
             class="form-control mt-2"
-            id="userImage"
+            name="userImage"
             style="display: none"
           />
         </div>
         <div class="flex-grow-1">
           <div class="mb-3">
-            <input type="hidden" id="id" value="{{id}}" />
+            <input type="hidden" name="id" value="{{user.id}}" />
             <label for="name" class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
-              id="name"
+              name="name"
               value="{{user.name}}"
               required
             />
@@ -45,7 +45,7 @@
             <input
               type="text"
               class="form-control"
-              id="surname"
+              name="surnames"
               value="{{user.surnames}}"
               required
             />
@@ -57,7 +57,7 @@
         <input
           type="email"
           class="form-control"
-          id="email"
+          name="email"
           value="{{user.email}}"
           required
         />
@@ -67,7 +67,7 @@
         <input
           type="password"
           class="form-control"
-          id="password"
+          name="password"
           value="{{user.password}}"
           required
         />

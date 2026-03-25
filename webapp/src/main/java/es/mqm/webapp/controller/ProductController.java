@@ -1,4 +1,5 @@
 package es.mqm.webapp.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class ProductController {
     @Autowired
     private ReviewService reviewService;
 
+    private List<Review> reviews = new ArrayList<Review>();
+    
     @GetMapping("/product/{id}")
     public String showProductDetails(@PathVariable("id") int id, Model model) {
         Product product = productService.findById(id).orElse(null);
