@@ -24,9 +24,8 @@ public class UserProfileController {
     private UserService userService;
 
     @GetMapping("/user_profile/{id}")
-    public String showUserProfile(Model model, @PathVariable String id) {
-        int user_id = Integer.parseInt(id);
-        User user = userService.findById(user_id).orElse(null);
+     public String showUserProfile(Model model, @PathVariable int id) {
+        User user = userService.findById(id).orElse(null);
         model.addAttribute("name", user.getName());
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());

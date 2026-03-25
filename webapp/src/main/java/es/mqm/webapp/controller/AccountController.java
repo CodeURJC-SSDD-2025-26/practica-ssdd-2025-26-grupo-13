@@ -58,16 +58,18 @@ public class AccountController {
         model.addAttribute("cssfile", "register");
         return "administrator_login";
     }
-    @GetMapping("/modify_user/{id}")
-        public String showModifyUser(Model model,@PathVariable String id, MultipartFile image) {
-        int user_id = Integer.parseInt(id);
-        User user = userService.findById(user_id).orElse(null);
-        model.addAttribute("name", user.getName());
-        model.addAttribute("surnames", user.getSurnames());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("password",user.getPassword());
-        model.addAttribute("cssfile", "sell_product");
-        model.addAttribute("image", image);
+
+    @GetMapping("modify_user/{id}")
+    public String showModifyUserForm(@PathVariable int id, Model model) {
+        model.addAttribute("cssfile", "product");
+        User user = userService.findById(id).orElse(null);
+        model.addAttribute("user", user);
+        Image image = user.getImage();
+        if (image != null) {
+            model.addAttribute("imageUrl", image.getId());
+        } else {
+            model.addAttribute("imageUrl", "usuario anonimo.jpg");
+        }
         return "modify_user";
     }
 
