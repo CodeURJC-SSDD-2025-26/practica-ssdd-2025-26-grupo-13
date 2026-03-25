@@ -1,4 +1,5 @@
 package es.mqm.webapp.controller;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Location;
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.service.ImageService;
 import es.mqm.webapp.service.LocationService;
 import es.mqm.webapp.service.UserService;
 
@@ -29,6 +32,9 @@ public class AccountController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private LocationService locationService;
@@ -66,18 +72,19 @@ public class AccountController {
         }
         return "modify_user";
     }
-    
+
     @PostMapping("/modify_info")
-    public String modifyUserInfo(@RequestParam int id, @RequestParam String name, @RequestParam String surnames, @RequestParam String email, @RequestParam String password) {
-        User user = userService.findById(id).orElse(null);
-        if (user != null) {
-            user.setName(name);
-            user.setSurnames(surnames);
-            user.setEmail(email);
-            user.setPassword(password);
-            userService.save(user);
+    public String modifyUser(Model model, @RequestParam int id, @RequestParam String name,
+            @RequestParam String surnames, @RequestParam String email, @RequestParam String password, @RequestParam MultipartFile image) throws IOException {
+        int user_id = id;
+        User user = userService.findById(user_id).orElse(null);
+        userService.save(user);
+        if(!image.isEmpty()){
+            Image im = imageService.createImage(image);
+            userService.addImageToPost(user.getId(),im);
         }
-        return "redirect:/user_profile/" + id;
+        userService.save(user);
+        return "redirect:/user_profile/{id}";
     }
 
 

@@ -1,9 +1,11 @@
 package es.mqm.webapp.repository;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.mqm.webapp.model.User;
 
