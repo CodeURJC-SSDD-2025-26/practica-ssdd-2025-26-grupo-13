@@ -30,6 +30,10 @@ public class ProductService {
         return repository.findAll();
     }
 
+    public Page<Product> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
     public Optional<Product> findById(int id) {
         return repository.findById(id);
     }
@@ -67,6 +71,10 @@ public class ProductService {
 
     public void delete(Product product) {
         repository.delete(product);
+    }
+
+    public long count() {
+        return repository.count();
     }
 
     public Page<Product> searchProducts(String name, String category, String location, String date, String minPrice, String maxPrice, int pageNo, int pageSize) {
@@ -113,4 +121,5 @@ public class ProductService {
             return cb.and(predicates.toArray(new Predicate[0]));
         }, PageRequest.of(pageNo, pageSize));
     }
+    
 }

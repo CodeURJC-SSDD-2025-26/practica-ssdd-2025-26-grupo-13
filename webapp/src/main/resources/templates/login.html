@@ -1,28 +1,34 @@
 {{> head}}
 <body>
-    <main class="border"> 
-            <h1 id="title">
-                    Inicia sesión
-            </h1>
-            <div id="login">
-                <form role ="form" action="/validatelogin" method="post">
-                    <div class="form-group">
+    {{#error}}
+    <div class="position-absolute me-3  bottom-0 end-0 alert alert-danger alert-dismissible fade show" role="alert">
+        Correo o contraseña no válidos. Revisa tus datos.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/error}}
+    <main class="border">
+        <h1 id="title">
+            Inicia sesión
+        </h1>
+        <div id="login">
+                <form role ="form" action="/login" method="post">
+                <div class="form-group">
                         <label for ="inputEmail">Email</label>
                         <input type="email" id="inputEmail" name="inputEmail" placeholder="Email" class="form-control" required><br>
-                    </div>
-                    <div class="form-group">
+                </div>
+                <div class="form-group">
                         <label for ="inputPassword">Contraseña</label>
                         <input type="password" id="inputPassword" name="inputPassword" placeholder="Contraseña" class="form-control" required><br>
-                    </div>
-                    <div id="regist">
-                        <button type="submit" class="btn btn-primary" id="submitBtn">Iniciar Sesión</button>
-                        <p id="registro">
-                            ¿Aún no tienes cuenta?
-                            <a href="register">Regístrate</a>
-                        </p>
-                    </div>
-                    <p class="text-end"> <a href="administrator_login">Administrador</a></p>
-                </form>
-            </div>
+                </div>
+                <div id="regist">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Iniciar Sesión</button>
+                    <p id="registro">
+                        ¿Aún no tienes cuenta?
+                        <a href="register">Regístrate</a>
+                    </p>
+                </div>
+                <p class="text-end"> <a href="administrator_login">Administrador</a></p>
+            </form>
+        </div>
     </main>
-{{> footer}}
+    {{> footer}}

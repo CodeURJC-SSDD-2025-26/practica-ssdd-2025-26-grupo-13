@@ -9,16 +9,18 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
-import es.mqm.webapp.service.ProductService;
-import es.mqm.webapp.service.UserService;
+import es.mqm.webapp.service.*;
 
 @Controller
 public class AdministratorDashboardController {
@@ -26,44 +28,43 @@ public class AdministratorDashboardController {
     private UserService userService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ReviewService reviewService;
+
+    private static final int PAGE_SIZE = 5;
 
     private List<User> users = new ArrayList<User>();
     private List<Product> products = new ArrayList<Product>();
     private List<Review> reviews = new ArrayList<Review>();
-    private int userCounter = 33550;
-    private int productCounter = 120730;
-    private int productSoldCounter = 570980;
+    private long userCounter;
+    private long productCounter;
+    private long productSoldCounter;
     private List<Integer> categoriesSold = new ArrayList<Integer>();
     private List<Integer> reviewsRating = new ArrayList<Integer>();
     private List<Integer> newUsersPerMonth = new ArrayList<Integer>();
 
     @GetMapping("/administrator_dashboard")
-    public String showAdministratorDashboardPage(Model model) {
+    public String showAdministratorDashboardPage(Model model, @RequestParam(value = "pageUser", defaultValue = "0") int pageUser, @RequestParam(value = "pageProduct", defaultValue = "0") int pageProduct, @RequestParam(value = "pageReview", defaultValue = "0") int pageReview) {
         users.clear();
         products.clear();
         reviews.clear();
         categoriesSold.clear();
         reviewsRating.clear();
         newUsersPerMonth.clear();
+        if (pageProduct < 0)
+            pageProduct = 0;
+        if (pageUser < 0)
+            pageUser = 0;
+        if (pageReview < 0)
+            pageReview = 0;
 
-        for(int i=0;i<3;i++){
-            Image image = new Image();
-            try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
-                image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to load default user image", e);
-            }
-            users.add(new User( "Nombre", "Apellido", "nombre" + (i+1) + "@example.com", image, "1234", (float) 4.5, "28012, Madrid", 1, 4));
-        }
-        for (int i = 0; i < 3; i++) {
-            User user = userService.findById(1).orElse(null);
-            products.add(new Product("Producto " + (i + 1), "buen estado", "Descripcion", 50, user, "placeholder100x100.png", "informatica"));
-        }
-        for(int i=0;i<3;i++){
-            Product product=productService.findById(i + 1).orElse(null);
-            User user=userService.findById(1).orElse(null);
-            reviews.add(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 4.0f));
-        }
+        Page<Product> productPage = productService.findAll(PageRequest.of(pageProduct, PAGE_SIZE));
+        Page<User> userPage = userService.findAll(PageRequest.of(pageUser, PAGE_SIZE));
+        Page<Review> reviewPage = reviewService.findAll(PageRequest.of(pageReview, PAGE_SIZE));
+        userCounter = userService.count();
+        productCounter = productService.count();
+        productSoldCounter = (long) (Math.floor(Math.random() * (productCounter)) + 1);
+        
         for(int i=0;i<5;i++){
             categoriesSold.add((int) Math.floor(Math.random() * (250 - 50 + 1)) + 50);
         }
@@ -73,9 +74,53 @@ public class AdministratorDashboardController {
         for(int i=0;i<5;i++){
             reviewsRating.add((int) Math.floor(Math.random() * (200 - 30 + 1)) + 30);
         }
-        model.addAttribute("users", users);
-        model.addAttribute("products",products);
-        model.addAttribute("reviews",reviews);
+
+        if (pageProduct >= productPage.getTotalPages() && productPage.getTotalPages() > 0) {
+            pageProduct = productPage.getTotalPages() - 1;
+            productPage = productService.findAll(PageRequest.of(pageProduct, PAGE_SIZE));
+        }
+        if (pageUser >= userPage.getTotalPages() && userPage.getTotalPages() > 0) {
+            pageUser = userPage.getTotalPages() - 1;
+            userPage = userService.findAll(PageRequest.of(pageUser, PAGE_SIZE));
+        }
+        if (pageReview >= reviewPage.getTotalPages() && reviewPage.getTotalPages() > 0) {
+            pageReview = reviewPage.getTotalPages() - 1;
+            reviewPage = reviewService.findAll(PageRequest.of(pageReview, PAGE_SIZE));
+        }
+        int totalPagesProduct = productPage.getTotalPages() == 0 ? 1 : productPage.getTotalPages();
+        int totalPagesUser = userPage.getTotalPages() == 0 ? 1 : userPage.getTotalPages();
+        int totalPagesReview = reviewPage.getTotalPages() == 0 ? 1 : reviewPage.getTotalPages();
+
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("reviews", reviewPage.getContent());
+
+        model.addAttribute("currentPageUser", pageUser+1);
+        model.addAttribute("currentPageProduct", pageProduct+1);
+        model.addAttribute("currentPageReview", pageReview+1);
+        // 0-based values for pagination links
+        model.addAttribute("currentPageUserZero", pageUser);
+        model.addAttribute("currentPageProductZero", pageProduct);
+        model.addAttribute("currentPageReviewZero", pageReview);
+        model.addAttribute("totalPagesUser", totalPagesUser);
+        model.addAttribute("totalPagesProduct", totalPagesProduct);
+        model.addAttribute("totalPagesReview", totalPagesReview);
+        model.addAttribute("hasPrevUser", userPage.hasPrevious());
+        model.addAttribute("hasNextUser", userPage.hasNext());
+        model.addAttribute("hasPrevProduct", productPage.hasPrevious());
+        model.addAttribute("hasNextProduct", productPage.hasNext());
+        model.addAttribute("hasPrevReview", reviewPage.hasPrevious());
+        model.addAttribute("hasNextReview", reviewPage.hasNext());
+        model.addAttribute("prevPageUser", pageUser - 1);
+        model.addAttribute("nextPageUser", pageUser + 1);
+        model.addAttribute("prevPageProduct", pageProduct - 1);
+        model.addAttribute("nextPageProduct", pageProduct + 1);
+        model.addAttribute("prevPageReview", pageReview - 1);
+        model.addAttribute("nextPageReview", pageReview + 1);
+        model.addAttribute("showPaginationUser", totalPagesUser > 1);
+        model.addAttribute("showPaginationProduct", totalPagesProduct > 1);
+        model.addAttribute("showPaginationReview", totalPagesReview > 1);
+
         model.addAttribute("userCounter", userCounter);
         model.addAttribute("productCounter", productCounter);
         model.addAttribute("productSoldCounter", productSoldCounter);

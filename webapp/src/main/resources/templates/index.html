@@ -1,5 +1,6 @@
 {{>header}}
 <main>
+
   <section id="carousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
           <button
@@ -64,12 +65,12 @@
     </div>
     <div class="productslist">
       {{#products}}
-      <a class="smallproductcard" href="/product/{{id}}">
-        <img src="/images/placeholder100x100.png" />
+      <a class="smallproductcard" href="product/{{id}}">
+        <img src="/images/{{#image}}{{id}}{{/image}}" />
         <p class="pricetag">{{price}}€</p>
         <p>{{name}}</p>
         <div class="vendor">
-          <span>usuario1</span>
+          <span>{{user.name}}</span>
           <div>
             <i class="bi bi-star-fill star"></i>
             <i class="bi bi-star-fill star"></i>

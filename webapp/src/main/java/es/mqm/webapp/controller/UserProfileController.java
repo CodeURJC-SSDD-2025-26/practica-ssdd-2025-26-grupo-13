@@ -22,7 +22,7 @@ import es.mqm.webapp.service.UserService;
 public class UserProfileController {
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/user_profile/{id}")
      public String showUserProfile(Model model, @PathVariable int id) {
         User user = userService.findById(id).orElse(null);
@@ -38,12 +38,12 @@ public class UserProfileController {
         }
         model.addAttribute("rating", user.getRating());
         model.addAttribute("location", user.getLocation().getName());
-        model.addAttribute("bought", user.getBought());
-        model.addAttribute("sold", user.getSold());
+        model.addAttribute("bought", 4); // placeholder
+        model.addAttribute("sold", 4);
 
 
         
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
     }
-}   
+}

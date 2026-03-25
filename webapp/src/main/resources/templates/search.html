@@ -127,8 +127,8 @@
       </p>
       <div class="productslist">
         {{#products}}
-        <a class="bigproductcard" href="product.html">
-          <img src="/images/{{imageUrl}}" />
+        <a class="bigproductcard" href="/product/{{id}}">
+          <img src="/images/{{#image}}{{id}}{{/image}}" />
           <p class="pricetag">{{price}}€</p>
           <p>{{name}}</p>
           <div class="vendor">

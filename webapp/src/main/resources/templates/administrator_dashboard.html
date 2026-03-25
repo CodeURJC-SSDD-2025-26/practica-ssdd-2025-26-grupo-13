@@ -53,19 +53,25 @@
                 </tbody>
             </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link" href="#">Siguiente</a>
-                    </li>
+            {{#showPaginationUser}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevUser}}disabled{{/hasPrevUser}}">
+                    <a class="page-link" href="/administrator_dashboard?pageUser={{prevPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageUser}} / {{totalPagesUser}}</span>
+                </li>
+                <li class="page-item {{^hasNextUser}}disabled{{/hasNextUser}}">
+                    <a class="page-link" href="/administrator_dashboard?pageUser={{nextPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
                 </ul>
             </nav>
+            {{/showPaginationUser}}
         </div>
 
 
@@ -88,7 +94,7 @@
                     {{#products}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{user.id}}">Usuario {{user.name}}</a></td>
+                    <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
                     <td>{{category}}</td>
                     <td>{{name}}</td>
                     <td>{{price}}€</td>
@@ -102,19 +108,25 @@
                 </tbody>
             </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link" href="#">Siguiente</a>
-                    </li>
+            {{#showPaginationProduct}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevProduct}}disabled{{/hasPrevProduct}}">
+                    <a class="page-link" href="/administrator_dashboard?pageProduct={{prevPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageProduct}} / {{totalPagesProduct}}</span>
+                </li>
+                <li class="page-item {{^hasNextProduct}}disabled{{/hasNextProduct}}">
+                    <a class="page-link" href="/administrator_dashboard?pageProduct={{nextPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
                 </ul>
             </nav>
+            {{/showPaginationProduct}}
         </div>
 
         <div class="container">
@@ -135,8 +147,8 @@
                     {{#reviews}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{user.id}}">Usuario {{user.name}}</a></td>
-                    <td><a href="user_profile/{{product.user.id}}">Usuario {{product.user.name}}</a></td>
+                    <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
+                    <td><a href="user_profile/{{product.user.id}}"> {{product.user.name}}</a></td>
                     <td>"{{description}}"</td>
                     <td>
                         <i class="bi bi-star-fill star"></i>
@@ -156,19 +168,25 @@
                 </tbody>
             </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link" href="#">Siguiente</a>
-                    </li>
+            {{#showPaginationReview}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevReview}}disabled{{/hasPrevReview}}">
+                    <a class="page-link" href="/administrator_dashboard?pageReview={{prevPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
+                </li>
+                <li class="page-item {{^hasNextReview}}disabled{{/hasNextReview}}">
+                    <a class="page-link" href="/administrator_dashboard?pageReview={{nextPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
                 </ul>
             </nav>
+            {{/showPaginationReview}}
         </div>
 
         <div class="container chart-container">
