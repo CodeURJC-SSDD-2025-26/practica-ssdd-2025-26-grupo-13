@@ -22,7 +22,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {
 
-        List<Product> products = productService.getProducts(0, 12).getContent();
+        List<Product> products = productService.getAvailableProducts(0, 12).getContent();
 
         model.addAttribute("cssfile", "index");
         model.addAttribute("loggedin", true);

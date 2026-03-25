@@ -86,7 +86,7 @@
         {{#orders}}
         <div class="smallproductcard">
           <a href="product">
-            <img width="150px" src="/images/{{product.imageUrl}}" />
+            <img width="150px" src="/images/{{#product}}{{#image}}{{id}}{{/image}}{{/product}}" />
             <p class="pricetag">{{product.price}}€</p>
           </a>
           <div class="product-footer">
