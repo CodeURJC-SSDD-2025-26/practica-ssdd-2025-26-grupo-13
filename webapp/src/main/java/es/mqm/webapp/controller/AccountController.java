@@ -49,31 +49,33 @@ public class AccountController {
         model.addAttribute("cssfile", "register");
         return "administrator_login";
     }
-    @GetMapping("/modify_user/{id}")
-        public String showModifyUser(Model model,@PathVariable String id) {
-        int user_id = Integer.parseInt(id);
-        User user = userService.findById(user_id).orElse(null);
-        model.addAttribute("name", user.getName());
-        model.addAttribute("surnames", user.getSurnames());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("password",user.getPassword());
-        model.addAttribute("cssfile", "sell_product");
+
+    @GetMapping("modify_user/{id}")
+    public String showModifyUserForm(@PathVariable int id, Model model) {
+        model.addAttribute("cssfile", "product");
+        User user = userService.findById(id).orElse(null);
+        model.addAttribute("user", user);
+        Image image = user.getImage();
+        if (image != null) {
+            model.addAttribute("imageUrl", image.getId());
+        } else {
+            model.addAttribute("imageUrl", "usuario anonimo.jpg");
+        }
         return "modify_user";
     }
-
-    @RequestMapping("/modify_info/{id}")
-    public String modifyUser(Model model, @PathVariable String id, @RequestParam String name,
-            @RequestParam String surnames, @RequestParam String email, @RequestParam String password) {
-        int user_id = Integer.parseInt(id);
-        User user = userService.findById(user_id).orElse(null);
-        user.setName(name);
-        user.setSurnames(surnames);
-        user.setEmail(email);
-        user.setPassword(password);
-        userService.save(user);
-        return "user_profile/{id}";
+    
+    @PostMapping("/modify_info/{id}")
+    public String modifyUserInfo(@PathVariable int id, @RequestParam String name, @RequestParam String surnames, @RequestParam String email, @RequestParam String password) {
+        User user = userService.findById(id).orElse(null);
+        if (user != null) {
+            user.setName(name);
+            user.setSurnames(surnames);
+            user.setEmail(email);
+            user.setPassword(password);
+            userService.save(user);
+        }
+        return "redirect:/user_profile/" + id;
     }
-
 
         @PostMapping("/newuser")
         public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword,
@@ -94,6 +96,7 @@ public class AccountController {
             userService.save(user);
             return "redirect:/";
         }
+
     @PostMapping("/validatelogin")
         public String login(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
         return "redirect:/";
