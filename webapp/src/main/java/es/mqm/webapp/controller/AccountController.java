@@ -1,11 +1,15 @@
 package es.mqm.webapp.controller;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +26,6 @@ import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.ImageService;
 import es.mqm.webapp.service.LocationService;
 import es.mqm.webapp.service.UserService;
-
 
 @Controller
 public class AccountController {
@@ -45,6 +48,7 @@ public class AccountController {
         model.addAttribute("mapsApiKey", mapsApiKey);
         return "register";
     }
+
     @GetMapping("/login")
     public String showLoginForm(Model model, @RequestParam(required = false, value = "error") String error) {
         model.addAttribute("cssfile", "register");
@@ -53,6 +57,7 @@ public class AccountController {
         }
         return "login";
     }
+
     @GetMapping("/administrator_login")
     public String showAdminLoginForm(Model model) {
         model.addAttribute("cssfile", "register");
@@ -62,10 +67,8 @@ public class AccountController {
     @GetMapping("modify_user/{id}")
     public String showModifyUserForm(@PathVariable int id, Model model) {
         model.addAttribute("cssfile", "product");
-        User user = userService.findById(id).orElse(null);
-        if (user == null) {
-            return "redirect:/error";
-        }
+        User user = userService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         model.addAttribute("user", user);
         model.addAttribute("id", user.getId());
         Image image = user.getImage();
@@ -77,13 +80,15 @@ public class AccountController {
         return "modify_user";
     }
 
-    @PostMapping("/modify_info")
+    @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
+    @PostMapping("/modify_user")
     public String modifyUser(Model model, @RequestParam int id, @RequestParam String name,
-            @RequestParam String surnames, @RequestParam String email, @RequestParam String password, @RequestParam MultipartFile image) throws IOException {
+            @RequestParam String surnames, @RequestParam String email, @RequestParam String password,
+            @RequestParam MultipartFile image) throws IOException {
         int user_id = id;
         User user = userService.findById(user_id).orElse(null);
         if (user == null) {
-            return "redirect:/error";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
         user.setName(name);
         user.setSurnames(surnames);
@@ -97,11 +102,10 @@ public class AccountController {
         return "redirect:/user_profile/" + user_id;
     }
 
-
     @PostMapping("/newuser")
-        public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword,
-            @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude
-         ){ 
+    public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames,
+            @RequestParam String inputEmail, @RequestParam String inputPassword,
+            @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude) {
         Image image = new Image();
         try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
             image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
@@ -117,14 +121,4 @@ public class AccountController {
         userService.save(user);
         return "redirect:/";
     }
-    @PostMapping("/validatelogin")
-        public String login(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
-        return "redirect:/";
-    }
-    @PostMapping("/login_admin")
-        public String loginAdmin(Model model, @RequestParam String inputEmail, @RequestParam String inputPassword){
-        return "redirect:/administrator_dashboard";
-    }
-
 }
-
