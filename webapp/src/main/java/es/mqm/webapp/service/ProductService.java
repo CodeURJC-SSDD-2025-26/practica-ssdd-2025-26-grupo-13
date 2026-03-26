@@ -31,6 +31,7 @@ public class ProductService {
         return repository.findAll();
     }
 
+    
     public Page<Product> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
@@ -51,9 +52,9 @@ public class ProductService {
         return repository.findByUser(user);
     }
 
-    public Page<Product> getProducts(int pageNo, int pageSize) {
+    public Page<Product> getAvailableProducts(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return repository.findAll(pageable);
+        return repository.findByIsSoldFalse(pageable);
     }
 
     public Page<Product> findByName(String name, int pageNo, int pageSize) {

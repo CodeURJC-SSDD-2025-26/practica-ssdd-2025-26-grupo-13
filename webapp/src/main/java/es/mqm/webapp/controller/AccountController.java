@@ -101,7 +101,7 @@ public class AccountController {
     @PostMapping("/newuser")
         public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames, @RequestParam String inputEmail, @RequestParam String inputPassword,
             @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude
-         ){
+         ){ 
         Image image = new Image();
         try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
             image.setImageFile(new SerialBlob(inputStream.readAllBytes()));

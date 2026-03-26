@@ -34,5 +34,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     Page<Product> findByCategory(String category, Pageable pageable);
 
+    List<Product> findByIsSoldFalse();
+
+    Page<Product> findByIsSoldFalse(Pageable pageable);
+
     long count();
 }

@@ -1,5 +1,6 @@
 package es.mqm.webapp.controller;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,8 @@ public class ProductController {
     @Autowired
     private ImageService imageService;
 
+    private List<Review> reviews = new ArrayList<Review>();
+    
     @GetMapping("/product/{id}")
     public String showProductDetails(@PathVariable("id") int id, Model model, Image image){
         Product product = productService.findById(id).orElse(null);

@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.Image;
+import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.UserRepository;
+import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.UserService;
 
 @Controller
 public class UserProfileController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/user_profile/{id}")
     public String showUserProfile(Model model, @PathVariable int id) {
@@ -45,7 +50,8 @@ public class UserProfileController {
         model.addAttribute("bought", 4); // placeholder
         model.addAttribute("sold", 4);
 
-
+        List<Order> orders = orderService.findByBuyer(user);
+        model.addAttribute("orders", orders);
         
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
