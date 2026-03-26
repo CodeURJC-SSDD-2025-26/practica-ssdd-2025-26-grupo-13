@@ -43,10 +43,10 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(authorize -> authorize
 						// PUBLIC PAGES
 						.requestMatchers("/", "/css/**", "/images/**", "/search", "/product/**", "/user_profile/**",
-								"/error")
+								"/error", "/register")
 						.permitAll()
 						.requestMatchers("/h2-console/**").permitAll()
-						.requestMatchers("/administrator_dashboard").hasRole("ADMIN")
+						.requestMatchers("/admin").hasRole("ADMIN")
 						// PRIVATE PAGES
 						.anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin

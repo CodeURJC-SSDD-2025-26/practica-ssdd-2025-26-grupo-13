@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,9 @@ public class AccountController {
 
     @Value("${google.maps.api-key:}")
     private String mapsApiKey; // stored in application-dev.properties (not in github)
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserService userService;
@@ -64,6 +68,7 @@ public class AccountController {
         return "administrator_login";
     }
 
+    @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
     @GetMapping("modify_user/{id}")
     public String showModifyUserForm(@PathVariable int id, Model model) {
         model.addAttribute("cssfile", "product");
@@ -93,7 +98,7 @@ public class AccountController {
         user.setName(name);
         user.setSurnames(surnames);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         if(!image.isEmpty()){
             Image im = imageService.createImage(image);
             userService.addImageToUser(user.getId(),im);
@@ -102,7 +107,7 @@ public class AccountController {
         return "redirect:/user_profile/" + user_id;
     }
 
-    @PostMapping("/newuser")
+    @PostMapping("/register")
     public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames,
             @RequestParam String inputEmail, @RequestParam String inputPassword,
             @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude) {
@@ -117,7 +122,7 @@ public class AccountController {
             loc = new Location(city, Double.parseDouble(latitude), Double.parseDouble(longitude));
             locationService.save(loc);
         }
-        User user = new User(inputName, inputSurnames, inputEmail, image, inputPassword, 5.0, loc, "USER");
+        User user = new User(inputName, inputSurnames, inputEmail, image, passwordEncoder.encode(inputPassword), 5.0, loc, "USER");
         userService.save(user);
         return "redirect:/";
     }

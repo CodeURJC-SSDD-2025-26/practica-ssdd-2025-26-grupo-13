@@ -130,7 +130,8 @@ public class ProductService {
         }, PageRequest.of(pageNo, pageSize));
     }
 
-    public boolean isOwnerOrAdmin(Product product, Authentication auth) {
+    public boolean isOwnerOrAdmin(int id, Authentication auth) {
+        Product product = repository.findById(id).orElseThrow();
         boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
         boolean isOwner = product.getUser().getEmail().equals(auth.getName());
         return isOwner || isAdmin;

@@ -49,7 +49,13 @@ public class DatabaseInitializer implements CommandLineRunner {
             }
             userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER"));
         }
-        userService.save(new User("Admin", "Admin", "admin@admin.com", null, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN"));
+        Image image = new Image();
+        try (InputStream inputStream = new ClassPathResource("static/images/admin_icon.png").getInputStream()) {
+            image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load default user image", e);
+        }
+        userService.save(new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN"));
         
         
         for (int i = 0; i < 40; i++) {

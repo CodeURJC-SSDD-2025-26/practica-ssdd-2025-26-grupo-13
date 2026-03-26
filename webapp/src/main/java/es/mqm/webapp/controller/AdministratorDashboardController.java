@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +44,8 @@ public class AdministratorDashboardController {
     private List<Integer> reviewsRating = new ArrayList<Integer>();
     private List<Integer> newUsersPerMonth = new ArrayList<Integer>();
 
-    @GetMapping("/administrator_dashboard")
+
+    @GetMapping("/admin")
     public String showAdministratorDashboardPage(Model model, @RequestParam(value = "pageUser", defaultValue = "0") int pageUser, @RequestParam(value = "pageProduct", defaultValue = "0") int pageProduct, @RequestParam(value = "pageReview", defaultValue = "0") int pageReview) {
         users.clear();
         products.clear();

@@ -78,9 +78,13 @@
         {{/currentUser}}
         {{#currentUser}}
         <div class="dropdown">
-          <img src="/images/{{image.id}}" width="40px" style="cursor:pointer;" class="rounded-circle ms-2 " data-bs-toggle="dropdown" />
+          <img src="/images/{{#image}}{{id}}{{/image}}" width="40px" style="cursor:pointer;"
+            class="rounded-circle ms-2 " data-bs-toggle="dropdown" />
           <ul class="dropdown-menu mt-1 dropdown-menu-end">
             <li><a class="dropdown-item" href="/user_profile/{{id}}">Perfil</a></li>
+            {{#isAdmin}}
+            <li><a class="dropdown-item" href="/admin">Administración</a></li>
+            {{/isAdmin}}
             <div class="dropdown-divider"></div>
             <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           </ul>

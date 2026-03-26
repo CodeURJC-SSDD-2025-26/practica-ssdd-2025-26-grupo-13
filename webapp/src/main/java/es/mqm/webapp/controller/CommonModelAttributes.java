@@ -22,4 +22,13 @@ public class CommonModelAttributes {
         String email = request.getUserPrincipal().getName();
         return userService.findByEmail(email).orElse(null);
     }
+
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(HttpServletRequest request) {
+        User user = currentUser(request);
+        if (user == null) {
+            return false;
+        }
+        return user.getRoles().contains("ADMIN");
+    }
 }

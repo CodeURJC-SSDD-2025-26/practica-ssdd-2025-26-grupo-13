@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.UserService;
@@ -118,6 +119,7 @@ public class ProductController {
         return "sell_product";
     }
 
+    @PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @GetMapping("/modify_product/{id}")
     public String showModifyProductPage(Model model, @PathVariable int id) {
         
