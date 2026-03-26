@@ -27,8 +27,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mqm_user")
-@Component
-@SessionScope
 public class User {
 
     @Id

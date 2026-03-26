@@ -48,7 +48,6 @@ public class ProductController {
         if (product == null) {
             return "redirect:/error";
         }
-        model.addAttribute("image",image);
         if (product.getImage() != null) {
             model.addAttribute("imageUrl", product.getImage().getId());
         } else {

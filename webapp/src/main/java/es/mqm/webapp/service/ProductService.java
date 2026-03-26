@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import es.mqm.webapp.model.Image;
@@ -127,6 +128,12 @@ public class ProductService {
 
             return cb.and(predicates.toArray(new Predicate[0]));
         }, PageRequest.of(pageNo, pageSize));
+    }
+
+    public boolean isOwnerOrAdmin(Product product, Authentication auth) {
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        boolean isOwner = product.getUser().getEmail().equals(auth.getName());
+        return isOwner || isAdmin;
     }
     
 }
