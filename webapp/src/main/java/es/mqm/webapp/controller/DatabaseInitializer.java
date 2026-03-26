@@ -53,7 +53,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         try (InputStream inputStream = new ClassPathResource("static/images/admin_icon.png").getInputStream()) {
             image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load default user image", e);
+            throw new RuntimeException("Failed to load default admin image", e);
         }
         userService.save(new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN"));
         

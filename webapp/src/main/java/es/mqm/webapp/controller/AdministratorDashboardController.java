@@ -14,8 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+
 
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Product;
@@ -141,5 +142,20 @@ public class AdministratorDashboardController {
 
         model.addAttribute("cssfile", "administrator_dashboard"); 
         return "administrator_dashboard";
+    }
+    @PostMapping("delete_user/{id}")
+    public String deleteUser(@PathVariable int id){
+        userService.deleteById(id);
+        return "redirect:/admin";
+    }
+    @PostMapping("delete_product/{id}")
+    public String deleteProduct(@PathVariable int id){
+        productService.deleteById(id);
+        return "redirect:/admin";
+    }
+    @PostMapping("delete_review/{id}")
+    public String deleteReview(@PathVariable int id){
+        reviewService.deleteById(id);
+        return "redirect:/admin";
     }
 }

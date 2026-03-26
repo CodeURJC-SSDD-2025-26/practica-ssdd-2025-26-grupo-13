@@ -47,7 +47,9 @@
                     <td>{{name}}</td>
                     <td>{{surnames}}</td>
                     <td>{{email}}</td>
-                    <td><button class="btn btn-danger">Eliminar</button></td>
+                    <td><form action="/delete_user/{{id}}" method="post">
+                            <input type="submit" value="Eliminar" class="btn btn-danger"></input>
+                        </form></td>
                     </tr>
                     {{/users}}
                 </tbody>
@@ -57,7 +59,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevUser}}disabled{{/hasPrevUser}}">
-                    <a class="page-link" href="/administrator_dashboard?pageUser={{prevPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <a class="page-link" href="/admin?pageUser={{prevPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -65,7 +67,7 @@
                     <span class="page-link">{{currentPageUser}} / {{totalPagesUser}}</span>
                 </li>
                 <li class="page-item {{^hasNextUser}}disabled{{/hasNextUser}}">
-                    <a class="page-link" href="/administrator_dashboard?pageUser={{nextPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <a class="page-link" href="/admin?pageUser={{nextPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -100,8 +102,12 @@
                     <td>{{price}}€</td>
                     <td>No</td>
                     <td>
-                        <button class="btn btn-danger">Eliminar</button>
-                        <a href="modify_product" class="btn btn-warning">Modificar</a>
+                        <div class="d-flex gap-2 flex-wrap">
+                        <form action="/delete_product/{{id}}" method="post">
+                            <input type="submit" value="Eliminar" class="btn btn-danger"></input>
+                        </form>
+                        <a href="modify_product/{{id}}" class="btn btn-warning">Modificar</a>
+                        </div>
                     </td>
                     </tr>
                     {{/products}}
@@ -112,7 +118,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevProduct}}disabled{{/hasPrevProduct}}">
-                    <a class="page-link" href="/administrator_dashboard?pageProduct={{prevPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <a class="page-link" href="/admin?pageProduct={{prevPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -120,7 +126,7 @@
                     <span class="page-link">{{currentPageProduct}} / {{totalPagesProduct}}</span>
                 </li>
                 <li class="page-item {{^hasNextProduct}}disabled{{/hasNextProduct}}">
-                    <a class="page-link" href="/administrator_dashboard?pageProduct={{nextPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <a class="page-link" href="/admin?pageProduct={{nextPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -159,8 +165,10 @@
                     </td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                        <button class="btn btn-danger">Eliminar</button>
-                        <a href="modify_review" class="btn btn-warning">Modificar</a>
+                        <form action="/delete_review/{{id}}" method="post">
+                            <input type="submit" value="Eliminar" class="btn btn-danger"></input>
+                        </form>
+                        <a href="modify_review/{{id}}" class="btn btn-warning">Modificar</a>
                         </div>
                     </td>
                     </tr>
@@ -172,7 +180,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevReview}}disabled{{/hasPrevReview}}">
-                    <a class="page-link" href="/administrator_dashboard?pageReview={{prevPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Anterior">
+                    <a class="page-link" href="/admin?pageReview={{prevPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -180,7 +188,7 @@
                     <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
                 </li>
                 <li class="page-item {{^hasNextReview}}disabled{{/hasNextReview}}">
-                    <a class="page-link" href="/administrator_dashboard?pageReview={{nextPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Siguiente">
+                    <a class="page-link" href="/admin?pageReview={{nextPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

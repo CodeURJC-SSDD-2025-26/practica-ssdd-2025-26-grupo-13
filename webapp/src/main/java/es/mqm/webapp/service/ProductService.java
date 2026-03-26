@@ -81,6 +81,9 @@ public class ProductService {
         repository.delete(product);
     }
 
+    public void deleteById(int id){
+        repository.deleteById(id);
+    }
     public long count() {
         return repository.count();
     }

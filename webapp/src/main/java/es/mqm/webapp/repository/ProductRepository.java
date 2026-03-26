@@ -39,4 +39,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
     Page<Product> findByIsSoldFalse(Pageable pageable);
 
     long count();
+
+    void deleteById(Integer id);
 }

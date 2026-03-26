@@ -41,22 +41,23 @@
             
         <div class="category">
                 <h4>Información del producto</h4>
-                <form action="product" method="get">
+                <form action="/modify_product" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
+                        <input type="hidden" name="id" value="{{product.id}}" />
                         <label for="productName" class="form-label">Nombre del producto</label> 
-                        <input type="text" class="form-control" id="productName" placeholder="Introduce el nombre del producto" value="{{product.name}}" required> 
+                        <input type="text" class="form-control" name="name" id="productName" placeholder="Introduce el nombre del producto" value="{{product.name}}" required> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productDescription" class="form-label">Descripción</label> 
-                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe tu producto" required>{{product.description}}</textarea> 
+                        <textarea class="form-control" name="description" id="productDescription" rows="3" placeholder="Describe tu producto" required>{{product.description}}</textarea> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productPrice" class="form-label">Precio (€)</label> 
-                        <input type="number" class="form-control" id="productPrice" placeholder="Introduce el precio" value="{{product.price}}" required> 
+                        <input type="number" name="price" class="form-control" id="productPrice" placeholder="Introduce el precio" value="{{product.price}}" required> 
                     </div> 
                     <div class="mb-3"> 
                         <label for="productImage" class="form-label">Imagen del producto</label> 
-                        <input class="form-control" type="file" id="productImage" value="images/{{product.image.id}}" required> 
+                        <input class="form-control" name="image" type="file" id="productImage"> 
                     </div> 
                     <br>
                     <button class="button" type="submit">Publicar</button>
