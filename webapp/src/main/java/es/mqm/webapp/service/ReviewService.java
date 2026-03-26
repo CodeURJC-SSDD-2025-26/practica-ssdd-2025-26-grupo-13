@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.repository.ReviewRepository;
 
@@ -39,4 +40,8 @@ public class ReviewService {
     public List<Review> findByProductId(Integer productId) {
         return repository.findByProductId(productId);
     }
+    public Page<Review> findByProductId(int productId, Pageable pageable) {
+        return repository.findByProductId(productId, pageable);
+    }
+    
 }

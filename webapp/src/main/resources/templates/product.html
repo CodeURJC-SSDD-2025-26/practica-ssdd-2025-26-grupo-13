@@ -123,6 +123,27 @@
               </div>
             </div>
             {{/reviews}}
+            <div>
+            {{#showPaginationReview}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevPage}}disabled{{/hasPrevPage}}">
+                    <a class="page-link" href="/product/{{product.id}}?pageReview={{previous}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
+                </li>
+                <li class="page-item {{^hasNextPage}}disabled{{/hasNextPage}}">
+                    <a class="page-link" href="/product/{{product.id}}?pageReview={{next}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+            {{/showPaginationReview}}
+            </div>
           </div>
         </div>
       </div>
