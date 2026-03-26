@@ -39,6 +39,8 @@ public class UserProfileController {
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("password",user.getPassword());
+        Boolean isUser = (((User) model.getAttribute("currentUser")).getId() == id);
+        model.addAttribute("isUser", isUser);
         Image image = user.getImage();
         if (image != null) {
             model.addAttribute("imageUrl", image.getId());
