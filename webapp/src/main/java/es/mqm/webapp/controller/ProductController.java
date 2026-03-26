@@ -36,7 +36,6 @@ public class ProductController {
     private ImageService imageService;
 
     private static final int PAGE_SIZE = 3;
-    private List<Review> reviews = new ArrayList<Review>();
     
     @GetMapping("/product/{id}")
     public String showProductDetails(@PathVariable("id") int id, Model model,@RequestParam(value = "pageReview", defaultValue = "0") int pageReview) {
@@ -48,7 +47,7 @@ public class ProductController {
         if (product == null) {
             return "redirect:/error";
         }
-        model.addAttribute("image",image);
+    
         if (product.getImage() != null) {
             model.addAttribute("imageUrl", product.getImage().getId());
         } else {
