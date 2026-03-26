@@ -80,17 +80,17 @@
 
     <section class="products">
       <div>
-        <h4>Productos Comprados</h4>
+        <h4>Productos comprados</h4>
       </div>
       <div class="productsgrid">
-        {{#products}}
+        {{#orders}}
         <div class="smallproductcard">
           <a href="product">
-            <img width="150px" src="/images/{{imageUrl}}" />
-            <p class="pricetag">{{price}}€</p>
+            <img width="150px" src="/images/{{#product}}{{#image}}{{id}}{{/image}}{{/product}}" />
+            <p class="pricetag">{{product.price}}€</p>
           </a>
           <div class="product-footer">
-            <p>{{name}}</p>
+            <p>{{product.name}}</p>
             <a
               class="create-review-right"
               href="/create_review/{{id}}"
@@ -99,7 +99,7 @@
             ></a>
           </div>
         </div>
-        {{/products}}
+        {{/orders}}
       </div>
     </section>
 

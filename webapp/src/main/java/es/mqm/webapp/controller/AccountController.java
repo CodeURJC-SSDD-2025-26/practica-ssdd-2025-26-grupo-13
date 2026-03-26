@@ -63,7 +63,11 @@ public class AccountController {
     public String showModifyUserForm(@PathVariable int id, Model model) {
         model.addAttribute("cssfile", "product");
         User user = userService.findById(id).orElse(null);
+        if (user == null) {
+            return "redirect:/error";
+        }
         model.addAttribute("user", user);
+        model.addAttribute("id", user.getId());
         Image image = user.getImage();
         if (image != null) {
             model.addAttribute("imageUrl", image.getId());
@@ -78,13 +82,19 @@ public class AccountController {
             @RequestParam String surnames, @RequestParam String email, @RequestParam String password, @RequestParam MultipartFile image) throws IOException {
         int user_id = id;
         User user = userService.findById(user_id).orElse(null);
-        userService.save(user);
+        if (user == null) {
+            return "redirect:/error";
+        }
+        user.setName(name);
+        user.setSurnames(surnames);
+        user.setEmail(email);
+        user.setPassword(password);
         if(!image.isEmpty()){
             Image im = imageService.createImage(image);
-            userService.addImageToPost(user.getId(),im);
+            userService.addImageToUser(user.getId(),im);
         }
         userService.save(user);
-        return "redirect:/user_profile/{id}";
+        return "redirect:/user_profile/" + user_id;
     }
 
 
