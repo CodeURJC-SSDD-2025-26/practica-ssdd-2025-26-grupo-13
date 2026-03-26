@@ -40,6 +40,7 @@ public class ImageService {
         return image;
     }
 
+
     public Resource getImageFile(int id) throws SQLException {
         Image image = imageRepository.findById(id).orElseThrow();
         if (image.getImageFile() != null) {

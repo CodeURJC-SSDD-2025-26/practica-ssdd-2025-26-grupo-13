@@ -36,7 +36,7 @@ public class UserService {
     public User save(User user) {
         return repository.save(user);
     }
-    public User addImageToPost(int id, Image image) {
+    public User addImageToUser(int id, Image image) {
         User user = repository.findById(id).orElseThrow();
         user.setImage(image);
         repository.save(user);

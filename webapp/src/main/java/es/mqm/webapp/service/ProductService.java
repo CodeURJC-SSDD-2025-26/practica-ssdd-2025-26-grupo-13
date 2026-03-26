@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ProductRepository;
@@ -59,7 +60,12 @@ public class ProductService {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return repository.findByNameIgnoreCaseContaining(name, pageable);
     }
-
+    public Product addImageToProduct(int id, Image image) {
+        Product product = repository.findById(id).orElseThrow();
+        product.setImage(image);
+        repository.save(product);
+        return product;
+    }
     public Page<Product> findByCategory(String category, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return repository.findByCategory(category, pageable);

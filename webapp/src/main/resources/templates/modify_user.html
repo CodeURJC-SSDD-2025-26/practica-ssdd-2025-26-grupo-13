@@ -4,13 +4,12 @@
     <h2>Modifica tus datos</h2>
   </div>
   <div class="category">
-    <form action="/modify_info" method="post">
-    <form role="form" action="/modify_info/{{id}}" method="post">
+    <form role="form" action="/modify_info" method="post" enctype="multipart/form-data">
       <div class="d-flex gap-5 flex-wrap justify-content-between ms-sm-2">
         <div class="m-auto position-relative">
           <img
             class="rounded-circle"
-            src="images/{{imageUrl}}"
+            src="/images/{{imageUrl}}"
             width="150px"
             alt="Usuario"
           />
@@ -26,18 +25,20 @@
             type="file"
             class="form-control mt-2"
             id="userImage"
+            name="image"
             style="display: none"
           />
         </div>
         <div class="flex-grow-1">
           <div class="mb-3">
-            <input type="hidden" id="id" value="{{id}}" />
+            <input type="hidden" id="id" name="id" value="{{id}}" />
             <label for="name" class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
               id="name"
-              value="{{user.name}}"
+              name="name"
+              value="{{product.user.name}}"
               required
             />
           </div>
@@ -47,7 +48,8 @@
               type="text"
               class="form-control"
               id="surname"
-              value="{{user.surnames}}"
+              name="surnames"
+              value="{{product.user.surnames}}"
               required
             />
           </div>
@@ -59,7 +61,8 @@
           type="email"
           class="form-control"
           id="email"
-          value="{{user.email}}"
+          name="email"
+          value="{{product.user.email}}"
           required
         />
       </div>
@@ -69,7 +72,8 @@
           type="password"
           class="form-control"
           id="password"
-          value="{{user.password}}"
+          name="password"
+          value="{{product.user.password}}"
           required
         />
       </div>

@@ -22,7 +22,7 @@ public class Product {
     private double price;
     @ManyToOne
     private User user;
-    @OneToOne(cascade = CascadeType.ALL) //to eliminate the image when the user is deleted
+    @ManyToOne(cascade = CascadeType.ALL) //to eliminate the image when the user is deleted
     private Image image;
     private Boolean isSold = false;
 
@@ -39,7 +39,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String state, String description, double price, User user, String imageUrl,
+    public Product(String name, String state, String description, double price, User user, Image image,
             String category) {
         this.name = name;
         this.state = state;
