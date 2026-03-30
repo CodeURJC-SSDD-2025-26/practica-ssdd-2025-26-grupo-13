@@ -67,7 +67,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 throw new RuntimeException("Failed to load default product image", e);
             }
             productService.save(new Product("Producto " + (i + 1), "Buen estado", "Descripcion", 50 + i, user,
-                    imProduct, "informatica"));
+                    imProduct, "automoviles"));
         }
         for(int i=0; i<3; i++){
             Product product = productService.findById(i + 1).orElse(null);

@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.CategoryData;
+import es.mqm.webapp.model.ExtendedProduct;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
+import es.mqm.webapp.model.User;
 
 @Controller
 public class SearchController {
@@ -32,15 +34,15 @@ public class SearchController {
         if (page < 0)
             page = 0;
 
-        Page<Product> productPage;
-        boolean hasSearch = searchParam != null && !searchParam.isEmpty();
+        Page<ExtendedProduct> productPage;
         boolean hasCategory = category != null && !category.isEmpty() && !category.equals("todas");
 
-        productPage = productService.searchProducts(searchParam, category, location, date, minPrice, maxPrice, page, PAGE_SIZE);
+        User currentUser = (User) model.getAttribute("currentUser");
+        productPage = productService.searchProducts(searchParam, category, location, date, minPrice, maxPrice, currentUser, page,  PAGE_SIZE);
 
         if (page >= productPage.getTotalPages() && productPage.getTotalPages() > 0) {
             page = productPage.getTotalPages() - 1;
-            productPage = productService.searchProducts(searchParam, category, location, date, minPrice, maxPrice, page, PAGE_SIZE);
+            productPage = productService.searchProducts(searchParam, category, location, date, minPrice, maxPrice, currentUser, page, PAGE_SIZE);
         }
 
         model.addAttribute("cssfile", "search");

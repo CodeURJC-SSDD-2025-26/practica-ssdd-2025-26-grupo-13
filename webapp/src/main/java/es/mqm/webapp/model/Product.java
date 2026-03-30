@@ -3,6 +3,8 @@ package es.mqm.webapp.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,11 +30,11 @@ public class Product {
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
     @Column(nullable = false)
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     private String category;
 

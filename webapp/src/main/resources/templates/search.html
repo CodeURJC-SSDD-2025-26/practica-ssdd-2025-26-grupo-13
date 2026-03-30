@@ -127,12 +127,13 @@
       </p>
       <div class="productslist">
         {{#products}}
-        <a class="bigproductcard" href="/product/{{id}}">
-          <img src="/images/{{#image}}{{id}}{{/image}}" />
-          <p class="pricetag">{{price}}€</p>
-          <p>{{name}}</p>
+        <a class="bigproductcard position-relative" href="/product/{{p.id}}">
+          {{#distance}}<span class="position-absolute top-0 end-0 rounded border-1 border p-1 z-1 bg-white">~{{distance}} km</span>{{/distance}}
+          <img src="/images/{{#p.image}}{{id}}{{/p.image}}" />
+          <p class="pricetag">{{p.price}}€</p>
+          <p>{{p.name}}</p>
           <div class="vendor">
-            <span>{{#user}}{{name}}{{/user}}</span>
+            <span>{{#p.user}}{{name}}{{/p.user}}</span>
             <div>
               <i class="bi bi-star-fill star"></i>
               <i class="bi bi-star-fill star"></i>

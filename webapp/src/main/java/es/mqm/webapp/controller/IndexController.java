@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import es.mqm.webapp.model.CategoryData;
+import es.mqm.webapp.model.ExtendedProduct;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
+import es.mqm.webapp.model.User;
 
 @Controller
 public class IndexController {
@@ -22,7 +24,8 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {
 
-        List<Product> products = productService.getAvailableProducts(0, 12).getContent();
+        User user = (User) model.getAttribute("currentUser");
+        List<ExtendedProduct> products = productService.getAvailableProducts(0, 12, user).getContent();
 
         model.addAttribute("cssfile", "index");
         model.addAttribute("loggedin", true);

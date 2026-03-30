@@ -23,6 +23,7 @@ import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.service.ReviewService;
+import es.mqm.webapp.model.ExtendedProduct;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.service.ImageService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,17 +47,16 @@ public class ProductController {
             pageReview = 0;
         }
 
-        Product product = productService.findById(id).orElse(null);
-        if (product == null) {
-            return "redirect:/error";
-        }
-    
+        User currentUser = (User) model.getAttribute("currentUser");
+        ExtendedProduct extproduct = productService.findByIdWithDistance(id, currentUser).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado"));
+        Product product = extproduct.getP();
         if (product.getImage() != null) {
             model.addAttribute("imageUrl", product.getImage().getId());
         } else {
             model.addAttribute("imageUrl", "product-400x600.png");
         }
         model.addAttribute("product", product);
+        model.addAttribute("distance", extproduct.getDistance());
 
         Page<Review> reviewPage = reviewService.findByProductId(id, PageRequest.of(pageReview, PAGE_SIZE));
         if (pageReview >= reviewPage.getTotalPages() && reviewPage.getTotalPages() > 0) {
