@@ -1,7 +1,9 @@
 package es.mqm.webapp.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import es.mqm.webapp.repository.UserRepository;
@@ -16,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.model.Product;
+import es.mqm.webapp.model.Review;
+import es.mqm.webapp.service.ReviewService;
+import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.repository.UserRepository;
 import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.UserService;
@@ -27,6 +33,12 @@ public class UserProfileController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/user_profile/{id}")
     public String showUserProfile(Model model, @PathVariable int id) {
@@ -52,9 +64,24 @@ public class UserProfileController {
         model.addAttribute("bought", 4); // placeholder
         model.addAttribute("sold", 4);
 
+        List<Product> products = productService.findByUser(user);
         List<Order> orders = orderService.findByBuyer(user);
+        List<Review> reviews = reviewService.findByUserDest(id);
+        User currentUser = (User) model.getAttribute("currentUser");
+        List<Map<String, Object>> reviewsVm = new ArrayList<>();
+        for (Review review : reviews) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("review", review);
+            boolean isUserReview = currentUser != null
+                    && review.getUser() != null
+                    && review.getUser().getId() == currentUser.getId();
+            item.put("isUserReview", isUserReview);
+            reviewsVm.add(item);
+        }
+        model.addAttribute("reviewsVm", reviewsVm);
         model.addAttribute("orders", orders);
-        
+        model.addAttribute("products", products);
+
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
     }

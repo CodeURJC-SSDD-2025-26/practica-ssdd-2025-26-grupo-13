@@ -98,7 +98,7 @@
                     <th scope="row">{{id}}</th>
                     <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
                     <td>{{category}}</td>
-                    <td>{{name}}</td>
+                    <td><a href="product/{{id}}">{{name}}</a></td>
                     <td>{{price}}€</td>
                     <td>No</td>
                     <td>
@@ -198,7 +198,7 @@
         </div>
 
         <div class="container chart-container">
-            <h4>Ventas por Categoría</h4>
+            <h4>Productos por Categoría</h4>
             <div class="chart-wrapper-small">
                 <canvas id="ventasChart"></canvas>
             </div>
@@ -231,7 +231,7 @@
                 data: {
                     labels: ['Ropa', 'Informática', 'Electrodomésticos', 'Libros', 'Automóviles'],
                     datasets: [{
-                        label: 'Productos vendidos',
+                        label: 'Productos',
                         data: categoriesSoldData,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.6)',

@@ -51,6 +51,10 @@ public class ProductService {
         return repository.findById(id);
     }
 
+    public int countByCategory(String category) {
+        return repository.countByCategory(category);
+    }
+
     public Optional<ExtendedProduct> findByIdWithDistance(int id, User viewer) {
         Optional<Product> p = repository.findById(id);
         if (!p.isPresent()) {

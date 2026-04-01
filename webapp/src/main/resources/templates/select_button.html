@@ -1,19 +1,42 @@
 <script>
-            // Para interactividad de botones
+            // Para interactividad de botones y sincronizar la categorÃ­a con el formulario
             const buttons = document.querySelectorAll('.button-main');
-            
-            // Asegurar que el primer botón empiece con active si no hay ninguno
-            if (!document.querySelector('.button-main.active')) {
+            const categoryInput = document.querySelector('#productCategory');
+
+            const getButtonCategory = (button) => button.getAttribute('data-category');
+
+            const setActiveButton = (category) => {
+                buttons.forEach(btn => {
+                    const isActive = getButtonCategory(btn) === category;
+                    btn.classList.toggle('active', isActive);
+                });
+            };
+
+            // Si el formulario ya trae categorÃ­a (modificar), reflejarla en el selector
+            if (categoryInput && categoryInput.value) {
+                setActiveButton(categoryInput.value);
+            } else if (!document.querySelector('.button-main.active') && buttons.length > 0) {
+                // Asegurar que el primer botÃ³n empiece con active si no hay ninguno
                 buttons[0].classList.add('active');
+                if (categoryInput) {
+                    categoryInput.value = getButtonCategory(buttons[0]) || categoryInput.value;
+                }
             }
-            
+
             buttons.forEach(button => {
                 button.addEventListener('click', function() {
                     // Remover clase 'active' de todos los botones
                     buttons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Añadir clase 'active' solo al botón clickado
+
+                    // AÃ±adir clase 'active' solo al botÃ³n clickado
                     this.classList.add('active');
+
+                    if (categoryInput) {
+                        const category = getButtonCategory(this);
+                        if (category) {
+                            categoryInput.value = category;
+                        }
+                    }
                 });
             });
 </script>

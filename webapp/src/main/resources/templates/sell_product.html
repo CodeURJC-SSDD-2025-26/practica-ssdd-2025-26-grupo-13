@@ -6,31 +6,31 @@
             <h4>Selecciona una categoría</h4>
             <div class="categoriesgrid">
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="ropa">
                         <img width="135px" src="/images/ropa.png" />
                         <p class="fw-medium">Ropa</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="automoviles">
                         <img width="173px" src="/images/car.png" />
                         <p class="fw-medium">Automóviles</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="informatica">
                         <img width="100px" src="/images/computers.png" />
                         <p class="fw-medium">Informática</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="libros">
                         <img width="100px" src="/images/books.png" />
                         <p class="fw-medium">Libros</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="electrodomesticos">
                         <img width="100px" src="/images/electrodomesticos.png" />
                         <p class="fw-medium">Electrodomésticos</p>
                     </button>
@@ -42,7 +42,7 @@
         <div class="category">
                 <h4>Información del producto</h4>
                 <form action="/newProduct" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="category" value="informatica" />
+                    <input type="hidden" name="category" id="productCategory" value="informatica" />
                     <div class="mb-3">
                         <label for="productName" class="form-label">Nombre del producto</label> 
                         <input type="text" class="form-control" id="productName" name="name" placeholder="Introduce el nombre del producto" required> 

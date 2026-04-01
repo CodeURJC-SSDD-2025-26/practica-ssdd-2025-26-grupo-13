@@ -28,6 +28,16 @@ public class ReviewService {
     public Optional<Review> findById(int id) {
         return repository.findById(id);
     }
+    public List<Review> findByUserId(int id){
+        return repository.findByUserId(id);
+    }
+    public List<Review> findByUserDest(int id){
+        List<Review> reviews = repository.findAll();
+        reviews.removeIf(r -> r.getProduct() == null
+                || r.getProduct().getUser() == null
+                || r.getProduct().getUser().getId() != id);
+        return reviews;
+    }
 
     public Review save(Review review) {
         return repository.save(review);

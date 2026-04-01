@@ -65,18 +65,20 @@
       <div class="productsgrid">
         {{#products}}
         <div class="smallproductcard">
-          <a href="product">
-            <img width="150px" src="/images/{{imageUrl}}" />
+          <a href="/product/{{id}}">
+            <img width="150px" src="/images/{{#image}}{{id}}{{/image}}" />
             <p class="pricetag">{{price}}€</p>
           </a>
           <div class="product-footer">
             <p>{{name}}</p>
+            {{#isUser}}
             <a
               class="create-review-right"
-              href="/modify_product"
-              aria-label="Crear reseña"
+              href="/modify_product/{{id}}"
+              aria-label="Modificar producto"
               ><i class="bi bi-pencil-square"></i
             ></a>
+            {{/isUser}}
           </div>
         </div>
         {{/products}}
@@ -90,15 +92,15 @@
       <div class="productsgrid">
         {{#orders}}
         <div class="smallproductcard">
-          <a href="product">
+          <a href="/product/{{#product}}{{id}}{{/product}}">
             <img width="150px" src="/images/{{#product}}{{#image}}{{id}}{{/image}}{{/product}}" />
-            <p class="pricetag">{{product.price}}€</p>
+            <p class="pricetag">{{#product}}{{price}}{{/product}}€</p>
           </a>
           <div class="product-footer">
-            <p>{{product.name}}</p>
+            <p>{{#product}}{{name}}{{/product}}</p>
             <a
               class="create-review-right"
-              href="/create_review/{{id}}"
+              href="/create_review/{{#product}}{{id}}{{/product}}"
               aria-label="Crear reseña"
               ><i class="bi bi-star"></i
             ></a>
@@ -114,7 +116,7 @@
           <div class="col-12">
             <h3>
               <i class="bi bi-star-fill star"></i>
-              <strong>3.5 Usuario 1 valoraciones</strong>
+              <strong>3.5 Usuario {{id}} valoraciones</strong>
             </h3>
           </div>
         </div>
@@ -124,17 +126,18 @@
             <br />
           </div>
         </div>
-        {{#reviews}}
+        {{#reviewsVm}}
         <div class="row">
           <div class="col-12">
             <div class="container py-2">
               <div
                 class="d-flex flex-column flex-md-row align-items-start gap-3"
               >
-                <a href="/user_profile/{{userId}}">
+                {{#review}}
+                <a href="/user_profile/{{#user}}{{id}}{{/user}}">
                   <img
                     class="rounded-circle"
-                    src="/images/usuario anonimo.jpg"
+                    src="/images/{{#user}}{{#image}}{{id}}{{/image}}{{/user}}"
                     width="60px"
                     alt="Usuario"
                   />
@@ -143,7 +146,7 @@
                   <div
                     class="d-flex flex-column flex-md-row align-items-md-center gap-2"
                   >
-                    <span class="fw-semibold">Usuario {{userId}}</span>
+                    <span class="fw-semibold">{{#user}}{{name}}{{/user}}</span>
                     <span>
                       <i class="bi bi-star-fill star"></i>
                       <i class="bi bi-star-fill star"></i>
@@ -152,15 +155,16 @@
                       <i class="bi bi-star star"></i>
                     </span>
                     <span class="text-muted small ms-md-3">{{date}}</span>
-                    <a href="/modify_review" class="button ms-4"
-                      >Modificar reseña</a
-                    >
+                {{/review}}
+                    {{#isUserReview}}
+                    <a href="/modify_review/{{#review}}{{id}}{{/review}}" class="button ms-4">Modificar reseña</a>
+                    {{/isUserReview}}
                   </div>
                   <p class="mb-2 mt-2">
-                    {{description}}
+                    {{#review}}{{description}}{{/review}}
                   </p>
                   <div class="item F">
-                    <p>Compró: {{product}}</p>
+                    <p>Compró: {{#review}}{{#product}}{{name}}{{/product}}{{/review}}</p>
                   </div>
                 </div>
               </div>
@@ -168,8 +172,13 @@
           </div>
         </div>
 
-          {{/reviews}}
+          {{/reviewsVm}}
       </div>
     </div>
 
 {{>footer}}
+
+
+
+
+

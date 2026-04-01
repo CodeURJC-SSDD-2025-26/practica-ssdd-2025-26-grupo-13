@@ -6,31 +6,31 @@
             <h4>Selecciona una categoría</h4>
             <div class="categoriesgrid">
                 <div class="element">
-                    <button class="btn button-main active">
+                    <button class="btn button-main" type="button" data-category="ropa">
                         <img width="135px" src="/images/ropa.png" />
                         <p class="fw-medium">Ropa</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="automoviles">
                         <img width="173px" src="/images/car.png" />
                         <p class="fw-medium">Automóviles</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="informatica">
                         <img width="100px" src="/images/computers.png" />
                         <p class="fw-medium">Informática</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="libros">
                         <img width="100px" src="/images/books.png" />
                         <p class="fw-medium">Libros</p>
                     </button>
                 </div>
                 <div class="element">
-                    <button class="btn button-main">
+                    <button class="btn button-main" type="button" data-category="electrodomesticos">
                         <img width="100px" src="/images/electrodomesticos.png" />
                         <p class="fw-medium">Electrodomésticos</p>
                     </button>
@@ -44,6 +44,7 @@
                 <form action="/modify_product" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <input type="hidden" name="id" value="{{product.id}}" />
+                        <input type="hidden" name="category" id="productCategory" value="{{product.category}}" />
                         <label for="productName" class="form-label">Nombre del producto</label> 
                         <input type="text" class="form-control" name="name" id="productName" placeholder="Introduce el nombre del producto" value="{{product.name}}" required> 
                     </div> 

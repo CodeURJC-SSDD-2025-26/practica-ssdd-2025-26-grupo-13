@@ -69,7 +69,17 @@ public class AdministratorDashboardController {
         productSoldCounter = (long) (Math.floor(Math.random() * (productCounter)) + 1);
         
         for(int i=0;i<5;i++){
-            categoriesSold.add((int) Math.floor(Math.random() * (250 - 50 + 1)) + 50);
+            if(i==0){
+                categoriesSold.add(productService.countByCategory("ropa"));
+            }else if(i==1){
+                categoriesSold.add(productService.countByCategory("informatica"));
+            }else if(i==2){
+                categoriesSold.add(productService.countByCategory("electrodomesticos"));
+            }else if(i==3){
+                categoriesSold.add(productService.countByCategory("libros"));
+            }else if(i==4){
+                categoriesSold.add(productService.countByCategory("automoviles"));
+            }
         }
         for(int i=0;i<12;i++){
             newUsersPerMonth.add((int) Math.floor(Math.random() * (1000 - 200 + 1)) + 200);
