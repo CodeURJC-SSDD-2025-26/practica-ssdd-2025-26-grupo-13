@@ -41,6 +41,7 @@ public class Order {
     private String zipcode;
     private String city;
     private String province;
+    private String country;
     private String phone;
 
     private String creditCardNumber;
@@ -61,7 +62,7 @@ public class Order {
     }
 
     public Order(User buyer, Product product, String name, String surnames, String address, String apartment,
-            String zipcode, String city, String province, String phone, String creditCardNumber, String creditCardExpiryDate,
+            String zipcode, String city, String province, String country, String phone, String creditCardNumber, String creditCardExpiryDate,
             String creditCardCVV, double totalPrice) {
         this.buyer = buyer;
         this.product = product;
@@ -69,6 +70,7 @@ public class Order {
         this.surnames = surnames;
         this.address = address;
         this.apartment = apartment;
+        this.country = country;
         this.zipcode = zipcode;
         this.city = city;
         this.province = province;
@@ -158,6 +160,11 @@ public class Order {
     public void setProvince(String province) {
         this.province = province;
     }
+
+    public String getCountry() {
+        return country;
+    }
+
 
     public String getPhone() {
         return phone;

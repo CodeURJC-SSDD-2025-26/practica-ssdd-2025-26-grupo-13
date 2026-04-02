@@ -1,5 +1,6 @@
 package es.mqm.webapp.controller;
 
+import es.mqm.webapp.service.MailService;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ import es.mqm.webapp.service.TicketService;
 public class BuyController {
 
     @Autowired
+    private final MailService mailService;
+
+    @Autowired
     private ProductService productService;
 
     @Autowired
@@ -33,6 +37,10 @@ public class BuyController {
 
     @Autowired
     private TicketService ticketService;
+
+    BuyController(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @GetMapping("/buy/{id}")
     public String buy(Model model, @PathVariable int id) {
@@ -53,7 +61,7 @@ public class BuyController {
     public String completeBuy(Model model, @PathVariable int id, @RequestParam(value = "name") String name,
             @RequestParam(value = "surnames") String surnames,
             @RequestParam(value = "country") String country, @RequestParam(value = "address") String address,
-            @RequestParam(value = "apartment") String apartment, @RequestParam(value = "province") String province,
+            @RequestParam(value = "apartment", required=false) String apartment, @RequestParam(value = "province") String province,
             @RequestParam(value = "city") String city, @RequestParam(value = "zipcode") String zipcode,
             @RequestParam(value = "phone") String phone, @RequestParam(value = "creditCardNumber") String creditCardNumber,
             @RequestParam(value = "creditCardExpiryDate") String creditCardExpiryDate,
@@ -67,11 +75,12 @@ public class BuyController {
 
         User buyer = (User) model.getAttribute("currentUser");
 
-        Order order = new Order(buyer, product, name, surnames, address, apartment, zipcode, city,
-                province, phone, creditCardNumber, creditCardExpiryDate, creditCardCVV, product.getPrice() + 3.5);
+        Order order = new Order(buyer, product, name, surnames, address, apartment == null ? "" : apartment, zipcode, city,
+                province, country, phone, creditCardNumber, creditCardExpiryDate, creditCardCVV, product.getPrice() + 3.5);
         orderService.save(order);
         product.setIsSold(true);
         productService.save(product);
+        mailService.sendOrderConfirmation(order);
         return "redirect:/";
     }
 

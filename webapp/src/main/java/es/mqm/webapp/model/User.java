@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import es.mqm.webapp.model.User;
 import jakarta.persistence.*;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "mqm_user")
 public class User {
 

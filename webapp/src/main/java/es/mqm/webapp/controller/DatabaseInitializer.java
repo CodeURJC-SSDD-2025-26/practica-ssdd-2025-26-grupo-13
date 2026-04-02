@@ -25,6 +25,7 @@ import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.UserService;
+import es.mqm.webapp.service.MailService;
 
 @Controller
 public class DatabaseInitializer implements CommandLineRunner {
@@ -36,6 +37,8 @@ public class DatabaseInitializer implements CommandLineRunner {
     private ReviewService reviewService;
     @Autowired
     private LocationService locationService;
+    @Autowired
+    private MailService mailService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -98,7 +101,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             product= productService.findById(1).orElse(null); 
             if (i==0) {
                 orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
-                "28933", "Móstoles", "Madrid", "+34654246502", "4242424242424242", "12/27",
+                "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
                 "234", 50.5));
             }
             reviewService.save(new Review(product, user, "Comentario " + 2, "2023-01-01", 3.0f));
