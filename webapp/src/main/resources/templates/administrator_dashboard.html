@@ -150,29 +150,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#reviews}}
+                    {{#reviewsVm}}
                     <tr>
+                    {{#review}}
                     <th scope="row">{{id}}</th>
                     <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
                     <td><a href="user_profile/{{product.user.id}}"> {{product.user.name}}</a></td>
                     <td>"{{description}}"</td>
+                    {{/review}}
                     <td>
-                        <i class="bi bi-star-fill star"></i>
-                        <i class="bi bi-star-fill star"></i>
-                        <i class="bi bi-star-fill star"></i>
-                        <i class="bi bi-star-fill star"></i>
-                        <i class="bi bi-star star"></i>
+                        <i class="bi bi-star{{#star1}}-fill{{/star1}}{{^star1}}{{/star1}} star"></i>
+                        <i class="bi bi-star{{#star2}}-fill{{/star2}}{{^star2}}{{/star2}} star"></i>
+                        <i class="bi bi-star{{#star3}}-fill{{/star3}}{{^star3}}{{/star3}} star"></i>
+                        <i class="bi bi-star{{#star4}}-fill{{/star4}}{{^star4}}{{/star4}} star"></i>
+                        <i class="bi bi-star{{#star5}}-fill{{/star5}}{{^star5}}{{/star5}} star"></i>
                     </td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                        <form action="/delete_review/{{id}}" method="post">
+                        <form action="/delete_review/{{#review}}{{id}}{{/review}}" method="post">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>
-                        <a href="modify_review/{{id}}" class="btn btn-warning">Modificar</a>
+                        <a href="modify_review/{{#review}}{{id}}{{/review}}" class="btn btn-warning">Modificar</a>
                         </div>
                     </td>
                     </tr>
-                    {{/reviews}}
+                    {{/reviewsVm}}
                 </tbody>
             </table>
             </div>

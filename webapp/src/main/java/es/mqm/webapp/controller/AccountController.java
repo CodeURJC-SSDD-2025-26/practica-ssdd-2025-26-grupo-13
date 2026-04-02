@@ -2,6 +2,7 @@ package es.mqm.webapp.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -123,6 +124,7 @@ public class AccountController {
             locationService.save(loc);
         }
         User user = new User(inputName, inputSurnames, inputEmail, image, passwordEncoder.encode(inputPassword), 5.0, loc, "USER");
+        user.setCreatedAt(LocalDate.now());
         userService.save(user);
         return "redirect:/";
     }

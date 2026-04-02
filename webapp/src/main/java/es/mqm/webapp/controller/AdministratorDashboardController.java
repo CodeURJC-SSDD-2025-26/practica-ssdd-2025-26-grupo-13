@@ -1,24 +1,18 @@
 package es.mqm.webapp.controller;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.sql.rowset.serial.SerialBlob;
+import java.util.Map;
+import java.util.HashMap;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-
-
-import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
@@ -32,6 +26,8 @@ public class AdministratorDashboardController {
     private ProductService productService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private OrderService orderService;
 
     private static final int PAGE_SIZE = 5;
 
@@ -44,6 +40,15 @@ public class AdministratorDashboardController {
     private List<Integer> categoriesSold = new ArrayList<Integer>();
     private List<Integer> reviewsRating = new ArrayList<Integer>();
     private List<Integer> newUsersPerMonth = new ArrayList<Integer>();
+
+    private void addReviewStars(Map<String, Object> item, Review review) {
+        int rating = Math.max(0, Math.min(5, Math.round(review.getRating())));
+        item.put("star1", rating >= 1);
+        item.put("star2", rating >= 2);
+        item.put("star3", rating >= 3);
+        item.put("star4", rating >= 4);
+        item.put("star5", rating >= 5);
+    }
 
 
     @GetMapping("/admin")
@@ -66,7 +71,7 @@ public class AdministratorDashboardController {
         Page<Review> reviewPage = reviewService.findAll(PageRequest.of(pageReview, PAGE_SIZE));
         userCounter = userService.count();
         productCounter = productService.count();
-        productSoldCounter = (long) (Math.floor(Math.random() * (productCounter)) + 1);
+        productSoldCounter = orderService.count();
         
         for(int i=0;i<5;i++){
             if(i==0){
@@ -81,11 +86,29 @@ public class AdministratorDashboardController {
                 categoriesSold.add(productService.countByCategory("automoviles"));
             }
         }
-        for(int i=0;i<12;i++){
-            newUsersPerMonth.add((int) Math.floor(Math.random() * (1000 - 200 + 1)) + 200);
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(364);
+        int[] monthCounts = new int[12];
+        for (Object[] row : userService.countUsersByMonthBetween(startDate, today)) {
+            if (row == null || row.length < 3 || row[0] == null || row[1] == null || row[2] == null) {
+                continue;
+            }
+            int year = ((Number) row[0]).intValue();
+            int month = ((Number) row[1]).intValue();
+            int count = ((Number) row[2]).intValue();
+            if (month < 1 || month > 12) {
+                continue;
+            }
+            int index = (year - startDate.getYear()) * 12 + (month - startDate.getMonthValue());
+            if (index >= 0 && index < 12) {
+                monthCounts[index] = count;
+            }
+        }
+        for (int i = 0; i < 12; i++) {
+            newUsersPerMonth.add(monthCounts[i]);
         }
         for(int i=0;i<5;i++){
-            reviewsRating.add((int) Math.floor(Math.random() * (200 - 30 + 1)) + 30);
+            reviewsRating.add(reviewService.findByRating(i+1).size());
         }
 
         if (pageProduct >= productPage.getTotalPages() && productPage.getTotalPages() > 0) {
@@ -106,7 +129,14 @@ public class AdministratorDashboardController {
 
         model.addAttribute("users", userPage.getContent());
         model.addAttribute("products", productPage.getContent());
-        model.addAttribute("reviews", reviewPage.getContent());
+        List<Map<String, Object>> reviewsVm = new ArrayList<>();
+        for (Review review : reviewPage.getContent()) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("review", review);
+            addReviewStars(item, review);
+            reviewsVm.add(item);
+        }
+        model.addAttribute("reviewsVm", reviewsVm);
 
         model.addAttribute("currentPageUser", pageUser+1);
         model.addAttribute("currentPageProduct", pageProduct+1);
