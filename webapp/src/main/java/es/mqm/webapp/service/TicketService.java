@@ -5,6 +5,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.element.Image;
 
 import java.io.ByteArrayOutputStream;
@@ -22,7 +23,7 @@ public class TicketService {
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
-            ClassPathResource imgFile = new ClassPathResource("static/MQM.png");
+            ClassPathResource imgFile = new ClassPathResource("/static/images/MQM.png");
             Image logo = new Image(
                ImageDataFactory.create(imgFile.getInputStream().readAllBytes())
             );
@@ -39,15 +40,16 @@ public class TicketService {
             document.add(new Paragraph("Nombre: " + order.getBuyer().getName()));
             document.add(new Paragraph("Email: " + order.getBuyer().getEmail()));
             document.add(new Paragraph("Teléfono: " + order.getPhone()));
-            String direccion = order.getAddress() + ", " +
+            String address = order.getAddress() + ", " +
                    order.getCity() + ", " +
                    order.getProvince() + ", " +
                    order.getZipcode() + ".";
-            document.add(new Paragraph("Dirección: " + direccion));
-            document.add(new Paragraph("Tarjeta de crédito: **** **** **** " + (order.getCreditCardNumber())));
+            document.add(new Paragraph("Dirección: " + address));
+            document.add(new Paragraph("Tarjeta de crédito: **** **** **** " + (order.getCreditCardNumber().substring(order.getCreditCardNumber().length()- 4))));
             document.add(new Paragraph(" "));
 
             Table table = new Table(2);
+            table.setWidth(UnitValue.createPercentValue(100));
             table.addHeaderCell("Producto");
             table.addHeaderCell("Precio");
 
@@ -57,7 +59,7 @@ public class TicketService {
             document.add(table);
             document.add(new Paragraph(" "));
 
-            document.add(new Paragraph("Gastos de envio: 0,00 €"));
+            document.add(new Paragraph("Gastos de envio: " + (order.getTotalPrice() - order.getProduct().getPrice()) + " €"));
             document.add(new Paragraph("Total: " + String.format("%.2f €", order.getTotalPrice())));
 
             document.close();

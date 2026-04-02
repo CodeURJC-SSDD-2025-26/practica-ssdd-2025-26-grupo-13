@@ -14,10 +14,12 @@ import org.springframework.stereotype.Controller;
 
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Location;
+import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.LocationService;
+import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.UserService;
@@ -35,6 +37,9 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -75,6 +80,11 @@ public class DatabaseInitializer implements CommandLineRunner {
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 1.0f));
             user=userService.findById(i+1).orElse(null);
             product= productService.findById(1).orElse(null); 
+            if (i==0) {
+                orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
+                "28933", "Móstoles", "Madrid", "+34654246502", "4242424242424242", "12/27",
+                "234", 50.5));
+            }
             reviewService.save(new Review(product, user, "Comentario " + 2, "2023-01-01", 3.0f));
         }
     }

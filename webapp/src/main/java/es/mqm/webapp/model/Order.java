@@ -38,16 +38,16 @@ public class Order {
     private String surnames;
     private String address;
     private String apartment;
-    private int zipcode;
+    private String zipcode;
     private String city;
     private String province;
     private String phone;
 
-    private int creditCardNumber;
+    private String creditCardNumber;
     private String creditCardExpiryDate;
-    private int creditCardCVV;
+    private String creditCardCVV;
 
-    private int totalPrice; // includes shipping price
+    private double totalPrice; // includes shipping price
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -61,8 +61,8 @@ public class Order {
     }
 
     public Order(User buyer, Product product, String name, String surnames, String address, String apartment,
-            int zipcode, String city, String province, String phone, int creditCardNumber, String creditCardExpiryDate,
-            int creditCardCVV) {
+            String zipcode, String city, String province, String phone, String creditCardNumber, String creditCardExpiryDate,
+            String creditCardCVV, double totalPrice) {
         this.buyer = buyer;
         this.product = product;
         this.name = name;
@@ -76,6 +76,7 @@ public class Order {
         this.creditCardNumber = creditCardNumber;
         this.creditCardExpiryDate = creditCardExpiryDate;
         this.creditCardCVV = creditCardCVV;
+        this.totalPrice = totalPrice;
     }
 
     public int getId() {
@@ -134,11 +135,11 @@ public class Order {
         this.apartment = apartment;
     }
 
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
@@ -166,11 +167,11 @@ public class Order {
         this.phone = phone;
     }
 
-    public int getCreditCardNumber() {
+    public String getCreditCardNumber() {
         return creditCardNumber;
     }
 
-    public void setCreditCardNumber(int creditCardNumber) {
+    public void setCreditCardNumber(String creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
     }
 
@@ -182,11 +183,11 @@ public class Order {
         this.creditCardExpiryDate = creditCardExpiryDate;
     }
 
-    public int getCreditCardCVV() {
+    public String getCreditCardCVV() {
         return creditCardCVV;
     }
 
-    public void setCreditCardCVV(int creditCardCVV) {
+    public void setCreditCardCVV(String creditCardCVV) {
         this.creditCardCVV = creditCardCVV;
     }
 
@@ -206,7 +207,7 @@ public class Order {
         this.updatedAt = updatedAt;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 

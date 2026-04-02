@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import es.mqm.webapp.model.Order;
@@ -52,10 +54,10 @@ public class BuyController {
             @RequestParam(value = "surnames") String surnames,
             @RequestParam(value = "country") String country, @RequestParam(value = "address") String address,
             @RequestParam(value = "apartment") String apartment, @RequestParam(value = "province") String province,
-            @RequestParam(value = "city") String city, @RequestParam(value = "zipcode") int zipcode,
-            @RequestParam(value = "phone") String phone, @RequestParam(value = "creditCardNumber") int creditCardNumber,
+            @RequestParam(value = "city") String city, @RequestParam(value = "zipcode") String zipcode,
+            @RequestParam(value = "phone") String phone, @RequestParam(value = "creditCardNumber") String creditCardNumber,
             @RequestParam(value = "creditCardExpiryDate") String creditCardExpiryDate,
-            @RequestParam(value = "creditCardCVV") int creditCardCVV) {
+            @RequestParam(value = "creditCardCVV") String creditCardCVV) {
 
         Optional<Product> productOpt = productService.findById(id);
         if (!productOpt.isPresent() || productOpt.get().getIsSold()) {
@@ -66,7 +68,7 @@ public class BuyController {
         User buyer = (User) model.getAttribute("currentUser");
 
         Order order = new Order(buyer, product, name, surnames, address, apartment, zipcode, city,
-                province, phone, creditCardNumber, creditCardExpiryDate, creditCardCVV);
+                province, phone, creditCardNumber, creditCardExpiryDate, creditCardCVV, product.getPrice() + 3.5);
         orderService.save(order);
         product.setIsSold(true);
         productService.save(product);
@@ -76,7 +78,7 @@ public class BuyController {
     //In the confirmation page there will be a button to download the ticket, which will call this method
     @GetMapping("buy/{id}/ticket")
     public ResponseEntity<byte[]> downloadTicket(@PathVariable int id) {
-        Order order = orderService.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+        Order order = orderService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado"));
         byte[] ticketBytes = ticketService.generateTicket(order);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=pedido_" + id + ".pdf")

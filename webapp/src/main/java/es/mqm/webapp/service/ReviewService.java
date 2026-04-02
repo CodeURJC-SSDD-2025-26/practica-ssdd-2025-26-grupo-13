@@ -32,11 +32,7 @@ public class ReviewService {
         return repository.findByUserId(id);
     }
     public List<Review> findByUserDest(int id){
-        List<Review> reviews = repository.findAll();
-        reviews.removeIf(r -> r.getProduct() == null
-                || r.getProduct().getUser() == null
-                || r.getProduct().getUser().getId() != id);
-        return reviews;
+        return repository.findByProductUserId(id);
     }
 
     public Review save(Review review) {

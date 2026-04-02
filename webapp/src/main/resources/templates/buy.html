@@ -443,10 +443,12 @@
             <div class="mb-3 d-flex gap-3">
               <input
                 class="form-control"
-                type="number"
+                type="text"
                 id="zipcode"
                 name="zipcode"
                 placeholder="Código postal"
+                autocomplete="postal-code"
+                inputmode="numeric"
                 required />
               <input
                 class="form-control"
@@ -470,6 +472,7 @@
                 id="phone"
                 name="phone"
                 placeholder="Teléfono de contacto"
+                autocomplete="tel"
                 required />
             </div>
 
@@ -481,10 +484,12 @@
             <div class="mb-3">
               <input
                 class="form-control"
-                type="number"
+                type="text"
                 id="cardNumber"
                 name="creditCardNumber"
                 placeholder="Número de tarjeta"
+                inputmode="numeric"
+                autocomplete="cc-number"
                 required />
             </div>
             <div class="mb-3 d-flex gap-3">
@@ -494,13 +499,15 @@
                 id="date"
                 name="creditCardExpiryDate"
                 placeholder="Fecha de vencimiento (MM/AA)"
+                autocomplete="cc-exp" pattern="^(0[1-9]|1[0-2])\/\d{2}$"
                 required />
               <input
                 class="form-control"
-                type="number"
+                type="text"
                 id="cvv"
                 name="creditCardCVV"
                 placeholder="CVV"
+                inputmode="numeric" autocomplete="cc-scs"
                 required />
             </div>
             <div class="mb-3">
@@ -509,6 +516,7 @@
                 type="text"
                 id="creditCardName"
                 name="creditCardName"
+                autocomplete="cc-name"
                 placeholder="Nombre del titular de la tarjeta"
                 required />
             </div>
