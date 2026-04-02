@@ -3,6 +3,7 @@ package es.mqm.webapp.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -55,6 +56,10 @@ public class UserService {
     
     public long count() {
         return repository.count();
+    }
+
+    public List<Object[]> countUsersByMonthBetween(LocalDate start, LocalDate end) {
+        return repository.countUsersByMonthBetween(start, end);
     }
 
     public Optional<User> findByEmail(String email) {

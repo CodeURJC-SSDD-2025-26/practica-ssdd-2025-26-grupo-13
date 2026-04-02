@@ -3,6 +3,8 @@ package es.mqm.webapp.controller;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -38,6 +40,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        LocalDate today = LocalDate.now();
         Location loc = new Location("Madrid", 40.4168, -3.7038);
         locationService.save(loc);
         for (int i = 0; i < 5; i++) {
@@ -47,7 +50,10 @@ public class DatabaseInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load default user image", e);
             }
-            userService.save(new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER"));
+            User user = new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER");
+            int daysBack = ThreadLocalRandom.current().nextInt(0, 365);
+            user.setCreatedAt(today.minusDays(daysBack)); //user created in the past year
+            userService.save(user);
         }
         Image image = new Image();
         try (InputStream inputStream = new ClassPathResource("static/images/admin_icon.png").getInputStream()) {
@@ -55,7 +61,10 @@ public class DatabaseInitializer implements CommandLineRunner {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load default admin image", e);
         }
-        userService.save(new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN"));
+        User admin = new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN");
+        int adminDaysBack = ThreadLocalRandom.current().nextInt(0, 365);
+        admin.setCreatedAt(today.minusDays(adminDaysBack));
+        userService.save(admin);
         
         
         for (int i = 0; i < 40; i++) {
@@ -66,8 +75,15 @@ public class DatabaseInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load default product image", e);
             }
+            String category = switch (i % 5) {
+                case 0 -> "automoviles";
+                case 1 -> "informatica";
+                case 2 -> "electrodomesticos";
+                case 3 -> "ropa";
+                default -> "libros";
+            };
             productService.save(new Product("Producto " + (i + 1), "Buen estado", "Descripcion", 50 + i, user,
-                    imProduct, "automoviles"));
+                    imProduct, category));
         }
         for(int i=0; i<3; i++){
             Product product = productService.findById(i + 1).orElse(null);

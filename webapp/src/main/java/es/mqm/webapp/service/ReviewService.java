@@ -31,6 +31,9 @@ public class ReviewService {
     public List<Review> findByUserId(int id){
         return repository.findByUserId(id);
     }
+    public List<Review> findByRating(float rating){
+        return repository.findByRating(rating);
+    }
     public List<Review> findByUserDest(int id){
         List<Review> reviews = repository.findAll();
         reviews.removeIf(r -> r.getProduct() == null

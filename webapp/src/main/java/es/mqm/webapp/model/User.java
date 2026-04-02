@@ -1,6 +1,10 @@
 package es.mqm.webapp.model;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+
 import es.mqm.webapp.model.User;
 import jakarta.persistence.*;
 
@@ -21,6 +25,9 @@ public class User {
     private double rating;
     @ManyToOne
     private Location location;
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    private LocalDate createdAt;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
@@ -40,6 +47,13 @@ public class User {
         this.rating = rating;
         this.location = location;
           this.roles = List.of(roles);
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = LocalDate.now();
+        }
     }
 
     public int getId() {
@@ -107,6 +121,14 @@ public class User {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+    
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 
 }

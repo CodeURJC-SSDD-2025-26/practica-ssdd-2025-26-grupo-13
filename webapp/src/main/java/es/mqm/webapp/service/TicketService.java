@@ -57,7 +57,7 @@ public class TicketService {
             document.add(table);
             document.add(new Paragraph(" "));
 
-            document.add(new Paragraph("Gastos de envio: 0,00 €"));
+            document.add(new Paragraph("Gastos de envio: 3,50 €"));
             document.add(new Paragraph("Total: " + String.format("%.2f €", order.getTotalPrice())));
 
             document.close();

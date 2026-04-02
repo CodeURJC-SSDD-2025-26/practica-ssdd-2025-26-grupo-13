@@ -23,6 +23,9 @@ public class OrderService {
     public Optional<Order> findById(int id) {
         return repository.findById(id);
     }
+    public long count() {
+        return repository.count();
+    }
 
     public List<Order> findByBuyer(User user) {
         return repository.findByBuyer(user);
