@@ -75,7 +75,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 1.0f));
             user=userService.findById(i+1).orElse(null);
             product= productService.findById(1).orElse(null); 
-            reviewService.save(new Review(product, user, "Comentario " + 2, "2023-01-01", 4.0f));
+            reviewService.save(new Review(product, user, "Comentario " + 2, "2023-01-01", 3.0f));
         }
     }
 }

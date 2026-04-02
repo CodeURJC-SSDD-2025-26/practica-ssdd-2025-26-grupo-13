@@ -1,7 +1,7 @@
 {{>header}}
 <main>
   <h4>Crear reseña</h4>
-  <form role=form action="/new_review" method="POST">
+  <form role=form action="/new_review" method="POST" id="review-form">
     <input type="hidden" name="product" value="{{product.id}}" />
     <div class="d-flex flex-wrap gap-2 mt-3">
         <p class="fw-semibold">Usuario:</p>
@@ -36,16 +36,17 @@
       <span class="star" data-value="3">&#9734;</span>
       <span class="star" data-value="4">&#9734;</span>
       <span class="star" data-value="5">&#9734;</span>
-      <input type="hidden" name="rating" id="rating-value" value="0" />
+      <input type="hidden" name="rating" id="rating-value" value="{{initialRating}}" />
     </div>
     <br />
     <button type="submit" class="button">Publicar</button>
   </form>
 </main>
 <script>
+  const reviewForm = document.getElementById("review-form");
   const stars = document.querySelectorAll("#star-rating .star");
   const ratingValue = document.getElementById("rating-value");
-  let currentRating = 0;
+  let currentRating = Number(ratingValue.value) || 0;
 
   stars.forEach((star, idx) => {
     star.addEventListener("mouseover", () => {
@@ -66,5 +67,14 @@
       star.innerHTML = idx < rating ? "&#9733;" : "&#9734;";
     });
   }
+
+  reviewForm.addEventListener("submit", (event) => {
+    if (currentRating < 1) {
+      event.preventDefault();
+      alert("Selecciona una valoración entre 1 y 5 estrellas.");
+    }
+  });
+
+  highlightStars(currentRating);
 </script>
 {{>footer}}

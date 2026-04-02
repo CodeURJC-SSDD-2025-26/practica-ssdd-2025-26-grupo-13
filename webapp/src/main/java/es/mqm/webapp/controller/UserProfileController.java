@@ -76,6 +76,7 @@ public class UserProfileController {
                     && review.getUser() != null
                     && review.getUser().getId() == currentUser.getId();
             item.put("isUserReview", isUserReview);
+            addReviewStars(item, review);
             reviewsVm.add(item);
         }
         model.addAttribute("reviewsVm", reviewsVm);
@@ -84,5 +85,14 @@ public class UserProfileController {
 
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
+    }
+
+    private void addReviewStars(Map<String, Object> item, Review review) {
+        int rating = Math.max(0, Math.min(5, Math.round(review.getRating())));
+        item.put("star1", rating >= 1);
+        item.put("star2", rating >= 2);
+        item.put("star3", rating >= 3);
+        item.put("star4", rating >= 4);
+        item.put("star5", rating >= 5);
     }
 }

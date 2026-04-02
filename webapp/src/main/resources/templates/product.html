@@ -10,8 +10,10 @@
       <div class="col-md-5">
         <div class="content">
           <h3 class="mb-0 fs-4 fw-semibold">{{product.name}}</h3>
-          <p class="text-muted mb-0 ">{{product.state}}</p>
-          <p class="text-muted">{{#distance}}~{{distance}} km de distancia{{/distance}}</p>
+          <p class="text-muted mb-0">{{product.state}}</p>
+          <p class="text-muted">
+            {{#distance}}~{{distance}} km de distancia{{/distance}}
+          </p>
           <p id="price"><strong>{{product.price}}€</strong></p>
           <div class="d-flex flex-wrap gap-2">
             <a href="/buy/{{product.id}}" class="button">Comprar</a>
@@ -23,7 +25,7 @@
               <a href="/user_profile/{{product.user.id}}"
                 ><img
                   class="rounded-circle"
-                  src="/images/{{product.user.image.id}}" 
+                  src="/images/{{product.user.image.id}}"
                   width="50px"
                 />
               </a>
@@ -55,16 +57,18 @@
       <div class="col">
         <div class="description">
           <h1>Detalles del producto:</h1>
-          <p>
-            {{product.description}}
-          </p>
+          <p>{{product.description}}</p>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <div class="ubication fw-medium">
-          <i class="bi bi-geo-alt me-2"></i> <span>{{product.user.location.name}}{{#distance}} (alrededor de {{distance}} kilómetros de distancia){{/distance}}</span>
+          <i class="bi bi-geo-alt me-2"></i>
+          <span
+            >{{product.user.location.name}}{{#distance}} (alrededor de
+            {{distance}} kilómetros de distancia){{/distance}}</span
+          >
         </div>
       </div>
     </div>
@@ -76,7 +80,10 @@
               <div class="col-12">
                 <h3>
                   <i class="bi bi-star-fill star"></i>
-                  <strong>{{product.user.rating}} {{product.user.name}} valoraciones</strong>
+                  <strong
+                    >{{product.user.rating}} {{product.user.name}}
+                    valoraciones</strong
+                  >
                 </h3>
               </div>
             </div>
@@ -86,17 +93,18 @@
                 <br />
               </div>
             </div>
-            {{#reviews}}
+            {{#reviewsVm}}
             <div class="row">
               <div class="col-12">
                 <div class="container py-2">
                   <div
                     class="d-flex flex-column flex-md-row align-items-start gap-3"
                   >
-                    <a href="/user_profile/{{user.id}}">
+                    {{#review}}
+                    <a href="/user_profile/{{#user}}{{id}}{{/user}}">
                       <img
                         class="rounded-circle"
-                        src="/images/{{user.image.id}}"
+                        src="/images/{{#user}}{{#image}}{{id}}{{/image}}{{/user}}"
                         width="60px"
                         alt="Usuario"
                       />
@@ -105,45 +113,73 @@
                       <div
                         class="d-flex flex-column flex-md-row align-items-md-center gap-2"
                       >
-                        <span class="fw-semibold">{{user.name}}</span>
+                        <span class="fw-semibold"
+                          >{{#user}}{{name}}{{/user}}</span
+                        >
                         <span>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star-fill star"></i>
-                          <i class="bi bi-star star"></i>
+                          <i class="bi bi-star{{#star1}}-fill{{/star1}}{{^star1}}{{/star1}} star"></i>
+                          <i class="bi bi-star{{#star2}}-fill{{/star2}}{{^star2}}{{/star2}} star"></i>
+                          <i class="bi bi-star{{#star3}}-fill{{/star3}}{{^star3}}{{/star3}} star"></i>
+                          <i class="bi bi-star{{#star4}}-fill{{/star4}}{{^star4}}{{/star4}} star"></i>
+                          <i class="bi bi-star{{#star5}}-fill{{/star5}}{{^star5}}{{/star5}} star"></i>
                         </span>
                         <span class="text-muted small ms-md-3">{{date}}</span>
+                        {{/review}} 
+                        {{#isUserReview}}
+                        <a
+                          href="/modify_review/{{#review}}{{id}}{{/review}}"
+                          class="button ms-4"
+                          >Modificar reseña</a
+                        >
+                        {{/isUserReview}}
                       </div>
-                      <p class="mb-0 mt-2">
-                        {{description}}
+                      <p class="mb-2 mt-2">
+                        {{#review}}{{description}}{{/review}}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {{/reviews}}
+
+            {{/reviewsVm}}
             <div>
-            {{#showPaginationReview}}
-            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+              {{#showPaginationReview}}
+              <nav
+                aria-label="Navegación de páginas"
+                class="d-flex justify-content-end"
+              >
                 <ul class="pagination mt-4">
-                <li class="page-item {{^hasPrevPage}}disabled{{/hasPrevPage}}">
-                    <a class="page-link" href="/product/{{product.id}}?pageReview={{previous}}" aria-label="Anterior">
-                    <span aria-hidden="true">&laquo;</span>
+                  <li
+                    class="page-item {{^hasPrevPage}}disabled{{/hasPrevPage}}"
+                  >
+                    <a
+                      class="page-link"
+                      href="/product/{{product.id}}?pageReview={{previous}}"
+                      aria-label="Anterior"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
                     </a>
-                </li>
-                <li class="page-item">
-                    <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
-                </li>
-                <li class="page-item {{^hasNextPage}}disabled{{/hasNextPage}}">
-                    <a class="page-link" href="/product/{{product.id}}?pageReview={{next}}" aria-label="Siguiente">
-                    <span aria-hidden="true">&raquo;</span>
+                  </li>
+                  <li class="page-item">
+                    <span class="page-link"
+                      >{{currentPageReview}} / {{totalPagesReview}}</span
+                    >
+                  </li>
+                  <li
+                    class="page-item {{^hasNextPage}}disabled{{/hasNextPage}}"
+                  >
+                    <a
+                      class="page-link"
+                      href="/product/{{product.id}}?pageReview={{next}}"
+                      aria-label="Siguiente"
+                    >
+                      <span aria-hidden="true">&raquo;</span>
                     </a>
-                </li>
+                  </li>
                 </ul>
-            </nav>
-            {{/showPaginationReview}}
+              </nav>
+              {{/showPaginationReview}}
             </div>
           </div>
         </div>

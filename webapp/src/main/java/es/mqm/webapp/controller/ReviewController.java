@@ -32,6 +32,7 @@ public class ReviewController {
         if(review==null){
             return "redirect:/error";
         }  
+        model.addAttribute("initialRating", Math.max(0, Math.min(5, Math.round(review.getRating()))));
         model.addAttribute("review", review);  
         return "modify_review"; 
     }
@@ -41,7 +42,7 @@ public class ReviewController {
         Review review = reviewService.findById(id).orElse(null);
         if (review != null) {
             review.setDescription(description);
-            review.setRating(rating);
+            review.setRating(normalizeRating(rating));
             reviewService.save(review);
         }
         return "redirect:/user_profile/" + review.getUser().getId();
@@ -62,6 +63,7 @@ public class ReviewController {
     public String showCreateReviewForm(@PathVariable("product_id") int productId, Model model) {
         Product product = productService.findById(productId).orElse(null);
         model.addAttribute("product", product);
+        model.addAttribute("initialRating", 0);
         model.addAttribute("cssfile", "styles");
         return  "create_review";
     }
@@ -80,9 +82,14 @@ public class ReviewController {
         review.setUser(reviewUser);
         review.setDescription(description);
         review.setDate(LocalDate.now().toString());
-        review.setRating(rating);
+        review.setRating(normalizeRating(rating));
         reviewService.save(review);
         return "redirect:/user_profile/" + review.getUser().getId(); 
+    }
+
+    private float normalizeRating(float rating) {
+        int roundedRating = Math.round(rating);
+        return Math.max(1, Math.min(5, roundedRating));
     }
     
 }
