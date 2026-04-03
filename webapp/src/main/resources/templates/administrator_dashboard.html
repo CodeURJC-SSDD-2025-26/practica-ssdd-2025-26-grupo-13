@@ -32,21 +32,21 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">User</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Fecha registro</th>
                     <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#users}}
                     <tr>
-                    <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{id}}">Usuario {{id}}</a></td>
+                    <th scope="row"><a href="user_profile/{{id}}">{{id}}</a></th>
+                    <td>{{email}}</td>
                     <td>{{name}}</td>
                     <td>{{surnames}}</td>
-                    <td>{{email}}</td>
+                    <td>{{createdAt}}</td>
                     <td><form action="/delete_user/{{id}}" method="post">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form></td>

@@ -87,22 +87,18 @@ public class AdministratorDashboardController {
             }
         }
         LocalDate today = LocalDate.now();
-        LocalDate startDate = today.minusDays(364);
+        LocalDate startDate = today.withDayOfYear(1);
         int[] monthCounts = new int[12];
         for (Object[] row : userService.countUsersByMonthBetween(startDate, today)) {
             if (row == null || row.length < 3 || row[0] == null || row[1] == null || row[2] == null) {
                 continue;
             }
-            int year = ((Number) row[0]).intValue();
             int month = ((Number) row[1]).intValue();
             int count = ((Number) row[2]).intValue();
             if (month < 1 || month > 12) {
                 continue;
             }
-            int index = (year - startDate.getYear()) * 12 + (month - startDate.getMonthValue());
-            if (index >= 0 && index < 12) {
-                monthCounts[index] = count;
-            }
+            monthCounts[month - 1] = count;
         }
         for (int i = 0; i < 12; i++) {
             newUsersPerMonth.add(monthCounts[i]);

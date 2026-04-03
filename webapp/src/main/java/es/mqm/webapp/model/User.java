@@ -10,7 +10,7 @@ import es.mqm.webapp.model.User;
 import jakarta.persistence.*;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+// @EntityListeners(AuditingEntityListener.class)
 @Table(name = "mqm_user")
 public class User {
 
@@ -28,7 +28,7 @@ public class User {
     @ManyToOne
     private Location location;
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = true, nullable = false)
     private LocalDate createdAt;
 
     @ElementCollection(fetch = FetchType.EAGER)

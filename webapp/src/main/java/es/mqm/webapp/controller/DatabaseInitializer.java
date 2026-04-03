@@ -37,8 +37,6 @@ public class DatabaseInitializer implements CommandLineRunner {
     private ReviewService reviewService;
     @Autowired
     private LocationService locationService;
-    @Autowired
-    private MailService mailService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
