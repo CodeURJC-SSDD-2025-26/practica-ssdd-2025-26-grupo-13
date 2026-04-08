@@ -85,6 +85,24 @@ public class UserProfileController {
         model.addAttribute("orders", orders);
         model.addAttribute("products", products);
 
+        if(products.isEmpty()){
+            model.addAttribute("emptyProducts", true);
+        }else{
+            model.addAttribute("emptyProducts", false);
+        }
+
+        if(orders.isEmpty()){
+            model.addAttribute("emptyOrders", true);
+        }else{
+            model.addAttribute("emptyOrders", false);
+        }
+
+        if(reviews.isEmpty()){
+            model.addAttribute("emptyReviews", true);
+        }else{
+            model.addAttribute("emptyReviews", false);
+        }
+
         model.addAttribute("cssfile", "user_profile");
         return "user_profile";
     }

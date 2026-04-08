@@ -68,6 +68,12 @@
     justify-items: start;
 }
 
+.empty-grid-message {
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+}
+
 .smallproductcard {
     display: flex;
     flex-direction: column;
@@ -103,7 +109,7 @@
     flex-wrap:nowrap;
     flex-flow: column;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
 
     width: 80%;
     margin-top: 20px !important;
@@ -112,6 +118,10 @@
     border-radius: 25px;
     padding: 1.2em 1.4em 1.2em 1.4em;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.reviews > div {
+    width: 100%;
 }
 
 .grid2{

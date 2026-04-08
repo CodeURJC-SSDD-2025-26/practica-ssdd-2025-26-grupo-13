@@ -62,6 +62,14 @@
       <div>
         <h4>Productos en venta</h4>
       </div>
+      {{#emptyProducts}}
+            <div class="row justify-content-center mt-3">
+              <div class="col-12 text-center">
+                <p class="text-muted ">No tiene productos en venta</p>
+              </div>
+            </div>
+      {{/emptyProducts}}
+      {{^emptyProducts}}
       <div class="productsgrid">
         {{#products}}
         <div class="smallproductcard">
@@ -83,13 +91,23 @@
         </div>
         {{/products}}
        </div>
+      {{/emptyProducts}}
       </section>
 
     <section class="products">
       <div>
         <h4>Productos comprados</h4>
       </div>
+      {{#emptyOrders}}
+            <div class="row justify-content-center mt-3">
+              <div class="col-12 text-center">
+                <p class="text-muted text-center">No se ha realizado ninguna compra</p>
+              </div>
+            </div>  
+      {{/emptyOrders}}
+      {{^emptyOrders}}
       <div class="productsgrid">
+
         {{#orders}}
         <div class="smallproductcard">
           <a href="/product/{{#product}}{{id}}{{/product}}">
@@ -110,6 +128,7 @@
         </div>
         {{/orders}}
       </div>
+      {{/emptyOrders}}
     </section>
 
     <div class="reviews">
@@ -124,10 +143,18 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <h4>Reseñas</h4>
+            <h4>Reseñas</h4> 
             <br />
           </div>
         </div>
+        {{#emptyReviews}}
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+              <p class="text-muted">No hay reseñas para este usuario</p>
+            </div>
+        </div>
+        {{/emptyReviews}}
+        {{^emptyReviews}}
         {{#reviewsVm}}
         <div class="row">
           <div class="col-12">
@@ -175,6 +202,7 @@
         </div>
 
           {{/reviewsVm}}
+          {{/emptyReviews}}
       </div>
     </div>
 

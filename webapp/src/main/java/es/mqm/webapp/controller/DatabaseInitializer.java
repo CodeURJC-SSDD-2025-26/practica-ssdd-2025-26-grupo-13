@@ -91,12 +91,28 @@ public class DatabaseInitializer implements CommandLineRunner {
             productService.save(new Product("Producto " + (i + 1), "Buen estado", "Descripcion", 50 + i, user,
                     imProduct, category));
         }
-        for(int i=0; i<3; i++){
-            Product product = productService.findById(i + 1).orElse(null);
-            User user = userService.findById(1).orElse(null);
+        for(int i=0; i<5; i++){ 
+            User user= userService.findById(2).orElse(null);
+            Image imProduct = new Image();
+            try (InputStream inputStream = new ClassPathResource("static/images/product-400x600.png").getInputStream()) {
+                imProduct.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load default product image", e);
+            }
+            String category = switch (i % 5) {
+                case 0 -> "automoviles";
+                case 1 -> "informatica";
+                case 2 -> "electrodomesticos";
+                case 3 -> "ropa";
+                default -> "libros";
+            };
+            productService.save(new Product("Producto " + (i + 50), "Buen estado", "Descripcion", 50 + i, user,
+                    imProduct, category));
+        }
+        for(int i=0; i<4; i++){ 
+            Product product = productService.findById(i + 1).orElse(null); 
+            User user = userService.findById(2).orElse(null);
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 1.0f));
-            user=userService.findById(i+1).orElse(null);
-            product= productService.findById(1).orElse(null); 
             if (i==0) {
                 orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
                 "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
@@ -104,7 +120,6 @@ public class DatabaseInitializer implements CommandLineRunner {
                 product.setIsSold(true);
                 productService.save(product);
             }
-            reviewService.save(new Review(product, user, "Comentario " + 2, "2023-01-01", 3.0f));
         }
     }
 }
