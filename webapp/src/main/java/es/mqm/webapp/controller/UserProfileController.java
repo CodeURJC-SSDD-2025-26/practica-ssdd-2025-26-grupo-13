@@ -70,6 +70,9 @@ public class UserProfileController {
         List<Product> products = productService.findByIsSoldFalseAndUser(user);
         List<Order> orders = orderService.findByBuyer(user);
         List<Review> reviews = reviewService.findByUserDest(id);
+        Double average = reviews.stream().mapToDouble(r -> r.getRating()).average().orElse(0.0);
+        model.addAttribute("average", average);
+        System.out.println(currentUser);
         List<Map<String, Object>> reviewsVm = new ArrayList<>();
         for (Review review : reviews) {
             Map<String, Object> item = new HashMap<>();

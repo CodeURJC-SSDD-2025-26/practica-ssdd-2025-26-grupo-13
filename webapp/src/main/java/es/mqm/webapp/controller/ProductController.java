@@ -176,7 +176,7 @@ public class ProductController {
             throws ResponseStatusException, IOException{
         Product product = productService.findById(id).orElse(null);
         if (product == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado");
         }
         product.setName(name);
         product.setDescription(description);

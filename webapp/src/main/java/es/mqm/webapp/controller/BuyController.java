@@ -28,7 +28,7 @@ import es.mqm.webapp.service.TicketService;
 public class BuyController {
 
     @Autowired
-    private final MailService mailService;
+    private MailService mailService;
 
     @Autowired
     private ProductService productService;
