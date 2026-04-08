@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,6 +86,7 @@ public class BuyController {
     }
 
     //In the confirmation page there will be a button to download the ticket, which will call this method
+    @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
     @GetMapping("buy/{id}/ticket")
     public ResponseEntity<byte[]> downloadTicket(@PathVariable int id) {
         Order order = orderService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado"));

@@ -51,7 +51,8 @@ public class UserProfileController {
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("password",user.getPassword());
-        Boolean isUser = (((User) model.getAttribute("currentUser")).getId() == id);
+        User currentUser = (User) model.getAttribute("currentUser");
+        boolean isUser = currentUser != null && currentUser.getId() == id;
         model.addAttribute("isUser", isUser);
         Image image = user.getImage();
         if (image != null) {
@@ -61,13 +62,14 @@ public class UserProfileController {
         }
         model.addAttribute("rating", user.getRating());
         model.addAttribute("location", user.getLocation().getName());
-        model.addAttribute("bought", 4); // placeholder
-        model.addAttribute("sold", 4);
+        int bought = orderService.countByBuyer(user);
+        int sold = orderService.countBySeller(user);
+        model.addAttribute("bought", bought);
+        model.addAttribute("sold", sold);
 
-        List<Product> products = productService.findByUser(user);
+        List<Product> products = productService.findByIsSoldFalseAndUser(user);
         List<Order> orders = orderService.findByBuyer(user);
         List<Review> reviews = reviewService.findByUserDest(id);
-        User currentUser = (User) model.getAttribute("currentUser");
         List<Map<String, Object>> reviewsVm = new ArrayList<>();
         for (Review review : reviews) {
             Map<String, Object> item = new HashMap<>();

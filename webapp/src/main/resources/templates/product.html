@@ -15,9 +15,41 @@
             {{#distance}}~{{distance}} km de distancia{{/distance}}
           </p>
           <p id="price"><strong>{{product.price}}€</strong></p>
-          <div class="d-flex flex-wrap gap-2">
-            <a href="/buy/{{product.id}}" class="button">Comprar</a>
-          </div>
+          {{#isUser}}
+            <div class="d-flex flex-wrap gap-2">
+              <a href="/modify_product/{{product.id}}" class="button bg-warning">Modificar</a>
+              <form action="/delete_product_user/{{product.id}}" method="post">
+                <!-- Button trigger modal -->
+                <button type="button" class="button bg-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal">
+                  Eliminar
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProductModalLabel">Confirmar eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar este producto? Esta acción no se puede deshacer.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="button bg-danger">Eliminar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          {{/isUser}}
+          {{^isUser}}
+            <div class="d-flex flex-wrap gap-2">
+              <a href="/buy/{{product.id}}" class="button">Comprar</a>
+            </div>
+          {{/isUser}}
         </div>
         <div class="user">
           <div class="profile">

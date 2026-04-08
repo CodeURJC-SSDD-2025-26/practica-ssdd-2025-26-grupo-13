@@ -98,12 +98,14 @@
           </a>
           <div class="product-footer">
             <p>{{#product}}{{name}}{{/product}}</p>
+            {{#isUser}}
             <a
               class="create-review-right"
               href="/create_review/{{#product}}{{id}}{{/product}}"
               aria-label="Crear reseña"
               ><i class="bi bi-star"></i
             ></a>
+            {{/isUser}}
           </div>
         </div>
         {{/orders}}

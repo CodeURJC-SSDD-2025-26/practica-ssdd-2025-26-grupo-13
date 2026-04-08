@@ -59,6 +59,8 @@ public class ProductController {
         }
         model.addAttribute("product", product);
         model.addAttribute("distance", extproduct.getDistance());
+        Boolean isUser = currentUser != null && product.getUser() != null && product.getUser().getId() == currentUser.getId();
+        model.addAttribute("isUser", isUser);
 
         Page<Review> reviewPage = reviewService.findByProductId(id, PageRequest.of(pageReview, PAGE_SIZE));
         if (pageReview >= reviewPage.getTotalPages() && reviewPage.getTotalPages() > 0) {
@@ -185,5 +187,15 @@ public class ProductController {
         productService.save(product);
 
         return "redirect:/product/" + id;            
+    }
+
+    @PostMapping("delete_product_user/{id}")
+    public String deleteProduct(@PathVariable int id){
+        int userId = productService.findById(id).map(p -> p.getUser().getId()).orElse(-1);
+        if(userId == -1){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se ha encontrado el dueño del producto");
+        }
+        productService.deleteById(id);
+        return "redirect:/user_profile/"+userId;
     }
 }

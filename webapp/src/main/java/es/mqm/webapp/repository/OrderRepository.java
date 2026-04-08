@@ -12,4 +12,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     Optional<Order> findById(Integer id);
     List<Order> findByBuyer(User buyer);
     List<Order> findAll();
+    Integer countByBuyer(User buyer);
+    Integer countByProductUser(User seller);
 }

@@ -211,5 +211,9 @@ public class ProductService {
         boolean isOwner = product.getUser().getEmail().equals(auth.getName());
         return isOwner || isAdmin;
     }
+
+    public List<Product> findByIsSoldFalseAndUser(User user) {
+        return repository.findByIsSoldFalseAndUser(user);
+    }
     
 }
