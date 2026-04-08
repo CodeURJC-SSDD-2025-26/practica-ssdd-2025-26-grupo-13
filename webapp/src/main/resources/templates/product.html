@@ -36,7 +36,7 @@
                         ¿Estás seguro de que quieres eliminar este producto? Esta acción no se puede deshacer.
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="button bg-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="button bg-danger">Eliminar</button>
                       </div>
                     </div>
@@ -63,7 +63,7 @@
               </a>
             </div>
             <div class="b">
-              <p id="user"><strong>{{product.user.name}}</strong></p>
+              <p id="user" class="text-truncate"><strong>{{product.user.name}}</strong></p>
             </div>
             <div class="c">
               <div>
@@ -119,7 +119,7 @@
                 </h3>
               </div>
             </div>
-            <div class="row">
+            <div class="row" id="reviews">
               <div class="col-12">
                 <h4>Reseñas</h4>
                 <br />
@@ -195,7 +195,7 @@
                   >
                     <a
                       class="page-link"
-                      href="/product/{{product.id}}?pageReview={{previous}}"
+                      href="/product/{{product.id}}?pageReview={{previous}}#reviews"
                       aria-label="Anterior"
                     >
                       <span aria-hidden="true">&laquo;</span>
@@ -211,7 +211,7 @@
                   >
                     <a
                       class="page-link"
-                      href="/product/{{product.id}}?pageReview={{next}}"
+                      href="/product/{{product.id}}?pageReview={{next}}#reviews"
                       aria-label="Siguiente"
                     >
                       <span aria-hidden="true">&raquo;</span>

@@ -9,6 +9,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +29,8 @@ import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.ImageService;
 import es.mqm.webapp.service.LocationService;
 import es.mqm.webapp.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccountController {
@@ -59,6 +62,7 @@ public class AccountController {
         model.addAttribute("cssfile", "register");
         if (error != null) {
             model.addAttribute("error", true);
+            model.addAttribute("toastMessage", "Correo o contraseña no válidos. Revisa tus datos.");
         }
         return "login";
     }
@@ -74,7 +78,7 @@ public class AccountController {
     public String showModifyUserForm(@PathVariable int id, Model model) {
         model.addAttribute("cssfile", "product");
         User user = userService.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
         model.addAttribute("user", user);
         model.addAttribute("id", user.getId());
         Image image = user.getImage();
@@ -90,11 +94,16 @@ public class AccountController {
     @PostMapping("/modify_user")
     public String modifyUser(Model model, @RequestParam int id, @RequestParam String name,
             @RequestParam String surnames, @RequestParam String email, @RequestParam String password,
-            @RequestParam MultipartFile image) throws IOException {
+            @RequestParam MultipartFile image, RedirectAttributes redirAttr) throws IOException {
         int user_id = id;
         User user = userService.findById(user_id).orElse(null);
         if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+        }
+        if (!user.getEmail().equals(email) && userService.findByEmail(email).isPresent()) {
+            redirAttr.addFlashAttribute("error", true);
+            redirAttr.addFlashAttribute("toastMessage", "El correo introducido ya está registrado.");
+            return "redirect:/modify_user/" + user_id;
         }
         user.setName(name);
         user.setSurnames(surnames);
@@ -109,9 +118,14 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String createNewUser(Model model, @RequestParam String inputName, @RequestParam String inputSurnames,
+    public String createNewUser(HttpServletRequest request, Model model, @RequestParam String inputName, @RequestParam String inputSurnames,
             @RequestParam String inputEmail, @RequestParam String inputPassword,
-            @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude) {
+            @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude, RedirectAttributes redirAttr) {
+        if (userService.findByEmail(inputEmail).isPresent()) {
+            redirAttr.addFlashAttribute("error", true);
+            redirAttr.addFlashAttribute("toastMessage", "El correo introducido ya está registrado");
+            return "redirect:/register";
+        }
         Image image = new Image();
         try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
             image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
@@ -126,6 +140,11 @@ public class AccountController {
         User user = new User(inputName, inputSurnames, inputEmail, image, passwordEncoder.encode(inputPassword), 5.0, loc, "USER");
         user.setCreatedAt(LocalDate.now());
         userService.save(user);
+        try { // auto login after completing registration
+            request.login(inputEmail, inputPassword);
+        } catch (ServletException e) {
+            return "redirect:/login";
+        }
         return "redirect:/";
     }
 }

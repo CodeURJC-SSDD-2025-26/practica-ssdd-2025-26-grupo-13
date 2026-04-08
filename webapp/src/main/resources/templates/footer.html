@@ -1,4 +1,22 @@
-<br/>
+{{#toastMessage}}
+<div class="z-3 toast {{#error}}bg-danger text-white{{/error}}{{^error}}bg-white text-black{{/error}}  border border-1  align-items-center  border-0 position-fixed bottom-0 end-0 m-3" role="alert"
+  aria-live="assertive" aria-atomic="true" id="liveToast">
+  <div class="d-flex">
+    <div class="toast-body">
+      {{toastMessage}}
+    </div>
+    <button type="button" class="btn-close me-2 m-auto {{#error}}btn-close-white{{/error}}" data-bs-dismiss="toast"
+      aria-label="Close"></button>
+  </div>
+</div>
+<script>
+  const toastEl = document.getElementById('liveToast');
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+</script>
+{{/toastMessage}}
+
+<br />
 <hr />
     <footer>
       <div class="copyright">

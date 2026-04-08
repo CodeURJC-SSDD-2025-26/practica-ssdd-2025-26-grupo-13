@@ -50,7 +50,6 @@ public class UserProfileController {
         model.addAttribute("name", user.getName());
         model.addAttribute("surnames", user.getSurnames());
         model.addAttribute("email", user.getEmail());
-        model.addAttribute("password",user.getPassword());
         User currentUser = (User) model.getAttribute("currentUser");
         boolean isUser = currentUser != null && currentUser.getId() == id;
         model.addAttribute("isUser", isUser);

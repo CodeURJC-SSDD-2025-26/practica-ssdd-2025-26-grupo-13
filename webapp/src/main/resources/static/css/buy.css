@@ -13,3 +13,9 @@
     position: sticky;
     top: 40px;
 }
+
+.productinfo img {
+  height: 75px;
+  object-fit: cover;
+  border-radius: 6px;
+}

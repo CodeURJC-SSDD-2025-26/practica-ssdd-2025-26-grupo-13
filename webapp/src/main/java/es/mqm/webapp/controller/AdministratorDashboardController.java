@@ -10,9 +10,12 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
@@ -72,7 +75,7 @@ public class AdministratorDashboardController {
         userCounter = userService.count();
         productCounter = productService.count();
         productSoldCounter = orderService.count();
-        
+
         for(int i=0;i<5;i++){
             if(i==0){
                 categoriesSold.add(productService.countByCategory("ropa"));
@@ -176,22 +179,28 @@ public class AdministratorDashboardController {
                 .collect(Collectors.joining(", "));
         model.addAttribute("newUsersPerMonthJson", newUsersPerMonthJson);
 
-        model.addAttribute("cssfile", "administrator_dashboard"); 
+        model.addAttribute("cssfile", "administrator_dashboard");
         return "administrator_dashboard";
     }
+    @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("delete_user/{id}")
-    public String deleteUser(@PathVariable int id){
+    public String deleteUser(@PathVariable int id, RedirectAttributes redirAttr){
         userService.deleteById(id);
+        redirAttr.addFlashAttribute("toastMessage", "Usuario eliminado correctamente");
         return "redirect:/admin";
     }
+    @PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("delete_product/{id}")
-    public String deleteProduct(@PathVariable int id){
+    public String deleteProduct(@PathVariable int id, RedirectAttributes redirAttr){
+        reviewService.findByProductId(id).forEach(r -> reviewService.deleteById(r.getId()));
         productService.deleteById(id);
+        redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");
         return "redirect:/admin";
     }
     @PostMapping("delete_review/{id}")
-    public String deleteReview(@PathVariable int id){
+    public String deleteReview(@PathVariable int id, RedirectAttributes redirAttr){
         reviewService.deleteById(id);
+        redirAttr.addFlashAttribute("toastMessage", "Reseña eliminada correctamente");
         return "redirect:/admin";
     }
 }

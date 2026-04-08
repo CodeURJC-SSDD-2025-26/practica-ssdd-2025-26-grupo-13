@@ -20,6 +20,8 @@ public class User {
 
     private String name;
     private String surnames;
+
+    @Column(unique = true, nullable = false)
     private String email;
     @OneToOne(cascade = CascadeType.ALL) //to eliminate the image when the user is deleted
     private Image image;
