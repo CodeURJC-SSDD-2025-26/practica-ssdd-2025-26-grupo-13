@@ -49,8 +49,9 @@ public class ReviewService {
     public List<Review> findByProductId(Integer productId) {
         return repository.findByProductId(productId);
     }
-    public Page<Review> findByProductId(int productId, Pageable pageable) {
-        return repository.findByProductId(productId, pageable);
+
+    public Page<Review> findByProductUserId(Integer userId, Pageable pageable) {
+        return repository.findByProductUserId(userId, pageable);
     }
     
 }

@@ -81,7 +81,7 @@ public class BuyController {
         product.setIsSold(true);
         productService.save(product);
         mailService.sendOrderConfirmation(order);
-        return "redirect:/";
+        return "redirect:/order_successful";
     }
 
     //In the confirmation page there will be a button to download the ticket, which will call this method
@@ -94,4 +94,16 @@ public class BuyController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(ticketBytes);
     }
+
+    @GetMapping("/order_successful/{id}")
+    public String showProductoComprado(Model model,@PathVariable int id) {
+        Optional<Order> orderOpt = orderService.findById(id);
+        if (!orderOpt.isPresent()) {
+            return "redirect:/";
+        }
+        model.addAttribute("id", id);
+        model.addAttribute("cssfile", "error");
+        return "order_successful";
+    }
+    
 }

@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -60,10 +61,12 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("distance", extproduct.getDistance());
 
-        Page<Review> reviewPage = reviewService.findByProductId(id, PageRequest.of(pageReview, PAGE_SIZE));
+        PageRequest reviewPageRequest = PageRequest.of(pageReview, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Review> reviewPage = reviewService.findByProductUserId(product.getUser().getId(), reviewPageRequest);
         if (pageReview >= reviewPage.getTotalPages() && reviewPage.getTotalPages() > 0) {
             pageReview = reviewPage.getTotalPages() - 1;
-            reviewPage = reviewService.findByProductId(id, PageRequest.of(pageReview, PAGE_SIZE));
+            reviewPageRequest = PageRequest.of(pageReview, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
+            reviewPage = reviewService.findByProductUserId(product.getUser().getId(), reviewPageRequest);
         }
 
         boolean hasNextPage = reviewPage.hasNext();
@@ -92,7 +95,11 @@ public class ProductController {
             reviewsVm.add(item);
         }
         model.addAttribute("reviewsVm", reviewsVm);
-        
+        if(reviews.isEmpty()){
+            model.addAttribute("empty", true);
+        }else{
+            model.addAttribute("empty", false);
+        }
         model.addAttribute("cssfile", "product");
         return "product";
     }
