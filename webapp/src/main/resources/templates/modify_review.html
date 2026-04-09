@@ -2,22 +2,21 @@
 <main>
   <div class="category">
     <h4>Modificar reseña</h4>
-    <form role="form" action="/change_review" method="Post" id="review-form">
+    <form role="form" action="/change_review" method="post" id="review-form">
       <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
       <input type="hidden" name="id" value="{{review.id}}" />
       <div class="d-flex flex-wrap gap-2 mt-3">
         <p class="fw-semibold">Usuario:</p>
-        <p>{{review.user.name}}</p>
+        <p>{{review.product.user.name}}</p>
       </div>
       <div class="d-flex flex-wrap gap-2 mb-3">
         <p class="fw-semibold">Producto:</p>
         <p>{{review.product.name}}</p>
       </div>
       <div class="mb-3">
-        <label for="reviewDescription" class="form-label">Información</label> 
+        <label for="reviewDescription" class="form-label">Información</label>
         <textarea class="form-control" name="description" id="reviewDescription" rows="3" required>{{review.description}}</textarea>
       </div>
-      <!-- Sistema de valoración por estrellas -->
       <p class="form-label mb-0">Valoración por estrellas</p>
       <div
         id="star-rating"
@@ -33,11 +32,32 @@
       <br />
       <div class="d-flex flex-wrap gap-2">
         <button class="button me-2" type="submit">Publicar</button>
-        <form action="/delete_review/{{#review}}{{id}}{{/review}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reseña?');">
-          <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
-          <button type="submit" class="button bg-danger">Eliminar reseña</button>
-        </form>
       </div>
+    </form>
+    <form action="/delete_review/{{#review}}{{id}}{{/review}}" method="post">
+      <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+                      <button type="button" class="button bg-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal">
+                  Eliminar reseña
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProductModalLabel">Confirmar eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar esta reseña? Esta acción no se puede deshacer.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="button bg-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="button bg-danger">Eliminar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
     </form>
   </div>
   <script>

@@ -113,6 +113,10 @@ public class UserProfileController {
         for (Review review : reviewPage.getContent()) {
             Map<String, Object> item = new HashMap<>();
             item.put("review", review);
+            boolean isUserReview = currentUser != null
+                    && review.getUser() != null
+                    && review.getUser().getId() == currentUser.getId();
+            item.put("isUserReview", isUserReview);
             addReviewStars(item, review);
             reviewsVm.add(item);
         }

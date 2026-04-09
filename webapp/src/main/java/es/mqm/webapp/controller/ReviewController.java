@@ -47,17 +47,16 @@ public class ReviewController {
             reviewService.save(review);
         }
         redirAttr.addFlashAttribute("toastMessage", "Reseña modificada correctamente");
-        return "redirect:/user_profile/" + review.getUser().getId();
+        return "redirect:/user_profile/" + review.getProduct().getUser().getId();
     }
 
     @PostMapping("/delete_review/{id}")
     public String deleteReview(@PathVariable("id") int id, RedirectAttributes redirAttr) {
         Review review = reviewService.findById(id).orElse(null);
         if (review != null) {
-            int userId = review.getUser().getId();
             reviewService.deleteById(id);
             redirAttr.addFlashAttribute("toastMessage", "Reseña eliminada correctamente");
-            return "redirect:/user_profile/" + userId;
+            return "redirect:/user_profile/" + review.getProduct().getUser().getId();
         }
         return "redirect:/error";
     }
@@ -88,7 +87,7 @@ public class ReviewController {
         review.setRating(normalizeRating(rating));
         reviewService.save(review);
         redirAttr.addFlashAttribute("toastMessage", "Reseña creada correctamente");
-        return "redirect:/user_profile/" + review.getUser().getId(); 
+        return "redirect:/user_profile/" + review.getProduct().getUser().getId(); 
     }
 
     private float normalizeRating(float rating) {
