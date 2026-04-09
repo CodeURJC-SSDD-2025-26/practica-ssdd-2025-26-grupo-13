@@ -1,0 +1,1 @@
+docker run --name mqmdb --rm -e MYSQL_ROOT_PASSWORD=mqmurjc -e MYSQL_DATABASE=mqm -p 3306:3306 -d mysql:latest
