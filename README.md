@@ -214,7 +214,7 @@ Solo si han cambiado.
 - **Usuario Admin**: usuario: `admin`, contraseña: `admin`
 - **Usuario Registrado**: usuario: `user`, contraseña: `user`
 
-### **Database Entity Diagram **
+### **Database Entity Diagram**
 
 ![Diagrama Entidad-Relación](images/erdiagram.svg)
 
