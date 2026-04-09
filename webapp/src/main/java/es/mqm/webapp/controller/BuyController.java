@@ -102,7 +102,6 @@ public class BuyController {
         return "redirect:/order_successful/" + order.getId();
     }
 
-    //In the confirmation page there will be a button to download the ticket, which will call this method
     @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
     @GetMapping("buy/{id}/ticket")
     public ResponseEntity<byte[]> downloadTicket(@PathVariable int id) {
@@ -114,6 +113,7 @@ public class BuyController {
                 .body(ticketBytes);
     }
 
+    @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
     @GetMapping("/order_successful/{id}")
     public String showProductoComprado(Model model,@PathVariable int id) {
         Optional<Order> orderOpt = orderService.findById(id);

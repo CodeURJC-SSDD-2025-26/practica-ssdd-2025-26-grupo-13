@@ -25,7 +25,7 @@
 
         
 
-        <div class="container">
+        <div class="container" id="users">
             <h4>Usuarios registrados</h4>
             <div class="table-responsive">
             <table class="table">
@@ -60,7 +60,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevUser}}disabled{{/hasPrevUser}}">
-                    <a class="page-link" href="/admin?pageUser={{prevPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <a class="page-link" href="/admin?pageUser={{prevPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}#users" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -68,7 +68,7 @@
                     <span class="page-link">{{currentPageUser}} / {{totalPagesUser}}</span>
                 </li>
                 <li class="page-item {{^hasNextUser}}disabled{{/hasNextUser}}">
-                    <a class="page-link" href="/admin?pageUser={{nextPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <a class="page-link" href="/admin?pageUser={{nextPageUser}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}#users" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -78,7 +78,7 @@
         </div>
 
 
-        <div class="container">
+        <div class="container" id="products">
             <h4>Productos publicados</h4>
             <div class="table-responsive">
             <table class="table">
@@ -120,7 +120,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevProduct}}disabled{{/hasPrevProduct}}">
-                    <a class="page-link" href="/admin?pageProduct={{prevPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <a class="page-link" href="/admin?pageProduct={{prevPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}#products" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -128,7 +128,7 @@
                     <span class="page-link">{{currentPageProduct}} / {{totalPagesProduct}}</span>
                 </li>
                 <li class="page-item {{^hasNextProduct}}disabled{{/hasNextProduct}}">
-                    <a class="page-link" href="/admin?pageProduct={{nextPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <a class="page-link" href="/admin?pageProduct={{nextPageProduct}}&pageUser={{currentPageUserZero}}&pageReview={{currentPageReviewZero}}#products" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -137,7 +137,7 @@
             {{/showPaginationProduct}}
         </div>
 
-        <div class="container">
+        <div class="container" id="reviews">
             <h4>Reseñas publicadas</h4>
             <div class="table-responsive">
             <table class="table">
@@ -185,7 +185,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevReview}}disabled{{/hasPrevReview}}">
-                    <a class="page-link" href="/admin?pageReview={{prevPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Anterior">
+                    <a class="page-link" href="/admin?pageReview={{prevPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}#reviews" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -193,7 +193,7 @@
                     <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
                 </li>
                 <li class="page-item {{^hasNextReview}}disabled{{/hasNextReview}}">
-                    <a class="page-link" href="/admin?pageReview={{nextPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}" aria-label="Siguiente">
+                    <a class="page-link" href="/admin?pageReview={{nextPageReview}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}#reviews" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -229,7 +229,7 @@
             const categoriesSoldData = JSON.parse('[{{{categoriesSoldJson}}}]');
             const newUsersPerMonthData = JSON.parse('[{{{newUsersPerMonthJson}}}]');
 
-            // Gráfica de ventas por categoría (Pie chart)
+            // Chart of sales by category (Pie chart)
             const ctx = document.getElementById('ventasChart').getContext('2d');
             const ventasChart = new Chart(ctx, {
                 type: 'pie',
@@ -269,7 +269,7 @@
                 }
             });
 
-            // Gráfica de nuevos usuarios por mes
+            // Chart of new users per month (Line chart)
             const ctxUsuarios = document.getElementById('usuariosChart').getContext('2d');
             const usuariosChart = new Chart(ctxUsuarios, {
                 type: 'line',
@@ -306,7 +306,7 @@
                 }
             });
 
-                // Gráfica de reseñas recibidas por calificación (1-5 estrellas)
+                // Chart of reviews by rating (Bar chart)
                 const ctxReviews = document.getElementById('reviewsChart').getContext('2d');
                 const reviewsRatingData = JSON.parse('[{{{reviewsRatingJson}}}]');
                 const reviewsChart = new Chart(ctxReviews, {

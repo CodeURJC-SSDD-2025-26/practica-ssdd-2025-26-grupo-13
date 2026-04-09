@@ -61,4 +61,16 @@ public class OrderService {
         boolean isBuyer = user.getEmail().equals(auth.getName());
         return isBuyer || isAdmin;
     }
+
+    public boolean isBuyerOrAdminReview(int id, Authentication auth) {
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        Optional<Order> orderOpt = repository.findByProductId(id);
+        if (!orderOpt.isPresent()) {
+            return false;
+        }
+        Order order = orderOpt.get();
+        User user = order.getBuyer();
+        boolean isBuyer = user.getEmail().equals(auth.getName());
+        return isBuyer || isAdmin;
+    }
 }

@@ -5,10 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
+import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ReviewRepository;
 
 @Service
@@ -52,6 +54,18 @@ public class ReviewService {
 
     public Page<Review> findByProductUserId(Integer userId, Pageable pageable) {
         return repository.findByProductUserId(userId, pageable);
+    }
+
+    public boolean isUserOrAdmin(int id, Authentication auth) {
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        Optional<Review> reviewOpt = repository.findById(id);
+        if (!reviewOpt.isPresent()) {
+            return false;
+        }
+        Review review = reviewOpt.get();
+        User user = review.getUser();
+        boolean isUser = user.getEmail().equals(auth.getName());
+        return isUser || isAdmin;
     }
     
 }

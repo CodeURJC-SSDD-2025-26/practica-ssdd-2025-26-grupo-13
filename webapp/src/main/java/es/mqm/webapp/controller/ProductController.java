@@ -69,6 +69,9 @@ public class ProductController {
         model.addAttribute("distance", extproduct.getDistance());
         Boolean isUser = currentUser != null && product.getUser() != null && product.getUser().getId() == currentUser.getId();
         model.addAttribute("isUser", isUser);
+        Boolean isSold = product.getIsSold();
+        model.addAttribute("isSold", isSold);
+
         List<Review> allSellerReviews = reviewService.findByUserDest(product.getUser().getId());
         double sellerAverage = allSellerReviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
         model.addAttribute("sellerAverage", sellerAverage);
@@ -171,7 +174,7 @@ public class ProductController {
         if(product.isPresent()){
             model.addAttribute("product", product.get());
         }else{
-            throw new RuntimeException("Failed to load default product image");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Failed to load default product image");
         }
         model.addAttribute("cssfile", "sell_product");
 
