@@ -130,7 +130,7 @@ public class AccountController {
         try (InputStream inputStream = new ClassPathResource("static/images/usuario anonimo.jpg").getInputStream()) {
             image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load default user image", e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Failed to load default user image");
         }
         Location loc = locationService.findByCity(city).orElse(null);
         if (loc == null) {

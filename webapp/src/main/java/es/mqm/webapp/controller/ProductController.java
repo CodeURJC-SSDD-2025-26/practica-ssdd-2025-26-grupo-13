@@ -64,6 +64,9 @@ public class ProductController {
         model.addAttribute("distance", extproduct.getDistance());
         Boolean isUser = currentUser != null && product.getUser() != null && product.getUser().getId() == currentUser.getId();
         model.addAttribute("isUser", isUser);
+        Boolean isSold = product.getIsSold();
+        model.addAttribute("isSold", isSold);
+
 
         PageRequest reviewPageRequest = PageRequest.of(pageReview, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
         Page<Review> reviewPage = reviewService.findByProductUserId(product.getUser().getId(), reviewPageRequest);
@@ -163,7 +166,7 @@ public class ProductController {
         if(product.isPresent()){
             model.addAttribute("product", product.get());
         }else{
-            throw new RuntimeException("Failed to load default product image");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Failed to load default product image");
         }
         model.addAttribute("cssfile", "sell_product");
 

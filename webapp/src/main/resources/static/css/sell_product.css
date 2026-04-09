@@ -32,7 +32,7 @@
   text-decoration: none;
   transition: 0.5s;
 }
-/*para interactividad de los botones*/
+/*for button interaction*/
 .button-main {
   background-color: transparent !important;
   border: none !important;

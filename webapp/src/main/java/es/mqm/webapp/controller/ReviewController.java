@@ -2,6 +2,7 @@ package es.mqm.webapp.controller;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class ReviewController {
     @Autowired
     private ProductService productService;
 
+    @PreAuthorize("@reviewService.isUserOrAdmin(#id, authentication)")
     @GetMapping("/modify_review/{id}")
     public String showModifyReviewForm(@PathVariable("id") int id,Model model) {
         model.addAttribute("cssfile", "sell_product");
@@ -48,6 +50,7 @@ public class ReviewController {
         return "redirect:/user_profile/" + review.getUser().getId();
     }
 
+    @PreAuthorize("@reviewService.isUserOrAdmin(#id, authentication)")
     @GetMapping("/delete_review/{id}")
     public String deleteReview(@PathVariable("id") int id) {
         Review review = reviewService.findById(id).orElse(null);
@@ -59,6 +62,7 @@ public class ReviewController {
         return "redirect:/error";
     }
     
+    @PreAuthorize("@orderService.isBuyerOrAdminReview(#productId, authentication)")
     @GetMapping("/create_review/{product_id}")
     public String showCreateReviewForm(@PathVariable("product_id") int productId, Model model) {
         Product product = productService.findById(productId).orElse(null);
