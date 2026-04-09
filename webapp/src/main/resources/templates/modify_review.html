@@ -33,7 +33,10 @@
       <br />
       <div class="d-flex flex-wrap gap-2">
         <button class="button me-2" type="submit">Publicar</button>
-        <a href="/delete_review/{{review.id}}" class="button">Eliminar reseña</a>
+        <form action="/delete_review/{{#review}}{{id}}{{/review}}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reseña?');">
+          <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+          <button type="submit" class="button bg-danger">Eliminar reseña</button>
+        </form>
       </div>
     </form>
   </div>

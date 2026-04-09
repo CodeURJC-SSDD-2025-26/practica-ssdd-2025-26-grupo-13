@@ -169,7 +169,7 @@
                     </td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                        <form action="/delete_review/{{#review}}{{id}}{{/review}}" method="post">
+                        <form action="/delete_review_admin/{{#review}}{{id}}{{/review}}" method="post">
                             <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>

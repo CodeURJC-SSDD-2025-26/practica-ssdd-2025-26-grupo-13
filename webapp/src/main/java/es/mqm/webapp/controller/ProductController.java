@@ -60,10 +60,18 @@ public class ProductController {
         } else {
             model.addAttribute("imageUrl", "product-400x600.png");
         }
+        if (product.getUser() != null && product.getUser().getImage() != null) {
+            model.addAttribute("sellerImageUrl", product.getUser().getImage().getId());
+        } else {
+            model.addAttribute("sellerImageUrl", "usuario anonimo.jpg");
+        }
         model.addAttribute("product", product);
         model.addAttribute("distance", extproduct.getDistance());
         Boolean isUser = currentUser != null && product.getUser() != null && product.getUser().getId() == currentUser.getId();
         model.addAttribute("isUser", isUser);
+        List<Review> allSellerReviews = reviewService.findByUserDest(product.getUser().getId());
+        double sellerAverage = allSellerReviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
+        model.addAttribute("sellerAverage", sellerAverage);
 
         PageRequest reviewPageRequest = PageRequest.of(pageReview, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
         Page<Review> reviewPage = reviewService.findByProductUserId(product.getUser().getId(), reviewPageRequest);

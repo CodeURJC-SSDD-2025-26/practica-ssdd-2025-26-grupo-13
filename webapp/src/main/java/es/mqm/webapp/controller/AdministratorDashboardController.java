@@ -197,7 +197,7 @@ public class AdministratorDashboardController {
         redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");
         return "redirect:/admin";
     }
-    @PostMapping("delete_review/{id}")
+    @PostMapping("delete_review_admin/{id}")
     public String deleteReview(@PathVariable int id, RedirectAttributes redirAttr){
         reviewService.deleteById(id);
         redirAttr.addFlashAttribute("toastMessage", "Reseña eliminada correctamente");

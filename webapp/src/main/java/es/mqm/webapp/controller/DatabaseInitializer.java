@@ -112,7 +112,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         for(int i=0; i<4; i++){ 
             Product product = productService.findById(i + 1).orElse(null); 
             User user = userService.findById(2).orElse(null);
-            reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 1.0f));
+            reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 3.0f));
             if (i==0) {
                 orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
                 "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
