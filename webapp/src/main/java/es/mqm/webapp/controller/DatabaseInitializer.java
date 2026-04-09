@@ -56,7 +56,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load default user image", e);
             }
-            User user = new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER");
+            User user = new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"), loc, "USER");
             int daysBack = ThreadLocalRandom.current().nextInt(0, 365);
             user.setCreatedAt(today.minusDays(daysBack)); //user created in the past year
             userService.save(user);
@@ -67,7 +67,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load default admin image", e);
         }
-        User admin = new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN");
+        User admin = new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"), loc, "USER", "ADMIN");
         int adminDaysBack = ThreadLocalRandom.current().nextInt(0, 365);
         admin.setCreatedAt(today.minusDays(adminDaysBack));
         userService.save(admin);

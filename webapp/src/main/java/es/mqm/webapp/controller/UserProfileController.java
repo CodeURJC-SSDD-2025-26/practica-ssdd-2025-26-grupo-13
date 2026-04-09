@@ -59,7 +59,6 @@ public class UserProfileController {
         } else {
             model.addAttribute("imageUrl", "usuario anonimo.jpg");
         }
-        model.addAttribute("rating", user.getRating());
         model.addAttribute("location", user.getLocation().getName());
         model.addAttribute("bought", 4); // placeholder
         model.addAttribute("sold", 4);

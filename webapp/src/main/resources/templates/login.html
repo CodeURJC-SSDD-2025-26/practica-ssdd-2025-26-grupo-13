@@ -12,6 +12,7 @@
         </h1>
         <div id="login">
                 <form role ="form" action="/login" method="post">
+                <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                 <div class="form-group">
                         <label for ="inputEmail">Email</label>
                         <input type="email" id="inputEmail" name="inputEmail" placeholder="Email" class="form-control" required><br>

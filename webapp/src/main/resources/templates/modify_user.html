@@ -5,6 +5,7 @@
   </div>
   <div class="category">
     <form role="form" action="/modify_user" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
       <div class="d-flex gap-5 flex-wrap justify-content-between ms-sm-2">
         <div class="m-auto position-relative">
           <img

@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import es.mqm.webapp.service.RepositoryUserDetailsService;
 
@@ -59,10 +61,9 @@ public class SecurityConfiguration {
 				.logout(logout -> logout
 						.logoutUrl("/logout")
 						.logoutSuccessUrl("/")
-						.permitAll());
-
-		// Disable CSRF at the moment
-		http.csrf(csrf -> csrf.disable());
+						.permitAll())
+				.csrf(csrf -> csrf
+                		.csrfTokenRepository(new HttpSessionCsrfTokenRepository()));
 
 		// Allow H2 console iframe to load (SAMEORIGIN)
 		http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));

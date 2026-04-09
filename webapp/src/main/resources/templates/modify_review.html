@@ -3,6 +3,7 @@
   <div class="category">
     <h4>Modificar reseña</h4>
     <form role="form" action="/change_review" method="Post" id="review-form">
+      <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
       <input type="hidden" name="id" value="{{review.id}}" />
       <div class="d-flex flex-wrap gap-2 mt-3">
         <p class="fw-semibold">Usuario:</p>

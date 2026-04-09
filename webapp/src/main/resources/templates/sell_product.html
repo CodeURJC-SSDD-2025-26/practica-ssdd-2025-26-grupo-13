@@ -42,6 +42,7 @@
         <div class="category">
                 <h4>Información del producto</h4>
                 <form action="/newProduct" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                     <input type="hidden" name="category" id="productCategory" value="informatica" />
                     <div class="mb-3">
                         <label for="productName" class="form-label">Nombre del producto</label> 

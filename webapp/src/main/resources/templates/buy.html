@@ -79,6 +79,7 @@
               </div>
             </div> -->
           <form role="form" action="/buy/{{product.id}}" method="post" class="mt-3">
+            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
             <h4 class="fs-4">Entrega</h4>
             <p class="subtitle">
               Indícanos dónde quieres recibir tu pedido
