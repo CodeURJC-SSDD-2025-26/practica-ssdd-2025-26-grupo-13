@@ -47,6 +47,10 @@ public class ProductService {
         return repository.findAll(pageable);
     }
 
+    public Page<Product> findByIsSoldFalseAndUser(User user, Pageable pageable) {
+        return repository.findByIsSoldFalseAndUser(pageable, user);
+    }
+
     public Optional<Product> findById(int id) {
         return repository.findById(id);
     }

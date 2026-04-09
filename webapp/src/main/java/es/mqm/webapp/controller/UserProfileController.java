@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import es.mqm.webapp.repository.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
@@ -40,12 +43,43 @@ public class UserProfileController {
     @Autowired
     private ReviewService reviewService;
 
+    private static final int PAGE_SIZE = 5;
+
     @GetMapping("/user_profile/{id}")
-    public String showUserProfile(Model model, @PathVariable int id) {
+    public String showUserProfile(Model model, @PathVariable int id,@RequestParam(value = "pageOrder", defaultValue = "0") int pageOrder, @RequestParam(value = "pageProduct", defaultValue = "0") int pageProduct, @RequestParam(value = "pageReview", defaultValue = "0") int pageReview) {
         User user = userService.findById(id).orElse(null);
         if (user == null) {
             return "redirect:/error";
         }
+
+        //for pagination
+        if (pageProduct < 0)
+            pageProduct = 0;
+        if (pageOrder < 0)
+            pageOrder = 0;
+        if (pageReview < 0)
+            pageReview = 0;
+
+        Page<Product> productPage = productService.findByIsSoldFalseAndUser(user, PageRequest.of(pageProduct, PAGE_SIZE));
+        Page<Order> orderPage = orderService.findByBuyer(user, PageRequest.of(pageOrder, PAGE_SIZE));
+        Page<Review> reviewPage = reviewService.findByProductUserId(id, PageRequest.of(pageReview, PAGE_SIZE));
+        if (pageProduct >= productPage.getTotalPages() && productPage.getTotalPages() > 0) {
+            pageProduct = productPage.getTotalPages() - 1;
+            productPage = productService.findByIsSoldFalseAndUser(user, PageRequest.of(pageProduct, PAGE_SIZE));
+        }
+        if (pageOrder >= orderPage.getTotalPages() && orderPage.getTotalPages() > 0) {
+            pageOrder = orderPage.getTotalPages() - 1;
+            orderPage = orderService.findByBuyer(user, PageRequest.of(pageOrder, PAGE_SIZE));
+        }
+        if (pageReview >= reviewPage.getTotalPages() && reviewPage.getTotalPages() > 0) {
+            pageReview = reviewPage.getTotalPages() - 1;
+            reviewPage = reviewService.findByProductUserId(id, PageRequest.of(pageReview, PAGE_SIZE));
+        }
+        int totalPagesProduct = productPage.getTotalPages() == 0 ? 1 : productPage.getTotalPages();
+        int totalPagesOrder = orderPage.getTotalPages() == 0 ? 1 : orderPage.getTotalPages();
+        int totalPagesReview = reviewPage.getTotalPages() == 0 ? 1 : reviewPage.getTotalPages();
+
+
         model.addAttribute("id", user.getId());
         model.addAttribute("name", user.getName());
         model.addAttribute("surnames", user.getSurnames());
@@ -71,21 +105,44 @@ public class UserProfileController {
         List<Review> reviews = reviewService.findByUserDest(id);
         Double average = reviews.stream().mapToDouble(r -> r.getRating()).average().orElse(0.0);
         model.addAttribute("average", average);
-        System.out.println(currentUser);
+
+        //for pagination
+        model.addAttribute("orders", orderPage.getContent());
+        model.addAttribute("products", productPage.getContent());
         List<Map<String, Object>> reviewsVm = new ArrayList<>();
-        for (Review review : reviews) {
+        for (Review review : reviewPage.getContent()) {
             Map<String, Object> item = new HashMap<>();
             item.put("review", review);
-            boolean isUserReview = currentUser != null
-                    && review.getUser() != null
-                    && review.getUser().getId() == currentUser.getId();
-            item.put("isUserReview", isUserReview);
             addReviewStars(item, review);
             reviewsVm.add(item);
         }
         model.addAttribute("reviewsVm", reviewsVm);
-        model.addAttribute("orders", orders);
-        model.addAttribute("products", products);
+
+        model.addAttribute("currentPageOrder", pageOrder+1);
+        model.addAttribute("currentPageProduct", pageProduct+1);
+        model.addAttribute("currentPageReview", pageReview+1);
+        // 0-based values for pagination links
+        model.addAttribute("currentPageOrderZero", pageOrder);
+        model.addAttribute("currentPageProductZero", pageProduct);
+        model.addAttribute("currentPageReviewZero", pageReview);
+        model.addAttribute("totalPagesOrder", totalPagesOrder);
+        model.addAttribute("totalPagesProduct", totalPagesProduct);
+        model.addAttribute("totalPagesReview", totalPagesReview);
+        model.addAttribute("hasPrevOrder", orderPage.hasPrevious());
+        model.addAttribute("hasNextOrder", orderPage.hasNext());
+        model.addAttribute("hasPrevProduct", productPage.hasPrevious());
+        model.addAttribute("hasNextProduct", productPage.hasNext());
+        model.addAttribute("hasPrevReview", reviewPage.hasPrevious());
+        model.addAttribute("hasNextReview", reviewPage.hasNext());
+        model.addAttribute("prevPageOrder", pageOrder - 1);
+        model.addAttribute("nextPageOrder", pageOrder + 1);
+        model.addAttribute("prevPageProduct", pageProduct - 1);
+        model.addAttribute("nextPageProduct", pageProduct + 1);
+        model.addAttribute("prevPageReview", pageReview - 1);
+        model.addAttribute("nextPageReview", pageReview + 1);
+        model.addAttribute("showPaginationOrder", totalPagesOrder > 1);
+        model.addAttribute("showPaginationProduct", totalPagesProduct > 1);
+        model.addAttribute("showPaginationReview", totalPagesReview > 1);
 
         if(products.isEmpty()){
             model.addAttribute("emptyProducts", true);
