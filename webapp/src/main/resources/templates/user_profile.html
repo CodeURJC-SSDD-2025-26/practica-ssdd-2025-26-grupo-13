@@ -91,6 +91,25 @@
         </div>
         {{/products}}
        </div>
+       {{#showPaginationProduct}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevProduct}}disabled{{/hasPrevProduct}}">
+                    <a class="page-link" href="/user_profile/{{id}}?pageProduct={{prevPageProduct}}&pageOrder={{currentPageOrderZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageProduct}} / {{totalPagesProduct}}</span>
+                </li>
+                <li class="page-item {{^hasNextProduct}}disabled{{/hasNextProduct}}">
+                    <a class="page-link" href="/user_profile/{{id}}?pageProduct={{nextPageProduct}}&pageOrder={{currentPageOrderZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+          {{/showPaginationProduct}}
       {{/emptyProducts}}
       </section>
 
@@ -116,26 +135,47 @@
           </a>
           <div class="product-footer">
             <p>{{#product}}{{name}}{{/product}}</p>
+            {{#isUser}}
             <a
               class="create-review-right"
               href="/create_review/{{#product}}{{id}}{{/product}}"
               aria-label="Crear reseña"
               ><i class="bi bi-star"></i
             ></a>
+            {{/isUser}}
           </div>
         </div>
         {{/orders}}
       </div>
+      {{#showPaginationOrder}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevOrder}}disabled{{/hasPrevOrder}}">
+                    <a class="page-link" href="/user_profile/{{id}}?pageOrder={{prevPageOrder}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageOrder}} / {{totalPagesOrder}}</span>
+                </li>
+                <li class="page-item {{^hasNextOrder}}disabled{{/hasNextOrder}}">
+                    <a class="page-link" href="/user_profile/{{id}}?pageOrder={{nextPageOrder}}&pageProduct={{currentPageProductZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+            {{/showPaginationOrder}}
       {{/emptyOrders}}
     </section>
 
-    <div class="reviews">
+    <div class="reviews" id="reviews">
       <div class=" gap-3">
         <div class="row">
           <div class="col-12">
             <h3>
               <i class="bi bi-star-fill star"></i>
-              <strong>3.5 Usuario {{id}} valoraciones</strong>
+              <strong>{{average}} {{name}} {{surnames}} valoraciones</strong>
             </h3>
           </div>
         </div>
@@ -200,6 +240,26 @@
         </div>
 
           {{/reviewsVm}}
+
+          {{#showPaginationReview}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevReview}}disabled{{/hasPrevReview}}">
+                    <a class="page-link" href="/user_profile/{{id}}?pageReview={{prevPageReview}}&pageProduct={{currentPageProductZero}}&pageOrder={{currentPageOrderZero}}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
+                </li>
+                <li class="page-item {{^hasNextReview}}disabled{{/hasNextReview}}">
+                    <a class="page-link" href="/user_profile/{{id}}?pageReview={{nextPageReview}}&pageProduct={{currentPageProductZero}}&pageOrder={{currentPageOrderZero}}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+            {{/showPaginationReview}}
           {{/emptyReviews}}
       </div>
     </div>

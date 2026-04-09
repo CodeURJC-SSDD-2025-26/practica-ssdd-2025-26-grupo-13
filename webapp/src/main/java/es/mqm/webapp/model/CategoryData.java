@@ -8,6 +8,8 @@ public class CategoryData {
     public record Category(String name, String slug, String imageUrl, int imgWidth) {
     }
 
+    // it makes more sense to hardcore categories instead of using an entity,
+    // since they are not expected to change
     public static final List<Category> CATEGORIES = List.of(
             new Category("Ropa", "ropa", "images/clothes.jpeg", 150),
             new Category("Automóviles", "automoviles", "images/car.png", 200),
@@ -15,6 +17,4 @@ public class CategoryData {
             new Category("Libros", "libros", "images/books.png", 150),
             new Category("Electrodomésticos", "electrodomesticos", "images/electrodomesticos.png", 200));
 
-    private CategoryData() {
-    } // prevent instantiation
 }

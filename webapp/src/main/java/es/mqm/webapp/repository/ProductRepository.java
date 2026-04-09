@@ -39,7 +39,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
     int countByCategory(String category);
     Page<Product> findByIsSoldFalse(Pageable pageable);
 
+    Page<Product> findByIsSoldFalseAndUser(Pageable pageable, User user);
+
     long count();
 
     void deleteById(Integer id);
+
+    List<Product> findByIsSoldFalseAndUser(User user);
+
 }

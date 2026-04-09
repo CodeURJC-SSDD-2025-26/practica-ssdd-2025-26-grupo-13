@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
 
 import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.User;
@@ -31,11 +34,31 @@ public class OrderService {
         return repository.findByBuyer(user);
     }
 
+    public Page<Order> findByBuyer(User user, Pageable pageable) {
+        return repository.findByBuyer(user, pageable);
+    }
     public Order save(Order order) {
         return repository.save(order);
     }
 
     public void delete(Order order) {
         repository.delete(order);
+    }
+    public int countByBuyer(User buyer) {
+        return repository.countByBuyer(buyer);
+    }
+    public int countBySeller(User seller) {
+        return repository.countByProductUser(seller);
+    }
+    public boolean isBuyerOrAdmin(int id, Authentication auth) {
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        Optional<Order> orderOpt = repository.findById(id);
+        if (!orderOpt.isPresent()) {
+            return false;
+        }
+        Order order = orderOpt.get();
+        User user = order.getBuyer();
+        boolean isBuyer = user.getEmail().equals(auth.getName());
+        return isBuyer || isAdmin;
     }
 }

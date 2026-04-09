@@ -19,7 +19,7 @@
       <div class="collapse px-4 border-bottom" id="summaryDropdown">
         <div class="productinfo mt-3">
           <div class="d-flex gap-3 align-items-center">
-            <img src="images/placeholder100x100.png" width="60" />
+            <img src="/images/{{#product}}{{#image}}{{id}}{{/image}}{{/product}}" width="60" />
             <div class="d-flex w-100 justify-content-between">
               <div class="d-flex flex-column">
                 <p class="fw-medium fs-5 mb-0">{{product.name}}</p>
@@ -29,19 +29,6 @@
             </div>
           </div>
 
-          <form>
-            <div class="mt-4 d-flex gap-2">
-              <input
-                type="text"
-                class="form-control w-75"
-                id="couponCode"
-                placeholder="Código de descuento"
-                required />
-              <button type="submit" class="button border-0 d-block w-25">
-                Aplicar
-              </button>
-            </div>
-          </form>
 
           <div class="mt-4 d-flex justify-content-between align-items-center">
             <span class="small">Subtotal</span>
@@ -49,7 +36,10 @@
           </div>
           <div class="mt-2 d-flex justify-content-between align-items-center">
             <span class="small">Envío</span>
-            <span class="small mb-0">3.5€</span>
+            <div>
+            <span class="small mb-0 {{^priceLessThan30}}text-decoration-line-through{{/priceLessThan30}}">3.5€</span>
+            <span class="small ms-2">{{^priceLessThan30}}0€{{/priceLessThan30}}</span>
+            </div>
           </div>
           <div class="mt-4 pb-4 d-flex justify-content-between align-items-center">
             <span class="fw-semibold fs-5">Total</span>
@@ -86,20 +76,14 @@
             </p>
 
             <div class="mb-3 d-flex gap-3">
-              <input
-                class="form-control"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Nombre"
-                required />
-              <input
-                class="form-control"
-                type="text"
-                id="surnames"
-                name="surnames"
-                placeholder="Apellidos"
-                required />
+              <div class="flex-grow-1">
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nombre" required />
+                <div class="invalid-feedback">Debes proporcionar un nombre</div>
+              </div>
+              <div class="flex-grow-1">
+                <input class="form-control w-100" type="text" id="surnames" name="surnames" placeholder="Apellidos" required />
+                <div class="invalid-feedback">Debes proporcionar unos apellidos</div>
+              </div>
             </div>
             <select
               class="form-select my-3"
@@ -430,6 +414,7 @@
                 name="address"
                 placeholder="Dirección"
                 required />
+              <div class="invalid-feedback">Debes proporcionar una dirección</div>
             </div>
             <div class="mb-3">
               <input
@@ -442,29 +427,19 @@
                        <!-- https://www.html-code-generator.com/drop-down/country-names -->
             
             <div class="mb-3 d-flex gap-3">
-              <input
-                class="form-control"
-                type="text"
-                id="zipcode"
-                name="zipcode"
-                placeholder="Código postal"
-                autocomplete="postal-code"
-                inputmode="numeric"
-                required />
-              <input
-                class="form-control"
-                type="text"
-                id="city"
-                name="city"
-                placeholder="Ciudad"
-                required />
-              <input
-                class="form-control"
-                type="text"
-                id="province"
-                name="province"
-                placeholder="Provincia/Estado"
-                required />
+              <div class="flex-grow-1">
+                <input class="form-control w-100 {{#zipcodeinvalid}}is-invalid{{/zipcodeinvalid}}" type="text" id="zipcode" name="zipcode" placeholder="Código postal"
+                  autocomplete="postal-code" inputmode="numeric" pattern="\d{5}" maxlength="5" required />
+                <div class="invalid-feedback">Debes proporcionar un código postal válido (5 dígitos)</div>
+              </div>
+              <div class="flex-grow-1">
+                <input class="form-control w-100" type="text" id="city" name="city" placeholder="Ciudad" required />
+                <div class="invalid-feedback">Debes proporcionar una ciudad</div>
+              </div>
+              <div class="flex-grow-1">
+                <input class="form-control w-100" type="text" id="province" name="province" placeholder="Provincia/Estado" required />
+                <div class="invalid-feedback">Debes proporcionar una provincia</div>
+              </div>
             </div>
             <div class="mb-3">
               <input
@@ -475,6 +450,7 @@
                 placeholder="Teléfono de contacto"
                 autocomplete="tel"
                 required />
+              <div class="invalid-feedback">Debes proporcionar un teléfono</div>
             </div>
 
             <h4 class="fs-4 mt-4">Pago</h4>
@@ -492,24 +468,19 @@
                 inputmode="numeric"
                 autocomplete="cc-number"
                 required />
+              <div class="invalid-feedback">Debes proporcionar un número de tarjeta</div>
             </div>
             <div class="mb-3 d-flex gap-3">
-              <input
-                class="form-control"
-                type="text"
-                id="date"
-                name="creditCardExpiryDate"
-                placeholder="Fecha de vencimiento (MM/AA)"
-                autocomplete="cc-exp" pattern="^(0[1-9]|1[0-2])\/\d{2}$"
-                required />
-              <input
-                class="form-control"
-                type="text"
-                id="cvv"
-                name="creditCardCVV"
-                placeholder="CVV"
-                inputmode="numeric" autocomplete="cc-scs"
-                required />
+              <div class="flex-grow-1">
+                <input class="form-control {{#dateinvalid}}is-invalid{{/dateinvalid}}" type="text" id="date" name="creditCardExpiryDate"
+                  placeholder="Fecha de vencimiento (MM/AA)" autocomplete="cc-exp" pattern="^(0[1-9]|1[0-2])\/\d{2}$" required />
+                <div class="invalid-feedback">Debes proporcionar una fecha válida (MM/AA)</div>
+              </div>
+              <div class="flex-grow-1">
+                <input class="form-control {{#cvvinvalid}}is-invalid{{/cvvinvalid}}" type="text" id="cvv" name="creditCardCVV" pattern="\d{3}" maxlength="3" placeholder="CVV"
+                  inputmode="numeric" autocomplete="cc-scs" required />
+                <div class="invalid-feedback">Debes proporcionar el CVV (3 digitos)</div>
+              </div>
             </div>
             <div class="mb-3">
               <input
@@ -520,6 +491,7 @@
                 autocomplete="cc-name"
                 placeholder="Nombre del titular de la tarjeta"
                 required />
+              <div class="invalid-feedback">Debes proporcionar el nombre del titular</div>
             </div>
 
             <button
@@ -528,10 +500,22 @@
               Pagar ahora
             </button>
           </form>
+          <script>
+              const forms = document.querySelectorAll('.needs-validation')
+              Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                  if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                  }
+                  form.classList.add('was-validated')
+                }, false)
+              })
+          </script>
         </div>
         <div class="d-none d-md-block col-md-4 align-self-start productinfo">
           <div class="d-flex gap-3 align-items-center">
-            <img src="images/placeholder100x100.png" width="60" />
+            <img src="/images/{{#product}}{{#image}}{{id}}{{/image}}{{/product}}" width="60" />
             <div class="d-flex w-100 justify-content-between gap-1">
               <div class="d-flex flex-column lh-sm">
                 <p class="fw-medium fs-5 mb-0">{{product.name}}</p>
@@ -541,19 +525,6 @@
             </div>
           </div>
 
-          <form>
-            <div class="mt-4 d-flex gap-2">
-              <input
-                type="text"
-                class="form-control w-75"
-                id="couponCode"
-                placeholder="Código de descuento"
-                required />
-              <button type="submit" class="button border-0 d-block w-25">
-                Aplicar
-              </button>
-            </div>
-          </form>
 
           <div class="mt-4 d-flex justify-content-between align-items-center">
             <span class="small">Subtotal</span>
@@ -561,7 +532,10 @@
           </div>
           <div class="mt-2 d-flex justify-content-between align-items-center">
             <span class="small">Envío</span>
-            <span class="small mb-0">3.5€</span>
+            <div>
+            <span class="small mb-0 {{^priceLessThan30}}text-decoration-line-through{{/priceLessThan30}}">3.5€</span>
+            <span class="small ms-2">{{^priceLessThan30}}0€{{/priceLessThan30}}</span>
+            </div>
           </div>
           <div class="mt-4 d-flex justify-content-between align-items-center">
             <span class="fw-semibold fs-5">Total</span>

@@ -117,6 +117,8 @@ public class DatabaseInitializer implements CommandLineRunner {
                 orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
                 "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
                 "234", 50.5));
+                product.setIsSold(true);
+                productService.save(product);
             }
         }
     }

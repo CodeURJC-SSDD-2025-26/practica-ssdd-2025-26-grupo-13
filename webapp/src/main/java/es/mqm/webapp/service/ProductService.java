@@ -47,6 +47,10 @@ public class ProductService {
         return repository.findAll(pageable);
     }
 
+    public Page<Product> findByIsSoldFalseAndUser(User user, Pageable pageable) {
+        return repository.findByIsSoldFalseAndUser(pageable, user);
+    }
+
     public Optional<Product> findById(int id) {
         return repository.findById(id);
     }
@@ -210,6 +214,10 @@ public class ProductService {
         boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
         boolean isOwner = product.getUser().getEmail().equals(auth.getName());
         return isOwner || isAdmin;
+    }
+
+    public List<Product> findByIsSoldFalseAndUser(User user) {
+        return repository.findByIsSoldFalseAndUser(user);
     }
     
 }

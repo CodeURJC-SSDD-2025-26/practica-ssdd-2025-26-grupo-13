@@ -1,4 +1,5 @@
 package es.mqm.webapp.controller;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,7 +45,7 @@ public class ProductController {
     private ImageService imageService;
 
     private static final int PAGE_SIZE = 3;
-    
+
     @GetMapping("/product/{id}")
     public String showProductDetails(@PathVariable("id") int id, Model model,@RequestParam(value = "pageReview", defaultValue = "0") int pageReview) {
         if (pageReview < 0) {
@@ -60,6 +62,8 @@ public class ProductController {
         }
         model.addAttribute("product", product);
         model.addAttribute("distance", extproduct.getDistance());
+        Boolean isUser = currentUser != null && product.getUser() != null && product.getUser().getId() == currentUser.getId();
+        model.addAttribute("isUser", isUser);
 
         PageRequest reviewPageRequest = PageRequest.of(pageReview, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
         Page<Review> reviewPage = reviewService.findByProductUserId(product.getUser().getId(), reviewPageRequest);
@@ -81,7 +85,7 @@ public class ProductController {
         model.addAttribute("totalPagesReview", totalPagesReview);
         model.addAttribute("reviews", reviewPage.getContent());
         model.addAttribute("showPaginationReview", totalPagesReview > 1);
-        
+
         List<Review> reviews = reviewPage.getContent();
         List<Map<String, Object>> reviewsVm = new ArrayList<>();
         for (Review review : reviews) {
@@ -154,7 +158,7 @@ public class ProductController {
     @PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @GetMapping("/modify_product/{id}")
     public String showModifyProductPage(Model model, @PathVariable int id) {
-        
+
         Optional<Product> product = productService.findById(id);
         if(product.isPresent()){
             model.addAttribute("product", product.get());
@@ -162,19 +166,21 @@ public class ProductController {
             throw new RuntimeException("Failed to load default product image");
         }
         model.addAttribute("cssfile", "sell_product");
-        
+
         return "modify_product";
     }
+
+    @PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("/modify_product")
     public String modifyProduct(Model model, @RequestParam int id, @RequestParam String name,
             @RequestParam String description, @RequestParam double price,
             @RequestParam(required = false) String state,
             @RequestParam(required=false) String category,
-            @RequestParam(required = false) MultipartFile image)
+            @RequestParam(required = false) MultipartFile image, RedirectAttributes redirAttr)
             throws ResponseStatusException, IOException{
         Product product = productService.findById(id).orElse(null);
         if (product == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado");
         }
         product.setName(name);
         product.setDescription(description);
@@ -190,7 +196,20 @@ public class ProductController {
             productService.addImageToProduct(id, im);
         }
         productService.save(product);
+        redirAttr.addFlashAttribute("toastMessage", "Producto modificado correctamente");
+        return "redirect:/product/" + id;
+    }
 
-        return "redirect:/product/" + id;            
+    @PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
+    @PostMapping("delete_product_user/{id}")
+    public String deleteProduct(@PathVariable int id, RedirectAttributes redirAttr) {
+        int userId = productService.findById(id).map(p -> p.getUser().getId()).orElse(-1);
+        if(userId == -1){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se ha encontrado el dueño del producto");
+        }
+        reviewService.findByProductId(id).forEach(r -> reviewService.deleteById(r.getId()));
+        productService.deleteById(id);
+        redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");
+        return "redirect:/user_profile/" + userId;
     }
 }
