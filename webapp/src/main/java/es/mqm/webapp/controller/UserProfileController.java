@@ -93,7 +93,6 @@ public class UserProfileController {
         } else {
             model.addAttribute("imageUrl", "usuario anonimo.jpg");
         }
-        model.addAttribute("rating", user.getRating());
         model.addAttribute("location", user.getLocation().getName());
         int bought = orderService.countByBuyer(user);
         int sold = orderService.countBySeller(user);
@@ -103,8 +102,9 @@ public class UserProfileController {
         List<Product> products = productService.findByIsSoldFalseAndUser(user);
         List<Order> orders = orderService.findByBuyer(user);
         List<Review> reviews = reviewService.findByUserDest(id);
-        Double average = reviews.stream().mapToDouble(r -> r.getRating()).average().orElse(0.0);
+        Double average = reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
         model.addAttribute("average", average);
+        addAverageStars(model, average);
 
         //for pagination
         model.addAttribute("orders", orderPage.getContent());
@@ -173,5 +173,14 @@ public class UserProfileController {
         item.put("star3", rating >= 3);
         item.put("star4", rating >= 4);
         item.put("star5", rating >= 5);
+    }
+
+    private void addAverageStars(Model model, double averageRating) {
+        int roundedRating = Math.max(0, Math.min(5, (int) Math.round(averageRating)));
+        model.addAttribute("avgStar1", roundedRating >= 1);
+        model.addAttribute("avgStar2", roundedRating >= 2);
+        model.addAttribute("avgStar3", roundedRating >= 3);
+        model.addAttribute("avgStar4", roundedRating >= 4);
+        model.addAttribute("avgStar5", roundedRating >= 5);
     }
 }

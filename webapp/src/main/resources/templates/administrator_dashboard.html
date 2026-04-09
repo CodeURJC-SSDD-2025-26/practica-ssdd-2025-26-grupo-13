@@ -48,6 +48,7 @@
                     <td>{{surnames}}</td>
                     <td>{{createdAt}}</td>
                     <td><form action="/delete_user/{{id}}" method="post">
+                            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form></td>
                     </tr>
@@ -104,6 +105,7 @@
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
                         <form action="/delete_product/{{id}}" method="post">
+                            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>
                         <a href="modify_product/{{id}}" class="btn btn-warning">Modificar</a>
@@ -167,7 +169,8 @@
                     </td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                        <form action="/delete_review/{{#review}}{{id}}{{/review}}" method="post">
+                        <form action="/delete_review_admin/{{#review}}{{id}}{{/review}}" method="post">
+                            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>
                         <a href="modify_review/{{#review}}{{id}}{{/review}}" class="btn btn-warning">Modificar</a>

@@ -86,7 +86,12 @@
             <li><a class="dropdown-item" href="/admin">Administración</a></li>
             {{/isAdmin}}
             <div class="dropdown-divider"></div>
-            <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+            <li>
+              <form action="/logout" method="post" class="px-3 py-1">
+                <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+                <button type="submit" class="dropdown-item px-0">Cerrar sesión</button>
+              </form>
+            </li>
           </ul>
         </div>
         {{/currentUser}}

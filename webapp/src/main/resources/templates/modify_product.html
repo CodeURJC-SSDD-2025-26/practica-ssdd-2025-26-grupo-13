@@ -42,6 +42,7 @@
         <div class="category">
                 <h4>Información del producto</h4>
                 <form action="/modify_product" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                     <div class="mb-3">
                         <input type="hidden" name="id" value="{{product.id}}" />
                         <input type="hidden" name="category" id="productCategory" value="{{product.category}}" />

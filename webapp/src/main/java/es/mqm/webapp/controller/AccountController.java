@@ -137,7 +137,7 @@ public class AccountController {
             loc = new Location(city, Double.parseDouble(latitude), Double.parseDouble(longitude));
             locationService.save(loc);
         }
-        User user = new User(inputName, inputSurnames, inputEmail, image, passwordEncoder.encode(inputPassword), 5.0, loc, "USER");
+        User user = new User(inputName, inputSurnames, inputEmail, image, passwordEncoder.encode(inputPassword), loc, "USER");
         user.setCreatedAt(LocalDate.now());
         userService.save(user);
         try { // auto login after completing registration

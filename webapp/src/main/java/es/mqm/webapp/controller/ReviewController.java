@@ -13,6 +13,7 @@ import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.ReviewService;
@@ -40,23 +41,25 @@ public class ReviewController {
     }
 
     @PostMapping("/change_review")
-    public String modifyReview(@RequestParam int id, @RequestParam String description, @RequestParam float rating) {
+    public String modifyReview(@RequestParam int id, @RequestParam String description, @RequestParam float rating, RedirectAttributes redirAttr) {
         Review review = reviewService.findById(id).orElse(null);
         if (review != null) {
             review.setDescription(description);
             review.setRating(normalizeRating(rating));
             reviewService.save(review);
         }
+        redirAttr.addFlashAttribute("toastMessage", "Reseña modificada correctamente");
         return "redirect:/user_profile/" + review.getUser().getId();
     }
 
     @PreAuthorize("@reviewService.isUserOrAdmin(#id, authentication)")
-    @GetMapping("/delete_review/{id}")
-    public String deleteReview(@PathVariable("id") int id) {
+    @PostMapping("/delete_review/{id}")
+    public String deleteReview(@PathVariable("id") int id, RedirectAttributes redirAttr) {
         Review review = reviewService.findById(id).orElse(null);
         if (review != null) {
             int userId = review.getUser().getId();
             reviewService.deleteById(id);
+            redirAttr.addFlashAttribute("toastMessage", "Reseña eliminada correctamente");
             return "redirect:/user_profile/" + userId;
         }
         return "redirect:/error";
@@ -73,7 +76,7 @@ public class ReviewController {
     }
 
     @PostMapping("/new_review")
-    public String newReview(@RequestParam int product, @RequestParam int user, @RequestParam String description, @RequestParam float rating) {
+    public String newReview(@RequestParam int product, @RequestParam int user, @RequestParam String description, @RequestParam float rating,RedirectAttributes redirAttr) {
         Product reviewProduct = productService.findById(product).orElse(null);
         User reviewUser = userService.findById(user).orElse(null);
 
@@ -88,6 +91,7 @@ public class ReviewController {
         review.setDate(LocalDate.now().toString());
         review.setRating(normalizeRating(rating));
         reviewService.save(review);
+        redirAttr.addFlashAttribute("toastMessage", "Reseña creada correctamente");
         return "redirect:/user_profile/" + review.getUser().getId(); 
     }
 

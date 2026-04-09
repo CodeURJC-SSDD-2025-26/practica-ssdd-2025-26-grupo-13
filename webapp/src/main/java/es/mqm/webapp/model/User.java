@@ -26,7 +26,6 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL) //to eliminate the image when the user is deleted
     private Image image;
     private String password;
-    private double rating;
     @ManyToOne
     private Location location;
     @CreatedDate
@@ -41,14 +40,13 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surnames, String email, Image image, String password, double rating, Location location,
+    public User(String name, String surnames, String email, Image image, String password, Location location,
             String... roles) {
         this.name = name;
         this.surnames = surnames;
         this.email = email;
         this.image = image;
         this.password = password;
-        this.rating = rating;
         this.location = location;
           this.roles = List.of(roles);
     }
@@ -101,14 +99,6 @@ public class User {
 
     public Image getImage() {
         return image;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
     }
 
     public Location getLocation() {

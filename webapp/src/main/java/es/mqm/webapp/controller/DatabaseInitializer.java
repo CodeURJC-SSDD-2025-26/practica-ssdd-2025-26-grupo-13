@@ -56,7 +56,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load default user image", e);
             }
-            User user = new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER");
+            User user = new User("Usuario " + (i + 1), "Apellido " + (i + 1), "usuario" + (i + 1) + "@example.com", image, passwordEncoder.encode("1234"), loc, "USER");
             int daysBack = ThreadLocalRandom.current().nextInt(0, 365);
             user.setCreatedAt(today.minusDays(daysBack)); //user created in the past year
             userService.save(user);
@@ -67,7 +67,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load default admin image", e);
         }
-        User admin = new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"),  (float) 4.5, loc, "USER", "ADMIN");
+        User admin = new User("Admin", "Admin", "admin@admin.com", image, passwordEncoder.encode("1234"), loc, "USER", "ADMIN");
         int adminDaysBack = ThreadLocalRandom.current().nextInt(0, 365);
         admin.setCreatedAt(today.minusDays(adminDaysBack));
         userService.save(admin);
@@ -112,7 +112,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         for(int i=0; i<4; i++){ 
             Product product = productService.findById(i + 1).orElse(null); 
             User user = userService.findById(2).orElse(null);
-            reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 1.0f));
+            reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 3.0f));
             if (i==0) {
                 orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
                 "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
