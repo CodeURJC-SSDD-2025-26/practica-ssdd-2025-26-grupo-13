@@ -44,6 +44,13 @@
 #user{
     font-size: 20pt;
 }
+
+@media screen and (min-width: 768px) {
+    .profile-name-block {
+        margin-right: 2.5rem;
+    }
+}
+
 #location{
     margin:0;
 }
@@ -59,13 +66,12 @@
 .productsgrid {
     margin-top: 25px;
     display: grid;
-    /* This creates 4 equal columns */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    /* This adds space between items */
-    gap: 20px;
-    margin: 25px 25px 10px 25px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    gap: 24px;
+    margin: 25px 0 10px 0;
     width: 100%;
-    justify-items: start;
+    justify-content: center;
+    justify-items: center;
 }
 
 .empty-grid-message {
@@ -81,6 +87,13 @@
     font-size: 1em;
     text-overflow: ellipsis;
     width: 150px;
+}
+
+.smallproductcard img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
 .smallproductcard p {
@@ -182,4 +195,19 @@ a{
     margin-left: auto;
     color: inherit;
     text-decoration: none;
+}
+
+.profile-edit-btn {
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 805px) {
+    .smallproductcard {
+        width: 100px;
+    }
+
+    .smallproductcard img {
+        width: 100px;
+        height: 100px;
+    }
 }

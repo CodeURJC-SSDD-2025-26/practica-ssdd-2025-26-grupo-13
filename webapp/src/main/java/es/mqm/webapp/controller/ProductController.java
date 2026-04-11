@@ -218,7 +218,7 @@ public class ProductController {
         if(userId == -1){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se ha encontrado el dueño del producto");
         }
-        reviewService.findByProductId(id).forEach(r -> reviewService.deleteById(r.getId()));
+        reviewService.deleteByProductId(id);
         productService.deleteById(id);
         redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");
         return "redirect:/user_profile/" + userId;

@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import es.mqm.webapp.repository.UserRepository;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.Image;
@@ -25,7 +22,6 @@ import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.ProductService;
-import es.mqm.webapp.repository.UserRepository;
 import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.UserService;
 

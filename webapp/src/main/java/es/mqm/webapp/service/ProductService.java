@@ -15,16 +15,12 @@ import org.springframework.stereotype.Service;
 
 import es.mqm.webapp.model.Location;
 import es.mqm.webapp.model.ExtendedProduct;
-import es.mqm.webapp.model.ExtendedProduct;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ProductRepository;
 import es.mqm.webapp.repository.UserRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Join;
 import org.springframework.data.domain.PageImpl;
 
