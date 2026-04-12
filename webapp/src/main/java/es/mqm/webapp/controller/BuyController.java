@@ -110,7 +110,7 @@ public class BuyController {
             redirAttr.addFlashAttribute("phoneinvalid", true);
             return "redirect:/buy/" + id;
         }
-        if (!creditCardNumber.matches("\\d*")) {
+        if (!creditCardNumber.matches("\\d{16}")) {
             redirAttr.addFlashAttribute("creditcardnumberinvalid", true);
             return "redirect:/buy/" + id;
         }

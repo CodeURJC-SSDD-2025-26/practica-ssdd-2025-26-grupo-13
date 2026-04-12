@@ -465,10 +465,12 @@
                 id="cardNumber"
                 name="creditCardNumber"
                 placeholder="Número de tarjeta"
+                pattern="\d{16}"
+                maxlength="16"
                 inputmode="numeric"
                 autocomplete="cc-number"
                 required />
-              <div class="invalid-feedback">Debes proporcionar un número de tarjeta</div>
+              <div class="invalid-feedback">Debes proporcionar un número de tarjeta válido (16 dígitos)</div>
             </div>
             <div class="mb-3 d-flex gap-3">
               <div class="flex-grow-1">

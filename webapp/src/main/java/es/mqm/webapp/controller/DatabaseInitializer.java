@@ -43,6 +43,10 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (userService.count() > 0 || productService.count() > 0) {
+            return;
+        }
+
         LocalDate today = LocalDate.now();
         Location loc = new Location("Madrid", 40.4168, -3.7038);
         locationService.save(loc);
