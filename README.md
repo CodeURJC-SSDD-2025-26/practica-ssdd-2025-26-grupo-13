@@ -258,17 +258,17 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - [Lucas Moreno Prieto]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+[First, I took charge of the product page, extracting information from the database and adding pagination to the reviews. Another major contribution was everything related to reviews: the "create review" and "edit review" pages, and all the review-related features on the other pages. In addition, I implemented the star rating system, applying the changes to all pages where it appears. I also managed the "edit user" page. Furthermore, I added CSRF, and finally, it's worth noting that we've all been modifying most of the pages to varying degrees.]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [add protection with CSRF](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/5268caac0fcc2133e3a95e0aec4ee803882e0143)  | [CSRFHandlerConfiguration.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/CSRFHandlerConfiguration.java)   |
+|2| [Added modify user and review templates, implemented Product and Review controllers, updated create review form action and updated user profile layout and functionality](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/03662f0ae6b06fc2eac62b112a9190cb587e51f0)  | [ProductController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/ProductController.java), [ReviewController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/ReviewController.java)   |
+|3| [Refactor Review handling, introduce ReviewService for better management and solve minor errors](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/07908f1f8938fbb436f20599b5c52928f10f3f0c)  | [ReviewService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/service/ReviewService.java), [ReviewController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/ReviewController.java) |
+|4| [Properly develop the product templete and the ProductController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/8561643b434dd2f66c63515e117ef242e24afe88)  | [ProductController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/ProductController.java), [product.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/templates/product.html)  |
+|5| [solve a problem with the reviews, create the order_successful page, and add small details on other pages](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/cdfbbc18c53eac1fb94cae8a12f48579d2655998)  | [order_successful.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/templates/order_successful.html), [BuyController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/BuyController.java)|
 
 ---
 

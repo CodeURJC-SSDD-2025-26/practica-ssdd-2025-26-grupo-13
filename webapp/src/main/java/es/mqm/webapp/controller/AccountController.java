@@ -3,6 +3,7 @@ package es.mqm.webapp.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -34,6 +35,8 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccountController {
+
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
 
     @Value("${google.maps.api-key:}")
     private String mapsApiKey; // stored in application-dev.properties (not in github)
@@ -121,9 +124,20 @@ public class AccountController {
     public String createNewUser(HttpServletRequest request, Model model, @RequestParam String inputName, @RequestParam String inputSurnames,
             @RequestParam String inputEmail, @RequestParam String inputPassword,
             @RequestParam String city, @RequestParam String latitude, @RequestParam String longitude, RedirectAttributes redirAttr) {
+        inputEmail = inputEmail.trim();
+        if (!EMAIL_PATTERN.matcher(inputEmail).matches()) {
+            redirAttr.addFlashAttribute("error", true);
+            redirAttr.addFlashAttribute("toastMessage", "El correo introducido no es valido");
+            return "redirect:/register";
+        }
         if (userService.findByEmail(inputEmail).isPresent()) {
             redirAttr.addFlashAttribute("error", true);
             redirAttr.addFlashAttribute("toastMessage", "El correo introducido ya está registrado");
+            return "redirect:/register";
+        }
+        if(city.isBlank() || latitude.isBlank() || longitude.isBlank()) {
+            redirAttr.addFlashAttribute("error", true);
+            redirAttr.addFlashAttribute("toastMessage", "La dirección introducida no es válida");
             return "redirect:/register";
         }
         Image image = new Image();
