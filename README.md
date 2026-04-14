@@ -269,23 +269,23 @@ Built index and search pages (templates, controllers, and their database integra
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Lucía López García del Pino**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+First, I addapted the old templates to the new Spring project, creating the respective controllers. Then, I created an Image entity, service and repository and made all the changes necessary for the uploading and downloading of user and product images. I also made the web's error page and rerouted errors as well as handling the paginations of different pages. Lastly, I controlled the access to restricted pages like modify_review. Other important additions that aren't in the main commits are creating the order ticket and using the database information for the admin's charts.
 
-| Nº  |               Commits                |           Files           |
-| :-: | :----------------------------------: | :-----------------------: |
-|  1  | [Descripción commit 1](URL_commit_1) | [Archivo1](URL_archivo_1) |
-|  2  | [Descripción commit 2](URL_commit_2) | [Archivo2](URL_archivo_2) |
-|  3  | [Descripción commit 3](URL_commit_3) | [Archivo3](URL_archivo_3) |
-|  4  | [Descripción commit 4](URL_commit_4) | [Archivo4](URL_archivo_4) |
-|  5  | [Descripción commit 5](URL_commit_5) | [Archivo5](URL_archivo_5) |
+| Nº    | Commits      | Files      |
+|:------------: |:------------:| :------------:|
+|  1  | [Creation of modify product and sell product, admin and user profile pages, controllers and css files](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/606a893e) | Mostly[user_profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/templates/user_profile.html),[administrator_dashboard.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/templates/administrator_dashboard.html), [user_profile.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/static/css/user_profile.css) |
+|  2  | [Changing user and product photos so that they are in the database, and adding an image entity](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/171ec796) | Mostly [ImageService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/service/ImageService.java),[Image.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/model/Image.java) |
+|  3  | [Creation of a functional error page and changes in product structure in all pages related](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/bb01902) | Mostly [AccountController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/AccountController.java), [ErrorPageController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/ErrorPageController.java) |
+|  4  | [Pagination in admin_dashboard and getting users, products and reviews from the database](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/1993234c) | Mostly [AdministratorDashboardController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/controller/AdministratorDashboardController.java), [administrator_dashboard.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/templates/administrator_dashboard.html) |
+|  5  | [Ensuring that only authorized users access to the pages and not being able to buy sold products](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/91e084d1) | Mostly [ReviewService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/service/ReviewService.java), [OrderService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/java/es/mqm/webapp/service/OrderService.java), [administrator_dashboard.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/webapp/src/main/resources/templates/administrator_dashboard.html) |
 
 ---
 
-#### **Alumno 3 - [Lucas Moreno Prieto]**
+#### **Alumno 3 - Lucas Moreno Prieto**
 
-[First, I took charge of the product page, extracting information from the database and adding pagination to the reviews. Another major contribution was everything related to reviews: the "create_review" and "modify_review" pages, and all the review-related features on the other pages. In addition, I implemented the star rating system, applying the changes to all pages where it appears. I also managed the "modify_user" page. Furthermore, I added CSRF, and finally, it's worth noting that we've all been modifying most of the pages to varying degrees.]
+First, I took charge of the product page, extracting information from the database and adding pagination to the reviews. Another major contribution was everything related to reviews: the "create_review" and "modify_review" pages, and all the review-related features on the other pages. In addition, I implemented the star rating system, applying the changes to all pages where it appears. I also managed the "modify_user" page. Furthermore, I added CSRF, and finally, it's worth noting that we've all been modifying most of the pages to varying degrees.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
@@ -297,19 +297,6 @@ Built index and search pages (templates, controllers, and their database integra
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº  |               Commits                |           Files           |
-| :-: | :----------------------------------: | :-----------------------: |
-|  1  | [Descripción commit 1](URL_commit_1) | [Archivo1](URL_archivo_1) |
-|  2  | [Descripción commit 2](URL_commit_2) | [Archivo2](URL_archivo_2) |
-|  3  | [Descripción commit 3](URL_commit_3) | [Archivo3](URL_archivo_3) |
-|  4  | [Descripción commit 4](URL_commit_4) | [Archivo4](URL_archivo_4) |
-|  5  | [Descripción commit 5](URL_commit_5) | [Archivo5](URL_archivo_5) |
-
----
 
 ## 🛠 **Práctica 3: API REST, docker y despliegue**
 
