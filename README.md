@@ -285,7 +285,7 @@ Built index and search pages (templates, controllers, and their database integra
 
 #### **Alumno 3 - [Lucas Moreno Prieto]**
 
-[First, I took charge of the product page, extracting information from the database and adding pagination to the reviews. Another major contribution was everything related to reviews: the "create review" and "edit review" pages, and all the review-related features on the other pages. In addition, I implemented the star rating system, applying the changes to all pages where it appears. I also managed the "edit user" page. Furthermore, I added CSRF, and finally, it's worth noting that we've all been modifying most of the pages to varying degrees.]
+[First, I took charge of the product page, extracting information from the database and adding pagination to the reviews. Another major contribution was everything related to reviews: the "create_review" and "modify_review" pages, and all the review-related features on the other pages. In addition, I implemented the star rating system, applying the changes to all pages where it appears. I also managed the "modify_user" page. Furthermore, I added CSRF, and finally, it's worth noting that we've all been modifying most of the pages to varying degrees.]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
