@@ -18,9 +18,10 @@
                 </a>
                 <div class="flex-grow-1">
                   <div
-                    class="d-flex flex-column flex-md-row align-items-md-center gap-2"
+                    class="d-flex flex-column flex-md-row align-items-md-start justify-content-md-between gap-2"
                   >
-                    <span class="me-5">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center gap-2">
+                    <span class="profile-name-block">
                       <p id="user"><strong>{{name}} {{surnames}}</strong></p>
                     </span>
                     <span class="me-2">
@@ -29,6 +30,10 @@
                     <span>
                       <p><strong>{{bought}}</strong> Compras</p>
                     </span>
+                    </div>
+                    {{#isUser}}
+                    <a class="nav-link button secondarybutton profile-edit-btn d-none d-md-inline-block" href="/modify_user/{{id}}">Modificar</a>
+                    {{/isUser}}
                   </div>
                   <div class="flex-grow-1 gap-2 d-flex flex-wrap">
                     <span class="me-4">
@@ -44,12 +49,10 @@
                       </span>
                       <span> {{location}} </span>
                     </div>
-                    <div class="ms-5">
-                      {{#isUser}}
-                          <a class="nav-link button w-100 secondarybutton" href="/modify_user/{{id}}">Modificar</a>
-                      {{/isUser}}
-                    </div>
                   </div>
+                  {{#isUser}}
+                  <a class="nav-link button secondarybutton profile-edit-btn d-md-none mt-2" href="/modify_user/{{id}}">Modificar</a>
+                  {{/isUser}}
                 </div>
               </div>
             </div>
@@ -95,7 +98,7 @@
             <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
                 <ul class="pagination mt-4">
                 <li class="page-item {{^hasPrevProduct}}disabled{{/hasPrevProduct}}">
-                    <a class="page-link" href="/user_profile/{{id}}?pageProduct={{prevPageProduct}}&pageOrder={{currentPageOrderZero}}&pageReview={{currentPageReviewZero}}#products" aria-label="Anterior">
+                    <a class="page-link" href="/user_profile/{{id}}?pageProduct={{prevPageProduct}}&pageOrder={{currentPageOrderZero}}&pageReview={{currentPageReviewZero}}" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -103,7 +106,7 @@
                     <span class="page-link">{{currentPageProduct}} / {{totalPagesProduct}}</span>
                 </li>
                 <li class="page-item {{^hasNextProduct}}disabled{{/hasNextProduct}}">
-                    <a class="page-link" href="/user_profile/{{id}}?pageProduct={{nextPageProduct}}&pageOrder={{currentPageOrderZero}}&pageReview={{currentPageReviewZero}}#products" aria-label="Siguiente">
+                    <a class="page-link" href="/user_profile/{{id}}?pageProduct={{nextPageProduct}}&pageOrder={{currentPageOrderZero}}&pageReview={{currentPageReviewZero}}" aria-label="Siguiente">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -231,7 +234,7 @@
                     {{#review}}{{description}}{{/review}}
                   </p>
                   <div class="item F">
-                    <p>Compró: {{#review}}{{#product}}{{name}}{{/product}}{{/review}}</p>
+                    <p>Compró: {{#review}}{{#product}}<a href="/product/{{id}}">{{name}}</a>{{/product}}{{/review}}</p>
                   </div>
                 </div>
               </div>

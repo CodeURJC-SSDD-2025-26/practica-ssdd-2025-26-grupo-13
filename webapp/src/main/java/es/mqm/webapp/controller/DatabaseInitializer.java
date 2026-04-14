@@ -1,8 +1,6 @@
 package es.mqm.webapp.controller;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,7 +23,6 @@ import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.UserService;
-import es.mqm.webapp.service.MailService;
 
 @Controller
 public class DatabaseInitializer implements CommandLineRunner {
@@ -46,6 +43,10 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (userService.count() > 0 || productService.count() > 0) {
+            return;
+        }
+
         LocalDate today = LocalDate.now();
         Location loc = new Location("Madrid", 40.4168, -3.7038);
         locationService.save(loc);
@@ -112,14 +113,12 @@ public class DatabaseInitializer implements CommandLineRunner {
         for(int i=0; i<4; i++){ 
             Product product = productService.findById(i + 1).orElse(null); 
             User user = userService.findById(2).orElse(null);
+            orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
+            "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
+             "234", 50.5));
+            product.setIsSold(true);
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 3.0f));
-            if (i==0) {
-                orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
-                "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
-                "234", 50.5));
-                product.setIsSold(true);
-                productService.save(product);
-            }
+            productService.save(product);
         }
     }
 }

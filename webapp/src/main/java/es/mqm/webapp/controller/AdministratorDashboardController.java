@@ -192,7 +192,7 @@ public class AdministratorDashboardController {
     @PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("delete_product/{id}")
     public String deleteProduct(@PathVariable int id, RedirectAttributes redirAttr){
-        reviewService.findByProductId(id).forEach(r -> reviewService.deleteById(r.getId()));
+        reviewService.deleteByProductId(id);
         productService.deleteById(id);
         redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");
         return "redirect:/admin";

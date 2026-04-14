@@ -22,6 +22,8 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,final ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
+            String viewName = modelAndView.getViewName();
+            if (viewName != null && viewName.startsWith("redirect:")) return; // to fix csrfToken appearing as query parameter after redirection
             CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
             if (token != null) {
                 modelAndView.addObject("csrfToken", token.getToken());

@@ -1,20 +1,16 @@
 package es.mqm.webapp.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
 
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import es.mqm.webapp.model.Image;
-import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.UserRepository;
 

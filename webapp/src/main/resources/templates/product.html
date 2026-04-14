@@ -1,13 +1,13 @@
 {{>header}}
 <main>
   <div class="container w-md-75 gap-3">
-    <div class="row">
-      <div class="col-md-7">
-        <div class="imagen h-100">
+    <div class="row product-top-row">
+      <div class="col-md-7 d-flex">
+        <div class="imagen">
           <img class="product" src="/images/{{imageUrl}}" />
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 d-flex flex-column">
         <div class="content">
           <h3 class="mb-0 fs-4 fw-semibold">{{product.name}}
             {{#isSold}}<span class="badge bg-danger ms-2">Vendido</span>{{/isSold}}
@@ -86,7 +86,7 @@
     <div class="row">
       <div class="col">
         <div class="categories">
-          <div class="item">{{product.category}}</div>
+          <div class="item text-capitalize">{{product.category}}</div>
         </div>
       </div>
     </div>
@@ -181,6 +181,9 @@
                       <p class="mb-2 mt-2">
                         {{#review}}{{description}}{{/review}}
                       </p>
+                      <div class="fw-bold">
+                        <p>Compró: {{#review}}{{#product}}<a href="/product/{{id}}">{{name}}</a>{{/product}}{{/review}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>

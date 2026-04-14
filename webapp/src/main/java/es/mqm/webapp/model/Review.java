@@ -1,8 +1,13 @@
 package es.mqm.webapp.model;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.*;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,6 +17,8 @@ public class Review {
     @ManyToOne
     private User user;
     private String description;
+    @CreatedDate
+    @Column(updatable = true, nullable = false)
     private String date;
     private float rating;
 

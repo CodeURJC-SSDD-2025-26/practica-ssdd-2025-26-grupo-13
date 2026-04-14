@@ -8,7 +8,6 @@ import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.ReviewRepository;
@@ -47,8 +46,11 @@ public class ReviewService {
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
+    public void deleteByProductId(Integer id) {
+        repository.deleteById(id);
+    }
 
-    public List<Review> findByProductId(Integer productId) {
+    public Optional<Review> findByProductId(Integer productId) {
         return repository.findByProductId(productId);
     }
 

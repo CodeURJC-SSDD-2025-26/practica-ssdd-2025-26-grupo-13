@@ -77,9 +77,41 @@ public class BuyController {
             return "redirect:/";
         }
         Product product = productOpt.get();
-
+        // server-sided validations with redirect attributes to show proper errors
+        if (isInvalid(name)) {
+            redirAttr.addFlashAttribute("nameinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (isInvalid(surnames)) {
+            redirAttr.addFlashAttribute("surnamesinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (isInvalid(country)) {
+            redirAttr.addFlashAttribute("countryinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (isInvalid(address)) {
+            redirAttr.addFlashAttribute("addressinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (isInvalid(province)) {
+            redirAttr.addFlashAttribute("provinceinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (isInvalid(city)) {
+            redirAttr.addFlashAttribute("cityinvalid", true);
+            return "redirect:/buy/" + id;
+        }
         if (!zipcode.matches("\\d{5}")) {
             redirAttr.addFlashAttribute("zipcodeinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (isInvalid(phone)) { // decided not to apply regex here, as there are many possible formats depending on the country and would be too complex. 
+            redirAttr.addFlashAttribute("phoneinvalid", true);
+            return "redirect:/buy/" + id;
+        }
+        if (!creditCardNumber.matches("\\d{16}")) {
+            redirAttr.addFlashAttribute("creditcardnumberinvalid", true);
             return "redirect:/buy/" + id;
         }
         if (!creditCardExpiryDate.matches("^(0[1-9]|1[0-2])/\\d{2}$")) {
@@ -90,6 +122,7 @@ public class BuyController {
             redirAttr.addFlashAttribute("cvvinvalid", true);
             return "redirect:/buy/" + id;
         }
+        
 
         User buyer = (User) model.getAttribute("currentUser");
 
@@ -100,6 +133,10 @@ public class BuyController {
         productService.save(product);
         mailService.sendOrderConfirmation(order);
         return "redirect:/order_successful/" + order.getId();
+    }
+
+    private boolean isInvalid(String value) {
+        return value.isBlank();
     }
 
     @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")

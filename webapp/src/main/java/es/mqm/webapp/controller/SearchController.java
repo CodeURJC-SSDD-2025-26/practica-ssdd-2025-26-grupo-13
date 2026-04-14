@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.mqm.webapp.model.CategoryData;
 import es.mqm.webapp.model.ExtendedProduct;
-import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.model.User;
 
