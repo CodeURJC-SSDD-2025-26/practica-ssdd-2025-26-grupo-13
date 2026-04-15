@@ -24,6 +24,8 @@ import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.TicketService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class BuyController {
@@ -152,7 +154,7 @@ public class BuyController {
 
     @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
     @GetMapping("/order_successful/{id}")
-    public String showProductoComprado(Model model,@PathVariable int id) {
+    public String showOrderedProduct(Model model,@PathVariable int id) {
         Optional<Order> orderOpt = orderService.findById(id);
         if (!orderOpt.isPresent()) {
             return "redirect:/";
@@ -161,5 +163,14 @@ public class BuyController {
         model.addAttribute("cssfile", "error");
         return "order_successful";
     }
+
+    @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
+    @PostMapping("/delete_order/{id}")
+    public String deleteOrder(@PathVariable int id, RedirectAttributes redirAttr) {
+        orderService.deleteById(id);
+        redirAttr.addFlashAttribute("toastMessage", "Pedido cancelado correctamente");
+        return "redirect:/";
+    }
+    
 
 }
