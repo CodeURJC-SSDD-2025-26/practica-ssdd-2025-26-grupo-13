@@ -1,6 +1,7 @@
 package es.mqm.webapp.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -34,7 +35,11 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -47,7 +52,7 @@ public class User {
         this.image = image;
         this.password = password;
         this.location = location;
-          this.roles = List.of(roles);
+        this.roles = List.of(roles);
     }
 
     @PrePersist
@@ -115,7 +120,7 @@ public class User {
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
-    
+
     public LocalDate getCreatedAt() {
         return createdAt;
     }

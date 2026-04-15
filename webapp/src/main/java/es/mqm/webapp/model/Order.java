@@ -6,7 +6,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -25,10 +24,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User buyer;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Product product;
 
     // delivery data (names and surnames do not necessarily need to be the same as
@@ -61,7 +60,8 @@ public class Order {
     }
 
     public Order(User buyer, Product product, String name, String surnames, String address, String apartment,
-            String zipcode, String city, String province, String country, String phone, String creditCardNumber, String creditCardExpiryDate,
+            String zipcode, String city, String province, String country, String phone, String creditCardNumber,
+            String creditCardExpiryDate,
             String creditCardCVV, double totalPrice) {
         this.buyer = buyer;
         this.product = product;
@@ -163,7 +163,6 @@ public class Order {
     public String getCountry() {
         return country;
     }
-
 
     public String getPhone() {
         return phone;

@@ -49,13 +49,13 @@
                     <td>{{createdAt}}</td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                            <form action="/modify_user/{{id}}" method="post">
-                                <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
-                                <input type="submit" value="Modificar" class="btn btn-warning"></input>
-                            </form>
                             <form action="/admin/delete_user/{{id}}" method="post">
                                 <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                                 <input type="submit" value="Eliminar" class="btn btn-danger"></input>
+                            </form>
+                            <form action="/modify_user/{{id}}" method="post">
+                                <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+                                <input type="submit" value="Modificar" class="btn btn-warning"></input>
                             </form>
                         </div>
                     </td>
