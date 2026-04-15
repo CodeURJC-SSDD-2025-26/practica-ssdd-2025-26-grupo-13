@@ -228,10 +228,10 @@
                     {{#orders}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{user.id}}"> {{buyer.name}}</a></td>
+                    <td><a href="user_profile/{{buyer.id}}"> {{buyer.name}}</a></td>
                     <td><a href="product/{{product.id}}">{{product.name}}</a></td>
-                    <td>{{created_at}}</td>
-                    <td>{{price}}€</td>
+                    <td>{{createdAt}}</td>
+                    <td>{{totalPrice}}€</td>
                     <td><a href="/buy/{{id}}/ticket" class="btn btn-info">Ver factura</a></td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
