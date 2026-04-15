@@ -95,8 +95,8 @@ public class AccountController {
     @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("/modify_user")
     public String modifyUser(Model model, @RequestParam int id, @RequestParam String name,
-            @RequestParam String surnames, @RequestParam String email, @RequestParam String password,
-            @RequestParam MultipartFile image, RedirectAttributes redirAttr) throws IOException {
+            @RequestParam String surnames, @RequestParam String email, @RequestParam(required=false) String password,
+            @RequestParam MultipartFile image, RedirectAttributes redirAttr, @RequestParam() String city, @RequestParam() String latitude, @RequestParam() String longitude) throws IOException {
         int user_id = id;
         User user = userService.findById(user_id).orElse(null);
         if (user == null) {
@@ -110,10 +110,18 @@ public class AccountController {
         user.setName(name);
         user.setSurnames(surnames);
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
+        if (password!=null && !password.isBlank()) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
         if(!image.isEmpty()){
             Image im = imageService.createImage(image);
             userService.addImageToUser(user.getId(),im);
+        }
+        double lat=Double.parseDouble(latitude); 
+        double lon=Double.parseDouble(longitude); 
+        if (user.getLocation().getLatitude()!=lat || user.getLocation().getLongitude()!=lon) { 
+            Location loc = new Location(city, lat, lon); 
+            user.setLocation(loc);
         }
         userService.save(user);
         return "redirect:/user_profile/" + user_id;
