@@ -69,12 +69,6 @@ public class AccountController {
         return "login";
     }
 
-    @GetMapping("/administrator_login")
-    public String showAdminLoginForm(Model model) {
-        model.addAttribute("cssfile", "register");
-        return "administrator_login";
-    }
-
     @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
     @GetMapping("modify_user/{id}")
     public String showModifyUserForm(@PathVariable int id, Model model) {

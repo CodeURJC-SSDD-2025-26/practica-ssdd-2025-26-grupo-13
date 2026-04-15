@@ -73,7 +73,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         admin.setCreatedAt(today.minusDays(adminDaysBack));
         userService.save(admin);
         
-        
+
         for (int i = 0; i < 40; i++) {
             User user= userService.findById(1).orElse(null);
             Image imProduct = new Image();
@@ -110,12 +110,13 @@ public class DatabaseInitializer implements CommandLineRunner {
             productService.save(new Product("Producto " + (i + 50), "Buen estado", "Descripcion", 50 + i, user,
                     imProduct, category));
         }
-        for(int i=0; i<4; i++){ 
+        for(int i=0; i<7; i++){ 
             Product product = productService.findById(i + 1).orElse(null); 
             User user = userService.findById(2).orElse(null);
             orderService.save(new Order(user, product, "Jose", "Perez", "C/ Tulipán", "s/n",
-            "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
-             "234", 50.5));
+                    "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
+                    "234", 50.5));
+            product = productService.findById(i + 1).orElse(null);
             product.setIsSold(true);
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 3.0f));
             productService.save(product);
