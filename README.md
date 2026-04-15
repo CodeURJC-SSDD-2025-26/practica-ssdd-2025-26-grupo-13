@@ -202,52 +202,47 @@ Designed and implemented the product.html page, which displays detailed informat
 
 ---
 
-## 🛠 **Práctica 2: Web con HTML generado en servidor**
+## 🛠 **Assigment 2: Web with HTML generated in the server**
 
-### **Navegación y Capturas de Pantalla**
+### **Navigation and Screen Shots**
 
-#### **Diagrama de Navegación**
+#### **Navigation Diagram**
 
-Solo si ha cambiado.
+Only if it has changed.
 
-#### **Capturas de Pantalla Actualizadas**
+### **Exectuing Instructions**
 
-Solo si han cambiado.
+#### **Prerequisites for executing the application**
 
-### **Instrucciones de Ejecución**
+- **Java**: version 21 or superior
+- **Maven**: version 3.8 or superior
+- **MySQL**: version 8.0 or superior
+- **Git**: for cloning the repository
 
-#### **Requisitos Previos**
+#### **Steps for executing the application**
 
-- **Java**: versión 21 o superior
-- **Maven**: versión 3.8 o superior
-- **MySQL**: versión 8.0 o superior
-- **Git**: para clonar el repositorio
-
-#### **Pasos para ejecutar la aplicación**
-
-1. **Clonar el repositorio**
+1. **Cloning the repository**
 
    ```bash
    git clone https://github.com/[usuario]/[nombre-repositorio].git
    cd [nombre-repositorio]
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+2. **HERE INDICATE THE FOLLOWING STEPS**
 
-#### **Credenciales de prueba**
+#### **Test credentials**
 
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Admin user**: user: `admin@admin.com`, password: `1234`
+- **Registered user**: user: `usuario1@example.com`, password: `1234`, user:`usuario2@example.com`, password:`1234`
 
 ### **Database Entity Diagram**
 
-![Diagrama Entidad-Relación](images/erdiagram.svg)
+![Diagram Entity-Relation](images/erdiagram.svg)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
 
-### **Diagrama de Clases y Templates**
+### **Classes and Templates Diagram**
 
-Diagrama de clases de la aplicación con diferenciación por colores o secciones:
+Application's Classes Diagram diferentiating by colors or sections:
 
 ```mermaid 
 flowchart LR
@@ -363,7 +358,6 @@ flowchart LR
   classDef entity fill:#ececec,stroke:#8b8b8b,color:#2b2b2b,stroke-width:1px;
   ```
 
-> [Descripción opcional del diagrama y relaciones principales]
 
 ### **Members Participation in Assignment 2**
 
@@ -381,7 +375,7 @@ Built index and search pages (templates, controllers, and their database integra
 
 ---
 
-#### **Alumno 2 - Lucía López García del Pino**
+#### **Student 2 - Lucía López García del Pino**
 
 First, I addapted the old templates to the new Spring project, creating the respective controllers. Then, I created an Image entity, service and repository and made all the changes necessary in services and entities for the uploading and downloading of user and product images so that images are in the database and they show in the respective products or users. I also made the web's error page and rerouted errors as well as handling the paginations of different pages such as user_profile and admin_dashboard. Lastly, I controlled the access to restricted pages like modify_review. Other important additions that aren't in the main commits are creating the order ticket and controlling access to document so that the only users with access are the admin and the user that made said order, and using the database information for the admin's charts and information. In addition, I also made some final changes to show stars correctly, take the category from the form and display when a product has already been bought (since it cannot be bought again) as well as making some queries to the database to modify or delete elements.
 
@@ -395,7 +389,7 @@ First, I addapted the old templates to the new Spring project, creating the resp
 
 ---
 
-#### **Alumno 3 - Lucas Moreno Prieto**
+#### **Student 3 - Lucas Moreno Prieto**
 
 First, I took charge of the product page, extracting information from the database and adding pagination to the reviews. Another major contribution was everything related to reviews: the "create_review" and "modify_review" pages, and all the review-related features on the other pages. In addition, I implemented the star rating system, applying the changes to all pages where it appears. I also managed the "modify_user" page. Furthermore, I added CSRF, and finally, it's worth noting that we've all been modifying most of the pages to varying degrees.
 
