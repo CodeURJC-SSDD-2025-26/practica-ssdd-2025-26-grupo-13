@@ -47,7 +47,12 @@
                     <td>{{name}}</td>
                     <td>{{surnames}}</td>
                     <td>{{createdAt}}</td>
-                    <td><form action="/delete_user/{{id}}" method="post">
+                    <td>
+                        <form action="/modify_user/{{id}}" method="post">
+                            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+                            <input type="submit" value="Modificar" class="btn btn-warning"></input>
+                        </form>
+                        <form action="/admin/delete_user/{{id}}" method="post">
                             <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form></td>
@@ -85,9 +90,9 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Nombre del producto</th>
                     <th scope="col">Vendedor</th>
                     <th scope="col">Categoría</th>
-                    <th scope="col">Nombre del producto</th>
                     <th scope="col">Precio</th>
                     <th scope="col">Vendido</th>
                     <th scope="col">Acciones</th>
@@ -97,14 +102,14 @@
                     {{#products}}
                     <tr>
                     <th scope="row">{{id}}</th>
+                    <td><a href="product/{{id}}">{{name}}</a></td>
                     <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
                     <td>{{category}}</td>
-                    <td><a href="product/{{id}}">{{name}}</a></td>
                     <td>{{price}}€</td>
                     <td>No</td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                        <form action="/delete_product/{{id}}" method="post">
+                        <form action="/admin/delete_product/{{id}}" method="post">
                             <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>
@@ -169,7 +174,7 @@
                     </td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
-                        <form action="/delete_review_admin/{{#review}}{{id}}{{/review}}" method="post">
+                        <form action="/admin/delete_review/{{#review}}{{id}}{{/review}}" method="post">
                             <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>
@@ -200,6 +205,63 @@
                 </ul>
             </nav>
             {{/showPaginationReview}}
+        </div>
+
+        <div class="container" id="orders">
+            <h4>Pedidos realizados</h4>
+            <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Usuario comprador</th>
+                    <th scope="col">Nombre del producto</th>
+                    <th scope="col">Fecha compra</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Factura</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#orders}}
+                    <tr>
+                    <th scope="row">{{id}}</th>
+                    <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
+                    <td><a href="product/{{product.id}}">{{product.name}}</a></td>
+                    <td>{{date}}</td>
+                    <td>{{price}}€</td>
+                    <td><a href="/buy/{{id}}/ticket" class="btn btn-info">Ver factura</a></td>
+                    <td>
+                        <div class="d-flex gap-2 flex-wrap">
+                        <form action="/admin/delete_order/{{id}}" method="post">
+                            <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
+                            <input type="submit" value="Eliminar" class="btn btn-danger"></input>
+                        </form>
+                        </div>
+                    </td>
+                    </tr>
+                    {{/orders}}
+                </tbody>
+            </table>
+            </div>
+            {{#showPaginationOrder}}
+            <nav aria-label="Navegación de páginas" class="d-flex justify-content-end">
+                <ul class="pagination mt-4">
+                <li class="page-item {{^hasPrevOrder}}disabled{{/hasPrevOrder}}">
+                    <a class="page-link" href="/admin?pageOrder={{prevPageOrder}}&pageReview={{currentPageReviewZero}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}#orders" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
+                </li>
+                <li class="page-item {{^hasNextOrder}}disabled{{/hasNextOrder}}">
+                    <a class="page-link" href="/admin?pageOrder={{nextPageOrder}}&pageReview={{currentPageReviewZero}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}#orders" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+            {{/showPaginationOrder}}
         </div>
 
         <div class="container chart-container">
