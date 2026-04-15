@@ -79,6 +79,7 @@ public class AccountController {
     @GetMapping("modify_user/{id}")
     public String showModifyUserForm(@PathVariable int id, Model model) {
         model.addAttribute("cssfile", "product");
+        model.addAttribute("mapsApiKey", mapsApiKey);
         User user = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
         model.addAttribute("user", user);
@@ -167,5 +168,17 @@ public class AccountController {
             return "redirect:/login";
         }
         return "redirect:/";
+    }
+
+    @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
+    @PostMapping("/delete_user")
+    public String deleteUser(@RequestParam int id, RedirectAttributes redirAttr) {
+        User user = userService.findById(id).orElse(null);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+        }
+        userService.delete(user);
+        redirAttr.addFlashAttribute("toastMessage", "Cuenta eliminada correctamente");
+        return "redirect:/"; 
     }
 }
