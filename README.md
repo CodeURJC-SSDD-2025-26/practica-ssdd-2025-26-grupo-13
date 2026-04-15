@@ -249,7 +249,119 @@ Solo si han cambiado.
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+```mermaid 
+flowchart LR
+  %% Left -> Right: Templates -> View -> Controller -> Service -> Repository -> Entity
+
+  %% ===== LEFT SIDE (templates + view + controller) =====
+  T_idx["index.html"]:::templateTxt --> V_idx["View"]:::view --> C_idx["IndexController"]:::controller
+  T_search["search.html"]:::templateTxt --> V_search["View"]:::view --> C_search["SearchController"]:::controller
+  T_product["product.html<br/>sell_product.html<br/>modify_product.html"]:::templateTxt --> V_product["View"]:::view --> C_product["ProductController"]:::controller
+  T_buy["buy.html<br/>order_successful.html"]:::templateTxt --> V_buy["View"]:::view --> C_buy["BuyController"]:::controller
+  T_review["create_review.html<br/>modify_review.html"]:::templateTxt --> V_review["View"]:::view --> C_review["ReviewController"]:::controller
+  T_profile["user_profile.html"]:::templateTxt --> V_profile["View"]:::view --> C_profile["UserProfileController"]:::controller
+  T_account["register.html<br/>login.html<br/>administrator_login.html<br/>modify_user.html"]:::templateTxt --> V_account["View"]:::view --> C_account["AccountController"]:::controller
+  T_admin["administrator_dashboard.html"]:::templateTxt --> V_admin["View"]:::view --> C_admin["AdministratorDashboardController"]:::controller
+  T_misc["error.html<br/>example.html"]:::templateTxt --> V_misc["View"]:::view --> C_misc["ErrorPageController"]:::controller
+  C_image["ImageController"]:::controller
+  %% ===== SERVICES =====
+  S_product["ProductService"]:::service
+  S_user["UserService"]:::service
+  S_review["ReviewService"]:::service
+  S_order["OrderService"]:::service
+  S_image["ImageService"]:::service
+  S_location["LocationService"]:::service
+  S_mail["MailService"]:::service
+  S_ticket["TicketService"]:::service
+
+  %% Controller -> Service
+  C_idx --> S_product
+  C_idx --> S_review
+
+  C_search --> S_product
+
+  C_product --> S_product
+  C_product --> S_user
+  C_product --> S_review
+  C_product --> S_image
+
+  C_buy --> S_product
+  C_buy --> S_order
+  C_buy --> S_mail
+  C_buy --> S_ticket
+
+  C_review --> S_review
+  C_review --> S_product
+  C_review --> S_order
+
+  C_profile --> S_user
+  C_profile --> S_order
+  C_profile --> S_product
+  C_profile --> S_review
+
+  C_account --> S_user
+  C_account --> S_image
+  C_account --> S_location
+
+  C_admin --> S_user
+  C_admin --> S_product
+  C_admin --> S_review
+  C_admin --> S_order
+  
+  C_image --> S_image
+
+
+  %% ===== REPOSITORIES =====
+  R_product["ProductRepository"]:::repo
+  R_user["UserRepository"]:::repo
+  R_review["ReviewRepository"]:::repo
+  R_order["OrderRepository"]:::repo
+  R_image["ImageRepository"]:::repo
+  R_location["LocationRepository"]:::repo
+
+  %% Service -> Repository
+  S_product --> R_product
+  S_product --> R_user
+  S_user --> R_user
+  S_review --> R_review
+  S_order --> R_order
+  S_image --> R_image
+  S_location --> R_location
+
+  %% ===== ENTITIES =====
+  E_product["Product"]:::entity
+  E_user["User"]:::entity
+  E_review["Review"]:::entity
+  E_order["Order"]:::entity
+  E_image["Image"]:::entity
+  E_location["Location"]:::entity
+
+  %% Repository -> Entity
+  R_product --> E_product
+  R_user --> E_user
+  R_review --> E_review
+  R_order --> E_order
+  R_image --> E_image
+  R_location --> E_location
+
+  %% Main entity relations (optional, like in your sample)
+  E_product --> E_user
+  E_product --> E_image
+  E_user --> E_image
+  E_user --> E_location
+  E_review --> E_product
+  E_review --> E_user
+  E_order --> E_product
+  E_order --> E_user
+
+  %% ===== STYLES (close to sample palette) =====
+  classDef templateTxt fill:transparent,stroke:transparent,color:#b06fa2;
+  classDef view fill:#d9c6e6,stroke:#8d6aa8,color:#2e1d36,stroke-width:1px;
+  classDef controller fill:#cfe8c6,stroke:#79a56a,color:#1f3a17,stroke-width:1px;
+  classDef service fill:#f1c9c9,stroke:#b06a6a,color:#4a1f1f,stroke-width:1px;
+  classDef repo fill:#cfe0f5,stroke:#6d8fb1,color:#1f3550,stroke-width:1px;
+  classDef entity fill:#ececec,stroke:#8b8b8b,color:#2b2b2b,stroke-width:1px;
+  ```
 
 > [Descripción opcional del diagrama y relaciones principales]
 
