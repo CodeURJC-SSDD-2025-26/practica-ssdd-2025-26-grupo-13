@@ -28,6 +28,7 @@ import es.mqm.webapp.model.Product;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.service.ReviewService;
+import es.mqm.webapp.service.ReviewUtils;
 import es.mqm.webapp.model.ExtendedProduct;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.service.ImageService;
@@ -98,17 +99,7 @@ public class ProductController {
         model.addAttribute("showPaginationReview", totalPagesReview > 1);
 
         List<Review> reviews = reviewPage.getContent();
-        List<Map<String, Object>> reviewsVm = new ArrayList<>();
-        for (Review review : reviews) {
-            Map<String, Object> item = new HashMap<>();
-            item.put("review", review);
-            boolean isUserReview = currentUser != null
-                    && review.getUser() != null
-                    && review.getUser().getId() == currentUser.getId();
-            item.put("isUserReview", isUserReview);
-            addReviewStars(item, review);
-            reviewsVm.add(item);
-        }
+        List<Map<String, Object>> reviewsVm = ReviewUtils.getReviewsVm(reviewPage, currentUser);
         model.addAttribute("reviewsVm", reviewsVm);
         if(reviews.isEmpty()){
             model.addAttribute("empty", true);
@@ -117,15 +108,6 @@ public class ProductController {
         }
         model.addAttribute("cssfile", "product");
         return "product";
-    }
-
-    private void addReviewStars(Map<String, Object> item, Review review) {
-        int rating = Math.max(0, Math.min(5, Math.round(review.getRating())));
-        item.put("star1", rating >= 1);
-        item.put("star2", rating >= 2);
-        item.put("star3", rating >= 3);
-        item.put("star4", rating >= 4);
-        item.put("star5", rating >= 5);
     }
 
     @PostMapping("/newProduct")

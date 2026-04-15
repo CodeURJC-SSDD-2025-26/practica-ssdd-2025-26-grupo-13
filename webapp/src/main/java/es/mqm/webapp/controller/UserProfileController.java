@@ -24,6 +24,7 @@ import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.ProductService;
 import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.UserService;
+import es.mqm.webapp.service.ReviewUtils;  
 
 @Controller
 public class UserProfileController {
@@ -105,17 +106,7 @@ public class UserProfileController {
         //for pagination
         model.addAttribute("orders", orderPage.getContent());
         model.addAttribute("products", productPage.getContent());
-        List<Map<String, Object>> reviewsVm = new ArrayList<>();
-        for (Review review : reviewPage.getContent()) {
-            Map<String, Object> item = new HashMap<>();
-            item.put("review", review);
-            boolean isUserReview = currentUser != null
-                    && review.getUser() != null
-                    && review.getUser().getId() == currentUser.getId();
-            item.put("isUserReview", isUserReview);
-            addReviewStars(item, review);
-            reviewsVm.add(item);
-        }
+        List<Map<String, Object>> reviewsVm = ReviewUtils.getReviewsVm(reviewPage, currentUser);
         model.addAttribute("reviewsVm", reviewsVm);
 
         model.addAttribute("currentPageOrder", pageOrder+1);
@@ -166,16 +157,7 @@ public class UserProfileController {
         return "user_profile";
     }
 
-    private void addReviewStars(Map<String, Object> item, Review review) {
-        int rating = Math.max(0, Math.min(5, Math.round(review.getRating())));
-        item.put("star1", rating >= 1);
-        item.put("star2", rating >= 2);
-        item.put("star3", rating >= 3);
-        item.put("star4", rating >= 4);
-        item.put("star5", rating >= 5);
-    }
-
-    private void addAverageStars(Model model, double averageRating) {
+    private static void addAverageStars(Model model, double averageRating) {
         int roundedRating = Math.max(0, Math.min(5, (int) Math.round(averageRating)));
         model.addAttribute("avgStar1", roundedRating >= 1);
         model.addAttribute("avgStar2", roundedRating >= 2);
@@ -183,4 +165,5 @@ public class UserProfileController {
         model.addAttribute("avgStar4", roundedRating >= 4);
         model.addAttribute("avgStar5", roundedRating >= 5);
     }
+
 }

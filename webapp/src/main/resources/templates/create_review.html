@@ -44,39 +44,5 @@
   </form>
   </div>
 </main>
-<script>
-  const reviewForm = document.getElementById("review-form");
-  const stars = document.querySelectorAll("#star-rating .star");
-  const ratingValue = document.getElementById("rating-value");
-  let currentRating = Number(ratingValue.value) || 0;
-
-  stars.forEach((star, idx) => {
-    star.addEventListener("mouseover", () => {
-      highlightStars(idx + 1);
-    });
-    star.addEventListener("mouseout", () => {
-      highlightStars(currentRating);
-    });
-    star.addEventListener("click", () => {
-      currentRating = idx + 1;
-      ratingValue.value = currentRating;
-      highlightStars(currentRating);
-    });
-  });
-
-  function highlightStars(rating) {
-    stars.forEach((star, idx) => {
-      star.innerHTML = idx < rating ? "&#9733;" : "&#9734;";
-    });
-  }
-
-  reviewForm.addEventListener("submit", (event) => {
-    if (currentRating < 1) {
-      event.preventDefault();
-      alert("Selecciona una valoración entre 1 y 5 estrellas.");
-    }
-  });
-
-  highlightStars(currentRating);
-</script>
+{{>starsscript}}
 {{>footer}}
