@@ -22,6 +22,13 @@ public class OrderService {
     public List<Order> findAll() {
         return repository.findAll();
     }
+    public Page<Order> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public void deleteById(int id) {
+        repository.deleteById(id);
+    }
 
     public Optional<Order> findById(int id) {
         return repository.findById(id);
@@ -33,7 +40,7 @@ public class OrderService {
     public List<Order> findByBuyer(User user) {
         return repository.findByBuyer(user);
     }
-
+    
     public Page<Order> findByBuyer(User user, Pageable pageable) {
         return repository.findByBuyer(user, pageable);
     }

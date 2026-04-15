@@ -46,7 +46,7 @@ public class SecurityConfiguration {
 						.requestMatchers("/", "/css/**", "/images/**", "/search", "/product/**", "/user_profile/**",
 								"/error", "/register")
 						.permitAll()
-						.requestMatchers("/admin").hasRole("ADMIN")
+						.requestMatchers("/admin/**").hasRole("ADMIN")
 						// PRIVATE PAGES
 						.anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin
