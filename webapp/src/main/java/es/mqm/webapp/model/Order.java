@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -24,10 +25,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User buyer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
     // delivery data (names and surnames do not necessarily need to be the same as
