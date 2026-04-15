@@ -225,9 +225,9 @@
                     {{#orders}}
                     <tr>
                     <th scope="row">{{id}}</th>
-                    <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
+                    <td><a href="user_profile/{{user.id}}"> {{buyer.name}}</a></td>
                     <td><a href="product/{{product.id}}">{{product.name}}</a></td>
-                    <td>{{date}}</td>
+                    <td>{{created_at}}</td>
                     <td>{{price}}€</td>
                     <td><a href="/buy/{{id}}/ticket" class="btn btn-info">Ver factura</a></td>
                     <td>
