@@ -58,6 +58,11 @@ public class ReviewService {
         return repository.findByProductUserId(userId, pageable);
     }
 
+    public double findAverageRatingByProductUserId(Integer userId) {
+        Double average = repository.findAverageRatingByProductUserId(userId);
+        return average != null ? average : 0.0;
+    }
+
     public boolean isUserOrAdmin(int id, Authentication auth) {
         boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
         Optional<Review> reviewOpt = repository.findById(id);

@@ -34,6 +34,9 @@ public class ProductService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ReviewService reviewService;
+
     public List<Product> findAll() {
         return repository.findAll();
     }
@@ -85,7 +88,7 @@ public class ProductService {
     public Page<ExtendedProduct> getAvailableProducts(int pageNo, int pageSize, User viewer) {
         List<Product> products = repository.findByIsSoldFalse();
         List<String> c = viewer != null ? userRepository.findLastCategoriesBoughtInById(viewer.getId(), PageRequest.of(0,3)).getContent() : List.of();
-        List<ExtendedProduct> sorted = products.stream().map(p -> new ExtendedProduct(p,viewer,c.contains(p.getCategory()))).sorted().toList();
+        List<ExtendedProduct> sorted = products.stream().map(p -> new ExtendedProduct(p, viewer, c.contains(p.getCategory()), reviewService.findAverageRatingByProductUserId(p.getUser().getId()))).sorted().toList();
         List<ExtendedProduct> pageContent = sorted.subList(pageSize * pageNo, Math.min(pageSize * pageNo + pageSize, sorted.size()));
         return new PageImpl<>(pageContent, PageRequest.of(pageNo,pageSize),sorted.size());
     }

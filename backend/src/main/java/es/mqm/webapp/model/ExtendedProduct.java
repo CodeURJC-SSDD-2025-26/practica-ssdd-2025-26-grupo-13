@@ -25,13 +25,17 @@ public class ExtendedProduct implements Comparable<ExtendedProduct> {
     }
 
     public ExtendedProduct(Product p, User viewer, Boolean interestingCategory) {
+        this(p, viewer, interestingCategory, 0.0);
+    }
+
+    public ExtendedProduct(Product p, User viewer, Boolean interestingCategory, Double sellerAverageRating) {
         this.p = p;
         this.distance = viewer != null ?  GeoUtils.calculateDistance(viewer.getLocation(), p.getUser().getLocation()).intValue() : null;
         this.interestingCategory = interestingCategory;
         if (this.distance == null || this.interestingCategory == null) {
             this.score = 0.0; 
         } else {
-            this.score =  this.distance - (interestingCategory ? 1.0 : 0.0) * 35; 
+            this.score =  this.distance - (interestingCategory ? 1.0 : 0.0) * 35 - sellerAverageRating; 
         }
     } // idea: interesting category = 35 km of difference. 30 km interesting category product wins 0 km non-interesting category product, 40 km loses, etc. 
 
