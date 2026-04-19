@@ -53,10 +53,7 @@
                                 <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                                 <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                             </form>
-                            <form action="/modify_user/{{id}}" method="post">
-                                <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
-                                <input type="submit" value="Modificar" class="btn btn-warning"></input>
-                            </form>
+                            <a href="/modify_user/{{id}}" class="btn btn-warning">Modificar</a>
                         </div>
                     </td>
                     </tr>
@@ -116,7 +113,7 @@
                             <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
                             <input type="submit" value="Eliminar" class="btn btn-danger"></input>
                         </form>
-                        <a href="modify_product/{{id}}" class="btn btn-warning">Modificar</a>
+                        <a href="/modify_product/{{id}}" class="btn btn-warning">Modificar</a>
                         </div>
                     </td>
                     </tr>

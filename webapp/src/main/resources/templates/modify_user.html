@@ -9,6 +9,7 @@
       <div class="d-flex gap-5 flex-wrap justify-content-between ms-sm-2">
         <div class="m-auto position-relative">
           <img
+            id="userImagePreview"
             class="rounded-circle"
             src="/images/{{imageUrl}}"
             width="150px"
@@ -116,6 +117,12 @@
 </main>
 
 <script>
+        document.getElementById("userImage").addEventListener("change", (event) => {
+            const [file] = event.target.files;
+            if (!file) return;
+            document.getElementById("userImagePreview").src = URL.createObjectURL(file);
+        });
+
         async function initAutocomplete() {
             const { PlaceAutocompleteElement } = await google.maps.importLibrary("places");
 

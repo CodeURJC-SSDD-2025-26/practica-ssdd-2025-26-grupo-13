@@ -87,9 +87,9 @@
             {{/isAdmin}}
             <div class="dropdown-divider"></div>
             <li>
-              <form action="/logout" method="post" class="px-3 py-1">
+              <form action="/logout" method="post" class="dropdown-item">
                 <input type="hidden" name="{{csrfParameterName}}" value="{{csrfToken}}">
-                <button type="submit" class="dropdown-item px-0">Cerrar sesión</button>
+                <button type="submit" class="dropdown-item w-100  px-0">Cerrar sesión</button>
               </form>
             </li>
           </ul>

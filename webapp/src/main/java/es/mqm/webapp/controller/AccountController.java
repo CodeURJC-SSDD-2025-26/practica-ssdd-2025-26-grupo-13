@@ -117,6 +117,7 @@ public class AccountController {
         if (user.getLocation().getLatitude()!=lat || user.getLocation().getLongitude()!=lon) { 
             Location loc = new Location(city, lat, lon); 
             user.setLocation(loc);
+            locationService.save(loc);
         }
         userService.save(user);
         return "redirect:/user_profile/" + user_id;
