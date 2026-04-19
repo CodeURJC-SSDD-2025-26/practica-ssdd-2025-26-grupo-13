@@ -89,7 +89,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 case 3 -> "ropa";
                 default -> "libros";
             };
-            productService.save(new Product("Producto " + (i + 1), "Buen estado", "Descripcion", 50 + i, user,
+            productService.save(new Product("Producto " + (i + 1), "Descripcion", 50 + i, user,
                     imProduct, category));
         }
         for(int i=0; i<5; i++){ 
@@ -107,7 +107,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 case 3 -> "ropa";
                 default -> "libros";
             };
-            productService.save(new Product("Producto " + (i + 50), "Buen estado", "Descripcion", 50 + i, user,
+            productService.save(new Product("Producto " + (i + 50),  "Descripcion", 50 + i, user,
                     imProduct, category));
         }
         for(int i=0; i<7; i++){ 

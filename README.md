@@ -206,29 +206,58 @@ Designed and implemented the product.html page, which displays detailed informat
 
 ### **Navigation and Screenshots**
 
+Most of the pages remain practically unchanged. There has been one addition:
+
+ 15. **Order Successful Page**
+
+> ![Order Successful Page](images/ordersuccessful_image.png)
+> Page shown to the user after a successful purchase. It includes buttons to download invoice or cancel order.
+
+
 #### **Navigation Diagram**
 
-Only if it has changed.
+![Navigation Diagram](images/navigation-diagram-2.png)
 
-### **Exectuing Instructions**
+> The blue arrows represent actions that all users can make, the yellow arrows are only for registered users and the green arrows are for administrators.
+
+### **Executing Instructions**
 
 #### **Prerequisites for executing the application**
 
-- **Java**: version 21 or superior
-- **Maven**: version 3.8 or superior
-- **MySQL**: version 8.0 or superior
+- **Java**: version 21 or higher
+- **Maven**: version 3.8 or higher
+- **MySQL**: version 8.0 or higher (in the following steps we will use Docker image)
 - **Git**: for cloning the repository
 
 #### **Steps for executing the application**
 
-1. **Cloning the repository**
+1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
-   ```
+```bash
+git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13.git
+cd practica-ssdd-2025-26-grupo-13
+```
+2. **Create application-dev.properties in resources folder**. The following variables will be needed:
+```
+google.maps.api-key=<FILL HERE>
+spring.mail.password=<FILL HERE>
+spring.mail.username=<FILL HERE>
+```
+IMPORTANT! The app will **not** work properly without Google Maps Places API (New) key: an error will appear while trying to register, although it's still possible to test the app with the credentials listed below. If Spring Mail variables are not filled, app will keep working as usual but no emails will be sent. 
 
-2. **HERE INDICATE THE FOLLOWING STEPS**
+3. **Run MySQL database with Docker**
+```
+docker run --name mqmdb --rm -e MYSQL_ROOT_PASSWORD=mqmurjc -e MYSQL_DATABASE=mqm -p 3306:3306 -d mysql:latest
+```
+Other alternatives for running MySQL are possible, but credentials should be `root:mqmurjc` and database `mqm`. 
+
+4. **Compile and execute the app**
+```
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+The application will be available at `https://localhost:8443`.
 
 #### **Test credentials**
 

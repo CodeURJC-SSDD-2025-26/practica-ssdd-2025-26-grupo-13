@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,21 +21,16 @@ import jakarta.mail.internet.MimeMessage;
 public class MailService {
 
     private final JavaMailSender mailSender;
+    @Value("${spring.mail.username:}") private String mailUsername;
+    @Value("${spring.mail.password:}") private String mailPassword;
 
     public MailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
-    public void sendPlainText(String to, String subject, String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
-        mailSender.send(message);
-    }
-
     @Async // prevents webapp waiting until email is sent
     public void sendOrderConfirmation(Order order) {
+        if (mailUsername.isBlank() || mailPassword.isBlank()) return;
         ClassPathResource template = new ClassPathResource("templates/orderemail.html");
         String html;
         Product product = order.getProduct();
@@ -43,7 +39,6 @@ public class MailService {
                 .replace("{{date}}", order.getCreatedAt().format(DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", Locale.of("es", "ES"))))
                 .replace("{{name}}",order.getName())
                 .replace("{{productname}}",product.getName())
-                .replace("{{productquality}}", product.getState())
                 .replace("{{productprice}}", String.valueOf(product.getPrice()))
                 .replace("{{surnames}}", order.getSurnames())
                 .replace("{{address}}", order.getAddress())
@@ -97,5 +92,4 @@ public class MailService {
         }
     }
 
-   
 }

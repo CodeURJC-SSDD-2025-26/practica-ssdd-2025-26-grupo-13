@@ -116,7 +116,6 @@ public class ProductController {
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam double price,
-            @RequestParam(required = false) String state,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) MultipartFile image
     ) throws IOException {
@@ -129,7 +128,6 @@ public class ProductController {
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
-        product.setState(state != null && !state.isBlank() ? state : "buen estado");
         product.setCategory(category != null && !category.isBlank() ? category : "informatica");
         product.setUser(user);
 
@@ -167,7 +165,6 @@ public class ProductController {
     @PostMapping("/modify_product")
     public String modifyProduct(Model model, @RequestParam int id, @RequestParam String name,
             @RequestParam String description, @RequestParam double price,
-            @RequestParam(required = false) String state,
             @RequestParam(required=false) String category,
             @RequestParam(required = false) MultipartFile image, RedirectAttributes redirAttr)
             throws ResponseStatusException, IOException{
@@ -178,9 +175,6 @@ public class ProductController {
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
-        if (state != null && !state.isBlank()) {
-            product.setState(state);
-        }
         if (category != null && !category.isBlank()) {
             product.setCategory(category);
         }
