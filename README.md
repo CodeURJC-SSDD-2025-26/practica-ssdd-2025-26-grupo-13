@@ -202,9 +202,9 @@ Designed and implemented the product.html page, which displays detailed informat
 
 ---
 
-## 🛠 **Assigment 2: Web with HTML generated in the server**
+## 🛠 **Assignment 2: Web with HTML generated in the server**
 
-### **Navigation and Screen Shots**
+### **Navigation and Screenshots**
 
 #### **Navigation Diagram**
 

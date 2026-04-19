@@ -75,7 +75,7 @@ public class ProductController {
 
         List<Review> allSellerReviews = reviewService.findByUserDest(product.getUser().getId());
         double sellerAverage = allSellerReviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
-        model.addAttribute("sellerAverage", sellerAverage);
+        model.addAttribute("sellerAverage", Math.round(sellerAverage * 100.0) / 100.0);
 
         PageRequest reviewPageRequest = PageRequest.of(pageReview, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id"));
         Page<Review> reviewPage = reviewService.findByProductUserId(product.getUser().getId(), reviewPageRequest);

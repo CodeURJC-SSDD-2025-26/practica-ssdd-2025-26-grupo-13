@@ -100,7 +100,7 @@ public class UserProfileController {
         List<Order> orders = orderService.findByBuyer(user);
         List<Review> reviews = reviewService.findByUserDest(id);
         Double average = reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
-        model.addAttribute("average", average);
+        model.addAttribute("average", Math.round(average * 100.0) / 100.0);
         addAverageStars(model, average);
 
         //for pagination

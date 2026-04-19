@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
 import es.mqm.webapp.model.Order;
+import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.repository.OrderRepository;
 
@@ -27,7 +28,27 @@ public class OrderService {
     }
 
     public void deleteById(int id) {
-        repository.deleteById(id);
+        Optional<Order> orderOpt = repository.findById(id);
+        if (!orderOpt.isPresent()) {
+            return;
+        }
+
+        Order order = orderOpt.get();
+        User buyer = order.getBuyer();
+        Product product = order.getProduct();
+
+        if (buyer != null) {
+            buyer.getOrders().removeIf(existingOrder -> existingOrder.getId() == order.getId());
+        }
+
+        if (product != null) {
+            product.setOrder(null);
+            product.setIsSold(false);
+        }
+
+        order.setBuyer(null);
+        order.setProduct(null);
+        repository.delete(order);
     }
 
     public Optional<Order> findById(int id) {
