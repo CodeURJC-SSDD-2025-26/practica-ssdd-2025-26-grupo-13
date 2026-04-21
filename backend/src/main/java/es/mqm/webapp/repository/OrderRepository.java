@@ -15,7 +15,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByBuyer(User buyer);
     List<Order> findAll();
     Page<Order> findAll(Pageable pageable);
-    void deleteById(Integer id);
     Integer countByBuyer(User buyer);
     Integer countByProductUser(User seller);
 

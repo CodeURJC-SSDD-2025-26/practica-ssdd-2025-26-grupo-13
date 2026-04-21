@@ -24,9 +24,6 @@ public class Product {
     private Image image;
     private Boolean isSold = false;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Order order;
-
     @CreatedDate
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
@@ -116,13 +113,4 @@ public class Product {
         this.isSold = isSold;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    
 }

@@ -43,8 +43,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     long count();
 
-    void deleteById(Integer id);
-
     List<Product> findByIsSoldFalseAndUser(User user);
 
 }

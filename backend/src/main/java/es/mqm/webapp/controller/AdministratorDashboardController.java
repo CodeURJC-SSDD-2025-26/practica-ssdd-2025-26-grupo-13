@@ -214,6 +214,7 @@ public class AdministratorDashboardController {
     }
     @PostMapping("/admin/delete_product/{id}")
     public String deleteProduct(@PathVariable int id, RedirectAttributes redirAttr){
+        orderService.deleteByProductId(id);
         reviewService.deleteByProductId(id);
         productService.deleteById(id);
         redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");

@@ -47,7 +47,7 @@ public class ReviewService {
         repository.deleteById(id);
     }
     public void deleteByProductId(Integer id) {
-        repository.deleteById(id);
+        repository.findByProductId(id).ifPresent(review -> repository.deleteById(review.getId()));
     }
 
     public Optional<Review> findByProductId(Integer productId) {

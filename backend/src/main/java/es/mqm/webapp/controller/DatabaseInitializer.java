@@ -117,9 +117,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                     "28933", "Móstoles", "Madrid", "España", "+34654246502", "4242424242424242", "12/27",
                     "234", 50.5));
             product = productService.findById(i + 1).orElse(null);
-            product.setIsSold(true);
             reviewService.save(new Review(product, user, "Comentario " + (i + 1), "2023-01-01", 3.0f));
-            productService.save(product);
         }
     }
 }

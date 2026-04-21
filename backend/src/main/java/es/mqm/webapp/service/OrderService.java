@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.repository.ProductRepository;
 import es.mqm.webapp.repository.OrderRepository;
 
 @Service
@@ -19,7 +20,10 @@ public class OrderService {
     
     @Autowired
     private OrderRepository repository;
-
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ReviewService reviewService;
     public List<Order> findAll() {
         return repository.findAll();
     }
@@ -42,13 +46,15 @@ public class OrderService {
         }
 
         if (product != null) {
-            product.setOrder(null);
+            reviewService.deleteByProductId(product.getId());
             product.setIsSold(false);
+            productRepository.save(product);
         }
+        repository.deleteById(order.getId());
+    }
 
-        order.setBuyer(null);
-        order.setProduct(null);
-        repository.delete(order);
+    public void deleteByProductId(int productId) {
+        repository.findByProductId(productId).ifPresent(order -> deleteById(order.getId()));
     }
 
     public Optional<Order> findById(int id) {
@@ -66,11 +72,17 @@ public class OrderService {
         return repository.findByBuyer(user, pageable);
     }
     public Order save(Order order) {
-        return repository.save(order);
+        Order savedOrder = repository.save(order);
+        Product product = savedOrder.getProduct();
+        if (product != null) {
+            product.setIsSold(true);
+            productRepository.save(product);
+        }
+        return savedOrder;
     }
 
     public void delete(Order order) {
-        repository.delete(order);
+        repository.deleteById(order.getId());
     }
     public int countByBuyer(User buyer) {
         return repository.countByBuyer(buyer);

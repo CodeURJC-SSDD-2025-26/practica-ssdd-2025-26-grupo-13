@@ -131,8 +131,6 @@ public class BuyController {
         Order order = new Order(buyer, product, name, surnames, address, apartment == null ? "" : apartment, zipcode, city,
                 province, country, phone, creditCardNumber, creditCardExpiryDate, creditCardCVV, product.getPrice() < 30 ? product.getPrice() + 3.5 : product.getPrice());
         orderService.save(order);
-        product.setIsSold(true);
-        productService.save(product);
         mailService.sendOrderConfirmation(order);
         return "redirect:/order_successful/" + order.getId();
     }

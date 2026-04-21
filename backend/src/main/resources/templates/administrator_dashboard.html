@@ -106,7 +106,7 @@
                     <td><a href="user_profile/{{user.id}}"> {{user.name}}</a></td>
                     <td>{{category}}</td>
                     <td>{{price}}€</td>
-                    <td>No</td>
+                    <td>{{isSold}}</td>
                     <td>
                         <div class="d-flex gap-2 flex-wrap">
                         <form action="/admin/delete_product/{{id}}" method="post">
@@ -252,7 +252,7 @@
                     </a>
                 </li>
                 <li class="page-item">
-                    <span class="page-link">{{currentPageReview}} / {{totalPagesReview}}</span>
+                    <span class="page-link">{{currentPageOrder}} / {{totalPagesOrder}}</span>
                 </li>
                 <li class="page-item {{^hasNextOrder}}disabled{{/hasNextOrder}}">
                     <a class="page-link" href="/admin?pageOrder={{nextPageOrder}}&pageReview={{currentPageReviewZero}}&pageProduct={{currentPageProductZero}}&pageUser={{currentPageUserZero}}#orders" aria-label="Siguiente">

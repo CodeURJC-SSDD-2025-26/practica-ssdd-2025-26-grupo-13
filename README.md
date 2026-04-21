@@ -19,13 +19,14 @@ A web application intended for buying/selling second hand products, similar to W
 ### **Entities**
 
 1. **User**: represents buyers and sellers (same role). It stores name, email address, phone number, avatar and delivery address.
-2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description, images and list of categories.
-3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date, estimated time of arrival and destination address.
+2. **Product**: an item offered for sale by a vendor, ready for another user to buy it. A product includes information such as title, description, image, price and category.
+3. **Order**: a purchase of a single product by a user. Includes product, buyer, purchase date, total price and destination address.
 4. **Review**: user feedback after a purchase. Includes text and number of stars given from 1 to 5, as well as reviewed and reviewer users.
 
 **Connections between entities:**
 
 - User - Order: a user can make several orders (1:N)
+- User - Product: a user can sell several products (1:N)
 - User - Review: a user can make multiple reviews about multiple users. Each message has one writer and is about another user in particular (1:N)
 - Order - Product: each order has exactly one product, because they can buy from different users (1:1)
 
@@ -46,15 +47,13 @@ A web application intended for buying/selling second hand products, similar to W
 ### **Images**
 
 - **User**: each user has one image as their avatar.
-- **Product**: each product has different images of the product taken by the vendor.
-- **Review** (optional): a review may have images showing the product as it arrived to the customer.
+- **Product**: each product has an image of the product taken by the vendor.
 
 ### **Charts**
 
-- **Reviews**: Bar chart showing the reviews given to a user
-- **Top Categories**: Pie chart showing categories where users buy the most
+- **Reviews**: Bar chart showing ratings distribution.
+- **Top Categories**: Pie chart showing categories where users sell the most.
 - **Registered Users**: Line chart of registered users by month.
-- **Daily Purchases**: Bar chart showing purchases made by day.
 
 ### **Complementary Technology**
 

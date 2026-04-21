@@ -32,6 +32,7 @@ import es.mqm.webapp.service.ReviewUtils;
 import es.mqm.webapp.model.ExtendedProduct;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.service.ImageService;
+import es.mqm.webapp.service.OrderService;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -42,6 +43,8 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private OrderService orderService;
     @Autowired
     private ImageService imageService;
 
@@ -194,6 +197,7 @@ public class ProductController {
         if(userId == -1){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se ha encontrado el dueño del producto");
         }
+        orderService.deleteByProductId(id);
         reviewService.deleteByProductId(id);
         productService.deleteById(id);
         redirAttr.addFlashAttribute("toastMessage", "Producto eliminado correctamente");
