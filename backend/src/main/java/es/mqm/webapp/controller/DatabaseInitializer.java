@@ -73,14 +73,25 @@ public class DatabaseInitializer implements CommandLineRunner {
         admin.setCreatedAt(today.minusDays(adminDaysBack));
         userService.save(admin);
         
+        String[] names = {"lavadora.jpg","ferrari.jpg","libro.jpg"};
+
 
         for (int i = 0; i < 40; i++) {
             User user= userService.findById(1).orElse(null);
-            Image imProduct = new Image();
-            try (InputStream inputStream = new ClassPathResource("static/images/product-400x600.png").getInputStream()) {
-                imProduct.setImageFile(new SerialBlob(inputStream.readAllBytes()));
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to load default product image", e);
+            if(i<3){
+                Image imProduct = new Image();
+                try (InputStream inputStream = new ClassPathResource("static/images/"+names[i]).getInputStream()) {
+                    imProduct.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to load default product image", e);
+                }
+            }else{
+                Image imProduct = new Image();
+                try (InputStream inputStream = new ClassPathResource("static/images/product-400x600.png").getInputStream()) {
+                    imProduct.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to load default product image", e);
+                }
             }
             String category = switch (i % 5) {
                 case 0 -> "automoviles";
