@@ -13,7 +13,12 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,13 +95,16 @@ public class AccountController {
     @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("/modify_user")
     public String modifyUser(Model model, @RequestParam int id, @RequestParam String name,
-            @RequestParam String surnames, @RequestParam String email, @RequestParam(required=false) String password,
-            @RequestParam MultipartFile image, RedirectAttributes redirAttr, @RequestParam() String city, @RequestParam() String latitude, @RequestParam() String longitude) throws IOException {
+            @RequestParam String surnames, @RequestParam String email, @RequestParam(required = false) String password,
+            @RequestParam MultipartFile image, RedirectAttributes redirAttr, @RequestParam() String city,
+            @RequestParam() String latitude, @RequestParam() String longitude, Authentication authentication,
+            HttpServletRequest request) throws IOException {
         int user_id = id;
         User user = userService.findById(user_id).orElse(null);
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
         }
+        String previousEmail = user.getEmail();
         if (!user.getEmail().equals(email) && userService.findByEmail(email).isPresent()) {
             redirAttr.addFlashAttribute("error", true);
             redirAttr.addFlashAttribute("toastMessage", "El correo introducido ya está registrado.");
@@ -120,7 +128,24 @@ public class AccountController {
             locationService.save(loc);
         }
         userService.save(user);
+        refreshAuthenticationIfCurrentUserWasUpdated(user, previousEmail, authentication, request);
         return "redirect:/user_profile/" + user_id;
+    }
+
+    private void refreshAuthenticationIfCurrentUserWasUpdated(User user, String previousEmail,
+            Authentication authentication, HttpServletRequest request) {
+        if (authentication == null || !previousEmail.equals(authentication.getName())) {
+            return;
+        }
+        var authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .toList();
+        var updatedAuthentication = new UsernamePasswordAuthenticationToken(
+                user.getEmail(),
+                user.getPassword(),
+                authorities);
+        updatedAuthentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(updatedAuthentication);
     }
 
     @PostMapping("/register")
