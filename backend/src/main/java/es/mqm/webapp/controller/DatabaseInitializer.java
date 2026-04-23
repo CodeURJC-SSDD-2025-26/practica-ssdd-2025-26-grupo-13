@@ -78,15 +78,14 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         for (int i = 0; i < 40; i++) {
             User user= userService.findById(1).orElse(null);
-            if(i<3){
-                Image imProduct = new Image();
-                try (InputStream inputStream = new ClassPathResource("static/images/"+names[i]).getInputStream()) {
+            Image imProduct = new Image();
+            if(i>7 && i<11){
+                try (InputStream inputStream = new ClassPathResource("static/images/"+names[i-8]).getInputStream()) {
                     imProduct.setImageFile(new SerialBlob(inputStream.readAllBytes()));
                 } catch (Exception e) {
                     throw new RuntimeException("Failed to load default product image", e);
                 }
             }else{
-                Image imProduct = new Image();
                 try (InputStream inputStream = new ClassPathResource("static/images/product-400x600.png").getInputStream()) {
                     imProduct.setImageFile(new SerialBlob(inputStream.readAllBytes()));
                 } catch (Exception e) {
