@@ -13,6 +13,6 @@ public record UserDTO(
         LocationDTO location,
         LocalDate createdAt,
         List<String> roles,
-        List<ProductDTO> products,
-        List<OrderDTO> orders) {
+        List<ProductBasicDTO> products,
+        List<OrderBasicDTO> orders) {
 }
