@@ -1,4 +1,4 @@
-package es.mqm.dto;
+package es.mqm.webapp.dto;
 
 public record ReviewDTO (
         int id,

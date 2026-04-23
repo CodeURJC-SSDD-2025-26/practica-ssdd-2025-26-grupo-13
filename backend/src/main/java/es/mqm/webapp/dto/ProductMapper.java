@@ -1,4 +1,4 @@
-package es.mqm.dto;
+package es.mqm.webapp.dto;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface ProductMapper {
     ProductBasicDTO toBasicDTO(Product product);
     List<ProductDTO> toDTOs(Collection<Product> products);
     Product toDomain(ProductDTO productDTO);
-    
+
 }

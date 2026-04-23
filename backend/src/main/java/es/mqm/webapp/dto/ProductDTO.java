@@ -1,4 +1,4 @@
-package es.mqm.dto;
+package es.mqm.webapp.dto;
 
 import java.time.LocalDateTime;
 
