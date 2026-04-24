@@ -44,7 +44,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(authorize -> authorize
 						// PUBLIC PAGES
 						.requestMatchers("/", "/css/**", "/images/**", "/search", "/product/**", "/user_profile/**",
-								"/error", "/register")
+								"/error", "/register", "/api/**")
 						.permitAll()
 						.requestMatchers("/admin/**").hasRole("ADMIN")
 						// PRIVATE PAGES
@@ -61,6 +61,7 @@ public class SecurityConfiguration {
 						.logoutSuccessUrl("/")
 						.permitAll())
 				.csrf(csrf -> csrf
+                		.ignoringRequestMatchers("/api/**") // temporary
                 		.csrfTokenRepository(new HttpSessionCsrfTokenRepository()));
 
 
