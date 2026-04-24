@@ -29,6 +29,7 @@ import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.OrderService;
 import es.mqm.webapp.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 
 
 
@@ -42,17 +43,20 @@ public class OrderRestController {
     @Autowired
 	private OrderMapper orderMapper;
 
-    @GetMapping({"/", ""})
+    @Operation(summary="Get a list of all orders")
+    @GetMapping("/")
     public Collection<OrderDTO> getOrders() {
         return orderMapper.toDTOs(orderService.findAll());
     }
 
+    @Operation(summary="Get an order by its id")
     @GetMapping("/{id}")
     public OrderDTO getOrder(@PathVariable int id) {
         Order order = orderService.findById(id).orElseThrow();
         return orderMapper.toDTO(order);
     }
 
+    @Operation(summary="Create a new order")
     @PostMapping("/")
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
         Order order = orderMapper.toDomain(orderDTO);
@@ -61,6 +65,7 @@ public class OrderRestController {
         return ResponseEntity.created(location).body(orderDTO);
     }
 
+    @Operation(summary="Delete the order with the given id")
     @DeleteMapping("/{id}")
     public OrderDTO deleteOrder(@PathVariable int id) {
         Order order = orderService.findById(id).orElseThrow();
@@ -68,6 +73,7 @@ public class OrderRestController {
         return orderMapper.toDTO(order);
     }
 
+    @Operation(summary="Modify the order with the given id")
     @PutMapping("/{id}")
     public OrderDTO replaceOrder(@PathVariable int id, @RequestBody OrderDTO updatedOrderDTO) throws SQLException {
         Order updatedOrder = orderMapper.toDomain(updatedOrderDTO);

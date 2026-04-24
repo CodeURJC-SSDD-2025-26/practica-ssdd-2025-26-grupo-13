@@ -1,5 +1,6 @@
 package es.mqm.webapp.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,14 @@ public class LocationService {
 
     public Optional<Location> findByCity(String name) {
         return repository.findByName(name);
+    }
+    public Optional<Location> findById(int id) {
+        return repository.findById(id);
+    } 
+    public List<Location> findAll() {
+        return repository.findAll();
+    }
+    public Optional<Location> deleteById(int id) {
+        return repository.deleteById(id);
     }
 }
