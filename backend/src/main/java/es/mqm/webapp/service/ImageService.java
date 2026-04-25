@@ -19,6 +19,10 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
+    public Image findById(int id) {
+        return imageRepository.findById(id).orElseThrow();
+    }
+
     public Image createImage(MultipartFile imageFile) throws IOException {
         Image image = new Image();
         try {
@@ -38,6 +42,27 @@ public class ImageService {
         } else {
             throw new RuntimeException("Image file not found");
         }
+    }
+    
+    public Image replaceImageFile(int id, MultipartFile imageFile) throws IOException {
+
+        Image image = imageRepository.findById(id).orElseThrow();
+
+        try {
+            image.setImageFile(new SerialBlob(imageFile.getBytes()));
+        } catch (Exception e) {
+            throw new IOException("Failed to create image", e);
+        }
+
+        imageRepository.save(image);
+        
+        return image;
+    }
+
+    public Image deleteImage(int id) {
+        Image image = imageRepository.findById(id).orElseThrow();
+        imageRepository.deleteById(id);
+        return image;
     }
 
 }

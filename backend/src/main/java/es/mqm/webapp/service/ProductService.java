@@ -103,6 +103,25 @@ public class ProductService {
         repository.save(product);
         return product;
     }
+
+    public Product removeImageFromProduct(int id) {
+		Product product = repository.findById(id).orElseThrow();
+		product.setImage(null);
+		repository.save(product);
+
+		return product;
+	}
+    public Product update(int id, Product updatedProduct) {
+        Product oldProduct = repository.findById(id).orElseThrow();
+        updatedProduct.setId(id);
+        updatedProduct.setUser(oldProduct.getUser()); // el usuario no se puede modificar al actualizar un producto
+        if (oldProduct.getImage() != null) {
+			// Transfer the image from the old product to the new one
+			updatedProduct.setImage(oldProduct.getImage());
+		}
+        repository.save(updatedProduct);
+        return updatedProduct;
+    }
     public Page<Product> findByCategory(String category, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return repository.findByCategory(category, pageable);
@@ -116,8 +135,10 @@ public class ProductService {
         repository.delete(product);
     }
 
-    public void deleteById(int id){
+    public Product deleteById(int id){
+        Product product = repository.findById(id).orElseThrow();
         repository.deleteById(id);
+        return product;
     }
     public long count() {
         return repository.count();

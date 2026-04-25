@@ -1,5 +1,6 @@
 package es.mqm.webapp.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +44,21 @@ public class ReviewService {
         return repository.save(review);
     }
 
-    public void deleteById(Integer id) {
+    public Review replaceReview(int id, Review updatedReview) throws SQLException {
+
+		Review oldReview = repository.findById(id).orElseThrow();
+		updatedReview.setId(id);
+        // When editing a review, the user and product cannot be modified, so they remain the same as in the original review.
+        updatedReview.setUser(oldReview.getUser());
+        updatedReview.setProduct(oldReview.getProduct());
+		repository.save(updatedReview);
+		return updatedReview;
+	}
+
+    public Review deleteById(Integer id) {
+        Review review = repository.findById(id).orElseThrow();
         repository.deleteById(id);
+        return review;
     }
     public void deleteByProductId(Integer id) {
         repository.findByProductId(id).ifPresent(review -> repository.deleteById(review.getId()));

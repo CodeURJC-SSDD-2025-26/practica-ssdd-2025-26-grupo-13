@@ -2,8 +2,8 @@ package es.mqm.webapp.dto;
 
 public record ReviewDTO (
         int id,
-        ProductDTO productId,
-        UserDTO userId,
+        ProductBasicDTO productId,
+        UserBasicDTO userId,
         String description,
         String date,
         float rating
