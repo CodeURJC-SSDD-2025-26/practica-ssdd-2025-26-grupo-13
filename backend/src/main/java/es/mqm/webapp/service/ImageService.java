@@ -1,7 +1,9 @@
 package es.mqm.webapp.service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -62,6 +64,24 @@ public class ImageService {
     public Image deleteImage(int id) {
         Image image = imageRepository.findById(id).orElseThrow();
         imageRepository.deleteById(id);
+        return image;
+    }
+
+    public Optional<Image> findById(int id) {
+        return imageRepository.findById(id);
+    }
+
+    public Image replaceImageFile(int id, InputStream inputStream) throws IOException {
+        Image image = imageRepository.findById(id).orElseThrow();
+
+        try {
+            image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+        } catch (Exception e) {
+            throw new IOException("Failed to create image", e);
+        }
+
+        imageRepository.save(image);
+        
         return image;
     }
 

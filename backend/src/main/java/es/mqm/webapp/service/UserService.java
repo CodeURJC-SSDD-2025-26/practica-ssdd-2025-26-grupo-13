@@ -46,8 +46,10 @@ public class UserService {
         repository.delete(user);
     }
 
-    public void deleteById(int id){
+    public Optional<User> deleteById(int id){
+        Optional<User> op = repository.findById(id);
         repository.deleteById(id);
+        return op;
     }
     
     public long count() {

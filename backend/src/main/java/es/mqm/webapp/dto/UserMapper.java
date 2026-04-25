@@ -1,5 +1,6 @@
 package es.mqm.webapp.dto;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.mapstruct.Mapper;
@@ -10,6 +11,6 @@ import es.mqm.webapp.model.User;
 public interface UserMapper {
 
 	UserDTO toDTO(User user);
-    List<UserDTO> toDTOs(List<User> users);
+    List<UserDTO> toDTOs(Collection<User> users);
 	User toDomain(UserDTO userDTO);
 }
