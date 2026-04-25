@@ -8,7 +8,7 @@ public record ProductDTO(
         String description,
         double price,
         UserBasicDTO user,
-        ImageDTO image,
+        ImageBasicDTO image,
         Boolean isSold,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,

@@ -1,4 +1,4 @@
-package es.mqm.webapp;
+package es.mqm.webapp.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.csrf.CsrfToken;

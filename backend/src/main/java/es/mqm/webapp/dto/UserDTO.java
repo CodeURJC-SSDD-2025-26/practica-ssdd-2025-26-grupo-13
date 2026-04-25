@@ -9,7 +9,7 @@ public record UserDTO(
         String surnames,
         String email,
         // String password,
-        ImageDTO image,
+        ImageBasicDTO image,
         LocationDTO location,
         LocalDate createdAt,
         List<String> roles,

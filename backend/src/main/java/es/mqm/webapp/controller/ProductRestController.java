@@ -2,7 +2,6 @@ package es.mqm.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +29,8 @@ import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.service.ImageService;
 import es.mqm.webapp.service.ProductService;
+import es.mqm.webapp.service.UserService;
+import es.mqm.webapp.model.User;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
 
@@ -44,6 +45,8 @@ public class ProductRestController {
 	private ImageService ImageService;
     @Autowired 
     private ImageMapper ImageMapper;
+	@Autowired
+	private UserService userService;
 
     @GetMapping("/")
     public Collection<ProductBasicDTO> getProducts() {
@@ -62,6 +65,19 @@ public class ProductRestController {
 	public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
 
 		Product product = ProductMapper.toDomain(productDTO);
+
+		if (productDTO.user() == null || productDTO.user().id() == null) {
+			throw new IllegalArgumentException("Se necesita un user.id");
+		}
+
+		User user = userService.findById(productDTO.user().id().intValue()).orElseThrow();
+		product.setUser(user);
+
+		if (productDTO.image() != null) {
+			Image image = ImageService.findById(productDTO.image().id()).orElseThrow();
+			product.setImage(image);
+		}
+
 		product = productService.save(product);
 		productDTO = ProductMapper.toDTO(product);
 
@@ -80,12 +96,11 @@ public class ProductRestController {
 
 	@DeleteMapping("/{id}")
 	public ProductDTO deleteProduct(@PathVariable int id) {
-
 		return ProductMapper.toDTO(productService.deleteById(id));
 	}
 
-    @PostMapping("/{id}/images/")
-	public ResponseEntity<ImageDTO> createBookImage(@PathVariable int id, @RequestParam MultipartFile imageFile)
+    @PostMapping("/{id}/image/")
+	public ResponseEntity<ImageDTO> createProductImage(@PathVariable int id, @RequestParam MultipartFile imageFile)
 			throws IOException{
 
 		if (imageFile.isEmpty()) {
@@ -96,25 +111,20 @@ public class ProductRestController {
 		productService.addImageToProduct(id, image);
 
 		URI location = fromCurrentContextPath()
-				.path("/api/images/{imageId}/media")
+				.path("/api/image/{imageId}/media")
 				.buildAndExpand(image.getId())
 				.toUri();
 
 		return ResponseEntity.created(location).body(ImageMapper.toDTO(image));
 	}
 
-    @DeleteMapping("/{id}/images/{imageId}")
+    @DeleteMapping("/{id}/image/{imageId}")
 	public ImageDTO deleteProductImage(@PathVariable int productId, @PathVariable int imageId)
 			throws SQLException {
 
-		Optional<Image> imageOptional = ImageService.findById(imageId);
-		if (imageOptional.isPresent()) {
-			Image image = imageOptional.get();
-			productService.removeImageFromProduct(productId);
-			ImageService.deleteImage(imageId);
-			return ImageMapper.toDTO(image);
-		} else {
-			throw new SQLException("Image not found");
-		}
+		Image image = ImageService.findById(imageId).orElseThrow();
+		productService.removeImageFromProduct(productId);
+		ImageService.deleteImage(imageId);
+		return ImageMapper.toDTO(image);
 	}
 }

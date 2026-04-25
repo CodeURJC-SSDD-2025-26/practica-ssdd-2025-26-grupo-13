@@ -9,4 +9,5 @@ public interface ImageMapper {
 
 	ImageDTO toDTO(Image image);
 	Image toDomain(ImageDTO imageDTO);
+	ImageBasicDTO toBasicDTO(Image image);
 }

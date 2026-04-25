@@ -114,7 +114,7 @@ public class ProductService {
     public Product update(int id, Product updatedProduct) {
         Product oldProduct = repository.findById(id).orElseThrow();
         updatedProduct.setId(id);
-        updatedProduct.setUser(oldProduct.getUser()); // el usuario no se puede modificar al actualizar un producto
+        updatedProduct.setUser(oldProduct.getUser()); // user cannot be modified while updating a product
         if (oldProduct.getImage() != null) {
 			// Transfer the image from the old product to the new one
 			updatedProduct.setImage(oldProduct.getImage());

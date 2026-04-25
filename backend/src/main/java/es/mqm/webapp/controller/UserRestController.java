@@ -1,13 +1,10 @@
 package es.mqm.webapp.controller;
 
 import java.net.URI;
-import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
