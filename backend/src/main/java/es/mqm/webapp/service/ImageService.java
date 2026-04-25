@@ -21,10 +21,6 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Image findById(int id) {
-        return imageRepository.findById(id).orElseThrow();
-    }
-
     public Image createImage(MultipartFile imageFile) throws IOException {
         Image image = new Image();
         try {

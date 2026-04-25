@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.io.IOException;
+import java.util.Optional;
 
 import es.mqm.webapp.dto.ImageDTO;
 import es.mqm.webapp.dto.ImageMapper;
@@ -105,10 +107,14 @@ public class ProductRestController {
 	public ImageDTO deleteProductImage(@PathVariable int productId, @PathVariable int imageId)
 			throws SQLException {
 
-		Image image = ImageService.findById(imageId);
-		productService.removeImageFromProduct(productId);
-		ImageService.deleteImage(imageId);
-
-		return ImageMapper.toDTO(image);
+		Optional<Image> imageOptional = ImageService.findById(imageId);
+		if (imageOptional.isPresent()) {
+			Image image = imageOptional.get();
+			productService.removeImageFromProduct(productId);
+			ImageService.deleteImage(imageId);
+			return ImageMapper.toDTO(image);
+		} else {
+			throw new SQLException("Image not found");
+		}
 	}
 }
