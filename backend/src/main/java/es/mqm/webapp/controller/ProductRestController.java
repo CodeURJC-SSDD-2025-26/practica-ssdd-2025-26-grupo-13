@@ -2,8 +2,8 @@ package es.mqm.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +22,9 @@ import java.util.Collection;
 import java.io.IOException;
 import java.util.Optional;
 
+import es.mqm.webapp.dto.ExtendedProductDTO;
 import es.mqm.webapp.dto.ImageDTO;
 import es.mqm.webapp.dto.ImageMapper;
-import es.mqm.webapp.dto.ProductBasicDTO;
 import es.mqm.webapp.dto.ProductDTO;
 import es.mqm.webapp.dto.ProductMapper;
 import es.mqm.webapp.model.Product;
@@ -50,9 +50,26 @@ public class ProductRestController {
 	@Autowired
 	private UserService userService;
 
-    @GetMapping("/")
-    public Page<ProductBasicDTO> getProducts(Pageable pageable) {
-        return productService.findAll(pageable).map(ProductMapper::toBasicDTO);
+	@GetMapping("/")
+	public Page<ExtendedProductDTO> getProducts(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) String minPrice,
+            @RequestParam(required = false) String maxPrice,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Authentication authentication) {
+        
+        User viewer = null;
+        if (authentication != null && authentication.isAuthenticated()) {
+            Optional<User> userOpt = userService.findByEmail(authentication.getName());
+            viewer = userOpt.orElse(null);
+        }
+        
+        return productService.searchProducts(name, category, location, date, minPrice, maxPrice, viewer, page, size)
+                .map(ProductMapper::toExtendedDTO);
     }
 
     @GetMapping("/{id}")
