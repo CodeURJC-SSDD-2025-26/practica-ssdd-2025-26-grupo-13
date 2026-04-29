@@ -1,6 +1,8 @@
 package es.mqm.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,10 +51,8 @@ public class ProductRestController {
 	private UserService userService;
 
     @GetMapping("/")
-    public Collection<ProductBasicDTO> getProducts() {
-        return productService.findAll().stream()
-				.map(ProductMapper::toBasicDTO)
-				.toList();
+    public Page<ProductBasicDTO> getProducts(Pageable pageable) {
+        return productService.findAll(pageable).map(ProductMapper::toBasicDTO);
     }
 
     @GetMapping("/{id}")

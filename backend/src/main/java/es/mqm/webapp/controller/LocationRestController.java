@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +37,8 @@ public class LocationRestController {
 
     @Operation(summary="Get all locations")
     @GetMapping("/")
-    public Collection<LocationDTO> getLocations() {
-        return locationMapper.toDTOs(locationService.findAll());
+    public Page<LocationDTO> getLocations(Pageable pageable) {
+        return locationService.findAll(pageable).map(locationMapper::toDTO);
     }
 
     @Operation(summary="Get the location with the given id")
