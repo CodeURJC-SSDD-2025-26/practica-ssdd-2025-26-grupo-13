@@ -64,7 +64,7 @@ public class SecurityConfiguration {
 			.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
 		http.authorizeHttpRequests(authorize -> authorize
-			.requestMatchers("/api/v1/orders/", "/api/v1/products/", "/api/v1/images/", "/api/v1/locations/",
+			.requestMatchers("/api/v1/orders/", "/api/v1/products/", "/api/v1/images/**", "/api/v1/locations/",
 				"/api/v1/users/").permitAll()
 			.requestMatchers(HttpMethod.PUT, "/api/v1/images/*/media").hasRole("USER")
 			.requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("USER")
