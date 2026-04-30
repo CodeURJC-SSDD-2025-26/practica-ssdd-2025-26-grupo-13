@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import es.mqm.webapp.model.Review;
 
@@ -11,5 +12,7 @@ import es.mqm.webapp.model.Review;
 public interface ReviewMapper {
     ReviewDTO toDTO(Review review);
     List<ReviewDTO> toDTOs(Collection<Review> reviews);
+    @Mapping (target = "id", ignore = true)
+    @Mapping (target = "date", ignore = true)
     Review toDomain(ReviewDTO reviewDTO);
 }

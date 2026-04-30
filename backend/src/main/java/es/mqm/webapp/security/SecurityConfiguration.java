@@ -65,7 +65,7 @@ public class SecurityConfiguration {
 
 		http.authorizeHttpRequests(authorize -> authorize
 			.requestMatchers("/api/v1/orders/**", "/api/v1/products/**", "/api/v1/images/**", "/api/v1/locations/**",
-				"/api/v1/users/**", "/api/v1/auth/**").permitAll()
+				"/api/v1/users/**", "/api/v1/reviews/**", "/api/v1/auth/**").permitAll()
 			.requestMatchers(HttpMethod.PUT, "/api/v1/images/*/media").hasRole("USER")
 			.requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("USER")
 			// PUBLIC ENDPOINTS

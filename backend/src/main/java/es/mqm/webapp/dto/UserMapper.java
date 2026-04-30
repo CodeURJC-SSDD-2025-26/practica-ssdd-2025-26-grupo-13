@@ -14,5 +14,8 @@ public interface UserMapper {
 	UserDTO toDTO(User user);
     List<UserDTO> toDTOs(Collection<User> users);
 	@Mapping(target = "image", ignore = true)
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "products", ignore = true) 
+	@Mapping(target = "orders", ignore = true) 
 	User toDomain(UserDTO userDTO);
 }

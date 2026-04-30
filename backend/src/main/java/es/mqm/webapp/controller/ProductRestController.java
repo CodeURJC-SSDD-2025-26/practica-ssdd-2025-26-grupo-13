@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import java.net.URI;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.io.IOException;
 import java.util.Optional;
@@ -158,11 +161,18 @@ public class ProductRestController {
 		return ImageMapper.toDTO(image);
 	}
 
-	@PreAuthorize("@orderService.isBuyerOrAdminReview(#id, authentication)")
+    @PreAuthorize("@orderService.isBuyerOrAdminReview(#id, authentication)")
     @PostMapping("/{id}/reviews/")
-	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO reviewDTO) {
+	public ResponseEntity<ReviewDTO> createReview(@PathVariable int id, @RequestBody ReviewDTO reviewDTO, Authentication authentication) {
+
+		if (reviewService.findByProductId(id).isPresent()) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "This product already has a review");
+		}
 
 		Review review = ReviewMapper.toDomain(reviewDTO);
+		review.setProduct(productService.findById(id).orElseThrow());
+		review.setUser(userService.findByEmail(authentication.getName()).orElseThrow());
+		review.setDate(LocalDate.now().toString());
 		review = reviewService.save(review);
 		reviewDTO = ReviewMapper.toDTO(review);
 
