@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,6 +88,7 @@ public class OrderRestController {
         return ResponseEntity.created(location).body(orderMapper.toDTO(savedOrder));
     }
 
+    @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
     @Operation(summary="Delete the order with the given id")
     @DeleteMapping("/{id}")
     public OrderDTO deleteOrder(@PathVariable int id) {
@@ -95,6 +97,7 @@ public class OrderRestController {
         return orderMapper.toDTO(order);
     }
 
+    @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
     @Operation(summary="Modify the order with the given id")
     @PutMapping("/{id}")
     public OrderDTO replaceOrder(@PathVariable int id, @RequestBody OrderDTO updatedOrderDTO) throws SQLException {

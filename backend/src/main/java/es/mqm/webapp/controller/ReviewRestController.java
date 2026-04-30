@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,18 +45,9 @@ public class ReviewRestController {
 		return ReviewMapper.toDTO(review);
 	}
 
-    @PostMapping("/")
-	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO reviewDTO) {
-
-		Review review = ReviewMapper.toDomain(reviewDTO);
-		review = reviewService.save(review);
-		reviewDTO = ReviewMapper.toDTO(review);
-
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(reviewDTO.id()).toUri();
-
-		return ResponseEntity.created(location).body(reviewDTO);
-	}
+	//the Post method is in the PostController (to check if the user has bought the product)
     
+	@PreAuthorize("@reviewService.isUserOrAdmin(#id, authentication)")
     @PutMapping("/{id}")
 	public ReviewDTO replaceReview(@PathVariable int id, @RequestBody ReviewDTO updatedReviewDTO) throws SQLException {
 
@@ -64,6 +56,7 @@ public class ReviewRestController {
 		return ReviewMapper.toDTO(updatedReview);
 	}
 
+	@PreAuthorize("@reviewService.isUserOrAdmin(#id, authentication)")
     @DeleteMapping("/{id}")
 	public ReviewDTO deleteReview(@PathVariable int id) {
 
