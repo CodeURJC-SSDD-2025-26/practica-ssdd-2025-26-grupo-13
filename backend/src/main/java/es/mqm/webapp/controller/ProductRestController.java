@@ -3,6 +3,7 @@ package es.mqm.webapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +28,14 @@ import es.mqm.webapp.dto.ImageDTO;
 import es.mqm.webapp.dto.ImageMapper;
 import es.mqm.webapp.dto.ProductDTO;
 import es.mqm.webapp.dto.ProductMapper;
+import es.mqm.webapp.dto.ReviewDTO;
+import es.mqm.webapp.dto.ReviewMapper;
 import es.mqm.webapp.model.Product;
+import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.service.ImageService;
 import es.mqm.webapp.service.ProductService;
+import es.mqm.webapp.service.ReviewService;
 import es.mqm.webapp.service.UserService;
 import es.mqm.webapp.model.User;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
@@ -43,6 +48,10 @@ public class ProductRestController {
 	private ProductService productService;
     @Autowired
     private ProductMapper ProductMapper;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private ReviewMapper ReviewMapper;
     @Autowired
 	private ImageService ImageService;
     @Autowired 
@@ -103,6 +112,7 @@ public class ProductRestController {
 		return ResponseEntity.created(location).body(productDTO);
 	}
 
+	@PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @PutMapping("/{id}")
 	public ProductDTO replaceProduct(@PathVariable int id, @RequestBody ProductDTO updatedProductDTO) throws SQLException {
 
@@ -111,11 +121,13 @@ public class ProductRestController {
 		return ProductMapper.toDTO(updatedProduct);
 	}
 
+	@PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
 	@DeleteMapping("/{id}")
 	public ProductDTO deleteProduct(@PathVariable int id) {
 		return ProductMapper.toDTO(productService.deleteById(id));
 	}
 
+	@PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @PostMapping("/{id}/image/")
 	public ResponseEntity<ImageDTO> createProductImage(@PathVariable int id, @RequestParam MultipartFile imageFile)
 			throws IOException{
@@ -135,6 +147,7 @@ public class ProductRestController {
 		return ResponseEntity.created(location).body(ImageMapper.toDTO(image));
 	}
 
+	@PreAuthorize("@productService.isOwnerOrAdmin(#id, authentication)")
     @DeleteMapping("/{id}/image/{imageId}")
 	public ImageDTO deleteProductImage(@PathVariable int id, @PathVariable int imageId)
 			throws SQLException {
@@ -143,5 +156,18 @@ public class ProductRestController {
 		productService.removeImageFromProduct(id);
 		ImageService.deleteImage(imageId);
 		return ImageMapper.toDTO(image);
+	}
+
+	@PreAuthorize("@orderService.isBuyerOrAdminReview(#id, authentication)")
+    @PostMapping("/{id}/reviews/")
+	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO reviewDTO) {
+
+		Review review = ReviewMapper.toDomain(reviewDTO);
+		review = reviewService.save(review);
+		reviewDTO = ReviewMapper.toDTO(review);
+
+		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(reviewDTO.id()).toUri();
+
+		return ResponseEntity.created(location).body(reviewDTO);
 	}
 }

@@ -41,6 +41,11 @@ public class UserService {
         repository.save(user);
         return user;
     }
+    public void removeImageFromUser(int id) {
+        User user = repository.findById(id).orElseThrow();
+        user.setImage(null);
+        repository.save(user);
+    }
 
     public void delete(User user) {
         repository.delete(user);
