@@ -136,11 +136,11 @@ public class ProductRestController {
 	}
 
     @DeleteMapping("/{id}/image/{imageId}")
-	public ImageDTO deleteProductImage(@PathVariable int productId, @PathVariable int imageId)
+	public ImageDTO deleteProductImage(@PathVariable int id, @PathVariable int imageId)
 			throws SQLException {
 
 		Image image = ImageService.findById(imageId).orElseThrow();
-		productService.removeImageFromProduct(productId);
+		productService.removeImageFromProduct(id);
 		ImageService.deleteImage(imageId);
 		return ImageMapper.toDTO(image);
 	}

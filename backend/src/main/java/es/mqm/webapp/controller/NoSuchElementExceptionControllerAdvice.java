@@ -20,4 +20,9 @@ class NoSuchElementExceptionControllerAdvice {
  @ExceptionHandler(MethodArgumentTypeMismatchException.class)
  public void handleException() {
  }
+
+ @ResponseStatus(HttpStatus.BAD_REQUEST)
+ @ExceptionHandler(IllegalArgumentException.class)
+ public void handleBadRequest() {
+ }
 }

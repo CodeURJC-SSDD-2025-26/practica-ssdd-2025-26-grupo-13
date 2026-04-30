@@ -13,7 +13,10 @@ public interface ProductMapper {
     ProductDTO toDTO(Product product);
     ProductBasicDTO toBasicDTO(Product product);
     List<ProductDTO> toDTOs(Collection<Product> products);
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "image", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     Product toDomain(ProductDTO productDTO);
     
     @Mapping(source = "p.id", target = "id")

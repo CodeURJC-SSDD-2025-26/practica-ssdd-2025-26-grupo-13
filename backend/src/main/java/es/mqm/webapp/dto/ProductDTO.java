@@ -3,7 +3,7 @@ package es.mqm.webapp.dto;
 import java.time.LocalDateTime;
 
 public record ProductDTO(
-        int id,
+        Integer id,
         String name,
         String description,
         double price,
