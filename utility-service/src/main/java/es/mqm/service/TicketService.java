@@ -1,4 +1,4 @@
-package es.mqm.webapp.service;
+package es.mqm.service;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -9,14 +9,14 @@ import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.element.Image;
 
 import java.io.ByteArrayOutputStream;
-import es.mqm.webapp.model.Order;
+import es.mqm.dto.MessageInfoDTO;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TicketService {
-    public byte[] generateTicket(Order order) throws RuntimeException {
+    public byte[] generateTicket(MessageInfoDTO info) throws RuntimeException {
          try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 
             PdfWriter writer = new PdfWriter(baos);
@@ -32,20 +32,20 @@ public class TicketService {
             document.add(logo);
 
             document.add(new Paragraph("MQM - Ticket de compra").setBold().setFontSize(20));
-            document.add(new Paragraph("Número de pedido: " + order.getId()));
-            document.add(new Paragraph("Fecha: " + order.getCreatedAt()));
+            document.add(new Paragraph("Número de pedido: " + info.id()));
+            document.add(new Paragraph("Fecha: " + info.createdAt()));
             document.add(new Paragraph(" "));
 
             document.add(new Paragraph("Información del comprador: "));
-            document.add(new Paragraph("Nombre: " + order.getBuyer().getName()));
-            document.add(new Paragraph("Email: " + order.getBuyer().getEmail()));
-            document.add(new Paragraph("Teléfono: " + order.getPhone()));
-            String address = order.getAddress() + ", " +
-                   order.getCity() + ", " +
-                   order.getProvince() + ", " +
-                   order.getZipcode() + ".";
+            document.add(new Paragraph("Nombre: " + info.buyerName()));
+            document.add(new Paragraph("Email: " + info.buyerEmail()));
+            document.add(new Paragraph("Teléfono: " + info.phone()));
+            String address = info.address() + ", " +
+                   info.city() + ", " +
+                   info.province() + ", " +
+                   info.zipcode() + ".";
             document.add(new Paragraph("Dirección: " + address));
-            document.add(new Paragraph("Tarjeta de crédito: **** **** **** " + (order.getCreditCardNumber().substring(order.getCreditCardNumber().length()- 4))));
+            document.add(new Paragraph("Tarjeta de crédito: **** **** **** " + (info.creditCardNumberLast4Digits())));
             document.add(new Paragraph(" "));
 
             Table table = new Table(2);
@@ -53,14 +53,14 @@ public class TicketService {
             table.addHeaderCell("Producto");
             table.addHeaderCell("Precio");
 
-            table.addCell(order.getProduct().getName());
-            table.addCell(String.format("%.2f €", order.getProduct().getPrice()));
+            table.addCell(info.productName());
+            table.addCell(String.format("%.2f €", info.productPrice()));
 
             document.add(table);
             document.add(new Paragraph(" "));
 
-            document.add(new Paragraph("Gastos de envio: " + (order.getTotalPrice() - order.getProduct().getPrice()) + " €"));
-            document.add(new Paragraph("Total: " + String.format("%.2f €", order.getTotalPrice())));
+            document.add(new Paragraph("Gastos de envio: " + (info.totalPrice() - info.productPrice()) + " €"));
+            document.add(new Paragraph("Total: " + String.format("%.2f €", info.totalPrice())));
 
             document.close();
             return baos.toByteArray();

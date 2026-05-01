@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" lang="es">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style type="text/css">
+    table { border-collapse: separate; table-layout: fixed; mso-table-lspace: 0pt; mso-table-rspace: 0pt; } table td { border-collapse: collapse; }
+    body, a, li, p, h1, h2, h3 { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; margin: 0; padding: 0; }
+    body { min-width: 100%; background-color: #E3F1EF; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, p, a { overflow-wrap: normal; word-break: break-word; font-family: 'Poppins', 'Roboto', Arial, sans-serif; }
+    @media (max-width: 480px) { .t164 { padding: 0 30px 40px !important; } .mobile-stack { display: block !important; width: 100% !important; max-width: 100% !important; } .t163 { display: none !important; } }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto&family=Albert+Sans:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tr><td align="center" style="padding: 45px 0;">
+      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color:#F8F8F8; border-radius:10px; overflow:hidden;">
+        <tr><td class="t164" style="padding:0 50px 60px 50px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:35px;">
+            <tr>
+              <td valign="top" width="130"><img src="https://i.imgur.com/oRxu7AN.png" width="127" alt="Logo" /></td>
+              <td valign="top" align="right" style="color:#333333;"><p style="font-weight:bold; font-size:16px;">Nueva venta</p><p style="font-size:16px;">Fecha: {{date}}</p></td>
+            </tr>
+          </table>
+          <h1 style="font-size:24px; font-weight:700; color:#333333; margin: 30px 0 15px;">Hola {{name}},</h1>
+          <p style="font-size:16px; color:#333333; margin-bottom:16px;">¡Enhorabuena! El usuario <a href="https://localhost:8443/user_profile/{{userid}}" style="font-weight:700; color:#0000FF;">{{buyername}}</a> ha comprado uno de tus productos.</p>
+          <p style="font-size:16px; color:#333333; margin-bottom:16px;">A continuación encontrarás todos los detalles para poder gestionar el envío del mismo.</p>
+          <p style="font-size:16px; color:#333333; border-bottom:1px solid #F0F0F0; padding-bottom:22px;">El dinero será ingresado en tu cuenta bancaria una vez el usuario reciba el producto.</p>
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#F0F0F0; margin-top:30px; padding:40px;">
+            <tr>
+              <td valign="top" class="mobile-stack" width="50%">
+                <p style="font-weight:700; font-size:14px; text-transform:uppercase; margin-bottom:10px;">{{productname}}</p><p style="font-weight:700; font-size:16px; margin-bottom:30px;">{{productprice}} €</p>
+                <p style="font-weight:700; font-size:14px; text-transform:uppercase; margin-bottom:10px;">DIRECCIÓN DE ENTREGA</p>
+                <div style="font-family:'Albert Sans', sans-serif; font-size:12px; color:#242424; line-height:1.5;">{{buyername}} {{buyersurnames}}<br>{{address}}, {{apartment}}<br>{{zipcode}} - {{city}}<br>{{province}}, {{country}}</div>
+              </td>
+              <td valign="top" class="mobile-stack" width="50%" style="padding-left:10px;">
+                <p style="font-weight:700; font-size:14px; text-transform:uppercase; margin-bottom:10px;">MÉTODO DE PAGO</p><p style="font-family:'Albert Sans', sans-serif; font-size:12px; color:#242424; margin-bottom:42px;">Tarjeta de débito/crédito</p>
+                <p style="font-weight:700; font-size:14px; text-transform:uppercase; margin-bottom:10px;">FECHA LÍMITE DE ENVÍO</p><p style="font-family:'Albert Sans', sans-serif; font-size:12px; color:#242424;">{{shippingdeadline}}</p>
+              </td>
+            </tr>
+          </table>
+        </td></tr>
+      </table>
+      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0">
+        <tr><td style="padding:48px 50px; font-size:12px; color:#888888; text-align:left;">
+          <p>C/ Tulipán s/n, 28933. Móstoles (Madrid).</p><p>© 2026 MeLoQuitanDeLasManos. Todos los derechos reservados</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>
