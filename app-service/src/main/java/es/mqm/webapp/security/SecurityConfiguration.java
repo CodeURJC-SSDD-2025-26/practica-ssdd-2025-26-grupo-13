@@ -68,6 +68,7 @@ public class SecurityConfiguration {
 				"/api/v1/users/**", "/api/v1/reviews/**", "/api/v1/auth/**").permitAll()
 			.requestMatchers(HttpMethod.PUT, "/api/v1/images/*/media").hasRole("USER")
 			.requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("USER")
+			.requestMatchers("/api/v1/charts/").hasRole("ADMIN")
 			// PUBLIC ENDPOINTS
 			.anyRequest().authenticated());
 

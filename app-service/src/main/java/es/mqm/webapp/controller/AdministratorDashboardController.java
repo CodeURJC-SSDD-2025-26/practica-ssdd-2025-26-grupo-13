@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.HashMap;
-import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +19,7 @@ import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.Review;
 import es.mqm.webapp.model.User;
+import es.mqm.webapp.dto.AdminChartsDTO;
 import es.mqm.webapp.service.*;
 
 @Controller
@@ -32,6 +32,8 @@ public class AdministratorDashboardController {
     private ReviewService reviewService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private ChartsService chartsService;
 
     private static final int PAGE_SIZE = 5;
 
@@ -43,9 +45,6 @@ public class AdministratorDashboardController {
     private long productCounter;
     private long productSoldCounter;
     private long orderCounter;
-    private List<Integer> categoriesSold = new ArrayList<Integer>();
-    private List<Integer> reviewsRating = new ArrayList<Integer>();
-    private List<Integer> newUsersPerMonth = new ArrayList<Integer>();
 
     private void addReviewStars(Map<String, Object> item, Review review) {
         int rating = Math.max(0, Math.min(5, Math.round(review.getRating())));
@@ -63,9 +62,6 @@ public class AdministratorDashboardController {
         products.clear();
         reviews.clear();
         orders.clear();
-        categoriesSold.clear();
-        reviewsRating.clear();
-        newUsersPerMonth.clear();
         if (pageProduct < 0)
             pageProduct = 0;
         if (pageUser < 0)
@@ -79,44 +75,12 @@ public class AdministratorDashboardController {
         Page<User> userPage = userService.findAll(PageRequest.of(pageUser, PAGE_SIZE));
         Page<Review> reviewPage = reviewService.findAll(PageRequest.of(pageReview, PAGE_SIZE));
         Page<Order> orderPage = orderService.findAll(PageRequest.of(pageOrder, PAGE_SIZE));
-        userCounter = userService.count();
-        productCounter = productService.count();
         productSoldCounter = orderService.count();
-        orderCounter = orderService.count();
 
-        for(int i=0;i<5;i++){
-            if(i==0){
-                categoriesSold.add(productService.countByCategory("ropa"));
-            }else if(i==1){
-                categoriesSold.add(productService.countByCategory("informatica"));
-            }else if(i==2){
-                categoriesSold.add(productService.countByCategory("electrodomesticos"));
-            }else if(i==3){
-                categoriesSold.add(productService.countByCategory("libros"));
-            }else if(i==4){
-                categoriesSold.add(productService.countByCategory("automoviles"));
-            }
-        }
-        LocalDate today = LocalDate.now();
-        LocalDate startDate = today.withDayOfYear(1);
-        int[] monthCounts = new int[12];
-        for (Object[] row : userService.countUsersByMonthBetween(startDate, today)) {
-            if (row == null || row.length < 3 || row[0] == null || row[1] == null || row[2] == null) {
-                continue;
-            }
-            int month = ((Number) row[1]).intValue();
-            int count = ((Number) row[2]).intValue();
-            if (month < 1 || month > 12) {
-                continue;
-            }
-            monthCounts[month - 1] = count;
-        }
-        for (int i = 0; i < 12; i++) {
-            newUsersPerMonth.add(monthCounts[i]);
-        }
-        for(int i=0;i<5;i++){
-            reviewsRating.add(reviewService.findByRating(i+1).size());
-        }
+        AdminChartsDTO chartsData = chartsService.getAdminChartsData();
+        userCounter = chartsData.userCounter();
+        productCounter = chartsData.productCounter();
+        orderCounter = chartsData.orderCounter();
 
         if (pageProduct >= productPage.getTotalPages() && productPage.getTotalPages() > 0) {
             pageProduct = productPage.getTotalPages() - 1;
@@ -189,15 +153,15 @@ public class AdministratorDashboardController {
         model.addAttribute("productCounter", productCounter);
         model.addAttribute("productSoldCounter", productSoldCounter);
         model.addAttribute("orderCounter", orderCounter);
-        String categoriesSoldJson = categoriesSold.stream()
+        String categoriesSoldJson = chartsData.categoriesSold().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         model.addAttribute("categoriesSoldJson", categoriesSoldJson);
-        String reviewsRatingJson = reviewsRating.stream()
+        String reviewsRatingJson = chartsData.reviewsRating().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         model.addAttribute("reviewsRatingJson", reviewsRatingJson);
-        String newUsersPerMonthJson = newUsersPerMonth.stream()
+        String newUsersPerMonthJson = chartsData.newUsersPerMonth().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         model.addAttribute("newUsersPerMonthJson", newUsersPerMonthJson);

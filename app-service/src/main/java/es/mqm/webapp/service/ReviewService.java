@@ -51,6 +51,7 @@ public class ReviewService {
         // When editing a review, the user and product cannot be modified, so they remain the same as in the original review.
         updatedReview.setUser(oldReview.getUser());
         updatedReview.setProduct(oldReview.getProduct());
+        updatedReview.setDate(oldReview.getDate());
 		repository.save(updatedReview);
 		return updatedReview;
 	}
