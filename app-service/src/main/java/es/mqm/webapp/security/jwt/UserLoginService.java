@@ -23,6 +23,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
+
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.core.io.ClassPathResource;
@@ -75,10 +77,17 @@ public class UserLoginService {
 
 	public ResponseEntity<AuthResponse> register(HttpServletResponse response, RegisterRequest registerRequest) {
 		try {
+			Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+
 			// Check if user already exists
 			if (userService.findByEmail(registerRequest.getUsername()).isPresent()) {
 				AuthResponse registerResponse = new AuthResponse(AuthResponse.Status.FAILURE,
 						"User already exists with this email");
+				return ResponseEntity.ok().body(registerResponse);
+			}
+			if(!EMAIL_PATTERN.matcher(registerRequest.getUsername()).matches()){
+				AuthResponse registerResponse = new AuthResponse(AuthResponse.Status.FAILURE,
+						"Formato de email no valido");
 				return ResponseEntity.ok().body(registerResponse);
 			}
 
