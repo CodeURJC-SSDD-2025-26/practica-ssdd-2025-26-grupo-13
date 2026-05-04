@@ -13,6 +13,7 @@ import es.mqm.webapp.security.jwt.AuthResponse.Status;
 import es.mqm.webapp.security.jwt.LoginRequest;
 import es.mqm.webapp.security.jwt.UserLoginService;
 import jakarta.servlet.http.HttpServletResponse;
+import es.mqm.webapp.security.jwt.RegisterRequest;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -29,6 +30,13 @@ public class LoginRestController {
 		return userService.login(response, loginRequest);
 	}
 
+	@PostMapping("/register")
+	public ResponseEntity<AuthResponse> register(
+		@RequestBody RegisterRequest registerRequest,
+		HttpServletResponse response){
+		return userService.register(response,registerRequest);
+	}
+	
 	@PostMapping("/refresh")
 	public ResponseEntity<AuthResponse> refreshToken(
 			@CookieValue(name = "RefreshToken", required = false) String refreshToken, HttpServletResponse response) {
