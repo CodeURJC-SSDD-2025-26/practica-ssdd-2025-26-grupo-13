@@ -21,8 +21,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -87,7 +85,7 @@ public class UserLoginService {
 			}
 			if(!EMAIL_PATTERN.matcher(registerRequest.getUsername()).matches()){
 				AuthResponse registerResponse = new AuthResponse(AuthResponse.Status.FAILURE,
-						"Formato de email no valido");
+						"Invalid format for email");
 				return ResponseEntity.ok().body(registerResponse);
 			}
 

@@ -3,7 +3,6 @@ package es.mqm.webapp.controller;
 import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.Optional;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;

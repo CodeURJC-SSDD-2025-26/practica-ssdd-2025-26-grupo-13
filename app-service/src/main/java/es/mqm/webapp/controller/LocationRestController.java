@@ -4,7 +4,6 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import java.net.URI;
 import java.sql.SQLException;
-import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import es.mqm.webapp.dto.LocationDTO;
 import es.mqm.webapp.dto.LocationMapper;
-import es.mqm.webapp.dto.OrderDTO;
 import es.mqm.webapp.model.Location;
-import es.mqm.webapp.model.Order;
 import es.mqm.webapp.service.LocationService;
 import io.swagger.v3.oas.annotations.Operation;
 

@@ -2,7 +2,6 @@ package es.mqm.webapp.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -27,7 +26,7 @@ public class MailService {
             order.getBuyer().getName(), order.getPhone(), order.getCreditCardNumber().substring(order.getCreditCardNumber().length()- 4),
             order.getTotalPrice(), order.getCreatedAt());
         
-        ResponseEntity<?> response = restClient.post()
+        restClient.post()
             .uri(baseUrl + "mails/")
             .contentType(MediaType.APPLICATION_JSON)
             .body(info)

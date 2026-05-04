@@ -23,7 +23,6 @@ import es.mqm.webapp.dto.ImageDTO;
 import es.mqm.webapp.dto.ImageMapper;
 import es.mqm.webapp.service.ImageService;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/api/v1/images")

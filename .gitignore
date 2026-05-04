@@ -31,5 +31,7 @@ hs_err_pid*
 .idea/
 .vscode/
 
+docker/.env
+
 # contains api keys
 **/application-dev.properties
