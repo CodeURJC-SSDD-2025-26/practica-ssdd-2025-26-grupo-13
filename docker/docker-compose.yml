@@ -1,0 +1,38 @@
+
+services:
+  web:
+    image: lucmp/web-mqm
+    restart: on-failure
+    ports:
+    - 8443:8443
+    environment:
+    - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mqm
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=mqmurjc
+    - UTILITY_SERVICE_URL=http://utility:8080/api/v1/
+    depends_on:
+      db:
+        condition: service_healthy
+  utility:
+    image: lucmp/utility-mqm
+    restart: on-failure
+    ports:
+      - 8080:8080
+    environment:
+    - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mqm
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=mqmurjc
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:9.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=mqmurjc
+      - MYSQL_DATABASE=mqm
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-P", "3306", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
