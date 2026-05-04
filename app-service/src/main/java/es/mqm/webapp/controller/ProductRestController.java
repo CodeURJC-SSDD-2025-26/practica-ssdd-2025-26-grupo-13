@@ -83,22 +83,32 @@ public class ProductRestController {
                 .map(ProductMapper::toExtendedDTO);
     }
 
+	@GetMapping("/recommendations")
+	public Page<ExtendedProductDTO> getAvailableProducts(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "12") int size,
+			Authentication authentication) {
+		User viewer = null;
+		if (authentication != null && authentication.isAuthenticated()) {
+			viewer = userService.findByEmail(authentication.getName()).orElse(null);
+		}
+		return productService.getAvailableProducts(page, size, viewer).map(ProductMapper::toExtendedDTO);
+	}
+
     @GetMapping("/{id}")
 	public ProductDTO getProduct(@PathVariable int id) {
 		Product product = productService.findById(id).orElseThrow();
 		return ProductMapper.toDTO(product); 
 	}
 
-    @PostMapping("/")
-	public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/")
+	public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO, Authentication authentication) {
 
 		Product product = ProductMapper.toDomain(productDTO);
 
-		if (productDTO.user() == null || productDTO.user().id() == null) {
-			throw new IllegalArgumentException("Se necesita un user.id");
-		}
 
-		User user = userService.findById(productDTO.user().id().intValue()).orElseThrow();
+		User user = userService.findByEmail(authentication.getName()).orElseThrow();
 		product.setUser(user);
 
 		if (productDTO.image() != null) {

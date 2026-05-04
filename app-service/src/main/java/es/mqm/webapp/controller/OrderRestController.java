@@ -141,6 +141,7 @@ public class OrderRestController {
     }
 
     @PreAuthorize("@orderService.isBuyerOrAdmin(#id, authentication)")
+    @Operation(summary="Get the invoice PDF of the order with the given id")
     @GetMapping("/{id}/ticket")
     public ResponseEntity<byte[]> downloadTicket(@PathVariable int id) {
         Order order = orderService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado"));

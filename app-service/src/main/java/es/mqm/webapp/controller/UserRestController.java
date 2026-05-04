@@ -30,6 +30,7 @@ import es.mqm.webapp.dto.UserMapper;
 import es.mqm.webapp.model.Image;
 import es.mqm.webapp.model.User;
 import es.mqm.webapp.service.ImageService;
+import es.mqm.webapp.service.LocationService;
 import es.mqm.webapp.service.UserService;
 
 
@@ -46,6 +47,9 @@ public class UserRestController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private LocationService locationService;
 
     @Autowired
 	private ImageMapper ImageMapper;
@@ -68,21 +72,40 @@ public class UserRestController {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
-        User user = UserMapper.toDomain(userDTO);
-        userService.save(user);
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(location).body(UserMapper.toDTO(user));
-    }
+    // @PostMapping("/")
+    // public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
+    //     User user = UserMapper.toDomain(userDTO);
+    //     userService.save(user);
+    //     URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+    //     return ResponseEntity.created(location).body(UserMapper.toDTO(user));
+    // }
 
     @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
     @PutMapping("/{id}")
     public UserDTO replaceUser(@PathVariable long id, @RequestBody UserDTO updatedUserDTO) throws SQLException {
-
+        User existingUser = userService.findById((int) id).orElseThrow();
         User updatedUser = UserMapper.toDomain(updatedUserDTO);
-        updatedUser = userService.save(updatedUser);
-        return UserMapper.toDTO(updatedUser);
+
+        existingUser.setName(updatedUser.getName());
+        existingUser.setSurnames(updatedUser.getSurnames());
+        existingUser.setEmail(updatedUser.getEmail());
+
+        if (updatedUserDTO.image() != null) {
+            Image image = imageService.findById(updatedUserDTO.image().id()).orElseThrow();
+            existingUser.setImage(image);
+        }
+
+        if (updatedUserDTO.location() != null) {
+            var location = locationService.findById(updatedUserDTO.location().id()).orElseThrow();
+            existingUser.setLocation(location);
+        }
+
+        existingUser.setRoles(existingUser.getRoles());
+        existingUser.setProducts(existingUser.getProducts());
+        existingUser.setOrders(existingUser.getOrders());
+
+        User savedUser = userService.save(existingUser);
+        return UserMapper.toDTO(savedUser);
     }
 
     @PreAuthorize("@userService.isOwnerOrAdmin(#id, authentication)")
@@ -111,7 +134,7 @@ public class UserRestController {
 		userService.addImageToUser(id, image);
 
 		URI location = fromCurrentContextPath()
-				.path("/api/image/{imageId}/media")
+				.path("/api/v1/image/{imageId}/media")
 				.buildAndExpand(image.getId())
 				.toUri();
 
