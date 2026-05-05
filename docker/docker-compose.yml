@@ -1,6 +1,6 @@
 services:
   web:
-    image: lucmp/app-service:latest
+    image: diegordgz/app-service:latest
     build:
       context: ..
       dockerfile: docker/app-service.Dockerfile
@@ -17,7 +17,7 @@ services:
       db:
         condition: service_healthy
   utility:
-    image: lucmp/utility-service:latest
+    image: diegordgz/utility-service:latest
     build:
       context: ..
       dockerfile: docker/utility-service.Dockerfile

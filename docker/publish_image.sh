@@ -2,5 +2,5 @@
 
 docker login
 
-docker push "lucmp/app-service:latest"
-docker push "lucmp/utility-service:latest"
+docker push "diegordgz/app-service:latest"
+docker push "diegordgz/utility-service:latest"
