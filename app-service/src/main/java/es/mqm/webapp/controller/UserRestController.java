@@ -84,11 +84,10 @@ public class UserRestController {
     @PutMapping("/{id}")
     public UserDTO replaceUser(@PathVariable long id, @RequestBody UserDTO updatedUserDTO) throws SQLException {
         User existingUser = userService.findById((int) id).orElseThrow();
-        User updatedUser = UserMapper.toDomain(updatedUserDTO);
 
-        existingUser.setName(updatedUser.getName());
-        existingUser.setSurnames(updatedUser.getSurnames());
-        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setName(updatedUserDTO.name());
+        existingUser.setSurnames(updatedUserDTO.surnames());
+        existingUser.setEmail(updatedUserDTO.email());
 
         if (updatedUserDTO.image() != null) {
             Image image = imageService.findById(updatedUserDTO.image().id()).orElseThrow();

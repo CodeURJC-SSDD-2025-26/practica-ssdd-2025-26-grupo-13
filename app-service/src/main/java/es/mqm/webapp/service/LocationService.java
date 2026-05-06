@@ -35,6 +35,8 @@ public class LocationService {
         return repository.findAll(pageable);
     }
     public Optional<Location> deleteById(int id) {
-        return repository.deleteById(id);
+        Optional<Location> existing = repository.findById(id);
+        existing.ifPresent(location -> repository.deleteById(location.getId()));
+        return existing;
     }
 }

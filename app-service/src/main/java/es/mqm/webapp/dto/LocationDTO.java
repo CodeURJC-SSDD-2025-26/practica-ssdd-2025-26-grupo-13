@@ -1,9 +1,9 @@
 package es.mqm.webapp.dto;
 
 public record LocationDTO(
-    int id,
+    Integer id,
     String name, 
-    double latitude, 
-    double longitude
+    Double latitude, 
+    Double longitude
 ) {
 }

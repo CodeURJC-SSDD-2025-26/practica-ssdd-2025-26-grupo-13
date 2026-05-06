@@ -7,6 +7,7 @@ public record AdminChartsDTO(
     long productCounter,
     long orderCounter,
     List<Integer> categoriesSold,
+    List<String> categoriesSoldLabels,
     List<Integer> newUsersPerMonth,
     List<Integer> reviewsRating
 ) {

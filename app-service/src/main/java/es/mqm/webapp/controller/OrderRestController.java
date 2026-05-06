@@ -85,8 +85,13 @@ public class OrderRestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "product.id must be provided");
         }
 
+        int productId = orderDTO.product().id();
+        if (orderService.findByProductId(productId).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Product already has an order");
+        }
+
         User buyer = userService.findByEmail(authentication.getName()).orElseThrow();
-        Product product = productService.findById(orderDTO.product().id()).orElseThrow();
+        Product product = productService.findById(productId).orElseThrow();
 
         order.setBuyer(buyer);
         order.setProduct(product);

@@ -45,8 +45,9 @@ public class ReviewRestController {
 	@PreAuthorize("@reviewService.isUserOrAdmin(#id, authentication)")
     @PutMapping("/{id}")
 	public ReviewDTO replaceReview(@PathVariable int id, @RequestBody ReviewDTO updatedReviewDTO) throws SQLException {
-
-		Review updatedReview = ReviewMapper.toDomain(updatedReviewDTO);
+		Review updatedReview = new Review();
+		updatedReview.setDescription(updatedReviewDTO.description());
+		updatedReview.setRating(updatedReviewDTO.rating());
 		updatedReview = reviewService.replaceReview(id, updatedReview);
 		return ReviewMapper.toDTO(updatedReview);
 	}

@@ -60,6 +60,10 @@ public class OrderService {
     public Optional<Order> findById(int id) {
         return repository.findById(id);
     }
+
+    public Optional<Order> findByProductId(int productId) {
+        return repository.findByProductId(productId);
+    }
     public long count() {
         return repository.count();
     }

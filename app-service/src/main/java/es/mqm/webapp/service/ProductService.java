@@ -37,6 +37,9 @@ public class ProductService {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired 
+    private OrderService orderService;
+
     public List<Product> findAll() {
         return repository.findAll();
     }
@@ -137,6 +140,8 @@ public class ProductService {
 
     public Product deleteById(int id){
         Product product = repository.findById(id).orElseThrow();
+        orderService.deleteByProductId(id);
+        reviewService.deleteByProductId(id);
         repository.deleteById(id);
         return product;
     }

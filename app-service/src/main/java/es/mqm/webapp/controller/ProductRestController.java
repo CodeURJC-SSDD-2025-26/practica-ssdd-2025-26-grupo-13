@@ -110,6 +110,7 @@ public class ProductRestController {
 
 		User user = userService.findByEmail(authentication.getName()).orElseThrow();
 		product.setUser(user);
+		product.setIsSold(false);
 
 		if (productDTO.image() != null) {
 			Image image = ImageService.findById(productDTO.image().id()).orElseThrow();
@@ -185,7 +186,7 @@ public class ProductRestController {
 		review = reviewService.save(review);
 		reviewDTO = ReviewMapper.toDTO(review);
 
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(reviewDTO.id()).toUri();
+		URI location = fromCurrentContextPath().path("/api/v1/reviews/{id}").buildAndExpand(reviewDTO.id()).toUri();
 
 		return ResponseEntity.created(location).body(reviewDTO);
 	}

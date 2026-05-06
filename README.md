@@ -435,9 +435,9 @@ First, I took charge of the product page, extracting information from the databa
 
 ---
 
-## 🛠 **Assignment 3: API REST, Socker and Deployment**
+## 🛠 **Assignment 3: REST API, Socker and Deployment**
 
-### **API REST Documentation**
+### **REST API Documentation**
 
 #### **OpenAPI Specification**
 
@@ -454,20 +454,21 @@ First, I took charge of the product page, extracting information from the databa
 > The API REST documentation is in the directory `/api-docs` of the repository. It has been automatically generated with SpringDoc from the Java code annotations.
 
 ### **Service Diagram**
+
 ```mermaid
 flowchart LR
-	subgraph Ext[Cliente externo]
-		user[Usuario / Cliente]
+	subgraph Ext[External Client]
+		user[User / Client]
 	end
 
-	subgraph App[Aplicacion]
+	subgraph App[Application]
 		app[app-service HTTPS :8443]
 		utility[utility-service HTTP :8080]
-		mysql[(MySQL books)]
+		mysql[(MySQL)]
 	end
 
-	user -->|UI web y API REST| app
-	app -->|GET /api/v1/| utility
+	user -->|Web UI and REST API| app
+  app -->|HTTP /api/v1/| utility
 	app -->|JPA| mysql
 ```
 
@@ -652,10 +653,10 @@ flowchart LR
    ```
 
 2. **NEXT STEPS**:
-    ```bash
-      cd ./docker
-      docker compose up --build
-    ```
+   ```bash
+     cd ./docker
+     docker compose up --build
+   ```
 
 ### **Docker Image Construction**
 
@@ -673,21 +674,18 @@ flowchart LR
 
 2. **NEXT STEPS**
 
-    ```bash
-    ./docker/create_image.sh 
-    ./docker/publish_image.sh
-    ```
-
-
+   ```bash
+   ./docker/create_image.sh
+   ./docker/publish_image.sh
+   ```
 
 #### **Credentials of an example user**
 
-| Role                | User | Password |
-| :----------------- | :------ | :--------- |
-| Administrator      | admin@admin.com  | 1234   |
-| Registered User | usuario1@example.com   | 1234    |
-| Registered User | usuario2@example.com   | 1234    |
-
+| Role            | User                 | Password |
+| :-------------- | :------------------- | :------- |
+| Administrator   | admin@admin.com      | 1234     |
+| Registered User | usuario1@example.com | 1234     |
+| Registered User | usuario2@example.com | 1234     |
 
 ### **Participatition of Members in Assigment 3**
 
@@ -709,13 +707,13 @@ Participated in the design and implementation of the REST API in app-service, cr
 
 I created the User and Image DTOs, with the respective RestControllers, Basic types and mappers for the API REST functionality. In addition to that, I created the full register endpoint functionality, enabling the API to create new users and their later login. I also made sure that the email wasn't already in use. Finally, I implemented some checks so that only authorized people could access certain pages (like put or delete, that you can only access if you were the creator of the resource or an admin).
 
-| Nº  |               Commits                |           Files           |
-| :-: | :----------------------------------: | :-----------------------: |
-|  1  | [Creating ImageRestController and UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f1fa9c0) | [ImageRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/ImageRestController.java) [UserRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/UserRestController.java) and others|
-|  2  | [Implementing register endpoint](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/c84e742) | [LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) [RegisterRequest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/security/jwt/RegisterRequest.java)  and others |
-|  3  | [Implementing authorization in the api pages and adding createUserImage and remove](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/fc517ec) | [OrderRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/OrderRestController.java)  [ProductRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/ProductRestController.java) and others|
-|  4  | [Creation of Image and User DTOs](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/24ab580) | [ImageDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/ImageDTO.java) [UserDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/UserDTO.java) and others |
-|  5  | [Validating email in register](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f2b9cbd) | [UserLoginService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f2b9cbd3e1878e46b8c278a7dcf8f489f9376119/app-service/src/main/java/es/mqm/webapp/security/jwt/UserLoginService.java) |
+| Nº  |                                                                                   Commits                                                                                   |                                                                                                                                                                                                                               Files                                                                                                                                                                                                                                |
+| :-: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  1  |                [Creating ImageRestController and UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f1fa9c0)                |    [ImageRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/ImageRestController.java) [UserRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/UserRestController.java) and others    |
+|  2  |                          [Implementing register endpoint](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/c84e742)                           |  [LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) [RegisterRequest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/security/jwt/RegisterRequest.java) and others  |
+|  3  | [Implementing authorization in the api pages and adding createUserImage and remove](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/fc517ec) | [OrderRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/OrderRestController.java) [ProductRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/ProductRestController.java) and others |
+|  4  |                          [Creation of Image and User DTOs](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/24ab580)                          |                                 [ImageDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/ImageDTO.java) [UserDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/UserDTO.java) and others                                 |
+|  5  |                           [Validating email in register](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f2b9cbd)                            |                                                                                                                     [UserLoginService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f2b9cbd3e1878e46b8c278a7dcf8f489f9376119/app-service/src/main/java/es/mqm/webapp/security/jwt/UserLoginService.java)                                                                                                                      |
 
 ---
 
@@ -723,13 +721,12 @@ I created the User and Image DTOs, with the respective RestControllers, Basic ty
 
 In this project, I primarily focused on the product and review aspects of the REST API, creating their corresponding DTOs and Mappers, as well as the corresponding RestControllers for those entities. I also implemented the REST API login and, most importantly, I was responsible for creating the Dockerfiles and the docker-compose.yml file for the system. Finally, it's worth noting that these classes, and many others, were modified throughout the development process.
 
-| Nº  |               Commits                |           Files           |
-| :-: | :----------------------------------: | :-----------------------: |
-|  1  | [create product and review DTOs and Mappers ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/85c5c5c) | [ProductDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/dto/ProductDTO.java) [ReviewDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/dto/ReviewDTO.java)|
-|  2  | [Create the ProductRestController and ReviewRestController along with their respective changes in ProductService, ReviewService and ImageService](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/a87b050) | [Archivo2](URL_archivo_2) |
-|  3  | [add LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/8d80460) | [LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) |
-|  4  | [add images with app-service.Dokerfile and utility-service.Dockerfile and add docker-compose ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/5928d8f) | [app-service.Dockerfile](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/app-service.Dockerfile) [utility-service.Dockerfile](Uhttps://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/utility-service.Dockerfile) [docker-compose.yml](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/docker-compose.yml)|
-|  5  | [fixed errors in productRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/9431ac3) | [productRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/controller/ProductRestController.java) |
+| Nº  |                                                                                                                  Commits                                                                                                                  |                                                                                                                                                                                                             Files                                                                                                                                                                                                              |
+| :-: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  1  |                                                   [create product and review DTOs and Mappers ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/85c5c5c)                                                   |                                                [ProductDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/dto/ProductDTO.java) [ReviewDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/dto/ReviewDTO.java)                                                 |
+|  2  | [Create the ProductRestController and ReviewRestController along with their respective changes in ProductService, ReviewService and ImageService](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/a87b050) |                                                                                                                                                                                                   [Archivo2](URL_archivo_2)                                                                                                                                                                                                    |
+|  3  |                                                          [add LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/8d80460)                                                           |                                                                                                                   [LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java)                                                                                                                    |
+|  4  |                          [add images with app-service.Dokerfile and utility-service.Dockerfile and add docker-compose ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/5928d8f)                           | [app-service.Dockerfile](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/app-service.Dockerfile) [utility-service.Dockerfile](Uhttps://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/utility-service.Dockerfile) [docker-compose.yml](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/docker-compose.yml) |
+|  5  |                                                      [fixed errors in productRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/9431ac3)                                                      |                                                                                                                 [productRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/controller/ProductRestController.java)                                                                                                                  |
 
 ---
-

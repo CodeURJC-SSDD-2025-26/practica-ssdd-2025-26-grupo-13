@@ -52,12 +52,12 @@ public class LocationRestController {
     }
 
     @Operation(summary="Create a new location")
-    @PostMapping("/{id}")
-    public ResponseEntity<LocationDTO> createLocation(@PathVariable int id, @RequestBody LocationDTO locDTO) {
+    @PostMapping("/")
+    public ResponseEntity<LocationDTO> createLocation(@RequestBody LocationDTO locDTO) {
         Location loc = locationMapper.toDomain(locDTO);
-        locationService.save(loc);
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(locDTO.id()).toUri();
-        return ResponseEntity.created(location).body(locDTO);
+        Location saved = locationService.save(loc);
+        URI location = fromCurrentRequest().path("{id}").buildAndExpand(saved.getId()).toUri();
+        return ResponseEntity.created(location).body(locationMapper.toDTO(saved));
     }
 
     @Operation(summary="Modify the location with the given id")

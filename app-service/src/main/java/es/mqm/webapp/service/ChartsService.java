@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.mqm.webapp.dto.AdminChartsDTO;
+import es.mqm.webapp.model.CategoryData;
 
 @Service
 public class ChartsService {
@@ -29,11 +30,11 @@ public class ChartsService {
         long orderCounter = orderService.count();
 
         List<Integer> categoriesSold = new ArrayList<>();
-        categoriesSold.add(productService.countByCategory("ropa"));
-        categoriesSold.add(productService.countByCategory("informatica"));
-        categoriesSold.add(productService.countByCategory("electrodomesticos"));
-        categoriesSold.add(productService.countByCategory("libros"));
-        categoriesSold.add(productService.countByCategory("automoviles"));
+        List<String> categoriesSoldLabels = new ArrayList<>();
+        for (CategoryData.Category category : CategoryData.CATEGORIES) {
+            categoriesSold.add(productService.countByCategory(category.slug()));
+            categoriesSoldLabels.add(category.name());
+        }
 
         List<Integer> reviewsRating = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
@@ -64,6 +65,7 @@ public class ChartsService {
             productCounter,
             orderCounter,
             categoriesSold,
+            categoriesSoldLabels,
             newUsersPerMonth,
             reviewsRating
         );
