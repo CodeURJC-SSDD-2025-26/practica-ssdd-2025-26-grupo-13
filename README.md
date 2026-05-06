@@ -435,71 +435,98 @@ First, I took charge of the product page, extracting information from the databa
 
 ---
 
-## 🛠 **Práctica 3: API REST, docker y despliegue**
+## 🛠 **Assignment 3: API REST, docker and desployment**
 
-### **Documentación de la API REST**
+### **API REST Documentation**
 
-#### **Especificación OpenAPI**
+#### **OpenAPI Especification**
 
 📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
 
-#### **Documentación HTML**
+#### **HTML Documentation**
 
 📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
 
-> La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
+> The API REST documentation is in the directory `/api-docs` of the repository. It has been automatically generated with SpringDoc from the Java code annotations.
 
-### **Diagrama de Clases y Templates Actualizado**
+### **Service Diagram**
+```mermaid
+flowchart LR
+	subgraph Ext[Cliente externo]
+		user[Usuario / Cliente]
+	end
+
+	subgraph App[Aplicacion]
+		app[app-service HTTPS :8443]
+		utility[utility-service HTTP :8080]
+		mysql[(MySQL books)]
+	end
+
+	user -->|UI web y API REST| app
+	app -->|GET /api/v1/| utility
+	app -->|JPA| mysql
+```
+
+### **Clases Diagram and Templates Actualized**
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
 ![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
 
-### **Instrucciones de Ejecución con Docker**
+### **Instructions of Docker Execution**
 
-#### **Requisitos previos:**
+#### **Previous Requirements:**
 
-- Docker instalado (versión 20.10 o superior)
-- Docker Compose instalado (versión 2.0 o superior)
+- Docker installed (version 20.10 or superior)
+- Docker Compose installed (version 2.0 or superior)
 
-#### **Pasos para ejecutar con docker-compose:**
+#### **Steps to run with Docker Compose:**
 
-1. **Clonar el repositorio** (si no lo has hecho ya):
+1. **Clone the repository** (if you haven't already):
 
    ```bash
-   git clone https://github.com/[usuario]/[repositorio].git
-   cd [repositorio]
+   git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13.git
+   cd practica-ssdd-2025-26-grupo-13
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **NEXT STEPS**:
+  ```bash
+    cd ./docker
+    docker compose up --build
+   ```
 
-### **Construcción de la Imagen Docker**
+### **Docker Image's Construction**
 
-#### **Requisitos:**
+#### **Requirements:**
 
-- Docker instalado en el sistema
+- Docker installed in the system
 
-#### **Pasos para construir y publicar la imagen:**
+#### **Steps for building and publishing the image**
 
-1. **Navegar al directorio de Docker**:
+1. **Navegating to the Docker directory**:
 
    ```bash
    cd docker
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**
+2. **NEXT STEPS**
 
-### **Despliegue en Máquina Virtual**
+    ```bash
+    ./docker/create_image.sh 
+    ./docker/publish_image.sh
+    ```
 
-#### **Requisitos:**
+### **Desployment in the Virtual Machine**
 
-- Acceso a la máquina virtual (SSH)
-- Clave privada para autenticación
-- Conexión a la red correspondiente o VPN configurada
+#### **Requirements:**
 
-#### **Pasos para desplegar:**
+- Access to the Virtual Machine(SSH)
+- Private key for authentication
+- Conection to the net or VPN
 
-1. **Conectar a la máquina virtual**:
+#### **Steps for deployment:**
+
+1. **Connecting to the Virtual Machine**:
 
    ```bash
    ssh -i [ruta/a/clave.key] [usuario]@[IP-o-dominio-VM]
@@ -511,23 +538,23 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
    ssh -i ssh-keys/app.key vmuser@10.100.139.XXX
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **NEXT STEPS**:
 
-### **URL de la Aplicación Desplegada**
+### **URL of the Deployed App**
 
-🌐 **URL de acceso**: `https://[nombre-app].etsii.urjc.es:8443`
+🌐 **Access URL**: `https://[nombre-app].etsii.urjc.es:8443`
 
-#### **Credenciales de Usuarios de Ejemplo**
+#### **Credentials of an example user**
 
-| Rol                | Usuario | Contraseña |
+| Role                | User | Password |
 | :----------------- | :------ | :--------- |
-| Administrador      | admin   | admin123   |
-| Usuario Registrado | user1   | user123    |
-| Usuario Registrado | user2   | user123    |
+| Administrator      | admin   | admin123   |
+| User Registered | user1   | user123    |
+| User Registered | user2   | user123    |
 
-### **OTRA DOCUMENTACIÓN ADICIONAL REQUERIDA EN LA PRÁCTICA**
+### **OTHER ADITIONAL DOCUMENTATION REQUIRED**
 
-### **Participación de Miembros en la Práctica 3**
+### **Participatition of Members in Assigment 3**
 
 #### **Student 1 - Diego Rodríguez Torrecilla**
 
@@ -543,14 +570,14 @@ Participated in the design and implementation of the REST API in app-service, cr
 
 ---
 
-#### **Alumno 2 - Lucía López García del Pino**
+#### **Student 2 - Lucía López García del Pino**
 
 I created the User and Image DTOs, with the respective RestControllers, Basic types and mappers for the API REST functionality. In addition to that, I created the full register endpoint functionality, enabling the API to create new users and their later login. I also made sure that the email wasn't already in use. Finally, I implemented some checks so that only authorized people could access certain pages (like put or delete, that you can only access if you were the creator of the resource or an admin).
 
 | Nº  |               Commits                |           Files           |
 | :-: | :----------------------------------: | :-----------------------: |
 |  1  | [Creating ImageRestController and UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f1fa9c0) | [ImageRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/ImageRestController.java) [UserRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/UserRestController.java) and others|
-|  2  | [Implementing register endpoint](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/c84e742) | [LoginRestController.java](URLhttps://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) [RegisterRequest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/security/jwt/RegisterRequest.java)  and others |
+|  2  | [Implementing register endpoint](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/c84e742) | [LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) [RegisterRequest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/security/jwt/RegisterRequest.java)  and others |
 |  3  | [Implementing authorization in the api pages and adding createUserImage and remove](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/fc517ec) | [OrderRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/OrderRestController.java)  [ProductRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/ProductRestController.java) and others|
 |  4  | [Creation of Image and User DTOs](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/24ab580) | [ImageDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/ImageDTO.java) [UserDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/UserDTO.java) and others |
 |  5  | [Validating email in register](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f2b9cbd) | [UserLoginService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f2b9cbd3e1878e46b8c278a7dcf8f489f9376119/app-service/src/main/java/es/mqm/webapp/security/jwt/UserLoginService.java) |
