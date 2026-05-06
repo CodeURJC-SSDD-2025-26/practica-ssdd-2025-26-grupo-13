@@ -447,9 +447,9 @@ First, I took charge of the product page, extracting information from the databa
 
 #### **HTML Documentation**
 
-📖 **[App Service Docs (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/app-service/api-docs/api-docs.html)**
+📖 **[App Service Docs (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/main/app-service/api-docs/api-docs.html)**
 
-📖 **[Utility Service Docs (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/utility-service/api-docs/api-docs.html)**
+📖 **[Utility Service Docs (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/main/utility-service/api-docs/api-docs.html)**
 
 > The API REST documentation is in the directory `/api-docs` of the repository. It has been automatically generated with SpringDoc from the Java code annotations.
 
