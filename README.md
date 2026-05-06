@@ -441,7 +441,9 @@ First, I took charge of the product page, extracting information from the databa
 
 #### **OpenAPI Especification**
 
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[App Service OpenAPI Especification (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/api-docs/api-docs.yaml)**
+
+📄 **[Utility Service OpenAPI Especification (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/utility-service/api-docs/api-docs.yaml)**
 
 #### **HTML Documentation**
 
@@ -648,10 +650,10 @@ flowchart LR
    ```
 
 2. **NEXT STEPS**:
-  ```bash
-    cd ./docker
-    docker compose up --build
-   ```
+    ```bash
+      cd ./docker
+      docker compose up --build
+    ```
 
 ### **Docker Image's Construction**
 
@@ -674,33 +676,7 @@ flowchart LR
     ./docker/publish_image.sh
     ```
 
-### **Desployment in the Virtual Machine**
 
-#### **Requirements:**
-
-- Access to the Virtual Machine(SSH)
-- Private key for authentication
-- Conection to the net or VPN
-
-#### **Steps for deployment:**
-
-1. **Connecting to the Virtual Machine**:
-
-   ```bash
-   ssh -i [ruta/a/clave.key] [usuario]@[IP-o-dominio-VM]
-   ```
-
-   Ejemplo:
-
-   ```bash
-   ssh -i ssh-keys/app.key vmuser@10.100.139.XXX
-   ```
-
-2. **NEXT STEPS**:
-
-### **URL of the Deployed App**
-
-🌐 **Access URL**: `https://[nombre-app].etsii.urjc.es:8443`
 
 #### **Credentials of an example user**
 
@@ -755,16 +731,3 @@ I created the User and Image DTOs, with the respective RestControllers, Basic ty
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº  |               Commits                |           Files           |
-| :-: | :----------------------------------: | :-----------------------: |
-|  1  | [Descripción commit 1](URL_commit_1) | [Archivo1](URL_archivo_1) |
-|  2  | [Descripción commit 2](URL_commit_2) | [Archivo2](URL_archivo_2) |
-|  3  | [Descripción commit 3](URL_commit_3) | [Archivo3](URL_archivo_3) |
-|  4  | [Descripción commit 4](URL_commit_4) | [Archivo4](URL_archivo_4) |
-|  5  | [Descripción commit 5](URL_commit_5) | [Archivo5](URL_archivo_5) |
-
----
