@@ -681,7 +681,7 @@ flowchart LR
 | :----------------- | :------ | :--------- |
 | Administrador      | admin@admin.com  | 1234   |
 | Usuario Registrado | usuario1@example.com   | 1234    |
-| Usuario Registrado | usuario2@example.com   | 123    |
+| Usuario Registrado | usuario2@example.com   | 1234    |
 
 ### **OTRA DOCUMENTACIÓN ADICIONAL REQUERIDA EN LA PRÁCTICA**
 
@@ -717,15 +717,15 @@ I created the User and Image DTOs, with the respective RestControllers, Basic ty
 
 #### **Alumno 3 - [Lucas Moreno Prieto]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+In this project, I primarily focused on the product and review aspects of the REST API, creating their corresponding DTOs and Mappers, as well as the corresponding RestControllers for those entities. I also implemented the REST API login and, most importantly, I was responsible for creating the Dockerfiles and the docker-compose.yml file for the system. Finally, it's worth noting that these classes, and many others, were modified throughout the development process.
 
 | Nº  |               Commits                |           Files           |
 | :-: | :----------------------------------: | :-----------------------: |
-|  1  | [Descripción commit 1](URL_commit_1) | [Archivo1](URL_archivo_1) |
-|  2  | [Descripción commit 2](URL_commit_2) | [Archivo2](URL_archivo_2) |
-|  3  | [Descripción commit 3](URL_commit_3) | [Archivo3](URL_archivo_3) |
-|  4  | [Descripción commit 4](URL_commit_4) | [Archivo4](URL_archivo_4) |
-|  5  | [Descripción commit 5](URL_commit_5) | [Archivo5](URL_archivo_5) |
+|  1  | [create product and review DTOs and Mappers ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/85c5c5c) | [ProductDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/dto/ProductDTO.java) [ReviewDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/dto/ReviewDTO.java)|
+|  2  | [Create the ProductRestController and ReviewRestController along with their respective changes in ProductService, ReviewService and ImageService](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/a87b050) | [Archivo2](URL_archivo_2) |
+|  3  | [add LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/8d80460) | [LoginRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) |
+|  4  | [add images with app-service.Dokerfile and utility-service.Dockerfile and add docker-compose ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/5928d8f) | [app-service.Dockerfile](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/app-service.Dockerfile) [utility-service.Dockerfile](Uhttps://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/utility-service.Dockerfile) [docker-compose.yml](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/docker/docker-compose.yml)|
+|  5  | [fixed errors in productRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/9431ac3) | [productRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/src/main/java/es/mqm/webapp/controller/ProductRestController.java) |
 
 ---
 
