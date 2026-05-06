@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/v1/tickets/:
+    post:
+      tags:
+      - ticket-rest-controller
+      operationId: downloadTicket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInfoDTO"
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+  /api/v1/mails/:
+    post:
+      tags:
+      - mail-rest-controller
+      operationId: sendEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInfoDTO"
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+components:
+  schemas:
+    MessageInfoDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        productName:
+          type: string
+        productUserName:
+          type: string
+        buyerId:
+          type: string
+        productPrice:
+          type: number
+          format: double
+        surnames:
+          type: string
+        address:
+          type: string
+        apartment:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        province:
+          type: string
+        country:
+          type: string
+        buyerEmail:
+          type: string
+        sellerEmail:
+          type: string
+        buyerName:
+          type: string
+        phone:
+          type: string
+        creditCardNumberLast4Digits:
+          type: string
+        totalPrice:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date

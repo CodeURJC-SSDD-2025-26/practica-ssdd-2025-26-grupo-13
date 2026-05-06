@@ -701,17 +701,17 @@ Participated in the design and implementation of the REST API in app-service, cr
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Lucía López García del Pino**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+I created the User and Image DTOs, with the respective RestControllers, Basic types and mappers for the API REST functionality. In addition to that, I created the full register endpoint functionality, enabling the API to create new users and their later login. I also made sure that the email wasn't already in use. Finally, I implemented some checks so that only authorized people could access certain pages (like put or delete, that you can only access if you were the creator of the resource or an admin).
 
 | Nº  |               Commits                |           Files           |
 | :-: | :----------------------------------: | :-----------------------: |
-|  1  | [Descripción commit 1](URL_commit_1) | [Archivo1](URL_archivo_1) |
-|  2  | [Descripción commit 2](URL_commit_2) | [Archivo2](URL_archivo_2) |
-|  3  | [Descripción commit 3](URL_commit_3) | [Archivo3](URL_archivo_3) |
-|  4  | [Descripción commit 4](URL_commit_4) | [Archivo4](URL_archivo_4) |
-|  5  | [Descripción commit 5](URL_commit_5) | [Archivo5](URL_archivo_5) |
+|  1  | [Creating ImageRestController and UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f1fa9c0) | [ImageRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/ImageRestController.java) [UserRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f1fa9c060bd8f992ba23594b1028a01130eb72fb/backend/src/main/java/es/mqm/webapp/controller/UserRestController.java) and others|
+|  2  | [Implementing register endpoint](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/c84e742) | [LoginRestController.java](URLhttps://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/controller/LoginRestController.java) [RegisterRequest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/c84e7420fbe82bcd082f3d5b4004cde9a952d794/app-service/src/main/java/es/mqm/webapp/security/jwt/RegisterRequest.java)  and others |
+|  3  | [Implementing authorization in the api pages and adding createUserImage and remove](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/fc517ec) | [OrderRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/OrderRestController.java)  [ProductRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/fc517ec23a6f5bed12ecd14d1ede8c3fc5071928/backend/src/main/java/es/mqm/webapp/controller/ProductRestController.java) and others|
+|  4  | [Creation of Image and User DTOs](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/24ab580) | [ImageDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/ImageDTO.java) [UserDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/24ab580a95a5639e6bc31bc95433d1f0729e0cd3/backend/src/main/java/es/mqm/webapp/dto/UserDTO.java) and others |
+|  5  | [Validating email in register](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/commit/f2b9cbd) | [UserLoginService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/f2b9cbd3e1878e46b8c278a7dcf8f489f9376119/app-service/src/main/java/es/mqm/webapp/security/jwt/UserLoginService.java) |
 
 ---
 
