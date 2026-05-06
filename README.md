@@ -435,19 +435,21 @@ First, I took charge of the product page, extracting information from the databa
 
 ---
 
-## 🛠 **Assignment 3: API REST, docker and desployment**
+## 🛠 **Assignment 3: API REST, Socker and Deployment**
 
 ### **API REST Documentation**
 
-#### **OpenAPI Especification**
+#### **OpenAPI Specification**
 
-📄 **[App Service OpenAPI Especification (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/api-docs/api-docs.yaml)**
+📄 **[App Service OpenAPI Specification (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/app-service/api-docs/api-docs.yaml)**
 
-📄 **[Utility Service OpenAPI Especification (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/utility-service/api-docs/api-docs.yaml)**
+📄 **[Utility Service OpenAPI Specification (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/blob/main/utility-service/api-docs/api-docs.yaml)**
 
 #### **HTML Documentation**
 
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[App Service Docs (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/app-service/api-docs/api-docs.html)**
+
+📖 **[Utility Service Docs (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13/utility-service/api-docs/api-docs.html)**
 
 > The API REST documentation is in the directory `/api-docs` of the repository. It has been automatically generated with SpringDoc from the Java code annotations.
 
@@ -469,7 +471,7 @@ flowchart LR
 	app -->|JPA| mysql
 ```
 
-### **Clases Diagram and Templates Actualized**
+### **Updated Classes and Templates Diagram**
 
 ```mermaid
 flowchart LR
@@ -637,8 +639,8 @@ flowchart LR
 
 #### **Previous Requirements:**
 
-- Docker installed (version 20.10 or superior)
-- Docker Compose installed (version 2.0 or superior)
+- Docker installed (version 20.10 or higher)
+- Docker Compose installed (version 2.0 or higher)
 
 #### **Steps to run with Docker Compose:**
 
@@ -655,7 +657,7 @@ flowchart LR
       docker compose up --build
     ```
 
-### **Docker Image's Construction**
+### **Docker Image Construction**
 
 #### **Requirements:**
 
@@ -663,7 +665,7 @@ flowchart LR
 
 #### **Steps for building and publishing the image**
 
-1. **Navegating to the Docker directory**:
+1. **Navegate to the Docker directory**:
 
    ```bash
    cd docker
@@ -717,7 +719,7 @@ I created the User and Image DTOs, with the respective RestControllers, Basic ty
 
 ---
 
-#### **Alumno 3 - [Lucas Moreno Prieto]**
+#### **Student 3 - Lucas Moreno Prieto**
 
 In this project, I primarily focused on the product and review aspects of the REST API, creating their corresponding DTOs and Mappers, as well as the corresponding RestControllers for those entities. I also implemented the REST API login and, most importantly, I was responsible for creating the Dockerfiles and the docker-compose.yml file for the system. Finally, it's worth noting that these classes, and many others, were modified throughout the development process.
 

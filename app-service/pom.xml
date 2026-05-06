@@ -115,10 +115,11 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-		</dependency> -->
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -146,40 +147,105 @@
 						-Dserver.ssl.enabled=false
 					</jvmArguments>
 				</configuration>
-				<executions>
-					<execution>
-						<id>pre-integration-test</id>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>post-integration-test</id>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.springdoc</groupId>
-				<artifactId>springdoc-openapi-maven-plugin</artifactId>
-				<version>1.4</version>
-				<executions>
-					<execution>
-					<phase>integration-test</phase>
-					<goals>
-						<goal>generate</goal>
-					</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
-					<outputFileName>openapi.json</outputFileName>
-					<outputDir>${project.build.directory}</outputDir>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>integration</id>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<jvmArguments>
+								-Dspring.profiles.active=integration
+								-Dserver.port=8080
+								-Dserver.ssl.enabled=false
+							</jvmArguments>
+						</configuration>
+						<executions>
+							<execution>
+								<id>pre-integration-test</id>
+								<goals>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>post-integration-test</id>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.springdoc</groupId>
+						<artifactId>springdoc-openapi-maven-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<apiDocsUrl>http://localhost:8080/v3/api-docs.yaml</apiDocsUrl>
+							<outputFileName>api-docs.yaml</outputFileName>
+							<outputDir>${project.basedir}/api-docs</outputDir>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.openapitools</groupId>
+						<artifactId>openapi-generator-maven-plugin</artifactId>
+						<version>7.17.0</version>
+						<executions>
+							<execution>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<generatorName>html2</generatorName>
+									<inputSpec>${project.basedir}/api-docs/api-docs.yaml</inputSpec>
+									<output>${project.basedir}/api-docs/</output>
+									<skipValidateSpec>true</skipValidateSpec>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.coderplus.maven.plugins</groupId>
+						<artifactId>copy-rename-maven-plugin</artifactId>
+						<version>1.0.1</version>
+						<executions>
+							<execution>
+								<id>copy-file</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>rename</goal>
+								</goals>
+								<configuration>
+									<sourceFile>api-docs/index.html</sourceFile>
+									<destinationFile>api-docs/api-docs.html</destinationFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

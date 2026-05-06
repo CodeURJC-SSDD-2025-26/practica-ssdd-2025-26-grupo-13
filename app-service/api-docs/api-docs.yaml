@@ -3,7 +3,7 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-- url: https://localhost:8443
+- url: http://localhost:8080
   description: Generated server url
 paths:
   /api/v1/users/{id}:
@@ -19,10 +19,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -47,10 +47,10 @@ paths:
               $ref: "#/components/schemas/UserDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -69,10 +69,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -92,10 +92,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -120,10 +120,10 @@ paths:
               $ref: "#/components/schemas/ReviewDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -142,10 +142,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -165,10 +165,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -193,10 +193,10 @@ paths:
               $ref: "#/components/schemas/ProductDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -215,10 +215,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -239,10 +239,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -268,10 +268,10 @@ paths:
               $ref: "#/components/schemas/OrderDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -291,10 +291,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -315,10 +315,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -344,10 +344,10 @@ paths:
               $ref: "#/components/schemas/LocationDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -373,10 +373,10 @@ paths:
               $ref: "#/components/schemas/LocationDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -396,10 +396,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -419,10 +419,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -452,10 +452,10 @@ paths:
               required:
               - imageFile
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -486,10 +486,10 @@ paths:
               required:
               - imageFile
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -515,10 +515,10 @@ paths:
               $ref: "#/components/schemas/ReviewDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -549,10 +549,10 @@ paths:
               required:
               - imageFile
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -610,10 +610,10 @@ paths:
           format: int32
           default: 10
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -631,10 +631,10 @@ paths:
               $ref: "#/components/schemas/ProductDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -648,10 +648,10 @@ paths:
       summary: Get a list of all orders
       operationId: getOrders
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -672,10 +672,10 @@ paths:
               $ref: "#/components/schemas/OrderDTO"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -694,10 +694,10 @@ paths:
               $ref: "#/components/schemas/RegisterRequest"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -716,10 +716,10 @@ paths:
         schema:
           type: string
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -732,10 +732,10 @@ paths:
       - login-rest-controller
       operationId: logOut
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -754,10 +754,10 @@ paths:
               $ref: "#/components/schemas/LoginRequest"
         required: true
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -776,10 +776,10 @@ paths:
         schema:
           $ref: "#/components/schemas/Pageable"
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -798,10 +798,10 @@ paths:
         schema:
           $ref: "#/components/schemas/Pageable"
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -829,10 +829,10 @@ paths:
           format: int32
           default: 12
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -853,10 +853,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -877,10 +877,10 @@ paths:
         schema:
           $ref: "#/components/schemas/Pageable"
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -900,10 +900,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -916,10 +916,10 @@ paths:
       - charts-rest-controller
       operationId: getAdminChartsInfo
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -945,10 +945,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
@@ -974,10 +974,10 @@ paths:
           type: integer
           format: int32
       responses:
-        "404":
-          description: Not Found
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "200":
           description: OK
           content:
