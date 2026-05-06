@@ -549,6 +549,7 @@ flowchart LR
   C_admin --> S_product
   C_admin --> S_review
   C_admin --> S_order
+   C_admin --> S_charts
 
   C_image --> S_image
 
@@ -651,8 +652,13 @@ flowchart LR
    git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-13.git
    cd practica-ssdd-2025-26-grupo-13
    ```
-
-2. **NEXT STEPS**:
+2. **Create .env file** in /docker, containing:
+  ```
+    GMAIL_ADDRESS=<FILL HERE>
+    GMAIL_PASSWORD=<FILL HERE>
+    GOOGLE_MAPS_API_KEY=<FILL HERE>
+  ```
+3. **Execute the following**:
    ```bash
      cd ./docker
      docker compose up --build
@@ -666,17 +672,36 @@ flowchart LR
 
 #### **Steps for building and publishing the image**
 
-1. **Navegate to the Docker directory**:
+1. **Navigate to the Docker directory**:
 
    ```bash
    cd docker
    ```
 
-2. **NEXT STEPS**
+2. **Run the following script to create image**:
 
    ```bash
-   ./docker/create_image.sh
-   ./docker/publish_image.sh
+   ./docker/create_image.sh "your DockerHub username"
+   ```
+3. **Run the following script to publish the image**:
+    ```bash
+      ./docker/publish_image.sh "your DockerHub username"
+    ```
+
+#### **Steps for publishing OCI Artifact for Compose**
+
+1. **Navigate to the Docker directory**:
+   ```bash
+   cd docker
+   ```
+2. **Run the following script to publish the OCI Artifact**:
+
+   ```bash
+   ./docker/publish_docker-compose.sh "your DockerHub username"
+   ```
+3. **If you want to run the OCI Artifact, execute**:
+    ```bash
+      env $(cat .env | xargs) docker compose -f oci://docker.io/"your DockerHub username"/mqm-app:0.1.0 up
    ```
 
 #### **Credentials of an example user**
