@@ -45,4 +45,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     List<Product> findByIsSoldFalseAndUser(User user);
 
+    boolean existsByImageIdAndUserEmail(Integer imageId, String email);
 }

@@ -6,10 +6,14 @@ import java.util.Collection;
 
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import es.mqm.webapp.dto.OrderDTO;
 import es.mqm.webapp.dto.OrderMapper;
+import es.mqm.webapp.dto.ReviewMapper;
 import es.mqm.webapp.model.Order;
 import es.mqm.webapp.model.Product;
 import es.mqm.webapp.model.User;
@@ -63,8 +68,8 @@ public class OrderRestController {
     @Operation(summary="Get a list of all orders")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/")
-    public Collection<OrderDTO> getOrders() {
-        return orderMapper.toDTOs(orderService.findAll());
+    public Page<OrderDTO> getOrders(Pageable pageable) {
+        return orderService.findAll(pageable).map(orderMapper::toDTO);
     }
 
     @Operation(summary="Get an order by its id")

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,12 +47,14 @@ public class LocationRestController {
     }
 
     @Operation(summary="Delete the location with the given id")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public LocationDTO deleteLocation(@PathVariable int id) {
         return locationMapper.toDTO(locationService.deleteById(id).orElseThrow());
     }
 
     @Operation(summary="Create a new location")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/")
     public ResponseEntity<LocationDTO> createLocation(@RequestBody LocationDTO locDTO) {
         Location loc = locationMapper.toDomain(locDTO);
@@ -61,6 +64,7 @@ public class LocationRestController {
     }
 
     @Operation(summary="Modify the location with the given id")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public LocationDTO replaceLocation(@PathVariable int id, @RequestBody LocationDTO updatedLocDTO) throws SQLException {
         Location updatedLoc = locationMapper.toDomain(updatedLocDTO);

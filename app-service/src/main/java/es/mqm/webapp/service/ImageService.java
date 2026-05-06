@@ -9,17 +9,24 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.mqm.webapp.model.*;
 import es.mqm.webapp.repository.ImageRepository;
+import es.mqm.webapp.repository.ProductRepository;
+import es.mqm.webapp.repository.UserRepository;
 import org.springframework.core.io.Resource;
 
 @Service
 public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     public Image createImage(MultipartFile imageFile) throws IOException {
         Image image = new Image();
@@ -79,6 +86,22 @@ public class ImageService {
         imageRepository.save(image);
         
         return image;
+    }
+
+    public boolean isOwnerOrAdmin(int id, Authentication auth) {
+        if (auth == null || auth.getName() == null) {
+            return false;
+        }
+
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        if (isAdmin) {
+            return true;
+        }
+
+        String email = auth.getName();
+        return userRepository.existsByImageIdAndEmail(id, email)
+                || productRepository.existsByImageIdAndUserEmail(id, email);
     }
 
 }

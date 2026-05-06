@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,8 +57,12 @@ public class ImageRestController {
                 .body(imageFile);
     }
     
+    @PreAuthorize("@imageService.isOwnerOrAdmin(#id, authentication)")
     @PutMapping("/{id}/media")
     public ResponseEntity<Object> replaceImageFile(@PathVariable int id, @RequestParam MultipartFile imageFile) throws IOException {
+        if (imageFile.isEmpty()) {
+            throw new IllegalArgumentException("Image file cannot be empty");
+        }
         imageService.replaceImageFile(id, imageFile.getInputStream());
         return ResponseEntity.noContent().build();
     }

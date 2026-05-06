@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByName(String name);
     Optional<User> findByEmail(String email);
     Optional<User> findById(Integer id);
+    boolean existsByImageIdAndEmail(Integer imageId, String email);
     long count();
     @Query("SELECT p.category FROM Order o JOIN o.product p WHERE o.buyer.id = ?1 ORDER BY o.createdAt DESC")
     Page<String> findLastCategoriesBoughtInById(Integer id, Pageable page);

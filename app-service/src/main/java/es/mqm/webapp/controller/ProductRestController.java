@@ -153,7 +153,7 @@ public class ProductRestController {
 		productService.addImageToProduct(id, image);
 
 		URI location = fromCurrentContextPath()
-				.path("/api/image/{imageId}/media")
+				.path("/api/images/{imageId}/media")
 				.buildAndExpand(image.getId())
 				.toUri();
 

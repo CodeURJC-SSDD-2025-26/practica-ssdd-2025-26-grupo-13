@@ -133,7 +133,7 @@ public class UserRestController {
 		userService.addImageToUser(id, image);
 
 		URI location = fromCurrentContextPath()
-				.path("/api/v1/image/{imageId}/media")
+				.path("/api/v1/images/{imageId}/media")
 				.buildAndExpand(image.getId())
 				.toUri();
 
