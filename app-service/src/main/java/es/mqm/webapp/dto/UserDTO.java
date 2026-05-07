@@ -12,7 +12,6 @@ public record UserDTO(
         ImageBasicDTO image,
         LocationDTO location,
         LocalDate createdAt,
-        List<String> roles,
         List<ProductBasicDTO> products,
         List<OrderBasicDTO> orders) {
 }
